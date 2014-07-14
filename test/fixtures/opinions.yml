@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  positive: false
+  opinionble_id: 1
+  opinionable_type: MyString
+
+two:
+  positive: false
+  opinionble_id: 1
+  opinionable_type: MyString

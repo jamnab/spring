@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  access_code: MyString
+  threshold: 1
+  organization_id: 1
+
+two:
+  name: MyString
+  access_code: MyString
+  threshold: 1
+  organization_id: 1

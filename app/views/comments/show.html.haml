@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Content:
+  = @comment.content
+%p
+  %b Endorsed:
+  = @comment.endorsed
+%p
+  %b Anonymous:
+  = @comment.anonymous
+%p
+  %b Commentable:
+  = @comment.commentable_id
+%p
+  %b Commentable type:
+  = @comment.commentable_type
+
+= link_to 'Edit', edit_comment_path(@comment)
+\|
+= link_to 'Back', comments_path
