@@ -18,6 +18,18 @@
 #posts {
   height: calc(100% - 80px);
   background-color: #ddd;
+  // padding-top: 54px;
+
+  .posts-header {
+    // position: absolute;
+    // margin-top: -54px;
+    padding: 10px 15px;
+    background-color: #ccc;
+
+    #query {
+      width: 180px;
+    }
+  }
 }
 
 #post {

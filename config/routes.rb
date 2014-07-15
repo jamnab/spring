@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       post :join_by_code
     end
     member do
+      post :show
       get :management
       get :generate_code
     end

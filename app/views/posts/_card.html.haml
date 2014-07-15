@@ -1,0 +1,6 @@
+= link_to post do
+  .row.post-card{class: ("active" if @post == post)}
+    .title
+      = post.title
+    .content
+      = post.content

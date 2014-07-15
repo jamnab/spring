@@ -6,26 +6,24 @@
         - @post.errors.full_messages.each do |msg|
           %li= msg
 
+  = f.hidden_field :user_id, value: current_user.id
+  = f.hidden_field :project_id, value: params[:project_id]
   .field
     = f.label :title
-    = f.text_field :title
+    = f.text_field :title, class: "form-control"
   .field
     = f.label :content
-    = f.text_area :content
-  .field
-    = f.label :endorsed
-    = f.check_box :endorsed
+    = f.text_area :content, class: "form-control"
   .field
     = f.label :anonymous
     = f.check_box :anonymous
+    %i
+      (If you do no check anonymous, you will be labeled as unidentified member. When your post/comment is upvoted beyond the threshold and endorsed, you identity will be revealed).
   .field
     = f.label :threshold
-    = f.number_field :threshold
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :project_id
-    = f.number_field :project_id
+    %p
+      %i
+        (The upvote threshold for comments in this post).
+    = f.number_field :threshold, class: "form-control"
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: "btn btn-success"

@@ -1,0 +1,16 @@
+.tag-index
+
+#posts.col-xs-3
+  .row.posts-header
+    = form_tag @project, class: "form-inline" do
+      .form-group
+        = link_to 'New Post', new_post_path(project_id: @project.id), class: "btn btn-success btn-sm"
+      .form-group
+        = text_field_tag :query, nil, class: "form-control", placeholder: "Search posts here ..."
+      %button#search-btn.btn.btn-sm.btn-primary{type: 'submit'}
+        .fa.fa-search
+  - @project.posts.each do |post|
+    = render "posts/card", post: post
+
+#post.col-xs-9
+

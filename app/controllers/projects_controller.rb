@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :generate_code, :management]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :generate_code, :management, :search]
 
   # GET /projects
   # GET /projects.json
@@ -10,6 +10,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    if params[:query]
+      raise
+    end
   end
 
   # GET /projects/new
