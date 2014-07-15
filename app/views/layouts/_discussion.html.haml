@@ -13,4 +13,61 @@
     = render "posts/card", post: post
 
 #post.col-xs-9
+  - if @post
+    %h2.title
+      = @post.title
+    %h5.content
+      = @post.content
+    %hr
+    %h5
+      Tags:
+    .tags
+      .tag-pill test tag
+    %h5
+      Labels:
+    .labels
+      .label-pill test label
 
+    #post-divider
+      .options
+        .fa.fa-edit
+        .fa.fa-trash-o
+    #new-comment
+      %h4
+        %b New Comment
+      = form_for Comment.new do |f|
+        = f.hidden_field :commentable_id, value: @post.id
+        = f.hidden_field :commentable_type, value: @post.class.to_s
+        .field
+          = f.text_area :content, class: "form-control"
+        .field
+          = f.check_box :anonymous
+          = f.label :anonymous
+          %i
+            (If you do not check anonymous, you will be labeled as unidentified member. When your post/comment is upvoted beyond the threshold and endorsed, you identity will be revealed).
+        .actions
+          = f.submit 'Comment', class: "btn btn-success"
+    #comment-filter
+      %h4
+        %b Comments
+      #filter
+        Filter:
+        .filter-pill test label
+        .filter-pill test label
+        .filter-pill test label
+        .filter-pill test label
+        .filter-pill test label
+      #sort
+        Sort By:
+        .filter-pill test label
+        .filter-pill test label
+    #comments
+      - @post.comments.each do |comment|
+        = render 'comments/card', comment: comment
+  - else
+    %h2.text-center
+      Home of #{@project.name}
+    %h3.text-center
+      Click on a post or
+      = link_to 'create one', new_post_path(project_id: @project.id)
+      to start.

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714234341) do
+ActiveRecord::Schema.define(version: 20140715154312) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -21,7 +21,10 @@ ActiveRecord::Schema.define(version: 20140714234341) do
     t.string   "commentable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ancestry"
   end
+
+  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
 
   create_table "label_entries", force: true do |t|
     t.integer  "tag_id"

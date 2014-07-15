@@ -17,7 +17,8 @@
 
 #posts {
   height: calc(100% - 80px);
-  background-color: #ddd;
+  background-color: #eee;
+  overflow-y: scroll;
   // padding-top: 54px;
 
   .posts-header {
@@ -27,7 +28,7 @@
     background-color: #ccc;
 
     #query {
-      width: 180px;
+      width: 165px;
     }
   }
 }
@@ -35,4 +36,50 @@
 #post {
   height: calc(100% - 80px);
   background-color: #fff;
+  padding: 0px 25px;
+  overflow-y: scroll;
+
+  #post-divider {
+    color: #fff;
+    margin: 20px -25px 0px -25px;
+    padding: 5px 25px;
+    height: 25px;
+    background-color: #5b6e84;
+  }
+
+  #new-comment {
+    color: #fff;
+    margin: 0px -25px;
+    padding: 10px 25px 20px 25px;
+    background-color: #90a2b4;
+  }
+
+  #comment-filter {
+    color: #fff;
+    margin: 0px -25px;
+    padding: 10px 25px 20px 25px;
+    background-color: #8196a9;
+
+    #filter {
+      float: right;
+    }
+  }
+
+  .comment-card {
+    margin: 0px -25px;
+    padding: 10px 25px 20px 25px;
+    border-top: 3px solid #90a2b4;
+  }
+}
+
+.tag-pill, .label-pill,, .filter-pill {
+  display: inline-block;
+  font-size: 10px;
+  padding: 3px 5px;
+  border: 1px solid #555;
+  border-radius: 5px;
+}
+
+.filter-pill {
+  border: 1px solid #fff;
 }
