@@ -1,15 +1,6 @@
-%h2
-  = @project.name
-  - if can? :update, @project
-    = link_to edit_organization_path(@project) do
-      .fa.fa-edit
+.tag-index
 
-- if can? :manage, @project
-  %h5
-    %b Access code:
-    = @organization.access_code
-%p
-  %b Threshold:
-  = @project.threshold
+#posts.col-xs-3
 
-%hr
+#post.col-xs-9
+

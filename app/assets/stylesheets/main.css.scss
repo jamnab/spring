@@ -1,5 +1,28 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.navbar{
+  background-color: #5b6e84;
+  border-radius: 0px;
+  border: 0px;
+  color: #ddd;
+  margin-bottom: 0px;
+
+  a, a:visited, li a, li a:visited {
+    color: #ddd !important;
+  }
+
+  .dropdown-menu {
+    li a, li a:visited {
+      color: #555 !important;
+    }
+  }
+}
+
 .container {
-  width: 90%;
+  width: 100%;
 }
 
 .btn {

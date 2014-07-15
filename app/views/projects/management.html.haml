@@ -1,0 +1,15 @@
+%h2
+  = @project.name
+  - if can? :update, @project
+    = link_to edit_organization_path(@project) do
+      .fa.fa-edit
+
+- if can? :manage, @project
+  %h5
+    %b Access code:
+    = @project.access_code
+%p
+  %b Threshold:
+  = @project.threshold
+
+%hr
