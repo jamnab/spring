@@ -65,6 +65,8 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+      @project = @post.project
+      @organization = @project.organization
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

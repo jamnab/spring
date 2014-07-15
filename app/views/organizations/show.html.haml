@@ -1,12 +1,28 @@
-%p#notice= notice
-
-%p
-  %b Name:
+%h2
   = @organization.name
-%p
-  %b Access code:
-  = @organization.access_code
 
-= link_to 'Edit', edit_organization_path(@organization)
-\|
-= link_to 'Back', organizations_path
+  - if can? :update, @organization
+    = link_to edit_organization_path(@organization) do
+      .fa.fa-edit
+
+- if can? :manage, @organization
+  %h5
+    %b Access code:
+    = @organization.access_code
+
+  = link_to generate_code_organization_path(@organization) do
+    .btn.btn-sm.btn-success
+      Generate New Code
+
+%hr
+
+%h3
+  Projects
+= link_to 'Create New Project', new_project_path(organization_id: @organization.id), class: "btn btn-success"
+%br
+%br
+- if @organization.projects.empty?
+  This organization doesn't have any projects yet.
+- else
+  - @organization.projects.each do |project|
+    = render "projects/card", project: project

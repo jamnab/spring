@@ -8,9 +8,6 @@
 
   .field
     = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :access_code
-    = f.text_field :access_code
+    = f.text_field :name, class: "form-control"
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: "btn btn-success"

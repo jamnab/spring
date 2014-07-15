@@ -1,4 +1,5 @@
 class Organization < ActiveRecord::Base
+  attr_accessor :username
   has_many :projects
   # has_many :posts, through: :projects
 

@@ -2,8 +2,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_user
+  helper_method :current_organization
 
   private
+
+  def current_organization
+    current_user.organizations.first
+  end
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)

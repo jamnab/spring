@@ -1,13 +1,48 @@
 Rails.application.routes.draw do
+  get 'pages/home'
+
   resources :comments
 
   resources :posts
 
-  resources :projects
+  resources :project_memberships do
+    member do
+      get :toggle
+    end
+  end
 
-  resources :organizations
+  resources :organization_memberships do
+    member do
+      get :toggle
+    end
+  end
 
-  resources :users, :user_sessions
+  resources :projects do
+    collection do
+      post :join_by_code
+    end
+    member do
+      get :management
+      get :generate_code
+    end
+  end
+
+  resources :organizations do
+    collection do
+      post :join_by_code
+    end
+    member do
+      get :generate_code
+    end
+  end
+
+  resources :user_sessions
+
+  resources :users do
+    member do
+      get :my_organization
+    end
+  end
 
   get 'login' => 'user_sessions#new', :as => :login
   get 'logout' => 'user_sessions#destroy', :as => :logout
@@ -16,7 +51,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'pages#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

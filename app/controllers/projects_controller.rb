@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :generate_code, :management]
 
   # GET /projects
   # GET /projects.json
@@ -21,13 +21,18 @@ class ProjectsController < ApplicationController
   def edit
   end
 
+  def management
+  end
+
   # POST /projects
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @project.access_code = ('a'..'z').to_a.shuffle[0,32].join
 
     respond_to do |format|
       if @project.save
+        ProjectMembership.create(user_id: current_user.id, project_id: @project.id, admin: true)
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -35,6 +40,27 @@ class ProjectsController < ApplicationController
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def generate_code
+    @project.access_code = ('a'..'z').to_a.shuffle[0,32].join
+    @project.save
+    redirect_to @project, notice: 'New access code generated.'
+  end
+
+  def join_by_code
+    target_organization = Project.where(name: params[:name]).first
+
+    if target_organization.nil?
+      redirect_to :back, notice: 'Project does not exist.' and return
+    end
+
+    if target_organization.access_code != params[:access_code]
+      redirect_to :back, notice: 'Wrong access code.' and return
+    end
+
+    ProjectMembership.create(organization_id: target_organization.id, user_id: params[:user_id], admin: false)
+    redirect_to target_organization, notice: 'Successfully joined organization.'
   end
 
   # PATCH/PUT /projects/1
@@ -65,6 +91,7 @@ class ProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
+      @organization = @project.organization
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :my_organization]
 
   # GET /users
   # GET /users.json
@@ -19,6 +19,12 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+
+  def my_organization
+    if current_organization
+      redirect_to current_organization and return
+    end
   end
 
   # POST /users

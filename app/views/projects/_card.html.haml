@@ -1,0 +1,15 @@
+.project-card
+  %h4
+    = project.name
+  - if can? :manage, project.organization || project.users.include?(current_user)
+    = link_to project do
+      View Project
+  - else
+    %p
+      No Access
+    = form_tag join_by_code_projects_path, class: "form-inline" do
+      = hidden_field_tag :user_id, current_user.id
+      = hidden_field_tag :project_id, project.id
+      .form-group
+        = text_field_tag :access_code, nil, class: "form-control", placeholder: "Enter access code ..."
+      = submit_tag "Join", class: "btn btn-sm btn-success"

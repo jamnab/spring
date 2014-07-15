@@ -1,0 +1,21 @@
+%h3
+  You are currently not in any organizations.
+
+= link_to 'Create My Own Organization', new_organization_path, class: "btn btn-success"
+
+%hr
+
+%h3
+  Joining Existing Organization
+%h4
+  Please ask the organization admin to add you.
+%h4
+  Or join by access code:
+
+= form_tag join_by_code_organizations_path, class: "form-inline" do
+  = hidden_field_tag :user_id, @user.id
+  .form-group
+    = text_field_tag :name, nil, class: "form-control", placeholder: "Enter organization name ..."
+  .form-group
+    = text_field_tag :access_code, nil, class: "form-control", placeholder: "Enter access code ..."
+  = submit_tag "Join", class: "btn btn-sm btn-success"

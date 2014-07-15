@@ -1,18 +1,15 @@
-%p#notice= notice
-
-%p
-  %b Name:
+%h2
   = @project.name
-%p
-  %b Access code:
-  = @project.access_code
+  - if can? :update, @project
+    = link_to edit_organization_path(@project) do
+      .fa.fa-edit
+
+- if can? :manage, @project
+  %h5
+    %b Access code:
+    = @organization.access_code
 %p
   %b Threshold:
   = @project.threshold
-%p
-  %b Organization:
-  = @project.organization_id
 
-= link_to 'Edit', edit_project_path(@project)
-\|
-= link_to 'Back', projects_path
+%hr

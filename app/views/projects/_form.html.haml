@@ -6,17 +6,12 @@
         - @project.errors.full_messages.each do |msg|
           %li= msg
 
+  = f.hidden_field :organization_id, value: params[:organization_id]
   .field
     = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :access_code
-    = f.text_field :access_code
+    = f.text_field :name, class: "form-control"
   .field
     = f.label :threshold
-    = f.number_field :threshold
-  .field
-    = f.label :organization_id
-    = f.number_field :organization_id
+    = f.number_field :threshold, class: "form-control"
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: "btn btn-success"
