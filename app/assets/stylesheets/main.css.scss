@@ -46,3 +46,20 @@ html, body {
 .btn {
   color: #fff !important;
 }
+
+.btn-collab {
+  border: 1px solid #fff;
+  background-color: #90a3b3;
+
+  &:hover {
+    background-color: #72899f;
+  }
+}
+
+a:hover {
+  background-color: transparent !important;
+}
+
+.inline {
+  display: inline-block;
+}

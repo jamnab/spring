@@ -3,6 +3,8 @@ class Ability
 
   def initialize(user)
 
+    can :manage, :all
+
     if user.role == 'admin'
       can :manage, :all
     else

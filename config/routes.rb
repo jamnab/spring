@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'pages/home'
 
+  resources :tag_entries
+
   resources :comments
 
   resources :posts
