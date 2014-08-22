@@ -22,3 +22,15 @@ a, a:hover {
     font-size: 16px;
   }
 }
+
+a, a:visited {
+  color: #333;
+}
+
+.selected_positive {
+  color: #4c66a4 !important;
+}
+
+.selected_negative {
+  color: #ff4444 !important;
+}

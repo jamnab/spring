@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :tag_entries
 
+  resources :opinions
+
   resources :comments
 
   resources :posts

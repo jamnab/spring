@@ -25,6 +25,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
+    sentiment_update(@comment)
 
     respond_to do |format|
       if @comment.save
@@ -42,6 +43,8 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
+        sentiment_update(@comment)
+
         format.html { redirect_to @comment.commentable, notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
       else

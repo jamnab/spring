@@ -37,6 +37,16 @@
       width: 165px;
     }
   }
+
+  .post-card {
+    .content {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      margin-bottom: 5px;
+    }
+  }
 }
 
 #post {
@@ -62,8 +72,8 @@
 
   .comment-card {
     margin: 0px -25px;
-    padding: 10px 25px 20px 25px;
-    border-top: 3px solid #90a2b4;
+    padding: 10px 25px 0px 25px;
+    border-bottom: 3px solid #90a2b4;
   }
 }
 

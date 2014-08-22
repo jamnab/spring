@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Collab
+    %title InThought
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
@@ -15,7 +15,7 @@
             %span.icon-bar
             %span.icon-bar
           = link_to root_path, class: "navbar-brand" do
-            Collab
+            InThought
         #navbar-collapse.collapse.navbar-collapse
           %ul.nav.navbar-nav.navbar-right
             - if current_user
@@ -46,6 +46,6 @@
             - else
               %li= link_to "Sign Up", new_user_path
               %li= link_to "Login", :login
-    - if notice
-      %p.text-center#notice= notice
+    / - if notice
+    /   %p.text-center#notice= notice
     = yield

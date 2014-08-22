@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  include ProjectsHelper
 
   # GET /posts
   # GET /posts.json
@@ -10,6 +11,17 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    if params[:comment_order] == 'newest'
+      @comments = @post.comments.order(created_at: :desc)
+    elsif params[:comment_order] == 'upvote'
+      @comments = @post.comments.sort_by{|x| count_opinion(x.opinions)}
+    elsif params[:comment_order] == 'happiness'
+      # SHOULD store sentiment as a field upon save
+      # @comments = @post.comments.sort_by{|x| JSON.parse(Sentimentalizer.analyze(x.content).to_json). }
+    elsif params[:comment_order] == 'distress'
+    else
+      @comments = @post.comments
+    end
   end
 
   # GET /posts/new
@@ -25,6 +37,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    sentiment_update(@post)
 
     respond_to do |format|
       if @post.save
@@ -42,6 +55,8 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        sentiment_update(@post)
+
         format.html { redirect_to @post.project, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -72,6 +87,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :endorsed, :anonymous, :threshold, :user_id, :project_id)
+      params.require(:post).permit(:title, :content, :endorsed, :anonymous, :threshold, :user_id, :project_id, :comment_anonymity)
     end
 end

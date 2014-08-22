@@ -24,6 +24,14 @@
       = @post.title
     %h5.content
       = simple_format(@post.content, {}, wrapper_tag: "div")
+    %br
+    %i.comment_anonymity
+      - if @post.comment_anonymity
+        Comment anonymity is ON, commenter identity is hidden to project managers on this post.
+      - else
+        Comment anonymity is OFF, commenter identity is visible to project managers on this post.
+    = render 'layouts/signature', signable: @post
+
     %hr
     %h5
       Tags:
@@ -54,12 +62,20 @@
       #sort
         %h5.inline
           Sort By:
-        .btn.btn-collab
-          Newest
-        .btn.btn-collab
-          Most Upvoted
+        = link_to '?comment_order=newest' do
+          .btn.btn-collab
+            Newest
+        = link_to '?comment_order=upvote' do
+          .btn.btn-collab
+            Most Upvoted
+        = link_to '?comment_order=happiness' do
+          .btn.btn-collab
+            Most Happy
+        = link_to '?comment_order=distress' do
+          .btn.btn-collab
+            Most Distressed
     #comments
-      - @post.comments.each do |comment|
+      - @comments.each do |comment|
         = render 'comments/card', comment: comment
   - else
     %h2.text-center
@@ -108,6 +124,11 @@
           = f.check_box :anonymous
           %i
             (If you do not check anonymous, you will be labeled as unidentified member. When your post/comment is upvoted beyond the threshold and endorsed, you identity will be revealed).
+        .field
+          = f.label :comment_anonymity
+          = f.check_box :comment_anonymity
+          %i
+            (If you do not check comment anonymity, the identity of commenters of this post will be visible to the project managers regardless of their anonymous setting).
         .field
           = f.label :threshold
           %p

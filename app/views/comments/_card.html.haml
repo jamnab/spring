@@ -1,5 +1,5 @@
 .comment-card
-  %h4
-    Unidentified Project Member
   %h5
     = comment.content
+  %br
+    = render 'layouts/signature', signable: comment

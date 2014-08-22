@@ -1,0 +1,31 @@
+.signature
+  .sentiment
+    - if !signable.sentiment_category.nil?
+      - if signable.sentiment_category == 1
+        .fa.fa-smile-o
+      - elsif signable.sentiment_category == -1
+        .fa.fa-frown-o
+      - elsif signable.sentiment_category == 0
+        Neutral
+      #{signable.sentiment_percentage}%
+    - else
+      Sentiment Analysis Failed
+  .author
+    By
+    %b
+      Unidentified Project Member
+    / = @post.user.username
+
+  .opinion
+    - if current_user
+      - opinion = Opinion.where(opinionable_id: signable.id, opinionable_type: signable.class.to_s, user_id: current_user.id).first
+    - else
+      - opinion = nil
+    %span
+      Opinion: #{signable.opinion}
+      \|
+    - if current_user
+      = link_to opinions_path(opinion: {opinionable_id: signable.id, opinionable_type: signable.class.to_s, positive: true, user_id: current_user.id}), method: :post, class: ("selected_positive" if opinion && opinion.positive) do
+        .fa.fa-thumbs-o-up
+      = link_to opinions_path(opinion: {opinionable_id: signable.id, opinionable_type: signable.class.to_s, positive: false, user_id: current_user.id}), method: :post, class: ("selected_negative" if opinion && !opinion.positive) do
+        .fa.fa-thumbs-o-down
