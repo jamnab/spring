@@ -1,3 +1,94 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bcg {
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+#slide-1 .bcg {
+  background: image-url('stock_photos/QAdTsSj8TOOWzlyLn3Rg_14248396556_aefcd9a926_o.jpg');
+}
+
+#slide-3 .bcg{
+  background: image-url('stock_photos/unsplash_528c8f581f45e_1.JPG');
+}
+
+#slide-5 .bcg{
+  background: image-url('stock_photos/unsplash-kitsune-3.jpg');
+}
+
+#slide-7 .bcg{
+  background: image-url('stock_photos/unsplash_528c8f581f45e_1.JPG');
+}
+
+#slide-9 .bcg{
+  background: image-url('stock_photos/unsplash-kitsune-3.jpg');
+}
+
+#slide-11 .bcg {
+  background: image-url('stock_photos/unsplash_528c8f581f45e_1.JPG');
+}
+
+.tagline {
+  margin: -60px -15px 100px -15px;
+  padding: 20px 160px;
+  text-align: center;
+  font-size: 28px;
+  line-height: 42px;
+  color: #fff;
+  background-color: rgba(0,0,0,0.25);
+}
+
+.content {
+  color: #fff;
+  margin: 0px -15px;
+  padding: 60px 40px 140px 40px;
+
+  .title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 50px;
+  }
+  .text {
+    width: 700px;
+    color: #fff;
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+.info-slide {
+  min-height: 200px;
+  background: image-url('foreground.png');
+}
+
+.img-slide .bcg{
+
+  .content {
+    min-height: 350px;
+    background-color: rgba(0,0,0,0.4);
+    text-align: right;
+  }
+  .text{
+    float: right;
+  }
+}
+
+#footer {
+  #ownership, #copyright {
+    color: #fff;
+    font-weight: bold;
+  }
+  #ownership {
+    margin: 30px 0px -30px 0px;
+  }
+  #copyright {
+    margin: -20px 0px 30px 0px;
+  }
+}

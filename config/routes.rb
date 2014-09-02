@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'pages/home'
+  resources :subscriptions
+
+  get 'pages/verse'
 
   resources :tag_entries
 

@@ -1,2 +1,96 @@
-%h1 Pages#home
-%p Find me in app/views/pages/home.html.haml
+#skrollr-body
+  %main.home-page
+    %section#slide-1.img-slide
+      .bcg{"data-anchor-target" => "#slide-2", "data-bottom-top" => "background-position: 50% 70px;", "data-top-bottom" => "background-position: 50% -70px;"}
+        .container
+          = image_tag 'logo_white.png', class: 'img-responsive'
+          .tagline
+            A software as a service (SaaS), semi-anonymous social platform that allows employers to capture employee opinions and emotions.
+
+#skrollr-body
+  %main.home-page
+    %section#slide-2.info-slide
+      .container
+        .content
+          .title Problem and Solution
+          .text
+            Our Solution Lorem ipsum dolor sit amet, no eos inciderint consequuntur. Id qui accumsan appareat, ut ius aeque explicari, vix solum vocent appellantur at. Vel eu mazim dicam nominavi, an diceret deleniti mediocritatem qui.
+
+#skrollr-body
+  %main.home-page
+    %section#slide-3.img-slide
+      .bcg{"data-anchor-target" => "#slide-3", "data-bottom-top" => "background-position: 50% 70px;", "data-top-bottom" => "background-position: 50% -70px;"}
+        .container
+          .content
+            .title Flexible Communication
+            .text
+              Both employers and employees can post and interact over the platform. Receive update notifications, create timed questions/responses, and also modify the visibility of the threads.
+
+#skrollr-body
+  %main.home-page
+    %section#slide-4.info-slide
+      .container
+        .content
+          .title Employee Engagement
+          .text
+            We allow employees to anonymously interact with one another over posts created about any kind of topic in the work place.Managers see trending posts, and the sentiment of the messages.
+
+#skrollr-body
+  %main.home-page
+    %section#slide-5.img-slide
+      .bcg{"data-anchor-target" => "#slide-5", "data-bottom-top" => "background-position: 50% 70px;", "data-top-bottom" => "background-position: 50% -70px;"}
+        .container
+          .content
+            .title Key Contributor Identity
+            .text
+              Finally there is a platform when you can speak your mind, and not worry about offending a co-worker. We are interested in what’s really on worker minds’, because this is where true change can be found- for managers its valuable input that can transform thoughts into actionable items.
+
+
+#skrollr-body
+  %main.home-page
+    %section#slide-6.info-slide
+      .container
+        .content
+          .title Prioritizing and Management
+          .text
+            Managers have a top-level view of trending posts and initiatives between employees, making sense of valuable data and identifying key contributors through sentiment analysis from within the workforce. All through our easy to use and intuitive dashboard.
+
+#skrollr-body
+  %main.home-page
+    %section#slide-7.img-slide
+      .bcg{"data-anchor-target" => "#slide-7", "data-bottom-top" => "background-position: 50% 70px;", "data-top-bottom" => "background-position: 50% -70px;"}
+        .container
+          .content
+            .title Stay Updated
+            .text
+              %h4 Insert subscription letter sign up form.
+              .row
+                .col-xs-12.col-sm-6.col-sm-offset-6
+                  = form_for Subscription.new do |f|
+                    .field
+                      = f.text_field :email, placeholder: 'Email', class: 'form-control'
+                    .field
+                      = f.text_area :note, placeholder: 'Additional Notes...', class: 'form-control'
+                    .field
+                      = f.submit 'Stay Updated', class: 'btn btn-success'
+#skrollr-body
+  %main.home-page
+    %section#footer.info-slide
+      .container
+        .sign
+          #ownership.text-center
+            A Product Of:
+          = image_tag 'verse_logo_white.png', class: 'img-responsive'
+          #copyright.text-center
+            &copy; Copyright Verse Software Lab Inc.
+            #{Time.now.year}.
+            All Rights Reserved.
+
+/ .modal.fade{:id => "info", :role => "dialog"}
+/   .modal-dialog
+/     .modal-content
+/       .modal-header
+/         %button.close{"data-dismiss" => "modal", :type => "button"}
+/           %span{"aria-hidden" => "true"} ×
+/           %span.sr-only Close
+/         = image_tag 'home/tactic_hive_info_package.png', class: 'img-responsive'

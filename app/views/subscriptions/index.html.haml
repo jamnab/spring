@@ -1,0 +1,18 @@
+.container{style: 'margin-top: 90px'}
+  %h1 Listing subscriptions
+
+  %table.table.table-bordered
+    %tr
+      %th Email
+      %th Note
+      %th
+      %th
+      %th
+
+    - @subscriptions.each do |subscription|
+      %tr
+        %td= subscription.email
+        %td= subscription.note
+        %td= link_to 'Show', subscription
+        %td= link_to 'Edit', edit_subscription_path(subscription)
+        %td= link_to 'Destroy', subscription, :method => :delete, :data => { :confirm => 'Are you sure?' }

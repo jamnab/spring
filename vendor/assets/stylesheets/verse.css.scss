@@ -1,0 +1,57 @@
+.navbar{
+  .navbar-brand {
+    margin: 0px 15px;
+    padding: 0px 15px;
+  }
+}
+
+#slide-1 {
+  img {
+    margin: 200px auto;
+  }
+
+  .tagline {
+    margin: -160px -15px 100px -15px;
+  }
+}
+
+.img-slide {
+  height: 350px;
+}
+
+#slide-5 {
+  .content {
+    text-align: left;
+  }
+  .text {
+    float: none;
+  }
+}
+
+.content.row {
+  text-align: center;
+  padding: 60px 20px;
+
+  .title {
+    text-align: center;
+  }
+
+  .value-icon {
+    font-size: 200px;
+  }
+  .value-text {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .social-icon {
+    text-align: center;
+    font-size: 100px;
+  }
+  .social-text {
+    text-align: center;
+    font-size: 24px;
+    line-height: 30px;
+  }
+}
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140822200451) do
+ActiveRecord::Schema.define(version: 20140902152321) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -95,6 +95,13 @@ ActiveRecord::Schema.define(version: 20140822200451) do
     t.string   "access_code"
     t.integer  "threshold"
     t.integer  "organization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subscriptions", force: true do |t|
+    t.string   "email"
+    t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

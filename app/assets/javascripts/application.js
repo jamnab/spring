@@ -13,4 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap.min
+//= require skrollr
+//= require skrollr.ie
+//= require skrollr.menu
 //= require_tree .

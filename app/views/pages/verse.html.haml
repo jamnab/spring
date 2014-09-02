@@ -1,0 +1,144 @@
+%html
+  %header
+    %title Verse Software Lab
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = stylesheet_link_tag 'verse'
+  %body
+    %nav.navbar.navbar-inverse
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to '#', class: "navbar-brand" do
+            = image_tag 'verse_logo_white.png', width: '200px'
+    #skrollr-body
+      %main.home-page
+        %section#slide-1
+          .bcg{"data-anchor-target" => "#slide-2", "data-bottom-top" => "background-position: 50% 70px;", "data-top-bottom" => "background-position: 50% -70px;"}
+            .container
+              = image_tag 'verse_logo_white.png', class: 'img-responsive'
+              .tagline
+                A software as a service (SaaS), semi-anonymous social platform that allows employers to capture employee opinions and emotions.
+
+    #skrollr-body
+      %main.home-page
+        %section#slide-2.info-slide
+          .container
+            .content
+              .title About Verse
+              .text
+                About Us Lorem ipsum dolor sit amet, no eos inciderint consequuntur. Id qui accumsan appareat, ut ius aeque explicari, vix solum vocent appellantur at. Vel eu mazim dicam nominavi, an diceret deleniti mediocritatem qui.
+
+    #skrollr-body
+      %main.home-page
+        %section#slide-3.img-slide
+          .bcg{"data-anchor-target" => "#slide-3", "data-bottom-top" => "background-position: 50% 70px;", "data-top-bottom" => "background-position: 50% -70px;"}
+            .container
+              .content
+                .title PortfolioTen
+                .text
+                  P10 Descriptions Lorem ipsum dolor sit amet, no eos inciderint consequuntur. Id qui accumsan appareat, ut ius aeque explicari, vix solum vocent appellantur at.
+
+    #skrollr-body
+      %main.home-page
+        %section#slide-4.info-slide
+          .container
+            .content.row
+              .col-xs-12.col-sm-4
+                .value-icon
+                  .fa.fa-laptop
+                .value-text
+                  Lorem ipsum dolor sit amet, no eos inciderint consequuntur. Id qui accumsan appareat, ut ius aeque explicari.
+              .col-xs-12.col-sm-4
+                .value-icon
+                  .fa.fa-laptop
+                .value-text
+                  Lorem ipsum dolor sit amet, no eos inciderint consequuntur. Id qui accumsan appareat, ut ius aeque explicari.
+              .col-xs-12.col-sm-4
+                .value-icon
+                  .fa.fa-laptop
+                .value-text
+                  Lorem ipsum dolor sit amet, no eos inciderint consequuntur. Id qui accumsan appareat, ut ius aeque explicari.
+
+    #skrollr-body
+      %main.home-page
+        %section#slide-5.img-slide
+          .bcg{"data-anchor-target" => "#slide-5", "data-bottom-top" => "background-position: 50% 70px;", "data-top-bottom" => "background-position: 50% -70px;"}
+            .container
+              .content
+                .title About InThought
+                .text
+                  InThought Descriptions Lorem ipsum dolor sit amet, no eos inciderint consequuntur. Id qui accumsan appareat, ut ius aeque explicari, vix solum vocent appellantur at.
+
+
+    #skrollr-body
+      %main.home-page
+        %section#slide-6.info-slide
+          .container
+            .content.row
+              .col-xs-12.col-sm-4
+                .value-icon
+                  .fa.fa-laptop
+                .value-text
+                  Lorem ipsum dolor sit amet, no eos inciderint consequuntur. Id qui accumsan appareat, ut ius aeque explicari.
+              .col-xs-12.col-sm-4
+                .value-icon
+                  .fa.fa-laptop
+                .value-text
+                  Lorem ipsum dolor sit amet, no eos inciderint consequuntur. Id qui accumsan appareat, ut ius aeque explicari.
+              .col-xs-12.col-sm-4
+                .value-icon
+                  .fa.fa-laptop
+                .value-text
+                  Lorem ipsum dolor sit amet, no eos inciderint consequuntur. Id qui accumsan appareat, ut ius aeque explicari.
+    #skrollr-body
+      %main.home-page
+        %section#slide-7.img-slide
+          .bcg{"data-anchor-target" => "#slide-7", "data-bottom-top" => "background-position: 50% 70px;", "data-top-bottom" => "background-position: 50% -70px;"}
+            .container
+              .content.row
+                .title Social Media
+                .col-xs-6.col-sm-3
+                  .social-icon
+                    .fa.fa-linkedin-square
+                  .social-text
+                    LinkedIn
+                .col-xs-6.col-sm-3
+                  .social-icon
+                    .fa.fa-facebook-square
+                  .social-text
+                    Facebook
+                .col-xs-6.col-sm-3
+                  .social-icon
+                    .fa.fa-twitter-square
+                  .social-text
+                    Twitter
+                .col-xs-6.col-sm-3
+                  .social-icon
+                    .fa.fa-google-plus-square
+                  .social-text
+                    Google+
+
+    #skrollr-body
+      %main.home-page
+        %section#footer.info-slide
+          .container
+            .sign
+              = image_tag 'verse_logo_white.png', class: 'img-responsive'
+              #copyright.text-center
+                &copy; Copyright Verse Software Lab Inc.
+                #{Time.now.year}.
+                All Rights Reserved.
+
+    / .modal.fade{:id => "info", :role => "dialog"}
+    /   .modal-dialog
+    /     .modal-content
+    /       .modal-header
+    /         %button.close{"data-dismiss" => "modal", :type => "button"}
+    /           %span{"aria-hidden" => "true"} ×
+    /           %span.sr-only Close
+    /         = image_tag 'home/tactic_hive_info_package.png', class: 'img-responsive'

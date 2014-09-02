@@ -4,11 +4,25 @@ html, body {
 }
 
 .navbar{
-  background-color: #5b6e84;
+  // background-color: #5b6e84;
+  // background-color: transparent;
+  background-color: rgba(0,0,0,0.4);
   border-radius: 0px;
   border: 0px;
   color: #ddd;
-  margin-bottom: 0px;
+  margin-bottom: -90px;
+  height: 90px;
+
+  .navbar-brand {
+    margin: -10px 15px;
+    padding: 0px 15px;
+  }
+
+  li a {
+    line-height: 60px;
+    padding: 15px 30px;
+    font-size: 18px;
+  }
 
   a, a:visited, li a, li a:visited {
     color: #ddd !important;
@@ -62,4 +76,8 @@ a:hover {
 
 .inline {
   display: inline-block;
+}
+
+.img-responsive {
+  margin: auto;
 }
