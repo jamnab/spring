@@ -43,7 +43,7 @@
           .content
             .title Key Contributor Identity
             .text
-              Finally there is a platform when you can speak your mind, and not worry about offending a co-worker. We are interested in what’s really on worker minds’, because this is where true change can be found- for managers its valuable input that can transform thoughts into actionable items.
+              Finally there is a platform when you can speak your mind, and not worry about offending a co-worker. We are interested in what’s really on worker minds’, because this is where true change can be found - for managers its valuable input that can transform thoughts into actionable items.
 
 
 #skrollr-body
@@ -63,7 +63,7 @@
           .content
             .title Stay Updated
             .text
-              %h4 Insert subscription letter sign up form.
+              / %h4 Input your email to stay up to date.
               .row
                 .col-xs-12.col-sm-6.col-sm-offset-6
                   = form_for Subscription.new do |f|
@@ -72,19 +72,21 @@
                     .field
                       = f.text_area :note, placeholder: 'Additional Notes...', class: 'form-control'
                     .field
-                      = f.submit 'Stay Updated', class: 'btn btn-success'
-#skrollr-body
-  %main.home-page
-    %section#footer.info-slide
-      .container
-        .sign
-          #ownership.text-center
-            A Product Of:
-          = image_tag 'verse_logo_white.png', class: 'img-responsive'
-          #copyright.text-center
-            &copy; Copyright Verse Software Lab Inc.
-            #{Time.now.year}.
-            All Rights Reserved.
+                      = f.submit 'Keep Me Updated', class: 'btn btn-success'
+#skrollr-body.footer
+  .footer-logo
+    .footer-logo-img-wrapper
+      = image_tag "verse_logo_white.png", class: 'img-responsive'
+  .footer-content
+    .col-sm-6
+      %p
+        Contact us:
+        = mail_to 'clinton@versesoftwarelab.com'
+      %p
+        About us:
+        = link_to 'www.versesoftwarelab.com', 'http://www.versesoftwarelab.com'
+      %p
+        151 Charles St W, Kitchener, ON N2G 1H6
 
 / .modal.fade{:id => "info", :role => "dialog"}
 /   .modal-dialog

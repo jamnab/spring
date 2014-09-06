@@ -12,34 +12,26 @@
 }
 
 #slide-1 .bcg {
-  background: image-url('stock_photos/QAdTsSj8TOOWzlyLn3Rg_14248396556_aefcd9a926_o.jpg');
+  background: image-url('inthought_main.jpg');
 }
 
 #slide-3 .bcg{
-  background: image-url('stock_photos/unsplash_528c8f581f45e_1.JPG');
+  background: image-url('phone.jpg');
 }
 
 #slide-5 .bcg{
-  background: image-url('stock_photos/unsplash-kitsune-3.jpg');
+  background: image-url('alejandroescamilla-dude-walkin.jpg');
 }
 
 #slide-7 .bcg{
-  background: image-url('stock_photos/unsplash_528c8f581f45e_1.JPG');
-}
-
-#slide-9 .bcg{
-  background: image-url('stock_photos/unsplash-kitsune-3.jpg');
-}
-
-#slide-11 .bcg {
-  background: image-url('stock_photos/unsplash_528c8f581f45e_1.JPG');
+  background: image-url('hub_map.png');
 }
 
 .tagline {
   margin: -60px -15px 100px -15px;
   padding: 20px 160px;
   text-align: center;
-  font-size: 28px;
+  font-size: 24px;
   line-height: 42px;
   color: #fff;
   background-color: rgba(0,0,0,0.25);
@@ -65,7 +57,7 @@
 
 .info-slide {
   min-height: 200px;
-  background: image-url('foreground.png');
+  background: image-url('foreground.jpg');
 }
 
 .img-slide .bcg{
@@ -90,5 +82,36 @@
   }
   #copyright {
     margin: -20px 0px 30px 0px;
+  }
+}
+
+.footer{
+  padding: 40px 0px;
+  // background-color: black;
+  background: image-url('foreground.jpg');
+  display: table;
+  width: 100%;
+  .footer-logo{
+    display: table-cell;
+    width: 38.2%;
+    vertical-align: middle;
+    img{
+      width: 50%;
+      padding-left: 15%;
+    }
+  }
+  .footer-content{
+    display: table-cell;
+    width: 61.8%;
+    vertical-align: middle;
+    color: #fff;
+    font-size: 12pt;
+    font-size: 1vw;
+    p{
+      padding: 5px;
+    }
+  }
+  a, a:visited {
+    color: #fff;
   }
 }
