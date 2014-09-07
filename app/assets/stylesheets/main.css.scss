@@ -14,8 +14,11 @@ html, body {
   height: 90px;
 
   .navbar-brand {
-    margin: -10px 15px;
+    margin: -40px 15px;
     padding: 0px 15px;
+    img {
+      position: absolute;
+    }
   }
 
   li a {
