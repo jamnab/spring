@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap.min
+//= require bootstrap-switch.min
+//= require prefixfree.min
 //= require skrollr
 //= require skrollr.ie
 //= require skrollr.menu

@@ -1,3 +1,5 @@
+@import 'presets';
+
 html, body {
   height: 100%;
   width: 100%;
@@ -6,25 +8,37 @@ html, body {
 .navbar{
   // background-color: #5b6e84;
   // background-color: transparent;
-  background-color: rgba(0,0,0,0.4);
+  background-color: $main-brown;
   border-radius: 0px;
   border: 0px;
   color: #ddd;
   margin-bottom: -90px;
-  height: 90px;
+  height: 70px;
+
+  .sidebar-toggler {
+    display: inline-block;
+    font-size: 22px;
+    padding: 15px;
+  }
 
   .navbar-brand {
-    margin: -40px 15px;
-    padding: 0px 15px;
+    display: inline-block;
+    font-size: 22px;
+    height: 70px;
+    padding: 10px;
     img {
-      position: absolute;
+      margin-top: -4px;
     }
   }
 
   li a {
-    line-height: 60px;
-    padding: 15px 30px;
+    line-height: 40px;
+    padding: 15px 20px;
     font-size: 18px;
+  }
+
+  li.divider-vertical {
+    margin-top: 20px;
   }
 
   a, a:visited, li a, li a:visited {
@@ -35,6 +49,104 @@ html, body {
     li a, li a:visited {
       color: #555 !important;
     }
+  }
+
+  .search {
+    position: absolute;
+    width: 350px;
+    min-width: 40px;
+    height: 40px;
+    margin-top: 15px;
+    margin-left: 200px;
+    overflow: hidden;
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    transition: width 0.3s;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .search-input {
+    top: 0;
+    right: 0;
+    border: none;
+    outline: none;
+    background: #fff;
+    width: 100%;
+    height: 40px;
+    margin: 0;
+    z-index: 10;
+    padding: 20px 65px 20px 20px;
+    font-family: inherit;
+    font-size: 16px;
+    color: #2c3e50;
+  }
+
+  .search-input::-webkit-input-placeholder {
+    color: #efb480;
+  }
+
+  .search-input:-moz-placeholder {
+    color: #efb480;
+  }
+
+  .search-input::-moz-placeholder {
+    color: #efb480;
+  }
+
+  .search-input:-ms-input-placeholder {
+    color: #efb480;
+  }
+
+  .sb-icon-search,
+  .search-submit  {
+    width: 40px;
+    height: 40px;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .search-submit {
+    background: #fff; /* IE needs this */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /* IE 8 */
+      filter: alpha(opacity=0); /* IE 5-7 */
+      opacity: 0;
+    color: transparent;
+    border: none;
+    outline: none;
+    z-index: -1;
+  }
+
+  .sb-icon-search {
+    color: #fff;
+    background: #e67e22;
+    z-index: 90;
+    font-size: 18px;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Open state */
+  .search.search-open .sb-icon-search,
+  .no-js .search .sb-icon-search {
+    background: #da6d0d;
+    color: #fff;
+    z-index: 11;
+  }
+
+  .search.search-open .search-submit,
+  .no-js .search .search-submit {
+    z-index: 90;
   }
 }
 
@@ -83,4 +195,63 @@ a:hover {
 
 .img-responsive {
   margin: auto;
+}
+
+.sidebar {
+  position: absolute;
+  width: 260px;
+  height: 100%;
+  margin-left: -260px;
+}
+
+// ------------------
+
+.body-wrapper, .sidebar {
+  flex: 1;
+  background: #333;
+  box-shadow: 0 0 5px black;
+  transform: translate3d(0, 0, 0);
+  transition: transform .3s;
+}
+
+.body-wrapper.isOpen { transform: translate3d(260px, 0, 0); }
+.sidebar.isOpen { transform: translate3d(260px, 0, 0); }
+
+// -------------------
+
+.pinned-toggler {
+  margin-top: 15px;
+}
+
+.bootstrap-switch{
+  width: 80px;
+  height: 40px;
+  border-radius: 0px;
+
+  .bootstrap-switch-container {
+    height: 40px;
+
+    .bootstrap-switch-handle-on,
+    .bootstrap-switch-label,
+    .bootstrap-switch-handle-off {
+      height: 40px;
+      width: 40px;
+      padding: 10px;
+      border-radius: 0px;
+    }
+
+    .bootstrap-switch-handle-on {
+      color: #ffffff;
+      background-color: #da6d0d;
+    }
+
+    .bootstrap-switch-handle-off {
+      color: #ffffff;
+      background-color: #006dcc;
+    }
+  }
+}
+
+.content-wrapper {
+  margin-top: 90px;
 }

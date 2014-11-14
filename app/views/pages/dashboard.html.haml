@@ -1,0 +1,48 @@
+.post-filters
+  = link_to '#' do
+    .btn.btn-sm.btn-custom
+      ALL
+  = link_to '#' do
+    .btn.btn-sm.btn-success
+      PLAY
+  = link_to '#' do
+    .btn.btn-sm.btn-primary
+      WORK
+  = link_to '#' do
+    .btn.btn-sm.btn-danger
+      TRENDING
+  = link_to '#' do
+    .btn.btn-sm.btn-warning
+      ENDORSED
+
+.post-board
+  - 3.times do |i|
+    .post-wrapper.col-xs-12.col-sm-6
+      .post.work
+        .header
+          Work Related Post #{i+1}
+          .traction
+            Traction: #{10*i+5}
+            = link_to '#', class: 'vote-up' do
+              .fa.fa-caret-up
+            = link_to '#', class: 'vote-down' do
+              .fa.fa-caret-down
+        .content
+          #{Forgery(:lorem_ipsum).words(50).capitalize}.
+
+        .signature
+  - 2.times do |i|
+    .post-wrapper.col-xs-12.col-sm-6
+      .post.play
+        .header
+          Leisure Related Post #{i+1}
+          .traction
+            Traction: #{10*i+5}
+            = link_to '#', class: 'vote-up' do
+              .fa.fa-caret-up
+            = link_to '#', class: 'vote-down' do
+              .fa.fa-caret-down
+        .content
+          #{Forgery(:lorem_ipsum).words(50).capitalize}.
+
+        .signature

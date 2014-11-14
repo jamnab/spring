@@ -1,0 +1,92 @@
+@import 'presets';
+
+.post-filters {
+  height: 50px;
+  width: 100%;
+  background-color: #eee;
+  text-align: center;
+
+  .btn {
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+}
+
+.btn {
+  border-radius: 0px;
+}
+
+.btn-custom {
+  background-color: #da6d0d;
+}
+
+.post-board {
+  padding: 0px 20px;
+}
+
+.post-wrapper {
+  height: 250px;
+  margin-top: 40px;
+  padding: 0px 20px;
+
+  .post {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: #dddddd;
+
+    .header, .signature {
+      position: absolute;
+      width: 100%;
+    }
+
+    .header {
+      height: 50px;
+      top: 0;
+      padding: 16px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 18px;
+
+      .traction {
+        position: relative;
+        float: right;
+        a, a:hover {
+          color: #ddd;
+        }
+      }
+    }
+
+    .content {
+      color: #555;
+      padding-top: 70px;
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+    .signature {
+      height: 50px;
+      bottom: 0;
+    }
+  }
+
+  .work {
+    background-color: rgba($main-blue, 0.25);
+    .header {
+      background-color: rgba($main-blue, 0.75);
+    }
+    .signature {
+      background-color: rgba($main-blue, 0.25);
+    }
+  }
+
+  .play {
+    background-color: rgba($main-green, 0.25);
+    .header {
+      background-color: rgba($main-green, 0.75);
+    }
+    .signature {
+      background-color: rgba($main-green, 0.25);
+    }
+  }
+}

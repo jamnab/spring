@@ -26,6 +26,9 @@ gem 'authlogic'
 gem 'ancestry'
 gem 'scrypt'
 gem 'cancan'
+
+gem 'forgery', '0.6.0'
+
 # gem "paperclip", :git => "http://github.com/thoughtbot/paperclip.git"
 gem "font-awesome-rails"
 gem "sentimentalizer", git: "https://github.com/findcongwang/sentimentalizer.git"

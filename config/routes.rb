@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :subscriptions
 
-  get 'pages/verse'
+  get 'dashboard' => 'pages#dashboard', as: :dashboard
+
+  resources :subscriptions
 
   resources :tag_entries
 
