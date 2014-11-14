@@ -17,7 +17,11 @@
 }
 
 .btn-custom {
-  background-color: #da6d0d;
+  background-color: #f17910;
+
+  &:hover {
+    background-color: #da6d0d;
+  }
 }
 
 .post-board {
@@ -47,12 +51,20 @@
       color: #fff;
       font-weight: bold;
       font-size: 18px;
+      line-height: 20px;
 
       .traction {
         position: relative;
         float: right;
-        a, a:hover {
-          color: #ddd;
+
+        .tags {
+          float: right;
+          margin-top: -5px;
+          padding-left: 15px;
+          .btn-sm {
+            margin-left: 5px;
+            width: 32px;
+          }
         }
       }
     }
@@ -67,6 +79,31 @@
     .signature {
       height: 50px;
       bottom: 0;
+
+      .user {
+        padding: 11px 15px;
+
+        img {
+          margin-top: -15px;
+          border: 1px solid #ddd;
+        }
+        .name {
+          display: inline-block;
+          padding: 0px 5px;
+          line-height: 14px;
+          color: #555;
+        }
+      }
+
+      .options {
+        float: right;
+        margin-top: -43px;
+        padding-right: 15px;
+        .btn-sm {
+          margin-left: 5px;
+          width: 32px;
+        }
+      }
     }
   }
 
