@@ -3,11 +3,47 @@
   %head
     %title InThought
     = stylesheet_link_tag    'application', media: 'all'
+    = stylesheet_link_tag    'flaticon/flaticon.css'
     = javascript_include_tag 'application'
     = csrf_meta_tags
     = favicon_link_tag 'favicon.png'
   %body
+    .sidebar-icons
+      %a.sidebar-toggler
+        .profile
+          = image_tag "//placehold.it/50x50"
+      .navicons
+        = link_to '#' do
+          %span.flaticon-clock6
+        = link_to '#' do
+          %span.flaticon-clock6
+        = link_to '#' do
+          %span.flaticon-clock6
+        = link_to '#' do
+          %span.flaticon-clock6
+        = link_to '#' do
+          %span.flaticon-clock6
+        = link_to '#' do
+          %span.flaticon-clock6
     .sidebar
+      .user
+        .name
+          John Smith
+        .username
+          (jsmith)
+      .sidenav
+        = link_to '#' do
+          Test Link
+        = link_to '#' do
+          Test Link
+        = link_to '#' do
+          Test Link
+        = link_to '#' do
+          Test Link
+        = link_to '#' do
+          Test Link
+        = link_to '#' do
+          Test Link
     .body-wrapper
       %nav.navbar.navbar-inverse
         .container
@@ -19,10 +55,8 @@
               %span.icon-bar
 
             .navbar-brand
-              %a.sidebar-toggler
-                .fa.fa-bars
               = link_to root_path do
-                = image_tag("//placehold.it/120x40")
+                = image_tag("//placehold.it/180x40")
 
             #search.search.search-open
               %form
@@ -35,6 +69,12 @@
             %ul.nav.navbar-nav.navbar-right
               - if current_user
                 %li.divider-vertical
+                %li
+                  = link_to '#' do
+                    %span.flaticon-calendar7
+                %li
+                  = link_to '#' do
+                    %span.flaticon-calendar7
                 %li= link_to "Logout", :logout
               - else
                 %li.divider-vertical

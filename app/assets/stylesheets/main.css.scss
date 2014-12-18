@@ -27,7 +27,7 @@ html, body {
     height: 70px;
     padding: 10px;
     img {
-      margin-top: -4px;
+      margin: 5px;
     }
   }
 
@@ -43,6 +43,12 @@ html, body {
 
   a, a:visited, li a, li a:visited {
     color: #ddd !important;
+    text-align: center;
+
+    span:before {
+      font-size: 40px;
+      margin: 0px;
+    }
   }
 
   .dropdown-menu {
@@ -202,16 +208,81 @@ a:hover {
   width: 260px;
   height: 100%;
   margin-left: -260px;
+  padding-left: 70px;
 }
 
 // ------------------
+
+.sidebar-icons {
+  position: fixed;
+  width: 70px;
+  height: 100%;
+  background-color: #333;
+  z-index: 100;
+
+  .profile {
+    background: #222;
+    img {
+      padding: 10px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+  }
+
+  .navicons {
+    border-right: 1px solid #222;
+    a {
+      display: block;
+      height: 70px;
+      width: 70px;
+      text-align: center;
+      border-bottom: 1px solid #222;
+      padding: 10px;
+
+      span:before {
+        display: block;
+        font-size: 50px;
+        line-height: 50px;
+        margin: 0px;
+      }
+    }
+  }
+}
+
+.sidebar {
+  color: #eee;
+  .user {
+    width: 190px;
+    height: 70px;
+    background-color: #222;
+    padding: 20px 10px;
+    .name {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+
+  .sidenav {
+    a {
+      display: block;
+      height: 70px;
+      width: 190px;
+      border-bottom: 1px solid #222;
+      padding: 10px;
+    }
+  }
+}
 
 .body-wrapper, .sidebar {
   flex: 1;
   background: #333;
   box-shadow: 0 0 5px black;
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(70px, 0, 0);
   transition: transform .3s;
+}
+
+.body-wrapper {
+  width: calc(100% - 70px);
 }
 
 .body-wrapper.isOpen { transform: translate3d(260px, 0, 0); }
