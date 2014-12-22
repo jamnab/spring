@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  require "sentimentalizer"
+  # require "sentimentalizer"
 
   helper_method :current_user
   helper_method :current_organization

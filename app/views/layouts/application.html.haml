@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title InThought
+    %title Pin.DoIt
     = stylesheet_link_tag    'application', media: 'all'
     = stylesheet_link_tag    'flaticon/flaticon.css'
     = javascript_include_tag 'application'
@@ -13,37 +13,54 @@
         .profile
           = image_tag "//placehold.it/50x50"
       .navicons
-        = link_to '#' do
-          %span.flaticon-clock6
-        = link_to '#' do
-          %span.flaticon-clock6
-        = link_to '#' do
-          %span.flaticon-clock6
-        = link_to '#' do
-          %span.flaticon-clock6
-        = link_to '#' do
-          %span.flaticon-clock6
-        = link_to '#' do
-          %span.flaticon-clock6
+        - if current_user
+          = link_to '#' do
+            %span.flaticon-clock6
+          = link_to '#' do
+            %span.flaticon-clock6
+          = link_to '#' do
+            %span.flaticon-clock6
+          = link_to '#' do
+            %span.flaticon-clock6
+        - else
+          = link_to '#', data: {target: "#login", toggle: "modal"} do
+            %span.flaticon-clock6
+          = link_to '#', data: {target: "#register", toggle: "modal"} do
+            %span.flaticon-clock6
+
     .sidebar
       .user
-        .name
-          John Smith
-        .username
-          (jsmith)
+        - if current_user
+          .name
+            John Smith
+          .username
+            (jsmith)
+        - else
+          .name
+            Guest User
+          .username
+            Please Login
       .sidenav
-        = link_to '#' do
-          Test Link
-        = link_to '#' do
-          Test Link
-        = link_to '#' do
-          Test Link
-        = link_to '#' do
-          Test Link
-        = link_to '#' do
-          Test Link
-        = link_to '#' do
-          Test Link
+        - if current_user
+          = link_to '#' do
+            Test Link
+          = link_to '#' do
+            Test Link
+          = link_to '#' do
+            Test Link
+          = link_to '#' do
+            Test Link
+          = link_to '#' do
+            Test Link
+          = link_to '#' do
+            Test Link
+          = link_to '#' do
+            Test Link
+        - else
+          = link_to '#', data: {target: "#login", toggle: "modal"} do
+            Log In
+          = link_to '#', data: {target: "#register", toggle: "modal"} do
+            Register
     .body-wrapper
       %nav.navbar.navbar-inverse
         .container
@@ -88,3 +105,61 @@
       /   %p.text-center#notice= notice
       .content-wrapper
         = yield
+
+
+
+    #login.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title Log In
+
+          = form_for UserSession.new do |f|
+            .modal-body
+              .field
+                = f.label :username
+                = f.text_field :username, class: "form-control", id: "login_username"
+              .field
+                = f.label :password
+                = f.password_field :password, class: "form-control"
+            .modal-footer
+              .actions
+                = f.submit 'Log In', class: "btn btn-success"
+                %button.btn.btn-danger{"data-dismiss" => "modal", :type => "button"} Cancel
+
+    #register.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title Register (Manager)
+          = form_for User.new do |f|
+            .modal-body.row
+              .field.col-xs-6
+                = f.label :username
+                = f.text_field :username, class: "form-control", id: "register_username"
+              .field.col-xs-6
+                = f.label :email
+                = f.text_field :email, class: "form-control"
+              .field.col-xs-6
+                = f.label :first_name
+                = f.text_field :first_name, class: "form-control"
+              .field.col-xs-6
+                = f.label :last_name
+                = f.text_field :last_name, class: "form-control"
+              .field.col-xs-6
+                = f.label :password
+                = f.password_field :password, class: "form-control"
+              .field.col-xs-6
+                = f.label :password_confirmation
+                = f.password_field :password_confirmation, class: "form-control"
+              .field.col-xs-12
+                = f.label :organization_name
+                = f.text_field :organization_name, class: "form-control"
+            .modal-footer
+              .actions
+                = f.submit 'Register', class: "btn btn-success"
+                %button.btn.btn-danger{"data-dismiss" => "modal", :type => "button"} Cancel

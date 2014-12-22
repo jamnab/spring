@@ -219,6 +219,8 @@ a:hover {
   height: 100%;
   background-color: #333;
   z-index: 100;
+  border-right: 1px solid #222;
+
 
   .profile {
     background: #222;
@@ -230,7 +232,6 @@ a:hover {
   }
 
   .navicons {
-    border-right: 1px solid #222;
     a {
       display: block;
       height: 70px;
@@ -250,6 +251,8 @@ a:hover {
 }
 
 .sidebar {
+  position: fixed;
+  background-color: #333;
   color: #eee;
   .user {
     width: 190px;
@@ -275,7 +278,6 @@ a:hover {
 
 .body-wrapper, .sidebar {
   flex: 1;
-  background: #333;
   box-shadow: 0 0 5px black;
   transform: translate3d(70px, 0, 0);
   transition: transform .3s;

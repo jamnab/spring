@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  attr_accessor :organization_name
   acts_as_authentic
 
   has_many :posts

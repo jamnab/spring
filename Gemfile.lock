@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/findcongwang/sentimentalizer.git
-  revision: 0ddfc301edb568a22c2aa88fb6601f7e417c7a0c
-  specs:
-    sentimentalizer (0.2.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -172,7 +166,6 @@ DEPENDENCIES
   sass-rails (~> 4.0.3)
   scrypt
   sdoc (~> 0.4.0)
-  sentimentalizer!
   skrollr-rails
   spring
   turbolinks
