@@ -1,16 +1,55 @@
 @import 'presets';
 
+// filter bars
+
 .post-filters {
   height: 50px;
   width: 100%;
   background-color: #eee;
-  text-align: center;
+  padding-left: 30px;
+
+  .btn {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+}
+
+.post-sorts {
+  height: 50px;
+  float: right;
+  padding-right: 30px;
 
   .btn {
     margin-top: 10px;
     margin-right: 10px;
   }
 }
+
+.comment-filters {
+  text-align: left;
+  height: 50px;
+  width: 100%;
+  background-color: #eee;
+  padding-left: 5px;
+
+  .btn {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+}
+
+.comment-sorts {
+  height: 50px;
+  float: right;
+  padding-right: 5px;
+
+  .btn {
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+}
+
+// ----
 
 .btn {
   border-radius: 0px;
@@ -39,11 +78,6 @@
     width: 100%;
     background-color: #dddddd;
 
-    .header, .signature {
-      position: absolute;
-      width: 100%;
-    }
-
     .header {
       height: 50px;
       top: 0;
@@ -61,10 +95,6 @@
           float: right;
           margin-top: -5px;
           padding-left: 15px;
-          .btn-sm {
-            margin-left: 5px;
-            width: 32px;
-          }
         }
       }
     }
@@ -75,46 +105,17 @@
       font-size: 14px;
       line-height: 22px;
     }
-
-    .signature {
-      height: 50px;
-      bottom: 0;
-
-      .user {
-        padding: 11px 15px;
-
-        img {
-          margin-top: -15px;
-          border: 1px solid #ddd;
-        }
-        .name {
-          display: inline-block;
-          padding: 0px 5px;
-          line-height: 14px;
-          color: #555;
-        }
-      }
-
-      .options {
-        float: right;
-        margin-top: -43px;
-        padding-right: 15px;
-        .btn-sm {
-          margin-left: 5px;
-          width: 32px;
-        }
-      }
-    }
   }
 
   .work {
-    background-color: rgba($main-blue, 0.25);
+    background-color: rgba($main-blue, 0.05);
     .header {
       background-color: rgba($main-blue, 0.75);
     }
     .signature {
       background-color: rgba($main-blue, 0.25);
     }
+    border: 1px solid $main-blue;
   }
 
   .play {
@@ -124,6 +125,111 @@
     }
     .signature {
       background-color: rgba($main-green, 0.25);
+    }
+    border: 1px solid $main-green;
+  }
+
+  .facility {
+    background-color: rgba($main-yellow, 0.25);
+    .header {
+      background-color: rgba($main-yellow, 0.75);
+    }
+    .signature {
+      background-color: rgba($main-yellow, 0.25);
+    }
+    border: 1px solid $main-yellow;
+  }
+}
+
+.comment-wrapper {
+  height: 150px;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 5px 0px 0px 0px;
+
+  .comment {
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    .traction {
+      padding: 5px 0px;
+
+      h4 {
+        display: inline-block;
+      }
+      .tags {
+        float: right;
+        padding-left: 15px;
+        margin-top: 2px;
+      }
+    }
+
+    .content {
+      text-align: left;
+      color: #555;
+      padding: 5px 15px;
+    }
+
+    .signature {
+      border-top: 1px dashed #e5e5e5;
+    }
+  }
+}
+
+.post, .comment {
+
+  .header, .signature {
+    position: absolute;
+    width: 100%;
+
+    .divider {
+      display: inline-block;
+      width: 5px;
+      height: 6px;
+      border-right: 1px solid #fff;
+    }
+  }
+
+  .header, .signature, .traction, .controls {
+
+    .btn-sm {
+      margin-left: 5px;
+      width: 32px;
+      padding: 4px 0px;
+
+      span:before {
+        display: block;
+        font-size: 20px;
+        line-height: 20px;
+        margin: 0px;
+      }
+    }
+  }
+
+  .signature {
+    height: 50px;
+    bottom: 0;
+
+    .user {
+      padding: 11px 15px;
+      text-align: left;
+
+      img {
+        margin-top: -15px;
+        border: 1px solid #ddd;
+      }
+      .name {
+        display: inline-block;
+        padding: 0px 5px;
+        line-height: 14px;
+        color: #555;
+      }
+    }
+
+    .options {
+      float: right;
+      margin-top: -43px;
+      padding-right: 15px;
     }
   }
 }

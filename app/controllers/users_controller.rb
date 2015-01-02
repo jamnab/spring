@@ -31,9 +31,33 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @organization = Organization.where(name: @user.organization_name).first
+
+    # allow if new organization or has embedded token
+    if @user.is_manager && @organization.nil?
+      # create new organization
+      @organization = Organization.create(name: @user.organization_name)
+      @org_mem = OrganizationMembership.create(organization_id: @organization.id, admin: true)
+    elsif @user.is_manager && !@organization.nil?
+      redirect_to :back, notice: "Error: Cannot create an organization that already exists."
+    elsif !@user.is_manager && @organization.nil?
+      redirect_to :back, notice: "Error: Cannot join, organization does not exist."
+    else
+      # check for token
+      if @organization.access_token == @user.organization_token
+        # joins existing organization
+        @org_mem = OrganizationMembership.create(organization_id: @organization.id)
+      else
+        redirect_to :back, notice: "Error: Cannot join, access token not detected."
+      end
+    end
 
     respond_to do |format|
       if @user.save
+        # set & save membership
+        @org_mem.user_id = @user.id
+        @org_mem.save
+
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else

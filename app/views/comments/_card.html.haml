@@ -1,5 +1,36 @@
-.comment-card
-  %h5
-    = comment.content
-  %br
-    = render 'layouts/signature', signable: comment
+- user = User.first
+
+.comment-wrapper
+  .comment
+    .col-xs-8
+      .content
+        = Forgery(:lorem_ipsum).words(34).capitalize
+    .col-xs-4
+      .traction
+        %h4
+          10 / 50
+        .tags
+          .btn.btn-sm.btn-success.disabled.off
+            %span.flaticon-check6
+      .controls
+        .btn.btn-sm.btn-custom.btn-off
+          %span.flaticon-go
+        .btn.btn-sm.btn-custom.btn-off
+          %span.flaticon-go1
+    .signature
+      .user
+        = image_tag("//placehold.it/35x35")
+        .name
+          = user.full_name
+          %br
+          (#{user.username})
+      .options
+        = link_to '#' do
+          .btn.btn-sm.btn-warning
+            %span.flaticon-edit7
+        = link_to '#' do
+          .btn.btn-sm.btn-danger
+            %span.flaticon-trash7
+        = link_to '#' do
+          .btn.btn-sm.btn-success.btn-off
+            %span.flaticon-star6

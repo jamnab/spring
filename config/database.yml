@@ -17,14 +17,14 @@ default: &default
 
 development:
   <<: *default
-  database: collab_development
+  database: pindoit_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: collab_test
+  database: pindoit_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -47,6 +47,6 @@ test:
 #
 production:
   <<: *default
-  database: collab_production
-  username: collab
+  database: pindoit_production
+  username: pindoit
   password: <%= ENV['COLLAB_DATABASE_PASSWORD'] %>

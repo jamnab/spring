@@ -42,20 +42,20 @@
             Please Login
       .sidenav
         - if current_user
+          = link_to :dashboard do
+            Home
           = link_to '#' do
-            Test Link
+            My Pins
           = link_to '#' do
-            Test Link
+            Do it
           = link_to '#' do
-            Test Link
+            Graveyard
           = link_to '#' do
-            Test Link
+            Calendar
           = link_to '#' do
-            Test Link
-          = link_to '#' do
-            Test Link
-          = link_to '#' do
-            Test Link
+            Scoreboard
+          = link_to :logout do
+            Logout
         - else
           = link_to '#', data: {target: "#login", toggle: "modal"} do
             Log In
@@ -95,18 +95,24 @@
                 %li= link_to "Logout", :logout
               - else
                 %li.divider-vertical
-                %li= link_to "Sign Up", new_user_path
+                %li
+                  = link_to '#', data: {target: "#register", toggle: "modal"} do
+                    Register
                 %li.divider-vertical
-                %li= link_to "Login", :login
+                %li
+                  = link_to '#', data: {target: "#login", toggle: "modal"} do
+                    Log In
 
           .pinned-toggler.pull-right
             %input{:checked => "checked", :name => "my-checkbox", :type => "checkbox"}
+
       / - if notice
-      /   %p.text-center#notice= notice
+      /   .alert.alert-warning
+      /     %a.close{"data-dismiss" => "alert", :href => "#"} ×
+      /     = notice
+
       .content-wrapper
         = yield
-
-
 
     #login.modal.fade
       .modal-dialog
@@ -135,8 +141,12 @@
           .modal-header
             %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
               %span{"aria-hidden" => "true"} ×
-            %h4.modal-title Register (Manager)
+            %h4.modal-title Register
           = form_for User.new do |f|
+
+            - if !params[:organization_token].nil?
+              = hidden_field :organization_token, value: params[:organization_token]
+
             .modal-body.row
               .field.col-xs-6
                 = f.label :username
@@ -159,7 +169,56 @@
               .field.col-xs-12
                 = f.label :organization_name
                 = f.text_field :organization_name, class: "form-control"
+              %hr
+              .field.col-xs-12
+                = check_box_tag("user[is_manager]", "1", false, class: "checkbox")
+                = label_tag :checkbox, "I am the manager of this organization."
+              %h5.text-center
+                %b OR
+              .field.col-xs-12
+                = f.label 'Organization access token'
+                = f.text_field :organization_token, class: "form-control"
             .modal-footer
               .actions
                 = f.submit 'Register', class: "btn btn-success"
                 %button.btn.btn-danger{"data-dismiss" => "modal", :type => "button"} Cancel
+
+    #post-discussion.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title
+              Post Title Discussion
+          .modal-body.row
+            = form_for Comment.new do |f|
+              = f.hidden_field :suggestion, value: false
+              .field.col-xs-12
+                = f.text_area :content, class: "form-control", placeholder: "Enter your comment here ...", rows: 3
+              / .field.col-xs-12.text-right
+              /   = check_box_tag("comment[anonymous]", "1", false, class: "checkbox")
+              /   = label_tag :checkbox, "Remain Anonymous"
+              .actions.col-xs-12.text-right
+                = f.submit 'Post Plain Comment', class: "btn btn-warning", id: "comment_plain"
+                = f.submit 'Post as Suggestion', class: "btn btn-custom", id: "comment_suggestion"
+          .modal-footer
+            .comment-sorts
+              = link_to '#' do
+                .btn.btn-sm.btn-custom
+                  NEWEST
+              = link_to '#' do
+                .btn.btn-sm.btn-success.btn-off
+                  MOST UPVOTED
+            .comment-filters
+              = link_to '#' do
+                .btn.btn-sm.btn-success
+                  ALL
+              = link_to '#' do
+                .btn.btn-sm.btn-warning.btn-off
+                  PLAIN
+              = link_to '#' do
+                .btn.btn-sm.btn-custom.btn-off
+                  SUGGESTION
+            = render "comments/card"
+            = render "comments/card"

@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :user
-  belongs_to :project
+  belongs_to :organization
 
   has_many :tag_entries, as: :taggable, dependent: :destroy
   has_many :tags, through: :tag_entries
@@ -10,4 +10,12 @@ class Post < ActiveRecord::Base
 
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :opinions, as: :opinionable, dependent: :destroy
+
+  WORK = 0
+  PLAY = 1
+  FACILITY = 2
+
+  def doit?
+    return (self.traction > self.threshold)
+  end
 end

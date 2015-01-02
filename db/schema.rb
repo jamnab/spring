@@ -15,19 +15,15 @@ ActiveRecord::Schema.define(version: 20140902152321) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
-    t.boolean  "endorsed",             default: false
-    t.boolean  "anonymous",            default: false
+    t.boolean  "endorsed",         default: false
+    t.boolean  "anonymous",        default: false
+    t.boolean  "suggestion",       default: false
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "ancestry"
-    t.integer  "sentiment_percentage"
-    t.integer  "sentiment_category"
-    t.integer  "opinion",              default: 0
+    t.integer  "opinion",          default: 0
   end
-
-  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
 
   create_table "label_entries", force: true do |t|
     t.integer  "tag_id"
@@ -47,9 +43,9 @@ ActiveRecord::Schema.define(version: 20140902152321) do
     t.boolean  "positive",         default: true
     t.integer  "opinionable_id"
     t.string   "opinionable_type"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
   end
 
   create_table "organization_memberships", force: true do |t|
@@ -62,7 +58,8 @@ ActiveRecord::Schema.define(version: 20140902152321) do
 
   create_table "organizations", force: true do |t|
     t.string   "name"
-    t.string   "access_code"
+    t.string   "access_token"
+    t.boolean  "activated",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -70,16 +67,17 @@ ActiveRecord::Schema.define(version: 20140902152321) do
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
-    t.boolean  "anonymous",            default: false
+    t.boolean  "anonymous",         default: false
     t.integer  "threshold"
+    t.integer  "traction",          default: 0
     t.integer  "user_id"
-    t.integer  "project_id"
+    t.integer  "organization_id"
+    t.integer  "post_type"
+    t.boolean  "graveyard",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "comment_anonymity",    default: false
-    t.integer  "sentiment_percentage"
-    t.integer  "sentiment_category"
-    t.integer  "opinion",              default: 0
+    t.boolean  "comment_anonymity", default: false
+    t.integer  "opinion",           default: 0
   end
 
   create_table "project_memberships", force: true do |t|
@@ -116,9 +114,9 @@ ActiveRecord::Schema.define(version: 20140902152321) do
 
   create_table "tags", force: true do |t|
     t.string   "name"
+    t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "project_id"
   end
 
   create_table "users", force: true do |t|
@@ -127,9 +125,9 @@ ActiveRecord::Schema.define(version: 20140902152321) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
-    t.string   "role",              default: "user"
     t.string   "first_name"
     t.string   "last_name"
+    t.boolean  "admin",             default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

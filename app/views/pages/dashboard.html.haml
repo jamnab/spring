@@ -1,108 +1,28 @@
+.post-sorts
+  = link_to '#' do
+    .btn.btn-sm.btn-custom
+      NEWEST
+  = link_to '#' do
+    .btn.btn-sm.btn-primary.btn-off
+      MOST DISCUSSED
+  = link_to '#' do
+    .btn.btn-sm.btn-success.btn-off
+      MOST UPVOTED
+
 .post-filters
   = link_to '#' do
     .btn.btn-sm.btn-custom
       ALL
   = link_to '#' do
-    .btn.btn-sm.btn-success
-      PLAY
-  = link_to '#' do
-    .btn.btn-sm.btn-primary
+    .btn.btn-sm.btn-success.btn-off
       WORK
   = link_to '#' do
-    .btn.btn-sm.btn-danger
-      TRENDING
+    .btn.btn-sm.btn-primary.btn-off
+      PLAY
   = link_to '#' do
-    .btn.btn-sm.btn-warning
-      ENDORSED
+    .btn.btn-sm.btn-danger.btn-off
+      FACILITY
 
 .post-board
-  - 3.times do |i|
-    .post-wrapper.col-xs-12.col-sm-6
-      .post.work
-        .header
-          Work Related Post #{i+1}
-          .traction
-            Traction: #{10*i+5}
-            .tags
-              .btn.btn-sm.btn-success
-                .fa.fa-smile-o
-              .btn.btn-sm.btn-danger.disabled
-                .fa.fa-signal
-              .btn.btn-sm.btn-primary.disabled
-                .fa.fa-thumb-tack
-              .btn.btn-sm.btn-warning.disabled
-                .fa.fa-star
-        .content
-          #{Forgery(:lorem_ipsum).words(50).capitalize}.
-        .signature
-          .user
-            = image_tag("//placehold.it/35x35")
-            .name
-              John Smith
-              %br
-              (jsmith)
-          .options
-            = link_to '#' do
-              .btn.btn-sm.btn-success
-                .fa.fa-edit
-            = link_to '#' do
-              .btn.btn-sm.btn-success
-                .fa.fa-trash-o
-            = link_to '#' do
-              .btn.btn-sm.btn-custom
-                .fa.fa-thumbs-up
-            = link_to '#' do
-              .btn.btn-sm.btn-custom
-                .fa.fa-thumbs-down
-            = link_to '#' do
-              .btn.btn-sm.btn-primary
-                .fa.fa-thumb-tack
-            = link_to '#' do
-              .btn.btn-sm.btn-warning
-                .fa.fa-star
-
-
-  - 2.times do |i|
-    .post-wrapper.col-xs-12.col-sm-6
-      .post.play
-        .header
-          Leisure Related Post #{i+1}
-          .traction
-            Traction: #{10*i+5}
-            .tags
-              .btn.btn-sm.btn-success
-                .fa.fa-smile-o
-              .btn.btn-sm.btn-danger.disabled
-                .fa.fa-signal
-              .btn.btn-sm.btn-primary.disabled
-                .fa.fa-thumb-tack
-              .btn.btn-sm.btn-warning.disabled
-                .fa.fa-star
-        .content
-          #{Forgery(:lorem_ipsum).words(50).capitalize}.
-        .signature
-          .user
-            = image_tag("//placehold.it/35x35")
-            .name
-              John Smith
-              %br
-              (jsmith)
-          .options
-            = link_to '#' do
-              .btn.btn-sm.btn-success
-                .fa.fa-edit
-            = link_to '#' do
-              .btn.btn-sm.btn-success
-                .fa.fa-trash-o
-            = link_to '#' do
-              .btn.btn-sm.btn-custom
-                .fa.fa-thumbs-up
-            = link_to '#' do
-              .btn.btn-sm.btn-custom
-                .fa.fa-thumbs-down
-            = link_to '#' do
-              .btn.btn-sm.btn-primary
-                .fa.fa-thumb-tack
-            = link_to '#' do
-              .btn.btn-sm.btn-warning
-                .fa.fa-star
+  - Post.all.each do |post|
+    = render "posts/card", post: post
