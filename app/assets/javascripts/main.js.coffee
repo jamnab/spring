@@ -3,6 +3,7 @@ $ ->
   $(".sidebar-toggler").on "click", ->
     $(".body-wrapper").toggleClass "isOpen"
     $(".sidebar").toggleClass "isOpen"
+    $(".sidebar-toggler .icon").toggleClass "hidden"
 
   # Search bar
   $(".search-input").focus ->

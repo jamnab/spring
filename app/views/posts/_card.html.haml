@@ -14,9 +14,9 @@
             .btn.btn-sm.btn-danger.disabled.on
               %span.flaticon-lock9
           - else
-            .btn.btn-sm.btn-custom.btn-off
+            .btn.btn-sm.btn-main.off
               %span.flaticon-go
-            .btn.btn-sm.btn-custom.btn-off
+            .btn.btn-sm.btn-main.off
               %span.flaticon-go1
             - if post.doit?
               .btn.btn-sm.btn-success.disabled.on
@@ -41,18 +41,18 @@
           (#{user.username})
       .options
         = link_to '#' do
-          .btn.btn-sm.btn-warning
+          .btn.btn-sm.btn-main
             %span.flaticon-edit7
         - if post.graveyard
           = link_to '#' do
-            .btn.btn-sm.btn-warning
+            .btn.btn-sm.btn-main
               %span.flaticon-unlock
         - else
           = link_to '#' do
-            .btn.btn-sm.btn-danger
+            .btn.btn-sm.btn-main
               %span.flaticon-lock9
         = link_to '#' do
-          .btn.btn-sm.btn-danger
+          .btn.btn-sm.btn-main
             %span.flaticon-trash7
 
         .divider

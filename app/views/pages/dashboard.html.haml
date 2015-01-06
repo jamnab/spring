@@ -1,27 +1,27 @@
-.post-sorts
-  = link_to '#' do
-    .btn.btn-sm.btn-custom
-      NEWEST
-  = link_to '#' do
-    .btn.btn-sm.btn-primary.btn-off
-      MOST DISCUSSED
-  = link_to '#' do
-    .btn.btn-sm.btn-success.btn-off
-      MOST UPVOTED
+/ .post-sorts
+/   = link_to '#' do
+/     .btn.btn-sm.btn-main
+/       NEWEST
+/   = link_to '#' do
+/     .btn.btn-sm.btn-primary.btn-off
+/       MOST DISCUSSED
+/   = link_to '#' do
+/     .btn.btn-sm.btn-success.btn-off
+/       MOST UPVOTED
 
-.post-filters
-  = link_to '#' do
-    .btn.btn-sm.btn-custom
-      ALL
-  = link_to '#' do
-    .btn.btn-sm.btn-success.btn-off
-      WORK
-  = link_to '#' do
-    .btn.btn-sm.btn-primary.btn-off
-      PLAY
-  = link_to '#' do
-    .btn.btn-sm.btn-danger.btn-off
-      FACILITY
+/ .post-filters
+/   = link_to '#' do
+/     .btn.btn-sm.btn-main
+/       ALL
+/   = link_to '#' do
+/     .btn.btn-sm.btn-success.btn-off
+/       WORK
+/   = link_to '#' do
+/     .btn.btn-sm.btn-primary.btn-off
+/       PLAY
+/   = link_to '#' do
+/     .btn.btn-sm.btn-danger.btn-off
+/       FACILITY
 
 .post-board
   - Post.all.each do |post|

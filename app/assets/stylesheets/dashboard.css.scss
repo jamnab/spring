@@ -51,8 +51,10 @@
 
 // ----
 
+// button classses
+
 .btn {
-  border-radius: 0px;
+  border-radius: 5px;
 }
 
 .btn-custom {
@@ -62,6 +64,35 @@
     background-color: #da6d0d;
   }
 }
+
+.btn-main {
+  background-color: rgba($inverse_background, 0.7);
+
+  &:hover {
+    background-color: $inverse_background;
+  }
+
+  &.off {
+    background-color: transparent;
+    border: 1px solid $inverse_background;
+    color: $inverse_text_main !important;
+
+    &:hover {
+      background-color: $inverse_background;
+      color: $inverse_text_main !important;
+    }
+  }
+}
+
+// .btn-primary {
+//   background-color: $purple-main;
+
+//   &:hover {
+//     background-color: $purple-highlight;
+//   }
+// }
+
+// ----
 
 .post-board {
   padding: 0px 20px;
@@ -108,36 +139,33 @@
   }
 
   .work {
-    background-color: rgba($main-blue, 0.05);
+    background-color: rgba($main-work, 0.05);
     .header {
-      background-color: rgba($main-blue, 0.75);
+      background-color: rgba($main-work, 0.75);
     }
     .signature {
-      background-color: rgba($main-blue, 0.25);
+      background-color: rgba($main-work, 0.25);
     }
-    border: 1px solid $main-blue;
   }
 
   .play {
-    background-color: rgba($main-green, 0.25);
+    background-color: rgba($main-play, 0.05);
     .header {
-      background-color: rgba($main-green, 0.75);
+      background-color: rgba($main-play, 0.75);
     }
     .signature {
-      background-color: rgba($main-green, 0.25);
+      background-color: rgba($main-play, 0.25);
     }
-    border: 1px solid $main-green;
   }
 
   .facility {
-    background-color: rgba($main-yellow, 0.25);
+    background-color: rgba($main-facility, 0.05);
     .header {
-      background-color: rgba($main-yellow, 0.75);
+      background-color: rgba($main-facility, 0.75);
     }
     .signature {
-      background-color: rgba($main-yellow, 0.25);
+      background-color: rgba($main-facility, 0.25);
     }
-    border: 1px solid $main-yellow;
   }
 }
 
@@ -217,6 +245,7 @@
       img {
         margin-top: -15px;
         border: 1px solid #ddd;
+        border-radius: 20px;
       }
       .name {
         display: inline-block;
@@ -231,5 +260,20 @@
       margin-top: -43px;
       padding-right: 15px;
     }
+  }
+}
+
+// roundedness
+
+.post-wrapper, .post {
+  border-radius: 10px;
+  border: none !important;
+
+  .header {
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  .signature {
+    border-radius: 0px 0px 10px 10px;
   }
 }
