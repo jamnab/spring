@@ -72,16 +72,21 @@ html, body {
     color: $inverse_text_main;
 
     &.open {
-      background-color: $inverse_background !important;
+      background-color: $inverse_text_off !important;
     }
 
     a.dropdown-toggle .option {
       padding: 0px 15px;
       color: $inverse_text_main;
-      background-color: $inverse_background !important;
+      background-color: $inverse_text_off !important;
       border-radius: 5px;
       font-size: 16px;
       font-weight: bold;
+
+      .caret {
+        border-top-color: $inverse_text_main;
+        border-bottom-color: $inverse_text_main;
+      }
     }
 
     li a, li a:visited {
@@ -95,7 +100,7 @@ html, body {
       li a {
         text-align: left;
         color: $inverse_text_main !important;
-        background-color: $inverse_background;
+        background-color: $inverse_text_off;
         padding: 5px 15px;
         height: 50px;
         font-size: 16px;
@@ -108,16 +113,19 @@ html, body {
       }
 
       #filter-post-all {
-        background-color: $inverse_background;
+        background-color: rgba($inverse_text_off, 0.75);
       }
       #filter-post-work {
-        background-color: $main-work;
+        background-color: rgba($main_work, 0.75);
       }
       #filter-post-play {
-        background-color: $main-play;
+        background-color: rgba($main_play, 0.75);
       }
       #filter-post-facility {
-        background-color: $main-facility;
+        background-color: rgba($main_facility, 0.75);
+      }
+      #filter-post-doit {
+        background-color: rgba($main_highlight, 0.75);
       }
     }
   }
@@ -440,63 +448,129 @@ a:hover {
   margin-top: 15px;
 }
 
-.bootstrap-switch{
-  width: 80px;
-  height: 40px;
-  border-radius: 0px;
+// .bootstrap-switch{
+//   width: 80px;
+//   height: 40px;
+//   border-radius: 0px;
 
-  .bootstrap-switch-container {
-    height: 40px;
+//   .bootstrap-switch-container {
+//     height: 40px;
 
-    .bootstrap-switch-handle-on,
-    .bootstrap-switch-label,
-    .bootstrap-switch-handle-off {
-      height: 40px;
-      width: 40px;
-      padding: 10px;
-      border-radius: 0px;
-    }
+//     .bootstrap-switch-handle-on,
+//     .bootstrap-switch-label,
+//     .bootstrap-switch-handle-off {
+//       height: 40px;
+//       width: 40px;
+//       padding: 10px;
+//       border-radius: 0px;
+//     }
 
-    .bootstrap-switch-handle-on {
-      color: #ffffff;
-      background-color: #da6d0d;
-    }
+//     .bootstrap-switch-handle-on {
+//       color: #ffffff;
+//       background-color: #da6d0d;
+//     }
 
-    .bootstrap-switch-handle-off {
-      color: #ffffff;
-      background-color: #006dcc;
-    }
-  }
-}
+//     .bootstrap-switch-handle-off {
+//       color: #ffffff;
+//       background-color: #006dcc;
+//     }
+//   }
+// }
 
 .content-wrapper {
   margin-top: 90px;
 }
 
-.btn.disabled.off {
-  opacity: 0.25;
-}
 
-.btn.disabled.on {
-  opacity: 1.0;
-}
+// button styles
 
-.btn.btn-off {
-  opacity: 0.5;
+.post {
 
-  &:hover {
-    opacity: 1.0;
+  .btn-off {
+    background-color: transparent;
+    color: $inverse_text_highlight !important;
+    border: 1px solid $inverse_text_highlight;
+
+    &:hover.btn-work {
+      background-color: $main_work;
+      color: $default_background !important;
+      border: 1px solid $default_background;
+    }
+
+    &:hover.btn-play {
+      background-color: $main_play;
+      color: $default_background !important;
+      border: 1px solid $default_background;
+    }
+
+    &:hover.btn-facility {
+      background-color: $main_facility;
+      color: $default_background !important;
+      border: 1px solid $default_background;
+    }
+  }
+
+  .btn-on {
+    border: 1px solid $default_background;
+  }
+
+  .signature .btn-off {
+    background-color: transparent;
+    color: $inverse_text_off !important;
+    border: 1px solid $inverse_text_off;
   }
 }
 
-.post .btn-off {
-  background-color: transparent;
-  border: 1px solid $default_background;
-  opacity: 1.0;
+.comment {
+  .btn-off {
+    background-color: transparent;
+    color: $inverse_text_off !important;
+    border: 1px solid $inverse_text_off;
+    opacity: 0.6;
 
-  &:hover {
-    background-color: $default_background;
+    &:hover {
+      background-color: $inverse_text_off;
+      color: $inverse_text_main !important;
+      border: 1px solid $inverse_text_main;
+      opacity: 0.75;
+    }
   }
+
+  .btn-on {
+    background-color: $inverse_text_off;
+    color: $inverse_text_main !important;
+    border: 1px solid $inverse_text_main;
+    opacity: 0.75;
+  }
+
+  .btn-default {
+    background-color: $inverse_text_off;
+    color: $inverse_text_main !important;
+    border: 1px solid $inverse_text_main;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
+
+.btn-work, .btn-play, .btn-facility {
+  color: $default_background;
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.btn-work {
+  background-color: $main_work;
+}
+
+.btn-play {
+  background-color: $main_play;
+}
+
+.btn-facility {
+  background-color: $main_facility;
 }
 
 // popup forms
@@ -524,8 +598,13 @@ a:hover {
 
 #post-discussion .modal-footer {
   padding: 0px;
+  border: none;
 }
 
 #comment_plain {
   margin-right: 10px;
+}
+
+#comment_plain, #comment_content, #comment_suggestion {
+  margin-top: 10px;
 }

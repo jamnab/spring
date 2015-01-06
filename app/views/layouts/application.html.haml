@@ -19,7 +19,7 @@
           = link_to '#' do
             %span.flaticon-star6
           = link_to '#' do
-            %span.flaticon-coffin4
+            %span.flaticon-lock9
           = link_to '#' do
             %span.flaticon-line31
 
@@ -93,6 +93,8 @@
                     %a{href: "#", id: "filter-post-play"} PLAY
                   %li
                     %a{href: "#", id: "filter-post-facility"} FACILITY
+                  %li
+                    %a{href: "#", id: "filter-post-doit"} DOIT
 
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
@@ -234,25 +236,25 @@
               /   = check_box_tag("comment[anonymous]", "1", false, class: "checkbox")
               /   = label_tag :checkbox, "Remain Anonymous"
               .actions.col-xs-12.text-right
-                = f.submit 'Post Plain Comment', class: "btn btn-warning", id: "comment_plain"
-                = f.submit 'Post as Suggestion', class: "btn btn-custom", id: "comment_suggestion"
+                = f.submit 'Post Plain Comment', class: "btn btn-main off", id: "comment_plain"
+                = f.submit 'Post as Suggestion', class: "btn btn-main on", id: "comment_suggestion"
           .modal-footer
             .comment-sorts
               = link_to '#' do
-                .btn.btn-sm.btn-custom
+                .btn.btn-sm.btn-main.on
                   NEWEST
               = link_to '#' do
-                .btn.btn-sm.btn-success.btn-off
+                .btn.btn-sm.btn-main.off
                   MOST UPVOTED
             .comment-filters
               = link_to '#' do
-                .btn.btn-sm.btn-success
+                .btn.btn-sm.btn-main.on
                   ALL
               = link_to '#' do
-                .btn.btn-sm.btn-warning.btn-off
+                .btn.btn-sm.btn-main.off
                   PLAIN
               = link_to '#' do
-                .btn.btn-sm.btn-custom.btn-off
+                .btn.btn-sm.btn-main.off
                   SUGGESTION
             = render "comments/card"
             = render "comments/card"

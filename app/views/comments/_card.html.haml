@@ -7,13 +7,16 @@
         = Forgery(:lorem_ipsum).words(34).capitalize
     .col-xs-4
       .traction
-        %h4
+        %h4{class: ("doit" if false)}
           10 / 50
-        .tags
-          .btn.btn-sm.btn-success.disabled.off
-            %span.flaticon-check6
+          .indicator
+            - if false
+              DOIT
+              %span.flaticon-check6
+            - else
+              DOIT?
       .controls
-        .btn.btn-sm.btn-custom.btn-off
+        .btn.btn-sm.btn-custom.btn-on
           %span.flaticon-go
         .btn.btn-sm.btn-custom.btn-off
           %span.flaticon-go1
@@ -26,11 +29,8 @@
           (#{user.username})
       .options
         = link_to '#' do
-          .btn.btn-sm.btn-main
+          .btn.btn-sm.btn-default
             %span.flaticon-edit7
         = link_to '#' do
-          .btn.btn-sm.btn-main
+          .btn.btn-sm.btn-default
             %span.flaticon-trash7
-        = link_to '#' do
-          .btn.btn-sm.btn-success.btn-off
-            %span.flaticon-star6

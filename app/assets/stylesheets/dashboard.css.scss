@@ -2,35 +2,36 @@
 
 // filter bars
 
-.post-filters {
-  height: 50px;
-  width: 100%;
-  background-color: #eee;
-  padding-left: 30px;
+// .post-filters {
+//   height: 50px;
+//   width: 100%;
+//   background-color: #eee;
+//   padding-left: 30px;
 
-  .btn {
-    margin-top: 10px;
-    margin-left: 10px;
-  }
-}
+//   .btn {
+//     margin-top: 10px;
+//     margin-left: 10px;
+//   }
+// }
 
-.post-sorts {
-  height: 50px;
-  float: right;
-  padding-right: 30px;
+// .post-sorts {
+//   height: 50px;
+//   float: right;
+//   padding-right: 30px;
 
-  .btn {
-    margin-top: 10px;
-    margin-right: 10px;
-  }
-}
+//   .btn {
+//     margin-top: 10px;
+//     margin-right: 10px;
+//   }
+// }
 
 .comment-filters {
   text-align: left;
   height: 50px;
   width: 100%;
-  background-color: #eee;
   padding-left: 5px;
+  border-top: 1px solid $inverse_background;
+  border-bottom: 1px solid $inverse_background;
 
   .btn {
     margin-top: 10px;
@@ -59,38 +60,28 @@
 
 .btn-custom {
   background-color: #f17910;
+  opacity: 0.75;
 
   &:hover {
-    background-color: #da6d0d;
+    opacity: 1.0;
   }
+
+  // &:hover {
+  //   background-color: #da6d0d;
+  // }
 }
 
 .btn-main {
-  background-color: rgba($inverse_background, 0.7);
+  background-color: $inverse_text_off;
+  opacity: 0.9;
+
+  &.on  { opacity: 0.9; }
+  &.off { opacity: 0.6; }
 
   &:hover {
-    background-color: $inverse_background;
-  }
-
-  &.off {
-    background-color: transparent;
-    border: 1px solid $inverse_background;
-    color: $inverse_text_main !important;
-
-    &:hover {
-      background-color: $inverse_background;
-      color: $inverse_text_main !important;
-    }
+    opacity: 1.0;
   }
 }
-
-// .btn-primary {
-//   background-color: $purple-main;
-
-//   &:hover {
-//     background-color: $purple-highlight;
-//   }
-// }
 
 // ----
 
@@ -107,7 +98,6 @@
     position: relative;
     height: 100%;
     width: 100%;
-    background-color: #dddddd;
 
     .header {
       height: 50px;
@@ -121,11 +111,21 @@
       .traction {
         position: relative;
         float: right;
+        font-weight: bold;
+        color: $inverse_text_highlight;
+
+        span:before {
+          margin: 0px 5px;
+        }
 
         .tags {
           float: right;
           margin-top: -5px;
           padding-left: 15px;
+        }
+
+        &.doit {
+          color: rgba($main_highlight, 0.75);
         }
       }
     }
@@ -180,15 +180,24 @@
     width: 100%;
 
     .traction {
-      padding: 5px 0px;
+      padding: 2px 0px;
 
       h4 {
         display: inline-block;
-      }
-      .tags {
-        float: right;
-        padding-left: 15px;
-        margin-top: 2px;
+        color: $default_text_main;
+
+        .indicator {
+          display: inline-block;
+          margin-left: 10px;
+          span:before {
+            margin: 0px;
+            margin-left: 0px;
+          }
+        }
+
+        &.doit {
+          color: $main_highlight;
+        }
       }
     }
 
