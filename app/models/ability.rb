@@ -5,7 +5,7 @@ class Ability
 
     can :manage, :all
 
-    if user.role == 'admin'
+    if user.admin
       can :manage, :all
     else
     end

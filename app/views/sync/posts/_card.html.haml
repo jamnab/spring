@@ -1,0 +1,67 @@
+- user = post.user
+- class_type = "work" if post.post_type == Post::WORK
+- class_type = "play" if post.post_type == Post::PLAY
+- class_type = "facility" if post.post_type == Post::FACILITY
+
+.post-wrapper.col-xs-12.col-sm-6
+  .post{class: class_type}
+    .header
+      = post.title
+      .traction
+        Traction: #{post.traction} / #{post.threshold}
+        .tags
+          - if post.graveyard
+            .btn.btn-sm.btn-danger.disabled.on
+              %span.flaticon-lock9
+          - else
+            .btn.btn-sm.btn-custom.btn-off
+              %span.flaticon-go
+            .btn.btn-sm.btn-custom.btn-off
+              %span.flaticon-go1
+            - if post.doit?
+              .btn.btn-sm.btn-success.disabled.on
+                %span.flaticon-check6
+            - else
+              .btn.btn-sm.btn-success.disabled.off
+                %span.flaticon-check6
+
+    .content
+      .row
+        .col-xs-8
+          = post.content
+        .col-xs-4
+          = image_tag("//placehold.it/140x110")
+
+    .signature
+      .user
+        = image_tag("//placehold.it/35x35")
+        .name
+          = user.full_name
+          %br
+          (#{user.username})
+      .options
+        = link_to '#' do
+          .btn.btn-sm.btn-warning
+            %span.flaticon-edit7
+        - if post.graveyard
+          = link_to '#' do
+            .btn.btn-sm.btn-warning
+              %span.flaticon-unlock
+        - else
+          = link_to '#' do
+            .btn.btn-sm.btn-danger
+              %span.flaticon-lock9
+        = link_to '#' do
+          .btn.btn-sm.btn-danger
+            %span.flaticon-trash7
+
+        .divider
+
+        = link_to '#', data: {target: "#post-discussion", toggle: "modal"} do
+          .btn.btn-sm.btn-primary
+            %span.flaticon-speech29
+        = link_to '#' do
+          .btn.btn-sm.btn-warning.btn-off
+            %span.flaticon-flag9
+
+

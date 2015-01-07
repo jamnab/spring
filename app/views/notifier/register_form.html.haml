@@ -1,0 +1,3 @@
+%html
+	-@full = "http://"+@url+new_user_path(:name=> @organization.name,:token=> @organization.access_token)
+	%a{ href: @full} Register 

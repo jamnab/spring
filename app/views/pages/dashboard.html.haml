@@ -25,4 +25,4 @@
 
 .post-board
   - Post.all.each do |post|
-    = render "posts/card", post: post
+    = sync partial:"card", resource: post

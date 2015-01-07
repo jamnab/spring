@@ -1,34 +1,54 @@
-= form_for @user do |f|
-  - if @user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg
+.col-xs-12  
+  = form_for @user do |f|
+    - if @user.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+        %ul
+          - @user.errors.full_messages.each do |msg|
+            %li= msg
 
-  .field
-    = f.label :username
-    = f.text_field :username
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :crypted_password
-    = f.text_field :crypted_password
-  .field
-    = f.label :password_salt
-    = f.text_field :password_salt
-  .field
-    = f.label :persistence_token
-    = f.text_field :persistence_token
-  .field
-    = f.label :role
-    = f.text_field :role
-  .field
-    = f.label :first_name
-    = f.text_field :first_name
-  .field
-    = f.label :last_name
-    = f.text_field :last_name
-  .actions
-    = f.submit 'Save'
+    .row.user_new
+      .field.col-xs-6
+        = f.label :username
+        = f.text_field :username, class: "form-control", id: "register_username"
+      .field.col-xs-6
+        = f.label :email
+        = f.text_field :email, class: "form-control"
+      .field.col-xs-6
+        = f.label :first_name
+        = f.text_field :first_name, class: "form-control"
+      .field.col-xs-6
+        = f.label :last_name
+        = f.text_field :last_name, class: "form-control"
+      .field.col-xs-6
+        = f.label :password
+        = f.password_field :password, class: "form-control"
+      .field.col-xs-6
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, class: "form-control"
+    .row.user_new
+
+      .field.col-xs-12
+        = f.label :organization_name
+
+        - if params[:token] != nil && params[:name] != nil
+
+          = f.text_field :organization_name, value: params[:name], class: "form-control", :disabled => true
+        - else
+          = f.text_field :organization_name, class: "form-control"
+      %hr
+      .field.col-xs-12
+        = check_box_tag("user[is_manager]", "1", false, class: "checkbox")
+        = label_tag :checkbox, "I am the manager of this organization."
+      %h5.text-center
+        %b OR
+      .field.col-xs-12
+        = f.label 'Organization access token'
+        - if params[:token] != nil && params[:name] != nil
+          = f.text_field :organization_token, class: "form-control", value: params[:token],:disabled => true
+        - else
+          = f.text_field :organization_token, class: "form-control"
+
+
+      .actions
+      = f.submit 'Save'

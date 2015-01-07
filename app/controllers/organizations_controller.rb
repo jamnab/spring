@@ -40,8 +40,14 @@ class OrganizationsController < ApplicationController
   end
 
   def generate_code
-    @organization.access_code = ('a'..'z').to_a.shuffle[0,32].join
-    @organization.save
+    @prev = @organization.access_token
+    @new = ('a'..'z').to_a.shuffle[0,32].join
+    @organization.update_attribute(:access_token, @new)
+    @user = current_user
+    @url = Rails.env.production? ? request.host : request.host_with_port
+    Notifier.register_form(@user,@organization,@url).deliver!
+    @organization.delay(run_at: 1.minute.from_now).update_attribute(:access_token, nil)
+    @time = Time.now
     redirect_to @organization, notice: 'New access code generated.'
   end
 

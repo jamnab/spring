@@ -1,7 +1,7 @@
 .tag-index
-  - @project.tags.uniq.each do |tag|
-    .tag-index-item
-      \##{tag.name}(#{tag.tag_entries.count})
+  / - @project.tags.uniq.each do |tag|
+  /   .tag-index-item
+  /     \##{tag.name}(#{tag.tag_entries.count})
 
 #posts.col-xs-3
   .row.posts-header
@@ -15,8 +15,8 @@
         = text_field_tag :query, nil, class: "form-control", placeholder: "Search posts here ..."
       %button#search-btn.btn.btn-sm.btn-primary{type: 'submit'}
         .fa.fa-search
-  - @project.posts.each do |post|
-    = render "posts/card", post: post
+  / - @project.posts.each do |post|
+  /   = render "posts/card", post: post
 
 #post.col-xs-9
   - if @post

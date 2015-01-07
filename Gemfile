@@ -23,17 +23,20 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'haml-rails'
 gem 'authlogic'
+gem 'whenever'
 gem 'ancestry'
 gem 'scrypt'
 gem 'cancan'
-
+gem 'faye'
+gem 'thin', require: false
+gem 'sync'
 gem 'forgery', '0.6.0'
 
 # gem "paperclip", :git => "http://github.com/thoughtbot/paperclip.git"
 gem "font-awesome-rails"
-# gem "sentimentalizer", git: "https://github.com/findcongwang/sentimentalizer.git"
+# gem "sentimentalizer", git: "https://github.com/findcongwang/emsentimentalizer.git"
 gem 'skrollr-rails'
-
+gem 'delayed_job_active_record'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

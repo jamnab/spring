@@ -6,11 +6,12 @@
       .fa.fa-edit
 
 - if can? :manage, @organization
-  %h5
-    %b Access code:
-    = @organization.access_code
+  - if @organization.access_token != nil
+    %h5
+      %b Access code:
+      = @organization.access_token
 
-  = link_to generate_code_organization_path(@organization) do
+  = link_to generate_code_organization_path(@organization),:confirm => 'Token Expires in 1 min' do
     .btn.btn-sm.btn-success
       Generate New Code
 
