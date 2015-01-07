@@ -11,4 +11,8 @@ class Comment < ActiveRecord::Base
   has_many :labels, through: :label_entries
 
   has_many :opinions, as: :opinionable
+
+  def doit?
+    true
+  end
 end

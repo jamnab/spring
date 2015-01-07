@@ -11,18 +11,23 @@
   %body
     .sidebar-icons
       %a.sidebar-toggler
-        .profile
-          = image_tag "//placehold.it/50x50"
+        .icon.fa.fa-bars
+        .icon.fa.fa-times-circle-o.hidden
       .navicons
         - if current_user
           = link_to '#' do
             %span.flaticon-home7
           = link_to '#' do
-            %span.flaticon-flag9
-          = link_to '#' do
-            %span.flaticon-check6
+            %span.flaticon-star6
           = link_to '#' do
             %span.flaticon-lock9
+          = link_to '#' do
+            %span.flaticon-line31
+
+          .logo.brand-link
+
+          = link_to '#', class: "logout-link" do
+            %span.flaticon-logout13
         - else
           = link_to '#', data: {target: "#login", toggle: "modal"} do
             %span.flaticon-clock6
@@ -30,32 +35,33 @@
             %span.flaticon-clock6
 
     .sidebar
-      .user
-        - if current_user
-          .name
-            John Smith
-          .username
-            (jsmith)
-        - else
-          .name
-            Guest User
-          .username
-            Please Login
+      .user-wrapper
+        .user
+          = image_tag("//placehold.it/60x60")
+          - if current_user
+            .name
+              John Smith
+            .username
+              (jsmith)
+          - else
+            .name
+              Guest User
+            .username
+              Please Login
       .sidenav
         - if current_user
           = link_to :dashboard do
             Home
           = link_to '#' do
-            My Pins
+            My Favoriates
           = link_to '#' do
-            Do it
-          = link_to '#' do
-            Graveyard
-          = link_to '#' do
-            Calendar
+            Archive
           = link_to '#' do
             Scoreboard
-          = link_to :logout do
+
+          .brand-link
+
+          = link_to :logout, class: "logout-link" do
             Logout
         - else
           = link_to '#', data: {target: "#login", toggle: "modal"} do
@@ -63,7 +69,7 @@
           = link_to '#', data: {target: "#register", toggle: "modal"} do
             Register
     .body-wrapper
-      %nav.navbar.navbar-inverse
+      %nav.navbar.navbar-default
         .container
           .navbar-header
             %button.navbar-toggle{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
@@ -72,44 +78,74 @@
               %span.icon-bar
               %span.icon-bar
 
-            .navbar-brand
-              = link_to root_path do
-                = image_tag("//placehold.it/180x40")
+            .nav.navbar-nav
 
-            #search.search.search-open
-              %form
-                %input#search.search-input{:name => "search", :placeholder => "Enter your search term...", :type => "search", :value => ""}/
-                %input.search-submit{:type => "submit", :value => ""}/
-                %span.sb-icon-search
-                  .fa.fa-search
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+                  #filter-posts.option
+                    ALL
+                    %span.caret
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{href: "#", id: "filter-post-all"} ALL
+                  %li
+                    %a{href: "#", id: "filter-post-work"} WORK
+                  %li
+                    %a{href: "#", id: "filter-post-play"} PLAY
+                  %li
+                    %a{href: "#", id: "filter-post-facility"} FACILITY
+                  %li
+                    %a{href: "#", id: "filter-post-doit"} DOIT
+
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+                  #sort-posts.option
+                    NEWEST
+                    %span.caret
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{href: "#", id: "sort-post-newest"} NEWEST
+                  %li
+                    %a{href: "#", id: "sort-post-dicussed"} MOST DISCUSSED
+                  %li
+                    %a{href: "#", id: "sort-post-updated"} MOST UPVOTED
+
+            / #search.search.search-open
+            /   %form
+            /     %input#search.search-input{:name => "search", :placeholder => "Enter your search term...", :type => "search", :value => ""}/
+            /     %input.search-submit{:type => "submit", :value => ""}/
+            /     %span.sb-icon-search
+            /       .fa.fa-search
 
           #navbar-collapse.collapse.navbar-collapse.pull-right
             %ul.nav.navbar-nav.navbar-right
               - if current_user
-                %li.divider-vertical
+                / %li.divider-vertical
                 %li
-                  = link_to '#' do
-                    %span.flaticon-calendar7
-                %li
-                  = link_to '#' do
-                    %span.flaticon-calendar7
+                  %form.form-inline
+                    .form-group
+                      .input-group
+                        %input#search.form-control{:placeholder => "search ...", :type => "text"}
+                    %button.btn.btn-main{:type => "submit"}
+                      .fa.fa-search
+
                 %li= link_to "Logout", :logout
               - else
-                %li.divider-vertical
+                / %li.divider-vertical
                 %li
                   = link_to '#', data: {target: "#register", toggle: "modal"} do
                     Register
-                %li.divider-vertical
+                / %li.divider-vertical
                 %li
                   = link_to '#', data: {target: "#login", toggle: "modal"} do
                     Log In
 
-          .pinned-toggler.pull-right
-            %input{:checked => "checked", :name => "my-checkbox", :type => "checkbox"}
+          / .pinned-toggler.pull-right
+          /   %input{:checked => "checked", :name => "my-checkbox", :type => "checkbox"}
 
       / - if notice
       /   .alert.alert-warning
-      /     %a.close{"data-dismiss" => "alert", :href => "#"} ×
+      /     %a.close{"data-dismiss" => "alert", href: "#"} ×
       /     = notice
 
       .content-wrapper
@@ -133,8 +169,8 @@
                 = f.password_field :password, class: "form-control"
             .modal-footer
               .actions
-                = f.submit 'Log In', class: "btn btn-success"
-                %button.btn.btn-danger{"data-dismiss" => "modal", :type => "button"} Cancel
+                = f.submit 'Log In', class: "btn btn-main"
+                / %button.btn.btn-main.off{"data-dismiss" => "modal", :type => "button"} Cancel
 
     #register.modal.fade
       .modal-dialog
@@ -181,8 +217,8 @@
                 = f.text_field :organization_token, class: "form-control"
             .modal-footer
               .actions
-                = f.submit 'Register', class: "btn btn-success"
-                %button.btn.btn-danger{"data-dismiss" => "modal", :type => "button"} Cancel
+                = f.submit 'Register', class: "btn btn-main"
+                / %button.btn.btn-main.off{"data-dismiss" => "modal", :type => "button"} Cancel
 
     #post-discussion.modal.fade
       .modal-dialog
@@ -201,25 +237,25 @@
               /   = check_box_tag("comment[anonymous]", "1", false, class: "checkbox")
               /   = label_tag :checkbox, "Remain Anonymous"
               .actions.col-xs-12.text-right
-                = f.submit 'Post Plain Comment', class: "btn btn-warning", id: "comment_plain"
-                = f.submit 'Post as Suggestion', class: "btn btn-custom", id: "comment_suggestion"
+                = f.submit 'Post Plain Comment', class: "btn btn-main off", id: "comment_plain"
+                = f.submit 'Post as Suggestion', class: "btn btn-main on", id: "comment_suggestion"
           .modal-footer
             .comment-sorts
               = link_to '#' do
-                .btn.btn-sm.btn-custom
+                .btn.btn-sm.btn-main.on
                   NEWEST
               = link_to '#' do
-                .btn.btn-sm.btn-success.btn-off
+                .btn.btn-sm.btn-main.off
                   MOST UPVOTED
             .comment-filters
               = link_to '#' do
-                .btn.btn-sm.btn-success
+                .btn.btn-sm.btn-main.on
                   ALL
               = link_to '#' do
-                .btn.btn-sm.btn-warning.btn-off
+                .btn.btn-sm.btn-main.off
                   PLAIN
               = link_to '#' do
-                .btn.btn-sm.btn-custom.btn-off
+                .btn.btn-sm.btn-main.off
                   SUGGESTION
             = render "comments/card"
             = render "comments/card"

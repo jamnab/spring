@@ -2,35 +2,36 @@
 
 // filter bars
 
-.post-filters {
-  height: 50px;
-  width: 100%;
-  background-color: #eee;
-  padding-left: 30px;
+// .post-filters {
+//   height: 50px;
+//   width: 100%;
+//   background-color: #eee;
+//   padding-left: 30px;
 
-  .btn {
-    margin-top: 10px;
-    margin-left: 10px;
-  }
-}
+//   .btn {
+//     margin-top: 10px;
+//     margin-left: 10px;
+//   }
+// }
 
-.post-sorts {
-  height: 50px;
-  float: right;
-  padding-right: 30px;
+// .post-sorts {
+//   height: 50px;
+//   float: right;
+//   padding-right: 30px;
 
-  .btn {
-    margin-top: 10px;
-    margin-right: 10px;
-  }
-}
+//   .btn {
+//     margin-top: 10px;
+//     margin-right: 10px;
+//   }
+// }
 
 .comment-filters {
   text-align: left;
   height: 50px;
   width: 100%;
-  background-color: #eee;
   padding-left: 5px;
+  border-top: 1px solid $inverse_background;
+  border-bottom: 1px solid $inverse_background;
 
   .btn {
     margin-top: 10px;
@@ -51,17 +52,38 @@
 
 // ----
 
+// button classses
+
 .btn {
-  border-radius: 0px;
+  border-radius: 5px;
 }
 
 .btn-custom {
   background-color: #f17910;
+  opacity: 0.75;
 
   &:hover {
-    background-color: #da6d0d;
+    opacity: 1.0;
+  }
+
+  // &:hover {
+  //   background-color: #da6d0d;
+  // }
+}
+
+.btn-main {
+  background-color: $inverse_text_off;
+  opacity: 0.9;
+
+  &.on  { opacity: 0.9; }
+  &.off { opacity: 0.6; }
+
+  &:hover {
+    opacity: 1.0;
   }
 }
+
+// ----
 
 .post-board {
   padding: 0px 20px;
@@ -76,7 +98,6 @@
     position: relative;
     height: 100%;
     width: 100%;
-    background-color: #dddddd;
 
     .header {
       height: 50px;
@@ -90,11 +111,21 @@
       .traction {
         position: relative;
         float: right;
+        font-weight: bold;
+        color: $inverse_text_highlight;
+
+        span:before {
+          margin: 0px 5px;
+        }
 
         .tags {
           float: right;
           margin-top: -5px;
           padding-left: 15px;
+        }
+
+        &.doit {
+          color: rgba($main_highlight, 0.75);
         }
       }
     }
@@ -108,36 +139,33 @@
   }
 
   .work {
-    background-color: rgba($main-blue, 0.05);
+    background-color: rgba($main-work, 0.05);
     .header {
-      background-color: rgba($main-blue, 0.75);
+      background-color: rgba($main-work, 0.75);
     }
     .signature {
-      background-color: rgba($main-blue, 0.25);
+      background-color: rgba($main-work, 0.25);
     }
-    border: 1px solid $main-blue;
   }
 
   .play {
-    background-color: rgba($main-green, 0.25);
+    background-color: rgba($main-play, 0.05);
     .header {
-      background-color: rgba($main-green, 0.75);
+      background-color: rgba($main-play, 0.75);
     }
     .signature {
-      background-color: rgba($main-green, 0.25);
+      background-color: rgba($main-play, 0.25);
     }
-    border: 1px solid $main-green;
   }
 
   .facility {
-    background-color: rgba($main-yellow, 0.25);
+    background-color: rgba($main-facility, 0.05);
     .header {
-      background-color: rgba($main-yellow, 0.75);
+      background-color: rgba($main-facility, 0.75);
     }
     .signature {
-      background-color: rgba($main-yellow, 0.25);
+      background-color: rgba($main-facility, 0.25);
     }
-    border: 1px solid $main-yellow;
   }
 }
 
@@ -152,15 +180,24 @@
     width: 100%;
 
     .traction {
-      padding: 5px 0px;
+      padding: 2px 0px;
 
       h4 {
         display: inline-block;
-      }
-      .tags {
-        float: right;
-        padding-left: 15px;
-        margin-top: 2px;
+        color: $default_text_main;
+
+        .indicator {
+          display: inline-block;
+          margin-left: 10px;
+          span:before {
+            margin: 0px;
+            margin-left: 0px;
+          }
+        }
+
+        &.doit {
+          color: $main_highlight;
+        }
       }
     }
 
@@ -217,6 +254,7 @@
       img {
         margin-top: -15px;
         border: 1px solid #ddd;
+        border-radius: 20px;
       }
       .name {
         display: inline-block;
@@ -231,5 +269,20 @@
       margin-top: -43px;
       padding-right: 15px;
     }
+  }
+}
+
+// roundedness
+
+.post-wrapper, .post {
+  border-radius: 10px;
+  border: none !important;
+
+  .header {
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  .signature {
+    border-radius: 0px 0px 10px 10px;
   }
 }
