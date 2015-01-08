@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  searchkick
   belongs_to :user
   belongs_to :organization
 

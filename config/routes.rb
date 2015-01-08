@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get 'dashboard' => 'pages#dashboard', as: :dashboard
-
+  get 'search' => 'pages#search', as: :search
   resources :subscriptions
 
   resources :tag_entries
