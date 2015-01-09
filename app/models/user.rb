@@ -24,4 +24,8 @@ class User < ActiveRecord::Base
   def is_manager?
     self.manager
   end
+
+  def is_admin?
+    self.admin
+  end
 end

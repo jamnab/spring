@@ -1,5 +1,5 @@
 .post-board
-  - Post.all.each do |post|
+  - @posts.all.each do |post|
     = sync partial: "card", resource: post
 
 
