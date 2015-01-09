@@ -140,9 +140,6 @@
                   = link_to '#', data: {target: "#login", toggle: "modal"} do
                     Log In
 
-          / .pinned-toggler.pull-right
-          /   %input{:checked => "checked", :name => "my-checkbox", :type => "checkbox"}
-
       / - if notice
       /   .alert.alert-warning
       /     %a.close{"data-dismiss" => "alert", href: "#"} ×
@@ -151,111 +148,6 @@
       .content-wrapper
         = yield
 
-    #login.modal.fade
-      .modal-dialog
-        .modal-content
-          .modal-header
-            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-              %span{"aria-hidden" => "true"} ×
-            %h4.modal-title Log In
-
-          = form_for UserSession.new do |f|
-            .modal-body
-              .field
-                = f.label :username
-                = f.text_field :username, class: "form-control", id: "login_username"
-              .field
-                = f.label :password
-                = f.password_field :password, class: "form-control"
-            .modal-footer
-              .actions
-                = f.submit 'Log In', class: "btn btn-main"
-                / %button.btn.btn-main.off{"data-dismiss" => "modal", :type => "button"} Cancel
-
-    #register.modal.fade
-      .modal-dialog
-        .modal-content
-          .modal-header
-            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-              %span{"aria-hidden" => "true"} ×
-            %h4.modal-title Register
-          = form_for User.new do |f|
-
-            - if !params[:organization_token].nil?
-              = hidden_field :organization_token, value: params[:organization_token]
-
-            .modal-body.row
-              .field.col-xs-6
-                = f.label :username
-                = f.text_field :username, class: "form-control", id: "register_username"
-              .field.col-xs-6
-                = f.label :email
-                = f.text_field :email, class: "form-control"
-              .field.col-xs-6
-                = f.label :first_name
-                = f.text_field :first_name, class: "form-control"
-              .field.col-xs-6
-                = f.label :last_name
-                = f.text_field :last_name, class: "form-control"
-              .field.col-xs-6
-                = f.label :password
-                = f.password_field :password, class: "form-control"
-              .field.col-xs-6
-                = f.label :password_confirmation
-                = f.password_field :password_confirmation, class: "form-control"
-              .field.col-xs-12
-                = f.label :organization_name
-                = f.text_field :organization_name, class: "form-control"
-              %hr
-              .field.col-xs-12
-                = check_box_tag("user[is_manager]", "1", false, class: "checkbox")
-                = label_tag :checkbox, "I am the manager of this organization."
-              %h5.text-center
-                %b OR
-              .field.col-xs-12
-                = f.label 'Organization access token'
-                = f.text_field :organization_token, class: "form-control"
-            .modal-footer
-              .actions
-                = f.submit 'Register', class: "btn btn-main"
-                / %button.btn.btn-main.off{"data-dismiss" => "modal", :type => "button"} Cancel
-
-    #post-discussion.modal.fade
-      .modal-dialog
-        .modal-content
-          .modal-header
-            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-              %span{"aria-hidden" => "true"} ×
-            %h4.modal-title
-              Post Title Discussion
-          .modal-body.row
-            = form_for Comment.new do |f|
-              = f.hidden_field :suggestion, value: false
-              .field.col-xs-12
-                = f.text_area :content, class: "form-control", placeholder: "Enter your comment here ...", rows: 3
-              / .field.col-xs-12.text-right
-              /   = check_box_tag("comment[anonymous]", "1", false, class: "checkbox")
-              /   = label_tag :checkbox, "Remain Anonymous"
-              .actions.col-xs-12.text-right
-                = f.submit 'Post Plain Comment', class: "btn btn-main off", id: "comment_plain"
-                = f.submit 'Post as Suggestion', class: "btn btn-main on", id: "comment_suggestion"
-          .modal-footer
-            .comment-sorts
-              = link_to '#' do
-                .btn.btn-sm.btn-main.on
-                  NEWEST
-              = link_to '#' do
-                .btn.btn-sm.btn-main.off
-                  MOST UPVOTED
-            .comment-filters
-              = link_to '#' do
-                .btn.btn-sm.btn-main.on
-                  ALL
-              = link_to '#' do
-                .btn.btn-sm.btn-main.off
-                  PLAIN
-              = link_to '#' do
-                .btn.btn-sm.btn-main.off
-                  SUGGESTION
-            = render "comments/card"
-            = render "comments/card"
+    = render 'layouts/login_form'
+    = render 'layouts/register_form'
+    = yield :popups

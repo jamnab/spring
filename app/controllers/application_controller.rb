@@ -6,11 +6,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_organization
 
-  
   private
 
   def current_organization
-    current_user.organizations.first
+    current_user.organization
   end
 
   def current_user_session

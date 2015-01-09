@@ -33,32 +33,33 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @organization = Organization.where(name: @user.organization_name).first
 
+    new_org = false
+
     # allow if new organization or has embedded token
-    if @user.is_manager && @organization.nil?
+    if @user.is_manager? && @organization.nil?
       # create new organization
-      @organization = Organization.create(name: @user.organization_name)
-      @org_mem = OrganizationMembership.create(organization_id: @organization.id, admin: true)
-    elsif @user.is_manager && !@organization.nil?
-      redirect_to :back, notice: "Error: Cannot create an organization that already exists."
-    elsif !@user.is_manager && @organization.nil?
-      redirect_to :back, notice: "Error: Cannot join, organization does not exist."
+      new_org = true
+    elsif @user.is_manager? && !@organization.nil?
+      redirect_to :back, notice: "Error: Cannot create an organization that already exists." and return
+    elsif !@user.is_manager? && @organization.nil?
+      redirect_to :back, notice: "Error: Cannot join, organization does not exist." and return
     else
       # check for token
       if @organization.access_token == @user.organization_token
         # joins existing organization
-        @org_mem = OrganizationMembership.create(organization_id: @organization.id)
+        @user.organization_id = @organization.id
       else
-        redirect_to :back, notice: "Error: Cannot join, access token not detected."
+        redirect_to :back, notice: "Error: Cannot join, access token not detected." and return
       end
     end
 
     respond_to do |format|
       if @user.save
-        # set & save membership
-        @org_mem.user_id = @user.id
-        @org_mem.save
-
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        if new_org
+          @organization = Organization.create(name: @user.organization_name)
+          @user.update(organization_id: @organization.id)
+        end
+        format.html { redirect_to :dashboard, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -99,6 +100,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :crypted_password, :password_salt, :persistence_token, :role, :first_name, :last_name)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :first_name, :last_name, :organization_name, :organization_token, :job_title, :manager, :organization_id)
     end
 end

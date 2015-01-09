@@ -143,6 +143,9 @@ ActiveRecord::Schema.define(version: 20150106234825) do
     t.string   "persistence_token"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "job_title"
+    t.integer  "organization_id"
+    t.boolean  "manager",           default: false
     t.boolean  "admin",             default: false
     t.datetime "created_at"
     t.datetime "updated_at"

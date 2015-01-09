@@ -14,6 +14,9 @@ class Post < ActiveRecord::Base
   WORK = 0
   PLAY = 1
   FACILITY = 2
+  TYPES = [{'name' => 'Work', 'id' => WORK},
+           {'name' => 'Play', 'id' => PLAY},
+           {'name' => 'Facility', 'id' => FACILITY}]
 
   def doit?
     return (self.traction > self.threshold)

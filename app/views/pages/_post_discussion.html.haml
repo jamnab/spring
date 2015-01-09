@@ -1,0 +1,39 @@
+#post-discussion.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title
+          Post Title Discussion
+      .modal-body.row
+        = form_for Comment.new do |f|
+          = f.hidden_field :suggestion, value: false
+          .field.col-xs-12
+            = f.text_area :content, class: "form-control", placeholder: "Enter your comment here ...", rows: 3
+          / .field.col-xs-12.text-right
+          /   = check_box_tag("comment[anonymous]", "1", false, class: "checkbox")
+          /   = label_tag :checkbox, "Remain Anonymous"
+          .actions.col-xs-12.text-right
+            = f.submit 'Post Plain Comment', class: "btn btn-main off", id: "comment_plain"
+            = f.submit 'Post as Suggestion', class: "btn btn-main on", id: "comment_suggestion"
+      .modal-footer
+        .comment-sorts
+          = link_to '#' do
+            .btn.btn-sm.btn-main.on
+              NEWEST
+          = link_to '#' do
+            .btn.btn-sm.btn-main.off
+              MOST UPVOTED
+        .comment-filters
+          = link_to '#' do
+            .btn.btn-sm.btn-main.on
+              ALL
+          = link_to '#' do
+            .btn.btn-sm.btn-main.off
+              PLAIN
+          = link_to '#' do
+            .btn.btn-sm.btn-main.off
+              SUGGESTION
+        = render "comments/card"
+        = render "comments/card"

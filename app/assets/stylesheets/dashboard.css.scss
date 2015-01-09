@@ -286,3 +286,28 @@
     border-radius: 0px 0px 10px 10px;
   }
 }
+
+// new post
+
+#new-post-toggler {
+  position: fixed;
+  bottom: 30px;
+  right: 50px;
+  height: 80px;
+  width: 80px;
+  border-radius: 50px;
+  background-color: $main_highlight;
+  opacity: 0.9;
+
+  &:hover {
+    background-color: $main_highlight !important;
+    opacity: 1.0;
+  }
+
+  span:before {
+    display: block;
+    font-size: 45px;
+    line-height: 68px;
+    margin: 0px;
+  }
+}
