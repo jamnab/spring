@@ -2,8 +2,6 @@
   - @posts.all.each do |post|
     = sync partial: "card", resource: post
 
-
-
 = content_for :popups do
 
   = render 'post_discussion'
@@ -11,3 +9,4 @@
 
   = link_to '#', data: {target: "#new-post", toggle: "modal"}, class: "btn", id: "new-post-toggler" do
     %span.flaticon-plus9
+

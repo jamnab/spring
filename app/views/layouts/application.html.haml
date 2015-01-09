@@ -5,6 +5,7 @@
     = stylesheet_link_tag    'application', media: 'all'
     = stylesheet_link_tag    'flaticon/flaticon.css'
     = javascript_include_tag 'application'
+    = javascript_include_tag :defaults
     = javascript_include_tag Sync.adapter_javascript_url
     = csrf_meta_tags
     = favicon_link_tag 'favicon.png'
@@ -122,12 +123,22 @@
               - if current_user
                 / %li.divider-vertical
                 %li
-                  %form.form-inline
-                    .form-group
-                      .input-group
-                        %input#search.form-control{:placeholder => "search ...", :type => "text"}
-                    %button.btn.btn-main{:type => "submit"}
-                      .fa.fa-search
+                  - if request.path == '/search'
+                    = form_tag search_path, class: "form-inline", remote: :true, :method => :get do
+                      .form-group
+                        .input-group
+                          = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "search ..."
+                          / %input#search.form-control{:placeholder => "search ...", :type => "text"}
+                      %button.btn.btn-main{:type => "submit"}
+                        .fa.fa-search
+                  - else
+                    = form_tag search_path, class: "form-inline", :method => :get do
+                      .form-group
+                        .input-group
+                          = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "search ..."
+                          / %input#search.form-control{:placeholder => "search ...", :type => "text"}
+                      %button.btn.btn-main{:type => "submit"}
+                        .fa.fa-search
 
                 %li= link_to "Logout", :logout
               - else
