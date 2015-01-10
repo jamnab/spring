@@ -2,7 +2,7 @@ class Comment < ActiveRecord::Base
   has_ancestry
 
   belongs_to :user
-  belongs_to :commentable, polymorphic: true
+  belongs_to :commentable, polymorphic: true, counter_cache: true
 
   has_many :tag_entries, as: :taggable, dependent: :destroy
   has_many :tags, through: :tag_entries

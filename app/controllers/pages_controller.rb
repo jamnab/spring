@@ -3,7 +3,26 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-   	 @posts = Post.all
+   	if params[:query].present?
+      @p = params[:query]
+      @posts = Post.where(:post_type => params[:query])
+    elsif params[:sort].present?
+      @p = params[:sort]
+      if @p == "newest"
+        @posts = Post.all.order("created_at DESC")
+      elsif @p == "discussed"
+
+      else
+        @posts = Post.all.order("traction DESC")
+      end
+    else
+      @posts = Post.all.order("created_at DESC")
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
+    end
+
   end
   def search
   	if params[:query].present?
@@ -13,7 +32,6 @@ class PagesController < ApplicationController
     end
 
     respond_to do |format|
-    	sync_update @posts
       format.html # index.html.erb
       format.js
     end

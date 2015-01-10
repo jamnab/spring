@@ -83,18 +83,21 @@
 
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-                  #filter-posts.option
-                    ALL
+                  #filter-posts.option.filter
+                    .text{style: "float:left;"}
+                      ALL
                     %span.caret
                 %ul.dropdown-menu{:role => "menu"}
                   %li
                     %a{href: "#", id: "filter-post-all"} ALL
                   %li
-                    %a{href: "#", id: "filter-post-work"} WORK
+                    = link_to "WORK",dashboard_path(:query => "0"),remote: true, :id =>"filter-post-work"                   
+                    / %a{href: "#", id: "filter-post-work"} WORK (request.path =="/dashboard")
                   %li
-                    %a{href: "#", id: "filter-post-play"} PLAY
+                    = link_to "PLAY",dashboard_path(:query => "1"),remote: true, :id =>"filter-post-play"
+    
                   %li
-                    %a{href: "#", id: "filter-post-facility"} FACILITY
+                    = link_to "FACILITY",dashboard_path(:query => "2"),remote: true, :id =>"filter-post-facility"
                   %li
                     %a{href: "#", id: "filter-post-doit"} DOIT
 
@@ -105,11 +108,13 @@
                     %span.caret
                 %ul.dropdown-menu{:role => "menu"}
                   %li
-                    %a{href: "#", id: "sort-post-newest"} NEWEST
+                    = link_to "NEWEST",dashboard_path(:sort => "newest"),remote: true, :id =>"sort-post-newest"
+                    
+
                   %li
                     %a{href: "#", id: "sort-post-dicussed"} MOST DISCUSSED
                   %li
-                    %a{href: "#", id: "sort-post-updated"} MOST UPVOTED
+                    = link_to "MOST UPVOTED",dashboard_path(:sort => "upvoted"),remote: true, :id =>"sort-post-updated"
 
             / #search.search.search-open
             /   %form
@@ -123,23 +128,14 @@
               - if current_user
                 / %li.divider-vertical
                 %li
-                  - if request.path == '/search'
-                    = form_tag search_path, class: "form-inline", remote: :true, :method => :get do
-                      .form-group
-                        .input-group
-                          = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "search ..."
-                          / %input#search.form-control{:placeholder => "search ...", :type => "text"}
-                      %button.btn.btn-main{:type => "submit"}
-                        .fa.fa-search
-                  - else
-                    = form_tag search_path, class: "form-inline", :method => :get do
-                      .form-group
-                        .input-group
-                          = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "search ..."
-                          / %input#search.form-control{:placeholder => "search ...", :type => "text"}
-                      %button.btn.btn-main{:type => "submit"}
-                        .fa.fa-search
-
+                  = form_tag search_path, class: "form-inline", remote: (request.path == '/search'), :method => :get do
+                    .form-group
+                      .input-group
+                        = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "search ..."
+                        / %input#search.form-control{:placeholder => "search ...", :type => "text"}
+                    %button.btn.btn-main{:type => "submit"}
+                      .fa.fa-search
+      
                 %li= link_to "Logout", :logout
               - else
                 / %li.divider-vertical

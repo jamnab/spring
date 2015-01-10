@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150106234825) do
+ActiveRecord::Schema.define(version: 20150109125041) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20150106234825) do
     t.datetime "updated_at"
     t.boolean  "comment_anonymity", default: false
     t.integer  "opinion",           default: 0
+    t.integer  "comments_count"
   end
 
   create_table "project_memberships", force: true do |t|
