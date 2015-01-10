@@ -114,6 +114,12 @@
         font-weight: bold;
         color: $inverse_text_highlight;
 
+        img {
+          position: absolute;
+          height: 18px;
+          margin-left: -70px;
+        }
+
         span:before {
           margin: 0px 5px;
         }
@@ -224,6 +230,11 @@
       width: 5px;
       height: 6px;
       border-right: 1px solid #fff;
+    }
+
+    .user img {
+      width: 35px;
+      height: 35px;
     }
   }
 

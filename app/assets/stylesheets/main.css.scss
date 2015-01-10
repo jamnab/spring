@@ -24,6 +24,7 @@ html, body {
     margin-left: 10px !important;
     img {
       margin: 5px;
+      height: 40px;
     }
   }
 
@@ -322,12 +323,14 @@ a:hover {
   text-align: center;
 
   &.logo {
-    padding-top: 15px;
+    padding-top: 25px;
     width: 69px;
+    img { height: 110px; }
   }
 
   &.org {
     padding-top: 30px;
+    img { height: 50px; }
     h4, h5 {
       color: $default_text_main;
     }
@@ -411,6 +414,8 @@ a:hover {
         margin-bottom: 5px;
         border-radius: 60px;
         border: 2px solid $inverse_text_main;
+        width: 60px;
+        height: 60px;
       }
 
       .name {

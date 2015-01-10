@@ -27,7 +27,7 @@
             %span.flaticon-line31
 
           .logo.brand-link
-            = image_tag "pindoit_vert.png", width: 40
+            = image_tag "pindoit_vert.png"
 
           = link_to '#', class: "logout-link" do
             %span.flaticon-logout13
@@ -40,7 +40,7 @@
     .sidebar
       .user-wrapper
         .user
-          = image_tag("//placehold.it/60x60")
+          = image_tag("profile_default.png")
           - if current_user
             .name
               John Smith
@@ -63,7 +63,7 @@
             Scoreboard
 
           .brand-link.org
-            = image_tag ("seeds/ecl_logo2.png")
+            = image_tag "seeds/ecl_logo2.png"
             %h4 Powered by Pindoit
             %h5 A Verse Software Lab Inc. Solution.
 
@@ -86,8 +86,8 @@
               %span.icon-bar
 
             .navbar-brand
-              / = image_tag("pindoit.png", height: 40)
-              = image_tag("seeds/ecl_logo2.png", height: 40)
+              / = image_tag "pindoit.png"
+              = image_tag "seeds/ecl_logo2.png"
 
 
             .nav.navbar-nav

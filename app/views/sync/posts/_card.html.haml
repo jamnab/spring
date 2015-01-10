@@ -9,10 +9,10 @@
       = post.title
       .traction{class: ("doit" if post.doit?)}
         - if post.doit?
-          DOIT
-          %span.flaticon-check6
+          = image_tag "doit.png"
         - else
-          DOIT?
+          Traction:
+
         #{post.traction} / #{post.threshold}
         .tags
           .btn.btn-sm.btn-on{class: "btn-#{class_type}"}
@@ -21,15 +21,14 @@
             %span.flaticon-go1
 
     .content
-      .row
-        .col-xs-8
-          = post.content
-        .col-xs-4
-          = image_tag("//placehold.it/140x110")
+      .col-xs-8
+        = post.content
+      .col-xs-4
+        = image_tag("//placehold.it/140x110")
 
     .signature
       .user
-        = image_tag("//placehold.it/35x35")
+        = image_tag("profile_default.png")
         .name
           = user.full_name
           %br
