@@ -4,6 +4,7 @@
     %title Pin.DoIt
     = stylesheet_link_tag    'application', media: 'all'
     = stylesheet_link_tag    'flaticon/flaticon.css'
+    = stylesheet_link_tag    'flaticon-pack2/flaticon.css'
     = javascript_include_tag 'application'
     = javascript_include_tag :defaults
     = javascript_include_tag Sync.adapter_javascript_url
@@ -26,14 +27,15 @@
             %span.flaticon-line31
 
           .logo.brand-link
+            = image_tag "pindoit_vert.png", width: 40
 
           = link_to '#', class: "logout-link" do
             %span.flaticon-logout13
         - else
           = link_to '#', data: {target: "#login", toggle: "modal"} do
-            %span.flaticon-clock6
+            %span.flaticon-login17
           = link_to '#', data: {target: "#register", toggle: "modal"} do
-            %span.flaticon-clock6
+            %span.flaticon-create1
 
     .sidebar
       .user-wrapper
@@ -60,7 +62,10 @@
           = link_to '#' do
             Scoreboard
 
-          .brand-link
+          .brand-link.org
+            = image_tag ("seeds/ecl_logo2.png")
+            %h4 Powered by Pindoit
+            %h5 A Verse Software Lab Inc. Solution.
 
           = link_to :logout, class: "logout-link" do
             Logout
@@ -69,6 +74,7 @@
             Log In
           = link_to '#', data: {target: "#register", toggle: "modal"} do
             Register
+
     .body-wrapper
       %nav.navbar.navbar-default
         .container
@@ -78,6 +84,11 @@
               %span.icon-bar
               %span.icon-bar
               %span.icon-bar
+
+            .navbar-brand
+              / = image_tag("pindoit.png", height: 40)
+              = image_tag("seeds/ecl_logo2.png", height: 40)
+
 
             .nav.navbar-nav
 

@@ -21,6 +21,7 @@ html, body {
     font-size: 22px;
     height: 70px;
     padding: 10px;
+    margin-left: 10px !important;
     img {
       margin: 5px;
     }
@@ -314,13 +315,22 @@ a:hover {
   position: fixed;
   bottom: 70px;
   height: 160px;
-  background-color: $inverse_background;
+  background-color: $inverse_text_highlight;
   width: 280px;
   border-top: 1px solid $default_text_off;
   z-index: 10;
+  text-align: center;
 
   &.logo {
+    padding-top: 15px;
     width: 69px;
+  }
+
+  &.org {
+    padding-top: 30px;
+    h4, h5 {
+      color: $default_text_main;
+    }
   }
 }
 
