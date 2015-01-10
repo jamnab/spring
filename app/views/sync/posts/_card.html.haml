@@ -52,7 +52,7 @@
 
         .divider
 
-        = link_to '#', data: {target: "#post-discussion", toggle: "modal"} do
+        = link_to '#', data: {target: "#post-discussion", toggle: "modal", type: "#{class_type}"}, class: "post-discussion-toggler" do
           .btn.btn-sm{class: "btn-#{class_type}"}
             %span.flaticon-speech29
         = link_to '#' do

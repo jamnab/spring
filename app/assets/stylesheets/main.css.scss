@@ -484,7 +484,7 @@ a:hover {
 
 // button styles
 
-.post {
+.post, .comment {
 
   .btn-off {
     background-color: transparent;
@@ -518,41 +518,47 @@ a:hover {
     background-color: transparent;
     color: $inverse_text_off !important;
     border: 1px solid $inverse_text_off;
-  }
-}
-
-.comment {
-  .btn-off {
-    background-color: transparent;
-    color: $inverse_text_off !important;
-    border: 1px solid $inverse_text_off;
-    opacity: 0.6;
-
-    &:hover {
-      background-color: $inverse_text_off;
-      color: $inverse_text_main !important;
-      border: 1px solid $inverse_text_main;
-      opacity: 0.75;
-    }
-  }
-
-  .btn-on {
-    background-color: $inverse_text_off;
-    color: $inverse_text_main !important;
-    border: 1px solid $inverse_text_main;
     opacity: 0.75;
   }
 
-  .btn-default {
-    background-color: $inverse_text_off;
-    color: $inverse_text_main !important;
-    border: 1px solid $inverse_text_main;
-
-    &:hover {
-      opacity: 0.75;
-    }
+  .controls .btn-off {
+    color: $inverse_text_off !important;
+    border: 1px solid $inverse_text_off;
   }
 }
+
+// .comment {
+//   .btn-off {
+//     background-color: transparent;
+//     color: $inverse_text_off !important;
+//     border: 1px solid $inverse_text_off;
+//     opacity: 0.6;
+
+//     &:hover {
+//       background-color: $inverse_text_off;
+//       color: $inverse_text_main !important;
+//       border: 1px solid $inverse_text_main;
+//       opacity: 0.75;
+//     }
+//   }
+
+//   .btn-on {
+//     background-color: $inverse_text_off;
+//     color: $inverse_text_main !important;
+//     border: 1px solid $inverse_text_main;
+//     opacity: 0.75;
+//   }
+
+//   .btn-default {
+//     background-color: $inverse_text_off;
+//     color: $inverse_text_main !important;
+//     border: 1px solid $inverse_text_main;
+
+//     &:hover {
+//       opacity: 0.75;
+//     }
+//   }
+// }
 
 .btn-work, .btn-play, .btn-facility {
   color: $default_background;
@@ -589,15 +595,54 @@ a:hover {
   .modal-content {
     height: 100%;
 
+    &.work {
+      .modal-header {
+        background-color: $main_work;
+        color: $inverse_text_main;
+      }
+      .btn.btn-main {
+        background-color: $main_work;
+      }
+    }
+
+    &.play {
+      .modal-header {
+        background-color: $main_play;
+        color: $inverse_text_main;
+      }
+      .btn.btn-main {
+        background-color: $main_play;
+      }
+    }
+
+    &.facility {
+      .modal-header {
+        background-color: $main_facility;
+        color: $inverse_text_main;
+      }
+      .btn.btn-main {
+        background-color: $main_facility;
+      }
+    }
+
+    .modal-body {
+      padding-bottom: 10px;
+    }
+
     .modal-footer {
-      height: calc(100% - 230px);
-      overflow-y: scroll;
+      height: calc(100% - 358px);
+
+      .comments {
+        height: calc(100% - 50px);
+        overflow-y: scroll;
+      }
     }
   }
 }
 
 #post-discussion .modal-footer {
   padding: 0px;
+  margin-top: 0px;
   border: none;
 }
 
@@ -605,6 +650,6 @@ a:hover {
   margin-right: 10px;
 }
 
-#comment_plain, #comment_content, #comment_suggestion {
-  margin-top: 10px;
-}
+// #comment_plain, #comment_content, #comment_suggestion {
+//   margin-top: 10px;
+// }
