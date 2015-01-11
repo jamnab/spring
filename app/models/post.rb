@@ -20,6 +20,11 @@ class Post < ActiveRecord::Base
            {'name' => 'Facility', 'id' => FACILITY}]
 
   def doit?
-    return (self.traction > self.threshold)
+    return (self.traction > self.threshold) || self.alt_doit?
+  end
+
+  def alt_doit?
+    # check for comment doit
+    return !self.comments.select{|x| x.doit?}.empty?
   end
 end

@@ -58,8 +58,9 @@
         .divider
 
         = link_to '#', data: {target: "#post-discussion", toggle: "modal", type: "#{class_type}"}, class: "post-discussion-toggler" do
-          .btn.btn-sm{class: "btn-#{class_type}"}
+          .btn.btn-sm.btn-counter{class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}
             %span.flaticon-speech29
+            .count 10
         = link_to '#' do
           .btn.btn-sm.btn-off{class: "btn-#{class_type}"}
             %span.flaticon-star6

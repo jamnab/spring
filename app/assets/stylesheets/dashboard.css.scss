@@ -242,7 +242,7 @@
 
     .btn-sm {
       margin-left: 5px;
-      width: 32px;
+      min-width: 32px;
       padding: 4px 0px;
 
       span:before {
@@ -280,6 +280,24 @@
       margin-top: -43px;
       padding-right: 15px;
     }
+  }
+}
+
+.btn-counter {
+  padding: 4px 6px !important;
+
+  .count {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  span {
+    display: inline-block;
+  }
+
+  &.btn-doit {
+    background-color: $main_highlight;
   }
 }
 
