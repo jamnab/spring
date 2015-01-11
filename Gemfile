@@ -37,6 +37,8 @@ gem "font-awesome-rails"
 # gem "sentimentalizer", git: "https://github.com/findcongwang/emsentimentalizer.git"
 gem 'skrollr-rails'
 gem 'delayed_job_active_record'
+gem 'chart-js-rails'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

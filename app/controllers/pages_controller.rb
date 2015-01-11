@@ -24,7 +24,7 @@ class PagesController < ApplicationController
     end
   end
 
-  def verse
-    render layout: false
+  def summary
+    @users = User.all
   end
 end

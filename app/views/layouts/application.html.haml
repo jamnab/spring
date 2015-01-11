@@ -17,13 +17,13 @@
         .icon.fa.fa-times-circle-o.hidden
       .navicons
         - if current_user
-          = link_to '#' do
+          = link_to :dashboard do
             %span.flaticon-home7
           = link_to '#' do
             %span.flaticon-star6
           = link_to '#' do
             %span.flaticon-lock9
-          = link_to '#' do
+          = link_to :summary do
             %span.flaticon-line31
 
           .logo.brand-link
@@ -59,8 +59,8 @@
             My Favoriates
           = link_to '#' do
             Archive
-          = link_to '#' do
-            Scoreboard
+          = link_to :summary do
+            Summary
 
           .brand-link.org
             = image_tag "seeds/ecl_logo2.png"
@@ -86,7 +86,8 @@
             /   %span.icon-bar
 
             .navbar-brand
-              / = image_tag "pindoit.png"
+              / = image_tag "pindoit_logo.png"
+              / = image_tag "pindoit_logo.png"
               = image_tag "seeds/ecl_logo2.png"
 
           #navbar-dropdown

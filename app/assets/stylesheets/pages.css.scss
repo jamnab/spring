@@ -1,0 +1,33 @@
+@import 'presets';
+
+.summary {
+  padding: 30px 40px;
+  color: $inverse-text-off;
+
+  .nav-pills {
+    li {
+      margin-right: 15px;
+      a {
+        background-color: $inverse-text-off !important;
+        color: $inverse-text-main !important;
+        opacity: 0.5;
+        &:hover {
+          opacity: 1.0;
+        }
+      }
+      &.active a {
+        opacity: 1.0;
+      }
+    }
+  }
+
+  .tab-content {
+    .tab-pane {
+      padding: 20px 20px 20px 0px;
+    }
+
+    #org-graph-canvas {
+      margin-top: 20px;
+    }
+  }
+}

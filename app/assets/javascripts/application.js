@@ -19,4 +19,5 @@
 //= require skrollr.ie
 //= require skrollr.menu
 //= require sync
+//= require Chart
 //= require_tree .

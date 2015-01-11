@@ -1,0 +1,71 @@
+.summary
+
+  %ul.nav.nav-pills
+    %li.active
+      %a{href: "#organization-summary", data: {toggle: "tab"}}
+        .fa.fa-building
+        Organization Summary
+    %li
+      %a{href: "#personnel-summary", data: {toggle: "tab"}}
+        .fa.fa-users
+        Personnel Summary
+
+  .tab-content
+    #organization-summary.tab-pane.fade.in.active
+      .col-xs-6
+        %h4
+          Number of Activities (This Week / This Month / Total):
+          %b 50/100/200
+        %h4
+          Number of Posts (W / M / T):
+          %b 50/100/200
+        %h4
+          Number of Comments (W / M / T):
+          %b 50/100/200
+      .col-xs-6
+        %h4
+          Number of Doits (This Week / This Month / Total):
+          %b 50/100/200
+        %h4
+          Doits Generated from Posts (W / M / T):
+          %b 50/100/200
+        %h4
+          Doits Generated from Suggestions (W / M / T):
+          %b 50/100/200
+
+      %canvas#org-graph-canvas{height: "400px", width: "1100px"}
+
+    #personnel-summary.tab-pane.fade
+      .col-xs-12
+        %h4
+          Number of Personnels:
+          %b 69
+
+        .btn.btn-main
+          Generate Invite Email
+
+        %hr
+
+        %table.table.table-striped
+          %thead
+            %th Username
+            %th First Name
+            %th Last Name
+            %th Job Title
+            %th # Posts (W/M/T)
+            %th # Comments (W/M/T)
+            %th Contribution (W/M/T)
+            %th Impact (W/M/T)
+          %tbody
+            - 5.times do
+              - @users.each do |user|
+                %tr
+                  %td= user.username
+                  %td= user.first_name
+                  %td= user.last_name
+                  %td= user.job_title
+                  %td (20/30/50)
+                  %td (20/30/50)
+                  %td (20/30/50)
+                  %td (20/30/50)
+
