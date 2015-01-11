@@ -13,12 +13,18 @@
         - else
           Traction:
 
-        #{post.traction} / #{post.threshold}
+        #{post.opinion} / #{post.threshold}
         .tags
-          .btn.btn-sm.btn-on{class: "btn-#{class_type}"}
-            %span.flaticon-go
-          .btn.btn-sm.btn-off{class: "btn-#{class_type}"}
-            %span.flaticon-go1
+          - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
+          = form_for Opinion.new, remote: true do |f|
+            = f.hidden_field :positive, value: 'true'
+            = f.hidden_field :user_id, value: current_user.id
+            = f.hidden_field :opinionable_id, value: post.id
+            = f.hidden_field :opinionable_type, value: 'Post'
+            .btn.btn-sm.btn-like{class: "btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}"}
+              %span.flaticon-go
+            .btn.btn-sm.btn-dislike{class: "btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}"}
+              %span.flaticon-go1
 
     .content
       .col-xs-8

@@ -79,19 +79,18 @@
       %nav.navbar.navbar-default
         .container
           .navbar-header
-            %button.navbar-toggle{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
-              %span.sr-only Toggle navigation
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
+            / %button.navbar-toggle{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
+            /   %span.sr-only Toggle navigation
+            /   %span.icon-bar
+            /   %span.icon-bar
+            /   %span.icon-bar
 
             .navbar-brand
               / = image_tag "pindoit.png"
               = image_tag "seeds/ecl_logo2.png"
 
-
-            .nav.navbar-nav
-
+          #navbar-dropdown
+            %ul.nav.navbar-nav
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
                   #filter-posts.option
@@ -108,7 +107,6 @@
                     %a{href: "#", id: "filter-post-facility"} FACILITY
                   %li
                     %a{href: "#", id: "filter-post-doit"} DOIT
-
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
                   #sort-posts.option
@@ -129,7 +127,7 @@
             /     %span.sb-icon-search
             /       .fa.fa-search
 
-          #navbar-collapse.collapse.navbar-collapse.pull-right
+          #navbar.pull-right
             %ul.nav.navbar-nav.navbar-right
               - if current_user
                 / %li.divider-vertical

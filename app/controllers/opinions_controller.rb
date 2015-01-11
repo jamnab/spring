@@ -51,6 +51,7 @@ class OpinionsController < ApplicationController
 
     respond_to do |format|
       if @opinion.save && @opinionable.save
+        sync_update destination
         format.html { redirect_to destination, notice: 'Opinion was successfully created.' }
         format.json { render action: 'show', status: :created, location: @opinion }
       else
