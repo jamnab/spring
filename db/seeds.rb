@@ -12,31 +12,31 @@ User.create(username: "pindoit", email: "info@pindoit.com", password: "pindoit",
 Organization.create(name: "Sample Org", activated: true)
 
 # sample posts
-3.times do |i|
-  post_type = "Work" if i == Post::WORK
-  post_type = "Play" if i == Post::PLAY
-  post_type = "Facility" if i == Post::FACILITY
+# 3.times do |i|
+#   post_type = "Work" if i == Post::WORK
+#   post_type = "Play" if i == Post::PLAY
+#   post_type = "Facility" if i == Post::FACILITY
 
-  Post.create(title: "Regular #{post_type} Post",
-              content: Forgery(:lorem_ipsum).words(34).capitalize,
-              threshold: 50,
-              user_id: 1,
-              organization_id: 1,
-              post_type: i)
+#   Post.create(title: "Regular #{post_type} Post",
+#               content: Forgery(:lorem_ipsum).words(34).capitalize,
+#               threshold: 50,
+#               user_id: 1,
+#               organization_id: 1,
+#               post_type: i)
 
-  Post.create(title: "Graveyard #{post_type} Post",
-              content: Forgery(:lorem_ipsum).words(34).capitalize,
-              threshold: 50,
-              user_id: 1,
-              organization_id: 1,
-              post_type: i,
-              graveyard: true)
+#   Post.create(title: "Graveyard #{post_type} Post",
+#               content: Forgery(:lorem_ipsum).words(34).capitalize,
+#               threshold: 50,
+#               user_id: 1,
+#               organization_id: 1,
+#               post_type: i,
+#               graveyard: true)
 
-  Post.create(title: "Doit #{post_type} Post",
-              content: Forgery(:lorem_ipsum).words(34).capitalize,
-              threshold: 50,
-              user_id: 1,
-              organization_id: 1,
-              post_type: i,
-              traction: 80)
-end
+#   Post.create(title: "Doit #{post_type} Post",
+#               content: Forgery(:lorem_ipsum).words(34).capitalize,
+#               threshold: 50,
+#               user_id: 1,
+#               organization_id: 1,
+#               post_type: i,
+#               traction: 80)
+# end

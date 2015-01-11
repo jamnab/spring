@@ -3,6 +3,8 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
 
+  has_many :pictures, :dependent => :destroy
+  accepts_nested_attributes_for :pictures
   has_many :tag_entries, as: :taggable, dependent: :destroy
   has_many :tags, through: :tag_entries
 

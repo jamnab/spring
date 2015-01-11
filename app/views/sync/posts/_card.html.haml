@@ -25,7 +25,7 @@
         .col-xs-8
           = post.content
         .col-xs-4
-          = image_tag("//placehold.it/140x110")
+          =image_tag post.pictures.first.image.url
 
     .signature
       .user

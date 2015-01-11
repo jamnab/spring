@@ -2,6 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
+	$(".nested_pics_button").click ->
+		$('.nested_pics_form').append("<input class='nested_pics_button' id='images_' multiple='multiple' name='images[]' type='file'>")
 	$('#filter-post-play').click ->
 		$('.option.filter').attr('id','filter-post-play')
 		$('.option.filter > .text').text("PLAY")
