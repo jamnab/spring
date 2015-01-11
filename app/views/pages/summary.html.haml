@@ -46,8 +46,8 @@
 
         %hr
 
-        %table.table.table-striped
-          %thead
+        %table#personnel-table.table.table-striped.display{cellspacing: "0", width: "100%"}
+          %thead.text-center
             %th Username
             %th First Name
             %th Last Name
@@ -56,7 +56,7 @@
             %th # Comments (W/M/T)
             %th Contribution (W/M/T)
             %th Impact (W/M/T)
-          %tbody
+          %tbody.text-center
             - 5.times do
               - @users.each do |user|
                 %tr

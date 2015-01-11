@@ -38,6 +38,7 @@ gem "font-awesome-rails"
 gem 'skrollr-rails'
 gem 'delayed_job_active_record'
 gem 'chart-js-rails'
+gem 'jquery-datatables-rails', '~> 3.1.1'
 
 group :development do
   gem 'better_errors'

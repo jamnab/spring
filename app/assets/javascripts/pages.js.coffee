@@ -1,11 +1,20 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-$(document).ready ->
-	$("#search").on("ajax:success",(data,status,xhr) ->
-		 $("#reportalert").text "Done."
-	)
 
+$ ->
+  # init search ajax
+	$("#search").on "ajax:success", (data,status,xhr) ->
+		 $("#reportalert").text "Done."
+
+  # init datatable for personnel
+  $('#personnel-table').dataTable({
+    # "processing": true,
+    # "serverSide": true,
+    # "ajax": "/summary"
+  });
+
+# sample chart
 $ ->
   data = {
     labels : ["Dec 14 - Dec 20", "Dec 21 - Dec 27", "Dec 28 - Jan 3",
