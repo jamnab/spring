@@ -14,3 +14,5 @@ $(document).ready ->
 	$('#filter-post-doit').click ->
 		$('.option.filter').attr('id','filter-post-doit')
 		$('.option.filter > .text').text("DOIT")
+		# $('.post-wrapper').css("display",'none')
+		# $('.doithidden').css('display','block')

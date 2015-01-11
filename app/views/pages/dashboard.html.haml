@@ -1,28 +1,19 @@
-/ .post-sorts
-/   = link_to '#' do
-/     .btn.btn-sm.btn-main
-/       NEWEST
-/   = link_to '#' do
-/     .btn.btn-sm.btn-primary.btn-off
-/       MOST DISCUSSED 
-/   = link_to '#' do
-/     .btn.btn-sm.btn-success.btn-off
-/       MOST UPVOTED
-
-/ .post-filters
-/   = link_to '#' do
-/     .btn.btn-sm.btn-main
-/       ALL
-/   = link_to '#' do
-/     .btn.btn-sm.btn-success.btn-off
-/       WORK
-/   = link_to '#' do
-/     .btn.btn-sm.btn-primary.btn-off
-/       PLAY
-/   = link_to '#' do
-/     .btn.btn-sm.btn-danger.btn-off
-/       FACILITY
-
 .post-board
-  - @posts.each do |post|
-    = sync partial:"card", resource: post
+	-if current_user.is_admin?	
+		= sync_new partial: "card", resource: Post.new
+	- else
+		= sync_new partial: "card", resource: Post.new, scope: current_organization
+
+
+	- @posts.all.each do |post|
+		= sync partial: "card", resource: post
+
+= content_for :popups do
+	.test-modal
+		= render 'post_discussion'
+
+	= render 'new_post_form'
+
+	= link_to '#', data: {target: "#new-post", toggle: "modal"}, class: "btn", id: "new-post-toggler" do
+		%span.flaticon-plus9
+

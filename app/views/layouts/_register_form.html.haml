@@ -1,0 +1,52 @@
+#register.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Register
+      = form_for User.new do |f|
+
+        - if !params[:organization_token].nil?
+          = hidden_field :organization_token, value: params[:organization_token]
+
+        .modal-body
+          .row
+            .field.col-xs-6
+              = f.label :username
+              = f.text_field :username, class: "form-control", id: "register_username"
+            .field.col-xs-6
+              = f.label :email
+              = f.text_field :email, class: "form-control"
+            .field.col-xs-6
+              = f.label :first_name
+              = f.text_field :first_name, class: "form-control"
+            .field.col-xs-6
+              = f.label :last_name
+              = f.text_field :last_name, class: "form-control"
+            .field.col-xs-6
+              = f.label :password
+              = f.password_field :password, class: "form-control"
+            .field.col-xs-6
+              = f.label :password_confirmation
+              = f.password_field :password_confirmation, class: "form-control"
+            .field.col-xs-6
+              = f.label :organization_name
+              = f.text_field :organization_name, class: "form-control"
+            .field.col-xs-6
+              = f.label :job_title
+              = f.text_field :job_title, class: "form-control"
+          %hr
+          .row
+            .field.col-xs-12
+              = f.check_box :manager, class: "checkbox"
+              = label_tag :checkbox, "I am the manager of this organization."
+            %h5.text-center
+              %b OR
+            .field.col-xs-12
+              = f.label 'Organization access token'
+              = f.text_field :organization_token, class: "form-control"
+        .modal-footer
+          .actions
+            = f.submit 'Register', class: "btn btn-main"
+            / %button.btn.btn-main.off{"data-dismiss" => "modal", :type => "button"} Cancel

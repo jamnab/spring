@@ -15,9 +15,21 @@ class Post < ActiveRecord::Base
   WORK = 0
   PLAY = 1
   FACILITY = 2
+  TYPES = [{'name' => 'Work', 'id' => WORK},
+           {'name' => 'Play', 'id' => PLAY},
+           {'name' => 'Facility', 'id' => FACILITY}]
 
   def doit?
     return (self.traction > self.threshold)
+  end
+  def type?
+    if self.post_type == 0
+      return "work"
+    elsif self.post_type == 1
+      return "play"
+    else
+      return "facility"
+    end 
   end
 end
 # joins(:chapters).

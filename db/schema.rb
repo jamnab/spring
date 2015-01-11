@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150109125041) do
+ActiveRecord::Schema.define(version: 20150111074412) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20150109125041) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "opinion",          default: 0
+    t.integer  "user_id"
   end
 
   create_table "delayed_jobs", force: true do |t|
@@ -144,6 +145,9 @@ ActiveRecord::Schema.define(version: 20150109125041) do
     t.string   "persistence_token"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "job_title"
+    t.integer  "organization_id"
+    t.boolean  "manager",           default: false
     t.boolean  "admin",             default: false
     t.datetime "created_at"
     t.datetime "updated_at"

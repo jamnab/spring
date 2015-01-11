@@ -1,4 +1,4 @@
-.col-xs-12  
+.col-xs-12
   = form_for @user do |f|
     - if @user.errors.any?
       #error_explanation
@@ -36,12 +36,9 @@
           = f.text_field :organization_name, value: params[:name], class: "form-control", :disabled => true
         - else
           = f.text_field :organization_name, class: "form-control"
-      %hr
       .field.col-xs-12
-        = check_box_tag("user[is_manager]", "1", false, class: "checkbox")
-        = label_tag :checkbox, "I am the manager of this organization."
-      %h5.text-center
-        %b OR
+        = f.label :job_title
+        = f.text_field :job_title, class: "form-control"
       .field.col-xs-12
         = f.label 'Organization access token'
         - if params[:token] != nil && params[:name] != nil

@@ -3,27 +3,22 @@
 - class_type = "play" if post.post_type == Post::PLAY
 - class_type = "facility" if post.post_type == Post::FACILITY
 
-.post-wrapper.col-xs-12.col-sm-6
+.post-wrapper.col-xs-12.col-sm-6{class: ("doithidden" if post.doit?)}
   .post{class: class_type}
     .header
       = post.title
-      .traction
-        Traction: #{post.traction} / #{post.threshold}
+      .traction{class: ("doit" if post.doit?)}
+        - if post.doit?
+          DOIT
+          %span.flaticon-check6
+        - else
+          DOIT?
+        #{post.traction} / #{post.threshold}
         .tags
-          - if post.graveyard
-            .btn.btn-sm.btn-danger.disabled.on
-              %span.flaticon-lock9
-          - else
-            .btn.btn-sm.btn-custom.btn-off
-              %span.flaticon-go
-            .btn.btn-sm.btn-custom.btn-off
-              %span.flaticon-go1
-            - if post.doit?
-              .btn.btn-sm.btn-success.disabled.on
-                %span.flaticon-check6
-            - else
-              .btn.btn-sm.btn-success.disabled.off
-                %span.flaticon-check6
+          .btn.btn-sm.btn-on{class: "btn-#{class_type}"}
+            %span.flaticon-go
+          .btn.btn-sm.btn-off{class: "btn-#{class_type}"}
+            %span.flaticon-go1
 
     .content
       .row
@@ -41,27 +36,27 @@
           (#{user.username})
       .options
         = link_to '#' do
-          .btn.btn-sm.btn-warning
+          .btn.btn-sm{class: "btn-#{class_type}"}
             %span.flaticon-edit7
         - if post.graveyard
           = link_to '#' do
-            .btn.btn-sm.btn-warning
+            .btn.btn-sm{class: "btn-#{class_type}"}
               %span.flaticon-unlock
         - else
           = link_to '#' do
-            .btn.btn-sm.btn-danger
+            .btn.btn-sm{class: "btn-#{class_type}"}
               %span.flaticon-lock9
         = link_to '#' do
-          .btn.btn-sm.btn-danger
+          .btn.btn-sm{class: "btn-#{class_type}"}
             %span.flaticon-trash7
 
         .divider
 
-        = link_to '#', data: {target: "#post-discussion", toggle: "modal"} do
-          .btn.btn-sm.btn-primary
+        = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "post-discussion-toggler" do
+          .btn.btn-sm{class: "btn-#{class_type}"}
             %span.flaticon-speech29
         = link_to '#' do
-          .btn.btn-sm.btn-warning.btn-off
-            %span.flaticon-flag9
+          .btn.btn-sm.btn-off{class: "btn-#{class_type}"}
+            %span.flaticon-star6
 
 

@@ -404,7 +404,7 @@ a:hover {
     width: 280px;
     height: 141px;
     // background-color: $default_background;
-    background: url("http://image.shutterstock.com/display_pic_with_logo/658033/120748093/stock-photo-wood-flooring-sample-background-oak-walnut-cherry-l-aminate-flooring-120748093.jpg");
+    background: url("http://i220.photobucket.com/albums/dd56/coloursinside/bte-a11-41.jpg");
     border-bottom: 1px solid $default_text_off;
 
     .user {
@@ -502,7 +502,7 @@ a:hover {
 
 // button styles
 
-.post {
+.post, .comment {
 
   .btn-off {
     background-color: transparent;
@@ -536,41 +536,47 @@ a:hover {
     background-color: transparent;
     color: $inverse_text_off !important;
     border: 1px solid $inverse_text_off;
-  }
-}
-
-.comment {
-  .btn-off {
-    background-color: transparent;
-    color: $inverse_text_off !important;
-    border: 1px solid $inverse_text_off;
-    opacity: 0.6;
-
-    &:hover {
-      background-color: $inverse_text_off;
-      color: $inverse_text_main !important;
-      border: 1px solid $inverse_text_main;
-      opacity: 0.75;
-    }
-  }
-
-  .btn-on {
-    background-color: $inverse_text_off;
-    color: $inverse_text_main !important;
-    border: 1px solid $inverse_text_main;
     opacity: 0.75;
   }
 
-  .btn-default {
-    background-color: $inverse_text_off;
-    color: $inverse_text_main !important;
-    border: 1px solid $inverse_text_main;
-
-    &:hover {
-      opacity: 0.75;
-    }
+  .controls .btn-off {
+    color: $inverse_text_off !important;
+    border: 1px solid $inverse_text_off;
   }
 }
+
+// .comment {
+//   .btn-off {
+//     background-color: transparent;
+//     color: $inverse_text_off !important;
+//     border: 1px solid $inverse_text_off;
+//     opacity: 0.6;
+
+//     &:hover {
+//       background-color: $inverse_text_off;
+//       color: $inverse_text_main !important;
+//       border: 1px solid $inverse_text_main;
+//       opacity: 0.75;
+//     }
+//   }
+
+//   .btn-on {
+//     background-color: $inverse_text_off;
+//     color: $inverse_text_main !important;
+//     border: 1px solid $inverse_text_main;
+//     opacity: 0.75;
+//   }
+
+//   .btn-default {
+//     background-color: $inverse_text_off;
+//     color: $inverse_text_main !important;
+//     border: 1px solid $inverse_text_main;
+
+//     &:hover {
+//       opacity: 0.75;
+//     }
+//   }
+// }
 
 .btn-work, .btn-play, .btn-facility {
   color: $default_background;
@@ -593,7 +599,7 @@ a:hover {
 
 // popup forms
 
-#comment_anonymous, #comment_suggestion, #user_is_manager {
+#comment_anonymous, #comment_suggestion, #user_manager {
   display: inline-block;
 }
 
@@ -607,15 +613,54 @@ a:hover {
   .modal-content {
     height: 100%;
 
+    &.work {
+      .modal-header {
+        background-color: $main_work;
+        color: $inverse_text_main;
+      }
+      .btn.btn-main {
+        background-color: $main_work;
+      }
+    }
+
+    &.play {
+      .modal-header {
+        background-color: $main_play;
+        color: $inverse_text_main;
+      }
+      .btn.btn-main {
+        background-color: $main_play;
+      }
+    }
+
+    &.facility {
+      .modal-header {
+        background-color: $main_facility;
+        color: $inverse_text_main;
+      }
+      .btn.btn-main {
+        background-color: $main_facility;
+      }
+    }
+
+    .modal-body {
+      padding-bottom: 10px;
+    }
+
     .modal-footer {
-      height: calc(100% - 230px);
-      overflow-y: scroll;
+      height: calc(100% - 358px);
+
+      .comments {
+        height: calc(100% - 50px);
+        overflow-y: scroll;
+      }
     }
   }
 }
 
 #post-discussion .modal-footer {
   padding: 0px;
+  margin-top: 0px;
   border: none;
 }
 
@@ -623,6 +668,6 @@ a:hover {
   margin-right: 10px;
 }
 
-#comment_plain, #comment_content, #comment_suggestion {
-  margin-top: 10px;
-}
+// #comment_plain, #comment_content, #comment_suggestion {
+//   margin-top: 10px;
+// }
