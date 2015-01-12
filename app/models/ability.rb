@@ -7,6 +7,9 @@ class Ability
       can :manage, :all
     else
       # Users
+      can :manage, User do |u|
+        user == u
+      end
 
       # Organizations
 
