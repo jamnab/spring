@@ -26,7 +26,7 @@ gem 'authlogic'
 gem 'whenever'
 gem 'ancestry'
 gem 'scrypt'
-gem 'cancan'
+gem 'cancancan'
 gem 'faye'
 gem 'thin', require: false
 gem 'sync'

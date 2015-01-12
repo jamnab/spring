@@ -29,4 +29,11 @@ class Post < ActiveRecord::Base
     # check for comment doit
     return !self.comments.select{|x| x.doit?}.empty?
   end
+
+  def favourited?(user)
+    if !user.nil?
+      return Favourite.where(user_id: user.id, fav_post_id: self.id).first
+    end
+    return nil
+  end
 end

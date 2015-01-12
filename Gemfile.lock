@@ -41,7 +41,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    cancan (1.6.10)
+    cancancan (1.9.2)
     chart-js-rails (0.0.7)
       railties (> 3.1)
     chronic (0.10.2)
@@ -218,7 +218,7 @@ DEPENDENCIES
   authlogic
   better_errors
   binding_of_caller
-  cancan
+  cancancan
   chart-js-rails
   coffee-rails (~> 4.0.0)
   delayed_job_active_record

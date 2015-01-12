@@ -3,11 +3,18 @@ class Ability
 
   def initialize(user)
 
-    can :manage, :all
-
-    if user.admin
+    if user.is_admin?
       can :manage, :all
     else
+      # Users
+
+      # Organizations
+
+      # Posts
+
+      # Comments
+
+      # Opinions
     end
 
     # See the wiki for details:

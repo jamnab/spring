@@ -49,3 +49,5 @@ $ ->
   $(".btn-dislike").on "click", ->
     $(this).siblings("#opinion_positive").attr("value", "false")
     $(this).parent().submit()
+  $(".btn-fav").on "click", ->
+    $(this).parent().next("form").submit()

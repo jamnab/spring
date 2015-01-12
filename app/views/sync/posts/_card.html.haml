@@ -62,8 +62,17 @@
             %span.flaticon-speech29
             .count
               = post.comments.count
-        = link_to '#' do
-          .btn.btn-sm.btn-off{class: "btn-#{class_type}"}
-            %span.flaticon-star6
 
+        - fav = post.favourited?(current_user)
+        - if fav.nil?
+          = link_to '#' do
+            .btn.btn-sm.btn-off.btn-fav{class: "btn-#{class_type}"}
+              %span.flaticon-star6
+          = form_for Favourite.new, remote: true do |f|
+            = f.hidden_field :fav_post_id, value: post.id
+            = f.hidden_field :user_id, value: current_user.id
+        - else
+          = link_to fav, method: :delete, remote: true do
+            .btn.btn-sm.btn-on{class: "btn-#{class_type}"}
+              %span.flaticon-star6
 
