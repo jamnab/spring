@@ -6,19 +6,30 @@
           %span{"aria-hidden" => "true"} ×
         %h4.modal-title
           Create New Post
-      = form_for Post.new do |f|
-        .modal-body.row
-          = f.hidden_field :user_id, value: current_user.try(:id)
-          = f.hidden_field :organization_id, value: current_user.try(:organization).try(:id)
-          .field.col-xs-12
-            = f.label :title
-            = f.text_field :title, class: "form-control"
-          .field.col-xs-12
-            = f.label :content
-            = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5
-          .field.col-xs-12
-            = f.label :post_type
-            = f.select(:post_type, Post::TYPES.collect {|e| [ e['name'], e['id'] ]}, {}, { class: "form-control" })
-        .modal-footer
-          .actions
-            = f.submit 'Create Post', class: "btn btn-main"
+      .slide-1 
+        = form_for Post.new, :html => { multipart: true },remote: true do |f|
+          .modal-body.row
+            = f.hidden_field :user_id, value: current_user.try(:id)
+            = f.hidden_field :organization_id, value: current_user.try(:organization).try(:id)
+            .field.col-xs-12
+              = f.label :title
+              = f.text_field :title, class: "form-control"
+            .field.col-xs-12.nested_pics_form
+              = f.label :images 
+              = file_field_tag "images[]",type: :file, multiple: true
+            
+            .field.col-xs-12
+              = f.label :threshold
+              = f.text_field :threshold, class: "form-control"
+            .field.col-xs-12
+              = f.label :content
+              = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5
+            .field.col-xs-12
+              = f.label :post_type
+              = f.select(:post_type, Post::TYPES.collect {|e| [ e['name'], e['id'] ]}, {}, { class: "form-control" })
+          .modal-footer
+            .row.circle-slider
+              .circle.focus-circle.float-left
+              .circle.cursor-focus.float-right
+            .actions
+              = f.submit 'Create Post', class: "btn btn-main"

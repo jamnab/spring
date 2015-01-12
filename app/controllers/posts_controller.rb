@@ -37,12 +37,16 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    sentiment_update(@post)
-
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post.project, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+        if params[:images]
+          params[:images].each { |image|
+            @post.pictures.create(image: image)
+          }
+        end
+        sync_new @post 
+        format.html
+        format.js
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -79,14 +83,8 @@ class PostsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-      @project = @post.project
-      @organization = @project.organization
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :endorsed, :anonymous, :threshold, :user_id, :project_id, :comment_anonymity)
+      params.require(:post).permit(:title, :content,:post_type, :endorsed, :anonymous, :threshold, :user_id, :project_id, :comment_anonymity, :pictures)
     end
 end

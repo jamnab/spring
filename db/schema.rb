@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20150112155737) do
     t.string   "commentable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "delayed_jobs", force: true do |t|
@@ -88,6 +89,17 @@ ActiveRecord::Schema.define(version: 20150112155737) do
     t.datetime "updated_at"
   end
 
+  create_table "pictures", force: true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
@@ -101,6 +113,7 @@ ActiveRecord::Schema.define(version: 20150112155737) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "comment_anonymity", default: false
+    t.integer  "comments_count"
   end
 
   create_table "project_memberships", force: true do |t|

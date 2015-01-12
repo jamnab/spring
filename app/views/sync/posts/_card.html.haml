@@ -3,7 +3,7 @@
 - class_type = "play" if post.post_type == Post::PLAY
 - class_type = "facility" if post.post_type == Post::FACILITY
 
-.post-wrapper.col-xs-12.col-sm-6
+.post-wrapper.col-xs-12.col-sm-6{class: ("doithidden" if post.doit?)}
   .post{class: class_type}
     .header
       = post.title
@@ -30,7 +30,7 @@
       .col-xs-8
         = post.content
       .col-xs-4
-        = image_tag("//placehold.it/140x110")
+        = image_tag post.pictures.first.image.url(:post_image)
 
     .signature
       .user
@@ -57,7 +57,7 @@
 
         .divider
 
-        = link_to '#', data: {target: "#post-discussion", toggle: "modal", type: "#{class_type}"}, class: "post-discussion-toggler" do
+        = link_to dashboard_path(:populate_disucssion_id => post.id), data: {type: "#{class_type}"}, remote: true, class: "post-discussion-toggler" do
           .btn.btn-sm.btn-counter{class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}
             %span.flaticon-speech29
             .count

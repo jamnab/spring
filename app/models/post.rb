@@ -5,6 +5,9 @@ class Post < ActiveRecord::Base
 
   has_many :favourites
 
+  has_many :pictures, dependent: :destroy
+  accepts_nested_attributes_for :pictures
+
   # has_many :tag_entries, as: :taggable, dependent: :destroy
   # has_many :tags, through: :tag_entries
 
@@ -36,4 +39,16 @@ class Post < ActiveRecord::Base
     end
     return nil
   end
+
+  def type?
+    if self.post_type == 0
+      return "work"
+    elsif self.post_type == 1
+      return "play"
+    else
+      return "facility"
+    end
+  end
 end
+# joins(:chapters).
+#                  select('books.id, count(chapters.id) as n_chapters').

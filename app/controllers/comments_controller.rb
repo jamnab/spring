@@ -25,12 +25,15 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
-    sentiment_update(@comment)
-
+    @comment.user = current_user
     respond_to do |format|
       if @comment.save
+        sync_new @comment
+        if @comment.commentable_type == "Post"
+        @post = @comment.commentable
+        end
         format.html { redirect_to @comment.commentable, notice:  'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @comment.errors, status: :unprocessable_entity }

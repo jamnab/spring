@@ -1,0 +1,36 @@
+- user = User.first
+
+.comment-wrapper
+  .comment
+    .col-xs-8
+      .content
+        = comment.content
+    .col-xs-4
+      .traction
+        %h4{class: ("doit" if false)}
+          10 / 50
+          .indicator
+            - if false
+              DOIT
+              %span.flaticon-check6
+            - else
+              DOIT?
+      .controls
+        .btn.btn-sm.btn-on
+          %span.flaticon-go
+        .btn.btn-sm.btn-off
+          %span.flaticon-go1
+    .signature
+      .user
+        = image_tag("//placehold.it/35x35")
+        .name
+          = user.full_name
+          %br
+          (#{user.username})
+      .options
+        = link_to '#' do
+          .btn.btn-sm
+            %span.flaticon-edit7
+        = link_to '#' do
+          .btn.btn-sm
+            %span.flaticon-trash7

@@ -93,7 +93,25 @@ html, body {
     &.open {
       background-color: $inverse_text_off !important;
     }
+    
+    .dropdown-toggle{
+      #filter-post-work{
+        background-color: rgba($main_work, 0.75) !important;
+      }
+      #filter-post-play{
+        background-color: rgba($main_play, 0.75) !important;
 
+      }
+      #filter-post-facility{
+        background-color: rgba($main_facility, 0.75) !important;
+
+      }
+      #filter-post-doit{
+        background-color: rgba($main_highlight, 0.75) !important;
+
+      }
+    }
+    
     a.dropdown-toggle .option {
       padding: 0px 15px;
       color: $inverse_text_main;

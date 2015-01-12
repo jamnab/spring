@@ -24,6 +24,31 @@
 //     margin-right: 10px;
 //   }
 // }
+.float-left{
+  float:left;
+}
+.float-right{
+  float:right;
+}
+.circle-slider{
+  width: 45px;
+  position: relative;
+  left: 50%;
+  margin-left: -22.5px;
+}
+.circle{
+  border-radius: 50%;
+  behavior: url(PIE.htc);
+  width: 20px;
+  height: 20px;
+  background-color: #e2e2e2;
+}
+.focus-circle{
+  background-color:#46b8da !important;
+}
+.cursor-focus{
+  cursor:pointer
+}
 
 .comment-filters {
   text-align: left;

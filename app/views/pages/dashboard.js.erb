@@ -1,0 +1,7 @@
+<% if @populate == true %>
+	$('.test-modal').html("<%= j render(:partial => 'pages/post_discussion') %>");
+	$('#post-discussion').modal("show")
+<% else %> 
+	$('.post-board').html("<%= j render(:partial => 'pages/update_search') %>");
+
+<%end%>

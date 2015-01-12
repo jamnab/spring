@@ -47,3 +47,21 @@ $ ->
 
   chart_canvas = $("#org-graph-canvas").get(0).getContext("2d")
   org_graph = new Chart(chart_canvas).Line(data, {bezierCurveTension : 0.0})
+
+$ ->
+	$(".nested_pics_button").click ->
+		$('.nested_pics_form').append("<input class='nested_pics_button' id='images_' multiple='multiple' name='images[]' type='file'>")
+	$('#filter-post-play').click ->
+		$('.option.filter').attr('id','filter-post-play')
+		$('.option.filter > .text').text("PLAY")
+	$('#filter-post-work').click ->
+		$('.option.filter').attr('id','filter-post-work')
+		$('.option.filter > .text').text("WORK")
+	$('#filter-post-facility').click ->
+		$('.option.filter').attr('id','filter-post-facility')
+		$('.option.filter > .text').text("FACILITY")
+	$('#filter-post-doit').click ->
+		$('.option.filter').attr('id','filter-post-doit')
+		$('.option.filter > .text').text("DOIT")
+		# $('.post-wrapper').css("display",'none')
+		# $('.doithidden').css('display','block')

@@ -139,8 +139,3 @@ end
 #   Post.create(title: "Doit #{post_type} Post",
 #               content: Forgery(:lorem_ipsum).words(34).capitalize,
 #               threshold: 20,
-#               user_id: 1,
-#               organization_id: 1,
-#               post_type: i,
-#               traction: 80)
-# end
