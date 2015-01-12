@@ -1,3 +1,8 @@
 .post-board
+  - if @posts.empty?
+    %h3.text-center There are no posts matching this criterion.
   - @posts.each do |post|
     = sync partial:"card", resource: post
+
+= content_for :popups do
+  = render 'post_discussion'

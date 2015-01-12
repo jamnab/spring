@@ -13,7 +13,7 @@ class PagesController < ApplicationController
   end
 
   def my_favourites
-    # @posts = current_user.
+    @posts = current_user.fav_posts
   end
 
   def archive

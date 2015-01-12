@@ -1,12 +1,12 @@
 .post-board
+  - if @posts.empty?
+    %h3.text-center There are no posts matching this criterion.
   - @posts.all.each do |post|
     = sync partial: "card", resource: post
 
 = content_for :popups do
-
   = render 'post_discussion'
   = render 'new_post_form'
-
   = link_to '#', data: {target: "#new-post", toggle: "modal"}, class: "btn", id: "new-post-toggler" do
     %span.flaticon-plus9
 

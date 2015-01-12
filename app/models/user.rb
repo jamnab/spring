@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :opinions
 
+  has_many :favourites
+  has_many :fav_posts, through: :favourites
+
   # has_many :project_memberships, dependent: :destroy
   # has_many :projects, through: :project_memberships
 
