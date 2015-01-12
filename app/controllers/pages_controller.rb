@@ -2,44 +2,37 @@ class PagesController < ApplicationController
   def home
   end
 
-  def dashboard
+  def dashboard 
     if current_user.is_admin?
-     	if params[:query].present?
-        @p = params[:query]
-        if @p == "doit"
-          @posts=Post.all.reject{|r| r.doit? == false }
-        else
-          @posts = Post.where(:post_type => params[:query])
-        end
-      elsif params[:sort].present?
-        @p = params[:sort]
-        if @p == "newest"
-          @posts = Post.all.order("created_at DESC")
-        elsif @p == "discussed"
+      @posts = Post.all
+    else
+      @posts = current_organization.posts
+    end
 
-        else
-          @posts = Post.all.order("traction DESC")
-        end
+
+
+   	if params[:query].present?
+      @p = params[:query]
+      if @p == "doit"
+        @posts.reject!{|r| r.doit? == false }
       else
-        @posts = Post.all.order("created_at DESC")
+        @posts = @posts.where(:post_type => params[:query])
+      end
+    elsif params[:sort].present?
+      @p = params[:sort]
+      if @p == "newest"
+        @posts = @posts.order("created_at DESC")
+      elsif @p == "discussed"
+
+      else
+        @posts = @posts.order("traction DESC")
       end
     else
-      if params[:query].present?
-        @p = params[:query]
-        @posts = current_organization.posts.where(:post_type => params[:query])
-      elsif params[:sort].present?
-        @p = params[:sort]
-        if @p == "newest"
-          @posts = current_organization.posts.all.order("created_at DESC")
-        elsif @p == "discussed"
-
-        else
-          @posts = current_organization.posts.all.order("traction DESC")
-        end
-      else
-        @posts = current_organization.posts.all.order("created_at DESC")
-      end
+      @posts = @posts.order("created_at DESC")
     end
+   
+
+
     if params[:populate_disucssion_id].present?
       @populate = true
       @id = params[:populate_disucssion_id].to_i
@@ -48,6 +41,8 @@ class PagesController < ApplicationController
       @populate = false
       @post = @posts.first
     end 
+
+
     respond_to do |format|
       format.html # index.html.erb
       format.js
