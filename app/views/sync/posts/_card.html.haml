@@ -22,10 +22,10 @@
 
     .content
       .row
-        .col-xs-8
+        .col-xs-7
           = post.content
-        .col-xs-4
-          =image_tag post.pictures.first.image.url
+        .col-xs-5
+          =image_tag post.pictures.first.image.url(:post_image)
 
     .signature
       .user
