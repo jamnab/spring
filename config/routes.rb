@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   get 'dashboard' => 'pages#dashboard', as: :dashboard
+  get 'my_favourites' => 'pages#my_favourites', as: :my_favourites
+  get 'archive' => 'pages#archive', as: :archive
   get 'summary' => 'pages#summary', as: :summary
   get 'search' => 'pages#search', as: :search
 

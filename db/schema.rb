@@ -18,11 +18,12 @@ ActiveRecord::Schema.define(version: 20150106234825) do
     t.boolean  "endorsed",         default: false
     t.boolean  "anonymous",        default: false
     t.boolean  "suggestion",       default: false
+    t.integer  "opinion",          default: 0
+    t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "opinion",          default: 0
   end
 
   create_table "delayed_jobs", force: true do |t|
@@ -85,7 +86,7 @@ ActiveRecord::Schema.define(version: 20150106234825) do
     t.text     "content"
     t.boolean  "anonymous",         default: false
     t.integer  "threshold"
-    t.integer  "traction",          default: 0
+    t.integer  "opinion",           default: 0
     t.integer  "user_id"
     t.integer  "organization_id"
     t.integer  "post_type"
@@ -93,7 +94,6 @@ ActiveRecord::Schema.define(version: 20150106234825) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "comment_anonymity", default: false
-    t.integer  "opinion",           default: 0
   end
 
   create_table "project_memberships", force: true do |t|

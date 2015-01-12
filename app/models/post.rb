@@ -20,7 +20,7 @@ class Post < ActiveRecord::Base
            {'name' => 'Facility', 'id' => FACILITY}]
 
   def doit?
-    return (self.traction > self.threshold) || self.alt_doit?
+    return (self.opinion > self.threshold) || self.alt_doit?
   end
 
   def alt_doit?

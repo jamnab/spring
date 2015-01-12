@@ -86,12 +86,12 @@
 // ----
 
 .post-board {
-  padding: 0px 20px;
+  padding: 40px 20px;
 }
 
 .post-wrapper {
   height: 250px;
-  margin-top: 40px;
+  margin-bottom: 40px;
   padding: 0px 20px;
 
   .post {
@@ -326,7 +326,7 @@
   width: 80px;
   border-radius: 50px;
   background-color: $main_highlight;
-  opacity: 0.9;
+  opacity: 0.6;
 
   &:hover {
     background-color: $main_highlight !important;

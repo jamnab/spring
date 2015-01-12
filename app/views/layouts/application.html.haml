@@ -19,9 +19,9 @@
         - if current_user
           = link_to :dashboard do
             %span.flaticon-home7
-          = link_to '#' do
+          = link_to :my_favourites do
             %span.flaticon-star6
-          = link_to '#' do
+          = link_to :archive do
             %span.flaticon-lock9
           = link_to :summary do
             %span.flaticon-line31
@@ -55,9 +55,9 @@
         - if current_user
           = link_to :dashboard do
             Home
-          = link_to '#' do
+          = link_to :my_favourites do
             My Favoriates
-          = link_to '#' do
+          = link_to :archive do
             Archive
           = link_to :summary do
             Summary

@@ -6,6 +6,7 @@ class CreateComments < ActiveRecord::Migration
       t.boolean :anonymous, default: false
       t.boolean :suggestion, default: false
       t.integer :opinion, default: 0
+      t.integer :user_id
       t.integer :commentable_id
       t.string :commentable_type
 
