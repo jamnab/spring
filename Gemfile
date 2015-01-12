@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
+
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
@@ -26,17 +27,24 @@ gem 'authlogic'
 gem 'whenever'
 gem 'ancestry'
 gem 'scrypt'
-gem 'cancan'
+gem 'cancancan'
 gem 'faye'
 gem 'thin', require: false
 gem 'sync'
 gem 'forgery', '0.6.0'
-
-# gem "paperclip", :git => "http://github.com/thoughtbot/paperclip.git"
+gem 'jquery-fileupload-rails'
+gem 'rmagick'
+gem 'remotipart', '~> 1.2'
+gem "paperclip", :git => "http://github.com/thoughtbot/paperclip.git"
 gem "font-awesome-rails"
 # gem "sentimentalizer", git: "https://github.com/findcongwang/emsentimentalizer.git"
 gem 'skrollr-rails'
 gem 'delayed_job_active_record'
+gem 'chart-js-rails'
+gem 'jquery-datatables-rails', '~> 3.1.1'
+gem 'to_words'
+# gem 'redcarpet'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

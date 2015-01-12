@@ -1,6 +1,7 @@
 class Organization < ActiveRecord::Base
   attr_accessor :username
   has_many :posts
+  has_many :comments, through: :posts
 
   # has_many :posts, through: :projects
 
@@ -12,4 +13,21 @@ class Organization < ActiveRecord::Base
   	access_token = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
   	self.update_attributes(:access_token => access_token)
   end
+
+  def activity_count
+    (self.posts.count + self.comments.count)
+  end
+
+  def doit_post_count
+    self.posts.select{|x| x.doit?}.count
+  end
+
+  def doit_comment_count
+    self.comments.select{|x| x.doit?}.count
+  end
+
+  def doit_count
+    self.doit_post_count + self.doit_comment_count
+  end
+
 end

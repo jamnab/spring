@@ -12,6 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require jquery.remotipart
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require bootstrap.min
 //= require bootstrap-switch.min
 //= require prefixfree.min
@@ -19,4 +24,5 @@
 //= require skrollr.ie
 //= require skrollr.menu
 //= require sync
+//= require Chart
 //= require_tree .

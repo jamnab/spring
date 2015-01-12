@@ -41,3 +41,13 @@ $ ->
     $("#post-discussion .comment .btn-sm").removeClass("btn-work")
     $("#post-discussion .comment .btn-sm").removeClass("btn-play")
     $("#post-discussion .comment .btn-sm").removeClass("btn-facility")
+
+  # like/dislike setting positive to true/false before submitting
+  $(".btn-like").on "click", ->
+    $(this).siblings("#opinion_positive").attr("value", "true")
+    $(this).parent().submit()
+  $(".btn-dislike").on "click", ->
+    $(this).siblings("#opinion_positive").attr("value", "false")
+    $(this).parent().submit()
+  $(".btn-fav").on "click", ->
+    $(this).parent().next("form").submit()

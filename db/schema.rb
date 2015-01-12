@@ -11,18 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150111074412) do
+ActiveRecord::Schema.define(version: 20150112155737) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
     t.boolean  "endorsed",         default: false
     t.boolean  "anonymous",        default: false
     t.boolean  "suggestion",       default: false
+    t.integer  "opinion",          default: 0
+    t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "opinion",          default: 0
     t.integer  "user_id"
   end
 
@@ -41,6 +42,13 @@ ActiveRecord::Schema.define(version: 20150111074412) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "favourites", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "fav_post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "label_entries", force: true do |t|
     t.integer  "tag_id"
@@ -81,12 +89,23 @@ ActiveRecord::Schema.define(version: 20150111074412) do
     t.datetime "updated_at"
   end
 
+  create_table "pictures", force: true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
     t.boolean  "anonymous",         default: false
     t.integer  "threshold"
-    t.integer  "traction",          default: 0
+    t.integer  "opinion",           default: 0
     t.integer  "user_id"
     t.integer  "organization_id"
     t.integer  "post_type"
@@ -94,7 +113,6 @@ ActiveRecord::Schema.define(version: 20150111074412) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "comment_anonymity", default: false
-    t.integer  "opinion",           default: 0
     t.integer  "comments_count"
   end
 

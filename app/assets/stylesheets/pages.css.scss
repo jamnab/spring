@@ -1,125 +1,33 @@
-// Place all the styles related to the pages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-.modal-footer{
-  .comments{
-    background:white;
-  }
-}
-.bcg {
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-  background-attachment: fixed !important;
-  background-size: cover !important;
-  height: 100% !important;
-  width: 100% !important;
-}
+@import 'presets';
 
-#slide-1 .bcg {
-  background: image-url('inthought_main.jpg');
-}
+.summary {
+  padding: 30px 40px;
+  color: $inverse-text-off;
 
-#slide-3 .bcg{
-  background: image-url('phone.jpg');
-}
-
-#slide-5 .bcg{
-  background: image-url('alejandroescamilla-dude-walkin.jpg');
-}
-
-#slide-7 .bcg{
-  background: image-url('hub_map.png');
-}
-
-#slide-1 img{
-  margin-top: -75px;
-}
-
-.tagline {
-  margin: -290px -15px 100px -15px;
-  padding: 20px 160px;
-  text-align: center;
-  font-size: 24px;
-  line-height: 42px;
-  color: #fff;
-  background-color: rgba(0,0,0,0.25);
-}
-
-.content {
-  color: #fff;
-  margin: 0px -15px;
-  padding: 60px 40px 140px 40px;
-
-  .title {
-    font-size: 48px;
-    font-weight: bold;
-    margin-bottom: 50px;
-  }
-  .text {
-    width: 700px;
-    color: #fff;
-    font-size: 24px;
-    line-height: 32px;
-  }
-}
-
-.info-slide {
-  min-height: 200px;
-  background: image-url('foreground.jpg');
-}
-
-.img-slide .bcg{
-
-  .content {
-    min-height: 350px;
-    background-color: rgba(0,0,0,0.4);
-    text-align: right;
-  }
-  .text{
-    float: right;
-  }
-}
-
-#footer {
-  #ownership, #copyright {
-    color: #fff;
-    font-weight: bold;
-  }
-  #ownership {
-    margin: 30px 0px -30px 0px;
-  }
-  #copyright {
-    margin: -20px 0px 30px 0px;
-  }
-}
-
-.footer{
-  padding: 40px 0px;
-  // background-color: black;
-  background: image-url('foreground.jpg');
-  display: table;
-  width: 100%;
-  .footer-logo{
-    display: table-cell;
-    width: 38.2%;
-    vertical-align: middle;
-    img{
-      width: 50%;
-      padding-left: 15%;
+  .nav-pills {
+    li {
+      margin-right: 15px;
+      a {
+        background-color: $inverse-text-off !important;
+        color: $inverse-text-main !important;
+        opacity: 0.5;
+        &:hover {
+          opacity: 1.0;
+        }
+      }
+      &.active a {
+        opacity: 1.0;
+      }
     }
   }
-  .footer-content{
-    display: table-cell;
-    width: 61.8%;
-    vertical-align: middle;
-    color: #fff;
-    font-size: 12pt;
-    font-size: 1vw;
-    p{
-      padding: 5px;
+
+  .tab-content {
+    .tab-pane {
+      padding: 20px 20px 20px 0px;
     }
-  }
-  a, a:visited {
-    color: #fff;
+
+    #org-graph-canvas {
+      margin-top: 20px;
+    }
   }
 }

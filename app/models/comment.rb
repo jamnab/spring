@@ -11,6 +11,6 @@ class Comment < ActiveRecord::Base
   has_many :opinions, as: :opinionable
 
   def doit?
-    true
+    self.opinion > self.commentable.threshold
   end
 end

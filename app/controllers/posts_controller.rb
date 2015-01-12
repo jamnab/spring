@@ -39,8 +39,13 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     respond_to do |format|
       if @post.save
+        if params[:images]
+          params[:images].each { |image|
+            @post.pictures.create(image: image)
+          }
+        end
         sync_new @post 
-        format.html { redirect_to @post.project, notice: 'Post was successfully created.' }
+        format.html
         format.js
       else
         format.html { render :new }
@@ -80,6 +85,6 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content,:post_type, :endorsed, :anonymous, :threshold, :user_id, :project_id, :comment_anonymity)
+      params.require(:post).permit(:title, :content,:post_type, :endorsed, :anonymous, :threshold, :user_id, :project_id, :comment_anonymity, :pictures)
     end
 end

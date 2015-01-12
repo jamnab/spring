@@ -15,14 +15,18 @@ html, body {
   color: #ddd;
   margin-bottom: -90px;
   height: 70px;
+  border-bottom: 1px solid $default_text_off;
+
 
   .navbar-brand {
     display: inline-block;
     font-size: 22px;
     height: 70px;
     padding: 10px;
+    margin-left: 10px !important;
     img {
       margin: 5px;
+      height: 40px;
     }
   }
 
@@ -67,6 +71,21 @@ html, body {
   .nav {
     margin-left: 5px;
   }
+
+  // #navbar-dropdown {
+  //   width: calc(100% - 120px);
+  //   float: right;
+  //   ul {
+  //     li {
+  //       width: 40%;
+  //       display: inline-block;
+  //       ul li {
+  //         display: block;
+  //         width: 100%;
+  //       }
+  //     }
+  //   }
+  // }
 
   .dropdown {
     color: $inverse_text_main;
@@ -300,7 +319,7 @@ a:hover {
   color: $default_text_main !important;
   background-color: $default_background;
   width: 70px;
-  height: 71px;
+  height: 70px;
   text-align: center;
   border-right: 1px solid $default_text_main;
   border-bottom: 1px solid $default_text_off;
@@ -332,13 +351,24 @@ a:hover {
   position: fixed;
   bottom: 70px;
   height: 160px;
-  background-color: $inverse_background;
+  background-color: $inverse_text_highlight;
   width: 280px;
   border-top: 1px solid $default_text_off;
   z-index: 10;
+  text-align: center;
 
   &.logo {
+    padding-top: 25px;
     width: 69px;
+    img { height: 110px; }
+  }
+
+  &.org {
+    padding-top: 30px;
+    img { height: 50px; }
+    h4, h5 {
+      color: $default_text_main;
+    }
   }
 }
 
@@ -419,6 +449,8 @@ a:hover {
         margin-bottom: 5px;
         border-radius: 60px;
         border: 2px solid $inverse_text_main;
+        width: 60px;
+        height: 60px;
       }
 
       .name {
@@ -448,7 +480,7 @@ a:hover {
 
 .body-wrapper, .sidebar {
   flex: 1;
-  box-shadow: 0 0 5px black;
+  // box-shadow: 0 0 5px black;
   transform: translate3d(70px, 0, 0);
   transition: transform .3s;
 }

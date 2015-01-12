@@ -1,19 +1,17 @@
 .post-board
-	-if current_user.is_admin?	
-		= sync_new partial: "card", resource: Post.new
-	- else
-		= sync_new partial: "card", resource: Post.new, scope: current_organization
+  - if @posts.empty?
+    %h3.text-center There are no posts matching this criterion.
 
-
-	- @posts.all.each do |post|
-		= sync partial: "card", resource: post
+  - if current_user.is_admin?
+    = sync_new partial: "card", resource: Post.new
+  - else
+    = sync_new partial: "card", resource: Post.new, scope: current_organization
+  - @posts.all.each do |post|
+    = sync partial: "card", resource: post
 
 = content_for :popups do
-	.test-modal
-		= render 'post_discussion'
-
-	= render 'new_post_form'
-
-	= link_to '#', data: {target: "#new-post", toggle: "modal"}, class: "btn", id: "new-post-toggler" do
-		%span.flaticon-plus9
-
+  .test-modal
+    / = render 'post_discussion'
+  = render 'new_post_form'
+  = link_to '#', data: {target: "#new-post", toggle: "modal"}, class: "btn", id: "new-post-toggler" do
+    %span.flaticon-plus9

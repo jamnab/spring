@@ -9,31 +9,36 @@
       = post.title
       .traction{class: ("doit" if post.doit?)}
         - if post.doit?
-          DOIT
-          %span.flaticon-check6
+          = image_tag "doit.png"
         - else
-          DOIT?
-        #{post.traction} / #{post.threshold}
+          Traction:
+
+        #{post.opinion} / #{post.threshold}
         .tags
-          .btn.btn-sm.btn-on{class: "btn-#{class_type}"}
-            %span.flaticon-go
-          .btn.btn-sm.btn-off{class: "btn-#{class_type}"}
-            %span.flaticon-go1
+          - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
+          = form_for Opinion.new, remote: true do |f|
+            = f.hidden_field :positive, value: 'true'
+            = f.hidden_field :user_id, value: current_user.id
+            = f.hidden_field :opinionable_id, value: post.id
+            = f.hidden_field :opinionable_type, value: 'Post'
+            .btn.btn-sm.btn-like{class: "btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}"}
+              %span.flaticon-go
+            .btn.btn-sm.btn-dislike{class: "btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}"}
+              %span.flaticon-go1
 
     .content
-      .row
-        .col-xs-8
-          = post.content
-        .col-xs-4
-          = image_tag("//placehold.it/140x110")
+      .col-xs-8
+        = post.content
+      .col-xs-4
+        = image_tag post.pictures.first.image.url(:post_image)
 
     .signature
       .user
-        = image_tag("//placehold.it/35x35")
+        = image_tag("profile_default.png")
         .name
           = user.full_name
           %br
-          (#{user.username})
+          (#{user.manager ? "Manager" : user.job_title})
       .options
         = link_to '#' do
           .btn.btn-sm{class: "btn-#{class_type}"}
@@ -48,15 +53,26 @@
               %span.flaticon-lock9
         = link_to '#' do
           .btn.btn-sm{class: "btn-#{class_type}"}
-            %span.flaticon-trash7
+            %span.flaticon-delete48
 
         .divider
 
-        = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "post-discussion-toggler" do
-          .btn.btn-sm{class: "btn-#{class_type}"}
+        = link_to dashboard_path(:populate_disucssion_id => post.id), data: {type: "#{class_type}"}, remote: true, class: "post-discussion-toggler" do
+          .btn.btn-sm.btn-counter{class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}
             %span.flaticon-speech29
-        = link_to '#' do
-          .btn.btn-sm.btn-off{class: "btn-#{class_type}"}
-            %span.flaticon-star6
+            .count
+              = post.comments.count
 
+        - fav = post.favourited?(current_user)
+        - if fav.nil?
+          = link_to '#' do
+            .btn.btn-sm.btn-off.btn-fav{class: "btn-#{class_type}"}
+              %span.flaticon-star6
+          = form_for Favourite.new, remote: true do |f|
+            = f.hidden_field :fav_post_id, value: post.id
+            = f.hidden_field :user_id, value: current_user.id
+        - else
+          = link_to fav, method: :delete, remote: true do
+            .btn.btn-sm.btn-on{class: "btn-#{class_type}"}
+              %span.flaticon-star6
 
