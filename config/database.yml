@@ -12,8 +12,8 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  username: root
-  password: 
+  username: pindoit
+  password: 8twpBsPCKHq6nL6CxBaqnP4a
 
 development:
   <<: *default
@@ -48,5 +48,3 @@ test:
 production:
   <<: *default
   database: pindoit_production
-  username: pindoit
-  password: <%= ENV['COLLAB_DATABASE_PASSWORD'] %>

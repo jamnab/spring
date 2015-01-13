@@ -44,6 +44,7 @@ gem 'chart-js-rails'
 gem 'jquery-datatables-rails', '~> 3.1.1'
 gem 'to_words'
 # gem 'redcarpet'
+gem 'therubyracer'
 
 group :development do
   gem 'better_errors'
