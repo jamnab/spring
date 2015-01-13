@@ -85,6 +85,6 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content,:post_type, :endorsed, :anonymous, :threshold, :user_id, :project_id, :comment_anonymity, :pictures)
+      params.require(:post).permit(:title, :content,:post_type, :endorsed, :anonymous, :threshold, :user_id, :comment_anonymity, :pictures)
     end
 end

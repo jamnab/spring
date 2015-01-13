@@ -14,7 +14,7 @@ class PagesController < ApplicationController
     if params[:query].present?
       @query = params[:query]
       if @query == "doit"
-        @posts.reject!{|r| r.doit? == false }
+        @posts=@posts.reject{|r| r.doit? == false }
       else
         @posts = @posts.where(:post_type => params[:query])
       end
@@ -25,7 +25,7 @@ class PagesController < ApplicationController
       elsif @query == "discussed"
 
       else
-        @posts = @posts.order("traction DESC")
+        @posts = @posts.order("opinion DESC")
       end
     else
       @posts = @posts.order("created_at DESC")

@@ -4,7 +4,7 @@
 - class_type = "facility" if post.post_type == Post::FACILITY
 
 .post-wrapper.col-xs-12.col-sm-6{class: ("doithidden" if post.doit?)}
-  .post{class: class_type}
+  .post{class: "#{class_type} #{post.id}"}
     .header
       = post.title
       .traction{class: ("doit" if post.doit?)}
@@ -21,16 +21,38 @@
             = f.hidden_field :user_id, value: current_user.id
             = f.hidden_field :opinionable_id, value: post.id
             = f.hidden_field :opinionable_type, value: 'Post'
-            .btn.btn-sm.btn-like{class: "btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}"}
+            .btn.post-loading.btn-sm.btn-like{class: "btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}", id: "#{post.id}"}
               %span.flaticon-go
-            .btn.btn-sm.btn-dislike{class: "btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}"}
+            .btn.btn-sm.btn-dislike{class: "btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", id: "#{post.id}"}
               %span.flaticon-go1
 
     .content
       .col-xs-8
         = post.content
-      .col-xs-4
-        = image_tag post.pictures.first.image.url(:post_image)
+      #carousel-post.col-xs-4
+        %ol.carousel-indicators
+          - if post.pictures.empty?
+            %li.active{"data-target"=> "#carousel-post", "data-slide-to"=>"0"}
+          -else
+            -post.pictures.each_with_index do |pic,index|
+              - if index == 0
+                %li.active{"data-target"=> "#carousel-post", "data-slide-to"=> index}
+              -else
+                %li{"data-target"=> "#carousel-post", "data-slide-to"=> index}
+
+        .carousel-inner
+          - if post.pictures.empty?
+            .item.active
+              = image_tag ("//placehold.it/170x95")
+          -else
+            -post.pictures.each_with_index do |pic,index|
+              - if index == 0
+                .item.active
+                  = image_tag pic.image.url(:post_image)
+              -else
+                .item
+                  = image_tag pic.image.url(:post_image)
+
 
     .signature
       .user
@@ -57,8 +79,8 @@
 
         .divider
 
-        = link_to dashboard_path(:populate_disucssion_id => post.id), data: {type: "#{class_type}"}, remote: true, class: "post-discussion-toggler" do
-          .btn.btn-sm.btn-counter{class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}
+        = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "post-discussion-toggler" do
+          .btn.btn-sm.post-loading.btn-counter{class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}",id: "#{post.id}"}
             %span.flaticon-speech29
             .count
               = post.comments.count
@@ -73,6 +95,11 @@
             = f.hidden_field :user_id, value: current_user.id
         - else
           = link_to fav, method: :delete, remote: true do
-            .btn.btn-sm.btn-on{class: "btn-#{class_type}"}
+            .btn.btn-sm.post-loading.btn-on{class: "btn-#{class_type}",id: "#{post.id}"}
               %span.flaticon-star6
+    / .loading-wrapper.hidden{id: "#{post.id}_loading_post"}
+    /   .loading-container
+    /     .loading
+    /     #loading-text
+    /       Loading
 

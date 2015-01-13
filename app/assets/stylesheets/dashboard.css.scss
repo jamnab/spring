@@ -24,6 +24,16 @@
 //     margin-right: 10px;
 //   }
 // }
+.carousel-indicators{
+  position:absolute;
+  bottom:0px;
+  margin-bottom: -25px;
+  padding-bottom: 4px;
+  li{
+    border:2px solid #e2e2e2;
+    background-color:#e2e2e2;
+  }
+ } 
 .float-left{
   float:left;
 }
