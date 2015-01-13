@@ -9,7 +9,7 @@ class PagesController < ApplicationController
         if params[:query].present?
         @query = params[:query]
         if @query == "doit"
-          @posts=Post.all.reject{|r| r.doit? == false }
+          @posts = Post.all.reject{|r| r.doit? == false }
         else
           @posts = Post.where(:post_type => params[:query])
         end
@@ -85,6 +85,10 @@ class PagesController < ApplicationController
   end
 
   def summary
+    # if current_user.is_manager?
+    #   redirect_to :back, notice: "No permission" and return
+    # end
+
     @users = User.all
     @organization = current_organization
 

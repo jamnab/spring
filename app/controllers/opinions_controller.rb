@@ -38,6 +38,7 @@ class OpinionsController < ApplicationController
         end
         @opinion.destroy
         @opinionable.save
+        sync_update destination
         redirect_to destination and return
       else
         @opinion.positive = opinion_params[:positive]

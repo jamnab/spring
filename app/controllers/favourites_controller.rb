@@ -8,6 +8,7 @@ class FavouritesController < ApplicationController
 
     respond_to do |format|
       if @favourite.save
+        sync_update @favourite.fav_post
         format.html { redirect_to :my_favourites, notice: 'Favourite was successfully created.' }
         format.json { render json: @favourite }
       else
@@ -19,7 +20,9 @@ class FavouritesController < ApplicationController
   # DELETE /favourites/1
   # DELETE /favourites/1.json
   def destroy
+    @post = @favourite.fav_post
     @favourite.destroy
+    sync_update @post
     respond_to do |format|
       format.html { redirect_to :my_favourites, notice: 'Favourite was successfully destroyed.' }
       format.json { head :no_content }

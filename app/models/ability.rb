@@ -2,22 +2,43 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    @cr = [:read, :create]
+    @cru = [:read, :create, :update]
+    @crud = [:read, :create, :update, :destroy]
 
     if user.is_admin?
       can :manage, :all
     else
       # Users
-      can :manage, User do |u|
+      can @cru, User do |u|
         user == u
       end
 
       # Organizations
+      can @cru, Organization do |org|
+        user.manager && user.organization == org
+      end
 
       # Posts
+      can @crud, Post do |post|
+        post.user == user
+      end
+      can @cr, Post do |post|
+        post.organization == user.organization
+      end
 
       # Comments
+      can @crud, Comment do |com|
+        com.user == user
+      end
+      can @cr, Comment do |com|
+        com.commentable.try(:organization) == user.organization
+      end
 
+      # Misc models that are not guarded
       # Opinions
+      # Favourite
+      # Picture
     end
 
     # See the wiki for details:

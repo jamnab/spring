@@ -1,36 +1,44 @@
 - user = User.first
 
-.comment-wrapper
-  .comment
-    .col-xs-8
-      .content
-        = comment.content
-    .col-xs-4
-      .traction
-        %h4{class: ("doit" if false)}
-          10 / 50
+- if can? :read, comment
+  .comment-wrapper
+    .comment
+      .col-xs-8
+        .content
+          = comment.content
+      .col-xs-4
+        .traction
+          %h4{class: ("doit" if false)}
+            #{comment.opinion} / #{comment.commentable.threshold}
           .indicator
-            - if false
-              DOIT
-              %span.flaticon-check6
-            - else
-              DOIT?
-      .controls
-        .btn.btn-sm.btn-on
-          %span.flaticon-go
-        .btn.btn-sm.btn-off
-          %span.flaticon-go1
-    .signature
-      .user
-        = image_tag("//placehold.it/35x35")
-        .name
-          = user.full_name
-          %br
-          (#{user.username})
-      .options
-        = link_to '#' do
-          .btn.btn-sm
-            %span.flaticon-edit7
-        = link_to '#' do
-          .btn.btn-sm
-            %span.flaticon-trash7
+            - if comment.doit?
+              = image_tag "doit.png"
+        .controls
+          - if comment.is_suggestion?
+            .btn.btn-sm.btn-on
+              %span.flaticon-go
+            .btn.btn-sm.btn-off
+              %span.flaticon-go1
+      .signature
+        .user
+          - if comment.doit?
+            = image_tag("profile_default.png")
+            .name
+              %b= user.full_name
+              %br
+              (#{user.job_title})
+          - else
+            = image_tag("profile_default.png")
+            .name
+              Anonymous User
+              %br
+              (Contributor)
+        .options
+          - if can? :update, comment
+            = link_to '#' do
+              .btn.btn-sm
+                %span.flaticon-edit7
+          - if can? :destroy, comment
+            = link_to comment, method: :delete, data: { confirm: "Are you sure about this?"}, remote: true do
+              .btn.btn-sm
+                %span.flaticon-delete48

@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20150112155737) do
     t.string   "commentable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
   end
 
   create_table "delayed_jobs", force: true do |t|
