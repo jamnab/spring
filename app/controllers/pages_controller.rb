@@ -72,10 +72,13 @@ class PagesController < ApplicationController
   end
 
   def search
-  	if params[:query].present?
-      @posts = current_organization.posts.search(params[:query])
+    @organization = current_organization
+    @organization = Organization.first if current_user.is_admin?
+
+    if params[:query].present?
+      @posts = @organization.posts.search(params[:query])
     else
-      @posts = current_organization.posts.all
+      @posts = @organization.posts.all
     end
 
     respond_to do |format|

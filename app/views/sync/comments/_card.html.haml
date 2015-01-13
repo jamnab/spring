@@ -1,4 +1,5 @@
 - user = User.first
+- class_type = comment.commentable.type?
 
 - if can? :read, comment
   .comment-wrapper
@@ -15,9 +16,10 @@
               = image_tag "doit.png"
         .controls
           - if comment.is_suggestion?
-            .btn.btn-sm.btn-on
+            - opinion = Opinion.where(opinionable_type: "Comment", opinionable_id: comment.id, user_id: current_user.id).first
+            .btn.btn-sm.btn-like{class: "btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}"}
               %span.flaticon-go
-            .btn.btn-sm.btn-off
+            .btn.btn-sm.btn-dislike{class: "btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}"}
               %span.flaticon-go1
       .signature
         .user
@@ -36,9 +38,9 @@
         .options
           - if can? :update, comment
             = link_to '#' do
-              .btn.btn-sm
+              .btn.btn-sm{class: "btn-#{class_type}"}
                 %span.flaticon-edit7
           - if can? :destroy, comment
             = link_to comment, method: :delete, data: { confirm: "Are you sure about this?"}, remote: true do
-              .btn.btn-sm
+              .btn.btn-sm{class: "btn-#{class_type}"}
                 %span.flaticon-delete48
