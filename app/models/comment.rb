@@ -13,4 +13,8 @@ class Comment < ActiveRecord::Base
   def doit?
     self.opinion > self.commentable.threshold
   end
+
+  def is_suggestion?
+    self.suggestion
+  end
 end

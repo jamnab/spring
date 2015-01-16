@@ -11,3 +11,6 @@ $ ->
 		id = $(this).attr("id")
 		target = ".modal-content.".concat(id);
 		$(target).append(loading)		
+	$("#new_post").submit ->
+		target = "body"
+		$(target).append(loading)

@@ -3,103 +3,115 @@
 - class_type = "play" if post.post_type == Post::PLAY
 - class_type = "facility" if post.post_type == Post::FACILITY
 
-.post-wrapper.col-xs-12.col-sm-6{class: ("doithidden" if post.doit?)}
-  .post{class: "#{class_type} #{post.id}"}
-    .header
-      = post.title
-      .traction{class: ("doit" if post.doit?)}
-        - if post.doit?
-          = image_tag "doit.png"
-        - else
-          Traction:
+- if can? :read, post
+  .post-wrapper.col-xs-12.col-sm-6{class: ("doithidden" if post.doit?)}
+    .post{class: "#{class_type} #{post.id}"}
+      .header
+        = post.title
+        .traction{class: ("doit" if post.doit?)}
+          - if post.doit?
+            = image_tag "doit.png"
+          - else
+            Traction:
 
-        #{post.opinion} / #{post.threshold}
-        .tags
-          - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
-          = form_for Opinion.new, remote: true do |f|
-            = f.hidden_field :positive, value: 'true'
-            = f.hidden_field :user_id, value: current_user.id
-            = f.hidden_field :opinionable_id, value: post.id
-            = f.hidden_field :opinionable_type, value: 'Post'
-            .btn.post-loading.btn-sm.btn-like{class: "btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}", id: "#{post.id}"}
-              %span.flaticon-go
-            .btn.btn-sm.btn-dislike{class: "btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", id: "#{post.id}"}
-              %span.flaticon-go1
+          #{post.opinion} / #{post.threshold}
+          .tags
+            - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
+            = form_for Opinion.new, remote: true do |f|
+              = f.hidden_field :positive, value: 'true'
+              = f.hidden_field :user_id, value: current_user.id
+              = f.hidden_field :opinionable_id, value: post.id
+              = f.hidden_field :opinionable_type, value: 'Post'
+              .btn.post-loading.btn-sm.btn-like{class: "btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}", id: "#{post.id}"}
+                %span.flaticon-go
+              .btn.btn-sm.btn-dislike{class: "btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", id: "#{post.id}"}
+                %span.flaticon-go1
 
-    .content
-      .col-xs-8
-        = post.content
-      #carousel-post.col-xs-4
-        %ol.carousel-indicators
-          - if post.pictures.empty?
-            %li.active{"data-target"=> "#carousel-post", "data-slide-to"=>"0"}
-          -else
-            -post.pictures.each_with_index do |pic,index|
-              - if index == 0
-                %li.active{"data-target"=> "#carousel-post", "data-slide-to"=> index}
-              -else
-                %li{"data-target"=> "#carousel-post", "data-slide-to"=> index}
+      .content
+        .col-xs-8
+          = post.content
+        #carousel-post.col-xs-4
+          %ol.carousel-indicators
+            - if post.pictures.empty?
+              %li.active{"data-target"=> "#carousel-post", "data-slide-to"=>"0"}
+            -else
+              -post.pictures.each_with_index do |pic,index|
+                - if index == 0
+                  %li.active{"data-target"=> "#carousel-post", "data-slide-to"=> index}
+                -else
+                  %li{"data-target"=> "#carousel-post", "data-slide-to"=> index}
 
-        .carousel-inner
-          - if post.pictures.empty?
-            .item.active
-              = image_tag ("//placehold.it/170x95")
-          -else
-            -post.pictures.each_with_index do |pic,index|
-              - if index == 0
-                .item.active
-                  = image_tag pic.image.url(:post_image)
-              -else
-                .item
-                  = image_tag pic.image.url(:post_image)
+          .carousel-inner
+            - if post.pictures.empty?
+              .item.active
+                = image_tag ("//placehold.it/170x95")
+            -else
+              -post.pictures.each_with_index do |pic,index|
+                - if index == 0
+                  .item.active
+                    = image_tag pic.image.url(:post_image)
+                -else
+                  .item
+                    = image_tag pic.image.url(:post_image)
+        .signature
+          .user
+            - if post.doit?
+              = image_tag("profile_default.png")
+              .name
+                %b= user.full_name
+                %br
+                (#{user.job_title})
+            - else
+              = image_tag("profile_default.png")
+              .name
+                Anonymous User
+                %br
+                (Contributor)
+          .options
+            = form_for post, remote: true do |f|
+              = f.hidden_field :graveyard, value: 'false'
+            - if can? :update, post
+              = link_to '#' do
+                .btn.btn-sm{class: "btn-#{class_type}"}
+                  %span.flaticon-edit7
+            - if can? :update, post.organization
+              - if post.graveyard
+                = link_to '#' do
+                  .btn.btn-sm.btn-archive{class: "btn-#{class_type}", data: {value: 'false'}}
+                    %span.flaticon-unlock
+              - else
+                = link_to '#' do
+                  .btn.btn-sm.btn-archive{class: "btn-#{class_type}", data: {value: 'true'}}
+                    %span.flaticon-lock9
+            - if can? :destroy, post
+              = link_to post, method: :delete, data: { confirm: "Are you sure about this?"}, remote: true do
+                .btn.btn-sm{class: "btn-#{class_type}"}
+                  %span.flaticon-delete48
 
+            .divider
 
-    .signature
-      .user
-        = image_tag("profile_default.png")
-        .name
-          = user.full_name
-          %br
-          (#{user.manager ? "Manager" : user.job_title})
-      .options
-        = link_to '#' do
-          .btn.btn-sm{class: "btn-#{class_type}"}
-            %span.flaticon-edit7
-        - if post.graveyard
-          = link_to '#' do
-            .btn.btn-sm{class: "btn-#{class_type}"}
-              %span.flaticon-unlock
-        - else
-          = link_to '#' do
-            .btn.btn-sm{class: "btn-#{class_type}"}
-              %span.flaticon-lock9
-        = link_to '#' do
-          .btn.btn-sm{class: "btn-#{class_type}"}
-            %span.flaticon-delete48
+            = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "post-discussion-toggler" do
+              .btn.btn-sm.post-loading.btn-counter{class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}",id: "#{post.id}"}
+                %span.flaticon-speech29
+                .count
+                  = post.comments.count
 
-        .divider
+            - fav = post.favourited?(current_user)
+            - if fav.nil?
+              = link_to '#' do
+                .btn.btn-sm.btn-off.btn-fav{class: "btn-#{class_type}"}
+                  %span.flaticon-star6
+              = form_for Favourite.new, remote: true do |f|
+                = f.hidden_field :fav_post_id, value: post.id
+                = f.hidden_field :user_id, value: current_user.id
+            - else
+              = link_to fav, method: :delete, remote: true do
+                .btn.btn-sm.post-loading.btn-on{class: "btn-#{class_type}",id: "#{post.id}"}
+                  %span.flaticon-star6
+      / .loading-wrapper.hidden{id: "#{post.id}_loading_post"}
+      /   .loading-container
+      /     .loading
+      /     #loading-text
+      /       Loading
 
-        = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "post-discussion-toggler" do
-          .btn.btn-sm.post-loading.btn-counter{class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}",id: "#{post.id}"}
-            %span.flaticon-speech29
-            .count
-              = post.comments.count
-
-        - fav = post.favourited?(current_user)
-        - if fav.nil?
-          = link_to '#' do
-            .btn.btn-sm.btn-off.btn-fav{class: "btn-#{class_type}"}
-              %span.flaticon-star6
-          = form_for Favourite.new, remote: true do |f|
-            = f.hidden_field :fav_post_id, value: post.id
-            = f.hidden_field :user_id, value: current_user.id
-        - else
-          = link_to fav, method: :delete, remote: true do
-            .btn.btn-sm.post-loading.btn-on{class: "btn-#{class_type}",id: "#{post.id}"}
-              %span.flaticon-star6
-    / .loading-wrapper.hidden{id: "#{post.id}_loading_post"}
-    /   .loading-container
-    /     .loading
-    /     #loading-text
-    /       Loading
 

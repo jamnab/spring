@@ -1,7 +1,29 @@
 $(".loading-wrapper").remove();
+$('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>");
 <% if @populate == true %>
 	$('.test-modal').html("<%= j render(:partial => 'pages/post_discussion') %>");
 	$('#post-discussion').modal("show")
 <% else %> 
+	<% if @query == "1" %>
+		$('.option.filter').attr('id','filter-post-play')
+		$('.option.filter > .text').text("PLAY")
+	<% elsif @query == "0" %>
+		$('.option.filter').attr('id','filter-post-work')
+		$('.option.filter > .text').text("WORK")
+	<% elsif @query == "2" %>
+		$('.option.filter').attr('id','filter-post-facility')
+		$('.option.filter > .text').text("FACILITY")
+	<% elsif @query == "doit" %>
+		$('.option.filter').attr('id','filter-post-doit')
+		$('.option.filter > .text').text("DOIT")
+	<%end%>
+
+	<% if @sort == "newest" %>
+		$('#sort-posts.option > .text').text("NEWEST")
+	<% elsif @sort == "upvoted" %>
+		$('#sort-posts.option > .text').text("MOST UPVOTED")
+	<% elsif @sort == "discussed" %>
+		$('#sort-posts.option > .text').text("MOST DICUSSED")
+	<%end%>
 	$('.post-board').html("<%= j render(:partial => 'pages/update_search') %>");
 <%end%>

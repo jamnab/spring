@@ -5,7 +5,8 @@
 
 User.create(username: "pindoit", email: "info@pindoit.com",
             password: "pindoit", password_confirmation: "pindoit",
-            admin: true, first_name: "Pindoit", last_name: "Admin")
+            admin: true, first_name: "Pindoit", last_name: "Admin",
+            job_title: "System Admin")
 
 # demo organization
 Organization.create(name: "Demo Company Inc.", activated: true)

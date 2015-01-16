@@ -43,11 +43,15 @@ $ ->
     $("#post-discussion .comment .btn-sm").removeClass("btn-facility")
 
   # like/dislike setting positive to true/false before submitting
-  $(".btn-like").on "click", ->
+  $("body").on "click", ".btn-like", (e) ->
     $(this).siblings("#opinion_positive").attr("value", "true")
     $(this).parent().submit()
-  $(".btn-dislike").on "click", ->
+  $("body").on "click", ".btn-dislike", (e) ->
     $(this).siblings("#opinion_positive").attr("value", "false")
     $(this).parent().submit()
-  $(".btn-fav").on "click", ->
+  $("body").on "click", ".btn-fav", (e) ->
     $(this).parent().next("form").submit()
+  $("body").on "click", ".btn-archive", (e) ->
+    value_field = $(".btn-archive").parent().prev().prev().children("#post_graveyard")
+    value_field.attr("value", $(this).data('value'))
+    $(this).parent().prev().prev("form").submit()

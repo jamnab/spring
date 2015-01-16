@@ -11,24 +11,25 @@ class PagesController < ApplicationController
       @posts = current_organization.posts
     end
 
-    if params[:query].present?
-      @query = params[:query]
-      if @query == "doit"
-        @posts=@posts.reject{|r| r.doit? == false }
-      else
-        @posts = @posts.where(:post_type => params[:query])
-      end
-    elsif params[:sort].present?
-      @query = params[:sort]
-      if @query == "newest"
-        @posts = @posts.order("created_at DESC")
-      elsif @query == "discussed"
 
+  
+    if params[:sort].present?
+      @sort = params[:sort]
+      if @sort == "newest"
+        @posts = @posts.order("created_at DESC")
+      elsif @sort == "discussed"
+        @posts = @posts.order("comments_count DESC")
       else
         @posts = @posts.order("opinion DESC")
       end
-    else
-      @posts = @posts.order("created_at DESC")
+      if params[:query].present?
+        @query = params[:query]
+        if @query == "doit"
+          @posts=@posts.reject{|r| r.doit? == false }
+        else
+          @posts = @posts.where(:post_type => params[:query])
+        end
+      end
     end
    
     if params[:populate_disucssion_id].present?
@@ -73,6 +74,10 @@ class PagesController < ApplicationController
   end
 
   def summary
+    # if current_user.is_manager?
+    #   redirect_to :back, notice: "No permission" and return
+    # end
+
     @users = User.all
     @organization = current_organization
 

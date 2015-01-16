@@ -1,0 +1,30 @@
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+    #filter-posts.option.filter
+      .text{style: "float:left;"}
+        ALL
+      %span.caret
+  %ul.dropdown-menu{:role => "menu"}
+    %li
+      = link_to "all",dashboard_path(:sort=>params[:sort]),remote: true, :id =>"filter-post-all"
+    %li
+      = link_to "WORK",dashboard_path(:query => "0",:sort=>params[:sort]),remote: true, :id =>"filter-post-work"
+    %li
+      = link_to "PLAY",dashboard_path(:query => "1",:sort=>params[:sort]),remote: true, :id =>"filter-post-play"
+    %li
+      = link_to "FACILITY",dashboard_path(:query => "2",:sort=>params[:sort]),remote: true, :id =>"filter-post-facility"
+    %li
+      = link_to "DOIT",dashboard_path(:query => "doit",:sort=>params[:sort]),remote: true, :id =>"filter-post-doit"
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+    #sort-posts.option
+      .text{style: "float:left;"}
+        NEWEST
+      %span.caret
+  %ul.dropdown-menu{:role => "menu"}
+    %li
+      = link_to "NEWEST",dashboard_path(:sort => "newest",:query=>params[:query]),remote: true, :id =>"sort-post-newest"
+    %li
+      = link_to "MOST  DISCUSSED",dashboard_path(:sort => "discussed",:query=>params[:query]),remote: true, :id =>"sort-post-updated" 
+    %li
+      = link_to "MOST UPVOTED",dashboard_path(:sort => "upvoted",:query=>params[:query]),remote: true, :id =>"sort-post-updated" 

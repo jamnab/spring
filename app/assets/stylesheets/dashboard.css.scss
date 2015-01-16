@@ -227,17 +227,17 @@
         display: inline-block;
         color: $default_text_main;
 
-        .indicator {
-          display: inline-block;
-          margin-left: 10px;
-          span:before {
-            margin: 0px;
-            margin-left: 0px;
-          }
-        }
-
         &.doit {
           color: $main_highlight;
+        }
+      }
+
+      .indicator {
+        display: inline-block;
+        margin-left: 10px;
+        img {
+          vertical-align: initial !important;
+          width: 60px;
         }
       }
     }
