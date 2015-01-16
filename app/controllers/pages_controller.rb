@@ -6,40 +6,30 @@ class PagesController < ApplicationController
 
   def dashboard
     if current_user.is_admin?
-        if params[:query].present?
-        @query = params[:query]
-        if @query == "doit"
-          @posts = Post.all.reject{|r| r.doit? == false }
-        else
-          @posts = Post.where(:post_type => params[:query])
-        end
-      elsif params[:sort].present?
-        @query = params[:sort]
-        if @query == "newest"
-          @posts = Post.all.order("created_at DESC")
-        elsif @query == "discussed"
-
-        else
-          @posts = Post.all.order("traction DESC")
-        end
-      else
-        @posts = Post.all.order("created_at DESC")
-      end
+      @posts = Post.all
     else
-      if params[:query].present?
-        @query = params[:query]
-        @posts = current_organization.posts.where(:post_type => params[:query])
-      elsif params[:sort].present?
-        @query = params[:sort]
-        if @query == "newest"
-          @posts = current_organization.posts.all.order("created_at DESC")
-        elsif
-          @query == "discussed"
-        else
-          @posts = current_organization.posts.all.order("traction DESC")
-        end
+      @posts = current_organization.posts
+    end
+
+    if params[:query].present?
+      @query = params[:query]
+      if @query == "doit"
+        @posts = @posts.reject{|r| r.doit? == false }
+      elsif @query == "all"
+        @posts = @posts.order(created_at: :desc)
       else
-        @posts = current_organization.posts.all.order("created_at DESC")
+        @posts = @posts.where(:post_type => params[:query])
+      end
+    end
+
+    if params[:sort].present?
+      @query = params[:sort]
+      if @query == "newest"
+        @posts = @posts.order(created_at: :desc)
+      elsif @query == "discussed"
+        @posts = @posts.order(comments_count: :desc)
+      else
+        @posts = @posts.order(opinion: :desc)
       end
     end
 

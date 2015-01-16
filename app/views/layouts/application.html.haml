@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Pin.DoIt
+    %title Pindoit
     = stylesheet_link_tag    'application', media: 'all'
     = stylesheet_link_tag    'flaticon/flaticon.css'
     = stylesheet_link_tag    'flaticon-pack2/flaticon.css'
@@ -56,7 +56,7 @@
           = link_to :dashboard do
             Home
           = link_to :my_favourites do
-            My Favoriates
+            My Favourites
           = link_to :archive do
             Archive
           = link_to :summary do
@@ -100,15 +100,15 @@
                     %span.caret
                 %ul.dropdown-menu{:role => "menu"}
                   %li
-                    %a{href: "#", id: "filter-post-all"} ALL
+                    = link_to "ALL", dashboard_path(:query => "all"), remote: true, :id =>"filter-post-all"
                   %li
-                    = link_to "WORK",dashboard_path(:query => "0"),remote: true, :id =>"filter-post-work"
+                    = link_to "WORK", dashboard_path(:query => "0"), remote: true, :id =>"filter-post-work"
                   %li
-                    = link_to "PLAY",dashboard_path(:query => "1"),remote: true, :id =>"filter-post-play"
+                    = link_to "PLAY", dashboard_path(:query => "1"), remote: true, :id =>"filter-post-play"
                   %li
-                    = link_to "FACILITY",dashboard_path(:query => "2"),remote: true, :id =>"filter-post-facility"
+                    = link_to "FACILITY", dashboard_path(:query => "2"), remote: true, :id =>"filter-post-facility"
                   %li
-                    = link_to "DOIT",dashboard_path(:query => "doit"),remote: true, :id =>"filter-post-doit"
+                    = link_to "DOIT", dashboard_path(:query => "doit"), remote: true, :id =>"filter-post-doit"
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
                   #sort-posts.option
@@ -116,13 +116,11 @@
                     %span.caret
                 %ul.dropdown-menu{:role => "menu"}
                   %li
-                    = link_to "NEWEST",dashboard_path(:sort => "newest"),remote: true, :id =>"sort-post-newest"
-
-
+                    = link_to "NEWEST", dashboard_path(:sort => "newest"), remote: true, :id =>"sort-post-newest"
                   %li
-                    %a{href: "#", id: "sort-post-dicussed"} MOST DISCUSSED
+                    = link_to "MOST DISCUSSED", dashboard_path(:sort => "discussed"), remote: true, :id =>"sort-post-discussed"
                   %li
-                    = link_to "MOST UPVOTED",dashboard_path(:sort => "upvoted"),remote: true, :id =>"sort-post-updated"
+                    = link_to "MOST UPVOTED", dashboard_path(:sort => "upvoted"), remote: true, :id =>"sort-post-upvoted"
 
             / #search.search.search-open
             /   %form
