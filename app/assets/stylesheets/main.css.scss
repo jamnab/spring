@@ -3,7 +3,12 @@
 html, body {
   height: 100%;
   width: 100%;
+  min-width: 660px;
   overflow-x: hidden;
+}
+
+.no-padding {
+  padding: 0px;
 }
 
 .navbar{
@@ -17,7 +22,6 @@ html, body {
   height: 70px;
   border-bottom: 1px solid $default_text_off;
 
-
   .navbar-brand {
     display: inline-block;
     font-size: 22px;
@@ -28,6 +32,10 @@ html, body {
       margin: 5px;
       height: 40px;
     }
+  }
+
+  .nav {
+    margin: 0px;
   }
 
   li a {
@@ -68,10 +76,6 @@ html, body {
     }
   }
 
-  .nav {
-    margin-left: 5px;
-  }
-
   // #navbar-dropdown {
   //   width: calc(100% - 120px);
   //   float: right;
@@ -87,7 +91,16 @@ html, body {
   //   }
   // }
 
+  #navbar-right {
+    display: inline-block;
+
+    button {
+      margin-top: -5px;
+    }
+  }
+
   .dropdown {
+    display: inline-block;
     color: $inverse_text_main;
 
     &.open {
