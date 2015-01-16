@@ -4,7 +4,7 @@
 - class_type = "facility" if post.post_type == Post::FACILITY
 
 - if can? :read, post
-  .post-wrapper.col-xs-12.col-md-6{class: ("doithidden" if post.doit?)}
+  .post-wrapper{class: ("doithidden" if post.doit?)}
     .post{class: class_type}
       .header
         = post.title
