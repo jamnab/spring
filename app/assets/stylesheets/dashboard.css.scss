@@ -122,7 +122,8 @@
   .post {
     position: relative;
     height: 100%;
-    width: 100%;
+    max-width: 600px;
+    margin: auto;
 
     .header {
       height: 50px;
@@ -166,6 +167,10 @@
       padding-top: 70px;
       font-size: 14px;
       line-height: 22px;
+
+      img {
+        width: 150px;
+      }
     }
   }
 

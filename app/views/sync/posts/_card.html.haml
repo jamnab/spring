@@ -4,7 +4,7 @@
 - class_type = "facility" if post.post_type == Post::FACILITY
 
 - if can? :read, post
-  .post-wrapper.col-xs-12.col-sm-6{class: ("doithidden" if post.doit?)}
+  .post-wrapper.col-xs-12.col-md-6{class: ("doithidden" if post.doit?)}
     .post{class: class_type}
       .header
         = post.title
@@ -31,7 +31,9 @@
         .col-xs-8
           = post.content
         .col-xs-4
-          - if !post.pictures.empty?
+          - if post.pictures.empty?
+            = image_tag "no_image.png"
+          - else
             = image_tag post.pictures.first.image.url(:post_image)
 
       .signature
