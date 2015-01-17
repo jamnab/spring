@@ -6,9 +6,20 @@ class PagesController < ApplicationController
 
   def dashboard
     if current_user.is_admin?
-      @posts = Post.all
+      @posts = Post.order(created_at: :desc)
     else
-      @posts = current_organization.posts
+      @posts = current_organization.posts.order(created_at: :desc)
+    end
+
+    if params[:sort].present?
+      @query = params[:sort]
+      if @query == "newest"
+        @posts = @posts.reorder(created_at: :desc)
+      elsif @query == "discussed"
+        @posts = @posts.reorder(comments_count: :desc)
+      else
+        @posts = @posts.reorder(opinion: :desc)
+      end
     end
 
     if params[:query].present?
@@ -16,20 +27,9 @@ class PagesController < ApplicationController
       if @query == "doit"
         @posts = @posts.reject{|r| r.doit? == false }
       elsif @query == "all"
-        @posts = @posts.order(created_at: :desc)
+        @posts = @posts.reorder(created_at: :desc)
       else
         @posts = @posts.where(:post_type => params[:query])
-      end
-    end
-
-    if params[:sort].present?
-      @query = params[:sort]
-      if @query == "newest"
-        @posts = @posts.order(created_at: :desc)
-      elsif @query == "discussed"
-        @posts = @posts.order(comments_count: :desc)
-      else
-        @posts = @posts.order(opinion: :desc)
       end
     end
 
@@ -82,10 +82,11 @@ class PagesController < ApplicationController
     #   redirect_to :back, notice: "No permission" and return
     # end
 
-    @users = User.all
     @organization = current_organization
-
     @organization = Organization.first if current_user.is_admin?
+
+    @users = @organization.users
+    @sorted_users = @users.sort_by{|x| -(x.contribution['total']+x.impact['total'])}
   end
 
   private
