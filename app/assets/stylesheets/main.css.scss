@@ -107,35 +107,36 @@ html, body {
       background-color: $inverse_text_off !important;
     }
 
-    .dropdown-toggle{
-      #filter-post-work{
-        background-color: rgba($main_work, 0.75) !important;
-      }
-      #filter-post-play{
-        background-color: rgba($main_play, 0.75) !important;
+    .filter-post-all{
+      background-color: rgba($inverse_text_off, 0.75) !important;
+    }
+    .filter-post-work{
+      background-color: rgba($main_work, 0.75) !important;
+    }
+    .filter-post-play{
+      background-color: rgba($main_play, 0.75) !important;
+    }
+    .filter-post-facility{
+      background-color: rgba($main_facility, 0.75) !important;
 
-      }
-      #filter-post-facility{
-        background-color: rgba($main_facility, 0.75) !important;
-
-      }
-      #filter-post-doit{
-        background-color: rgba($main_highlight, 0.75) !important;
-
-      }
+    }
+    .filter-post-doit{
+      background-color: rgba($main_highlight, 0.75) !important;
     }
 
-    a.dropdown-toggle .option {
-      padding: 0px 15px;
-      color: $inverse_text_main;
-      background-color: $inverse_text_off !important;
-      border-radius: 5px;
-      font-size: 16px;
-      font-weight: bold;
+    a.dropdown-toggle{
+      .option {
+        padding: 0px 15px;
+        color: $inverse_text_main;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: rgba($inverse_text_off, 0.75);
 
-      .caret {
-        border-top-color: $inverse_text_main;
-        border-bottom-color: $inverse_text_main;
+        .caret {
+          border-top-color: $inverse_text_main;
+          border-bottom-color: $inverse_text_main;
+        }
       }
     }
 
@@ -157,25 +158,9 @@ html, body {
         font-weight: bold;
 
         &:hover {
-          color: $default_text_main !important;
           background-color: $default_background;
+          opacity: 0.75;
         }
-      }
-
-      #filter-post-all {
-        background-color: rgba($inverse_text_off, 0.75);
-      }
-      #filter-post-work {
-        background-color: rgba($main_work, 0.75);
-      }
-      #filter-post-play {
-        background-color: rgba($main_play, 0.75);
-      }
-      #filter-post-facility {
-        background-color: rgba($main_facility, 0.75);
-      }
-      #filter-post-doit {
-        background-color: rgba($main_highlight, 0.75);
       }
     }
   }

@@ -1,0 +1,63 @@
+.sidebar-icons
+  %a.sidebar-toggler
+    .icon.fa.fa-bars
+    .icon.fa.fa-times-circle-o.hidden
+  .navicons
+    - if current_user
+      = link_to :dashboard do
+        %span.flaticon-home7
+      = link_to :my_favourites do
+        %span.flaticon-star6
+      = link_to :archive do
+        %span.flaticon-lock9
+      = link_to :summary do
+        %span.flaticon-line31
+
+      .logo.brand-link
+        = image_tag "pindoit_vert.png"
+
+      = link_to '#', class: "logout-link" do
+        %span.flaticon-logout13
+    - else
+      = link_to '#', data: {target: "#login", toggle: "modal"} do
+        %span.flaticon-login17
+      = link_to '#', data: {target: "#register", toggle: "modal"} do
+        %span.flaticon-create1
+
+.sidebar
+  .user-wrapper
+    .user
+      = image_tag("profile_default.png")
+      - if current_user
+        .name
+          John Smith
+        .username
+          (jsmith)
+      - else
+        .name
+          Guest User
+        .username
+          Please Login
+  .sidenav
+    - if current_user
+      = link_to :dashboard do
+        Home
+      = link_to :my_favourites do
+        My Favourites
+      = link_to :archive do
+        Archive
+      = link_to :summary do
+        Summary
+
+      .brand-link.org
+        = image_tag "seeds/ecl_logo2.png"
+        %h4 Powered by Pindoit
+        %h5 A Verse Software Lab Inc. Solution.
+
+      = link_to :logout, class: "logout-link" do
+        Logout
+    - else
+      = link_to '#', data: {target: "#login", toggle: "modal"} do
+        Log In
+      = link_to '#', data: {target: "#register", toggle: "modal"} do
+        Register

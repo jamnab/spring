@@ -1,51 +1,54 @@
 .summary
 
   %ul.nav.nav-pills
-    %li.active
+    %li
       %a{href: "#organization-summary", data: {toggle: "tab"}}
         .fa.fa-building
         Organization Summary
-    %li
+    %li.active
       %a{href: "#personnel-summary", data: {toggle: "tab"}}
         .fa.fa-users
         Personnel Summary
 
   .tab-content
-    #organization-summary.tab-pane.fade.in.active
+    #organization-summary.tab-pane.fade
       .col-xs-6
         %h4
           Number of Activities (<b>Week</b>/Month/Total):
-          <b>#{@organization.activity_count}</b>/#{@organization.activity_count}/#{@organization.activity_count}
+          <b>#{@organization.activity_count}</b>/-/-
         %h4
           Number of Posts (<b>W</b>/M/T):
-          <b>#{@organization.posts.count}</b>/#{@organization.posts.count}/#{@organization.posts.count}
+          <b>#{@organization.posts.count}</b>/-/-
         %h4
           Number of Comments (<b>W</b>/M/T):
-          <b>#{@organization.comments.count}</b>/#{@organization.comments.count}/#{@organization.comments.count}
+          <b>#{@organization.comments.count}</b>/-/-
       .col-xs-6
         %h4
           Number of Doits (<b>Week</b>/Month/Total):
-          <b>#{@organization.doit_count}</b>/#{@organization.doit_count}/#{@organization.doit_count}
+          <b>#{@organization.doit_count}</b>/-/-
         %h4
           Doits Generated from Posts (<b>W</b>/M/T):
-          <b>#{@organization.doit_post_count}</b>/#{@organization.doit_post_count}/#{@organization.doit_post_count}
+          <b>#{@organization.doit_post_count}</b>/-/-
         %h4
           Doits Generated from Suggestions (<b>W</b>/M/T):
-          <b>#{@organization.doit_comment_count}</b>/#{@organization.doit_comment_count}/#{@organization.doit_comment_count}
+          <b>#{@organization.doit_comment_count}</b>/-/-
 
-      %canvas#org-graph-canvas{height: "400px", width: "1100px"}
+      .graph-wrapper
+        .graph-overlay
+          %h1 Not Enough Data Points
+        %canvas.org-graph-canvas{height: "400px", width: "1100px"}
 
-    #personnel-summary.tab-pane.fade
+    #personnel-summary.tab-pane.fade.in.active
       .col-xs-12
         %h4
           Number of Personnels:
           %b 69
         %h4
           Top Performers this week:
-          %b John Doe, Jason Smith
+          %b= @sorted_users[0..2].map{|x| x.full_name} * ', '
         %h4
           Bottom Performers this week:
-          %b Aaron Joe, Buzz Light
+          %b= @sorted_users[-3..-1].reverse.map{|x| x.full_name} * ', '
 
         .btn.btn-main
           Generate Invite Email
@@ -70,9 +73,9 @@
                 %td= user.last_name
                 %td= user.job_title
                 %td
-                  (<b>#{user.posts.count}</b>/#{user.posts.count}/#{user.posts.count})
+                  (<b>#{user.posts.count}</b>/-/-)
                 %td
-                  (<b>#{user.comments.count}</b>/#{user.comments.count}/#{user.comments.count})
+                  (<b>#{user.comments.count}</b>/-/-)
                 %td
                   (<b>#{user.contribution['total']}</b>/#{user.contribution['positive']}/#{user.contribution['negative']})
                 %td
