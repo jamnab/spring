@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20150112155737) do
   create_table "pictures", force: true do |t|
     t.integer  "post_id"
     t.integer  "user_id"
+    t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
@@ -112,7 +113,7 @@ ActiveRecord::Schema.define(version: 20150112155737) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "comment_anonymity", default: false
-    t.integer  "comments_count"
+    t.integer  "comments_count",    default: 0
   end
 
   create_table "project_memberships", force: true do |t|

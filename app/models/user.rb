@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :comments
   has_many :opinions
-
+  has_one :picture
+  accepts_nested_attributes_for :picture
   has_many :favourites
   has_many :fav_posts, through: :favourites
 

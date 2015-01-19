@@ -6,6 +6,7 @@
 - if can? :read, post
   .post-wrapper.col-xs-12.col-sm-6{class: ("doithidden" if post.doit?)}
     .post{class: "#{class_type} #{post.id}"}
+
       .header
         = post.title
         .traction{class: ("doit" if post.doit?)}
@@ -73,12 +74,12 @@
           = form_for post, remote: true do |f|
             = f.hidden_field :graveyard, value: 'false'
           - if can? :update, post
-            = link_to '#' do
+            = link_to edit_post_path(post), remote:true do
               .btn.btn-sm.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {content: "Edit", placement: "top", trigger: "hover"}}
                 %span.flaticon-edit7
           - if can? :update, post.organization
             - if post.graveyard
-              = link_to '#' do
+              = link_to edit_post_path(post), remote: true do
                 .btn.btn-sm.btn-archive{class: "popover-trigger btn-#{class_type}", data: {value: 'false', content: "Unarchive", placement: "top", trigger: "hover"}}
                   %span.flaticon-unlock
             - else

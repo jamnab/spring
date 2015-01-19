@@ -2,13 +2,17 @@ class PagesController < ApplicationController
   before_action :check_login, only: [:dashboard, :summary, :search, :archive]
 
   def home
+    @organization = current_organization
+    @organization = Organization.first if current_user.is_admin?
   end
 
   def dashboard 
+    @organization = current_organization
+    @organization = Organization.first if current_user.is_admin?
     if current_user.is_admin?
       @posts = Post.all
     else
-      @posts = current_organization.posts.order("created_at DESC")
+      @posts = current_organization.posts
     end  
     if params[:sort].present?
       @sort = params[:sort]
@@ -21,16 +25,18 @@ class PagesController < ApplicationController
       else
         @posts = @posts.order("created_at DESC")
       end
-      if params[:query].present?
-        @query = params[:query]
-        if @query == "doit"
-          @posts=@posts.reject{|r| r.doit? == false }
-        else
-          @posts = @posts.where(:post_type => params[:query])
-        end
+    else
+      @posts.order("created_at DESC")
+    end
+    if params[:query].present?
+      @query = params[:query]
+      if @query == "doit"
+        @posts=@posts.reject{|r| r.doit? == false }
+      else
+        @posts = @posts.where(:post_type => params[:query])
       end
     end
-   
+    
     if params[:populate_disucssion_id].present?
       @populate = true
       @id = params[:populate_disucssion_id].to_i
@@ -80,10 +86,11 @@ class PagesController < ApplicationController
     #   redirect_to :back, notice: "No permission" and return
     # end
 
-    @users = User.all
     @organization = current_organization
-
     @organization = Organization.first if current_user.is_admin?
+
+    @users = @organization.users
+    @sorted_users = @users.sort_by{|x| -(x.contribution['total']+x.impact['total'])}
   end
 
   private

@@ -32,6 +32,9 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST /posts
@@ -41,8 +44,14 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        if params[:images]
+        #===== The magic is here ;)
+        params[:images].each { |image|
+          @post.pictures.create(image: image)
+        }
+        end
         format.html { redirect_to :dashboard, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -55,8 +64,9 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        sync_update @post
         format.html { redirect_to :dashboard, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }

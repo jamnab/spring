@@ -4,8 +4,8 @@
 
 $ ->
   # init search ajax
-	$("#search").on "ajax:success", (data,status,xhr) ->
-		 $("#reportalert").text "Done."
+  $("#search").on "ajax:success", (data,status,xhr) ->
+     $("#reportalert").text "Done."
 
   # init datatable for personnel
   $('#personnel-table').dataTable({
@@ -14,6 +14,60 @@ $ ->
     # "ajax": "/summary"
   });
 
+$ ->
+  $(".nested_pics_button").click ->
+    $('.nested_pics_form').append("<input class='nested_pics_button' id='images_' multiple='multiple' name='images[]' type='file'>")
+
+  # $('#filter-post-work').click ->
+  #   $('#filter-posts').removeClass()
+  #   $('#filter-posts').addClass('filter-post-work option filter')
+  #   $('#filter-posts .text').text("WORK")
+
+  # $('#filter-post-play').click ->
+  #   $('#filter-posts').removeClass()
+  #   $('#filter-posts').addClass('filter-post-play option filter')
+  #   $('#filter-posts .text').text("PLAY")
+
+  # $('#filter-post-facility').click ->
+  #   $('#filter-posts').removeClass()
+  #   $('#filter-posts').addClass('filter-post-facility option filter')
+  #   $('#filter-posts .text').text("FACILITY")
+
+  # $('#filter-post-doit').click ->
+  #   $('#filter-posts').removeClass()
+  #   $('#filter-posts').addClass('filter-post-doit option filter')
+  #   $('#filter-posts .text').text("DOIT")
+
+  # $('#filter-post-all').click ->
+  #   $('#filter-posts').removeClass()
+  #   $('#filter-posts').addClass('filter-post-all option filter')
+  #   $('#filter-posts .text').text("ALL")
+
+  # $('#sort-post-newest').click ->
+  #   $('#sort-posts .text').text("NEWEST")
+  # $('#sort-post-discussed').click ->
+  #   $('#sort-posts .text').text("MOST DISCUSSED")
+  # $('#sort-post-upvoted').click ->
+  #   $('#sort-posts .text').text("MOST UPVOTED")
+
+  $('.filter-sort-link').click ->
+    query = "all"
+    sort = "newest"
+
+    query = "all" if $('#filter-posts .text').text() == "ALL"
+    query = "0" if $('#filter-posts .text').text() == "WORK"
+    query = "1" if $('#filter-posts .text').text() == "PLAY"
+    query = "2" if $('#filter-posts .text').text() == "FACILITY"
+    query = "doit" if $('#filter-posts .text').text() == "DOIT"
+
+    sort = "doit" if $('#sort-posts .text').text() == "NEWEST"
+    sort = "discussed" if $('#sort-posts .text').text() == "MOST DISCUSSED"
+    sort = "upvoted" if $('#sort-posts .text').text() == "MOST UPVOTED"
+
+    $(this).attr("href", $(this).data("base-url")+"?query=#{query}&sort=#{sort}")
+
+    console.log($(this).attr("href"))
+    # console.log($('#filter-posts .text').text() + " " + $('#sort-posts .text').text())
 
 # sample chart
 $ ->
@@ -46,5 +100,7 @@ $ ->
     ]
   }
 
-  chart_canvas = $("#org-graph-canvas").get(0).getContext("2d")
+
+  chart_canvas = $(".org-graph-canvas").get(0).getContext("2d")
   org_graph = new Chart(chart_canvas).Line(data, {bezierCurveTension : 0.0})
+

@@ -13,5 +13,6 @@
   .test-modal
     / = render 'post_discussion'
   = render 'new_post_form'
+  .edit-modal
   = link_to '#', data: {target: "#new-post", toggle: "modal", content: "Create a new post", placement: "left", trigger: "hover"}, class: "btn popover-trigger", id: "new-post-toggler" do
     %span.flaticon-plus9
