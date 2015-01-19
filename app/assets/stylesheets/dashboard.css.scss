@@ -360,11 +360,11 @@
   height: 80px;
   width: 80px;
   border-radius: 50px;
-  background-color: $main_highlight;
-  opacity: 0.6;
+  background-color: $inverse_text_off;
+  opacity: 0.75;
 
   &:hover {
-    background-color: $main_highlight !important;
+    background-color: $inverse_text_off !important;
     opacity: 1.0;
   }
 

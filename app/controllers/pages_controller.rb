@@ -8,19 +8,18 @@ class PagesController < ApplicationController
     if current_user.is_admin?
       @posts = Post.all
     else
-      @posts = current_organization.posts
-    end
-
-
-  
+      @posts = current_organization.posts.order("created_at DESC")
+    end  
     if params[:sort].present?
       @sort = params[:sort]
       if @sort == "newest"
         @posts = @posts.order("created_at DESC")
       elsif @sort == "discussed"
         @posts = @posts.order("comments_count DESC")
-      else
+      elsif @sort == "upvoted"
         @posts = @posts.order("opinion DESC")
+      else
+        @posts = @posts.order("created_at DESC")
       end
       if params[:query].present?
         @query = params[:query]
@@ -61,10 +60,13 @@ class PagesController < ApplicationController
   end
 
   def search
-  	if params[:query].present?
-      @posts = current_organization.posts.search(params[:query])
+    @organization = current_organization
+    @organization = Organization.first if current_user.is_admin?
+
+    if params[:query].present?
+      @posts = @organization.posts.search(params[:query])
     else
-      @posts = current_organization.posts.all
+      @posts = @organization.posts.all
     end
 
     respond_to do |format|

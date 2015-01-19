@@ -1,8 +1,9 @@
 - user = User.first
+- class_type = comment.commentable.type?
 
 - if can? :read, comment
   .comment-wrapper
-    .comment
+    .comment{class: "inline_comment_#{comment.id}"}
       .col-xs-8
         .content
           = comment.content
@@ -15,10 +16,16 @@
               = image_tag "doit.png"
         .controls
           - if comment.is_suggestion?
-            .btn.btn-sm.btn-on
-              %span.flaticon-go
-            .btn.btn-sm.btn-off
-              %span.flaticon-go1
+            - opinion = Opinion.where(opinionable_type: "Comment", opinionable_id: comment.id, user_id: current_user.id).first
+            = form_for Opinion.new, remote: true do |f|
+              = f.hidden_field :positive, value: 'true'
+              = f.hidden_field :user_id, value: current_user.id
+              = f.hidden_field :opinionable_id, value: comment.id
+              = f.hidden_field :opinionable_type, value: 'Comment'
+              .btn.btn-sm.btn-like{class: "btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}"}
+                %span.flaticon-thumbs7
+              .btn.btn-sm.btn-dislike{class: "btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}"}
+                %span.flaticon-thumbs8
       .signature
         .user
           - if comment.doit?
@@ -35,10 +42,10 @@
               (Contributor)
         .options
           - if can? :update, comment
-            = link_to '#' do
-              .btn.btn-sm
+            = link_to edit_comment_path(comment), remote: true do
+              .btn.btn-sm{class: "btn-#{class_type}"}
                 %span.flaticon-edit7
           - if can? :destroy, comment
             = link_to comment, method: :delete, data: { confirm: "Are you sure about this?"}, remote: true do
-              .btn.btn-sm
+              .btn.btn-sm{class: "btn-#{class_type}"}
                 %span.flaticon-delete48

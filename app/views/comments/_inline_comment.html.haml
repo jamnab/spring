@@ -1,0 +1,24 @@
+- class_type = @comment.commentable.type?
+=form_for @comment, remote: true do |f|
+  .col-xs-12
+    .content 
+      = f.text_area :content, class: "form-control", rows: 3
+  .signature
+    .user
+      - if @comment.doit?
+        = image_tag("profile_default.png")
+        .name
+          %b= user.full_name
+          %br
+          (#{user.job_title})
+      - else
+        = image_tag("profile_default.png")
+        .name
+          Anonymous User
+          %br
+          (Contributor)
+    .options
+      - if can? :update, @comment
+        = f.submit "save",  class: "btn btn-sm btn-#{class_type}"
+
+      

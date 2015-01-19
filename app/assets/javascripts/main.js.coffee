@@ -55,3 +55,7 @@ $ ->
     value_field = $(".btn-archive").parent().prev().prev().children("#post_graveyard")
     value_field.attr("value", $(this).data('value'))
     $(this).parent().prev().prev("form").submit()
+
+  $(".popover-trigger").popover();
+  $("body").on "mouseover", ".popover-trigger", (e) ->
+    $(this).popover()
