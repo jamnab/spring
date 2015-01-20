@@ -49,6 +49,7 @@ class PostsController < ApplicationController
         params[:images].each { |image|
           @post.pictures.create(image: image)
         }
+        sync_new @post
         end
         format.html { redirect_to :dashboard, notice: 'Post was successfully created.' }
         format.js

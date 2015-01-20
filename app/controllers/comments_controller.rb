@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
   def show
   end
 
+
   # GET /comments/new
   def new
     @comment = Comment.new
@@ -36,7 +37,9 @@ class CommentsController < ApplicationController
         sync_new @comment
         if @comment.commentable_type == "Post"
         @post = @comment.commentable
+        sync_new @post
         end
+        flash[:error] = "failed"
         format.html { redirect_to @comment.commentable, notice:  'Comment was successfully created.' }
         format.js
       else
@@ -52,8 +55,8 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update(comment_params)
         @post = @comment.commentable
-        sync_update @post
         sync_update @comment
+        sync_update @post
         format.html { redirect_to @comment.commentable, notice: 'Comment was successfully updated.' }
         format.js
       else

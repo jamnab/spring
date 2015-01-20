@@ -1,7 +1,26 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+class Sync.PostCard extends Sync.View
+  
+  beforeInsert: ($el) ->
+    $el.hide()
+    @insert($el)
 
+  afterInsert: -> 
+    $(".loading-wrapper").remove();
+    @$el.fadeIn 'slow'
+    $(".post-loading").click ->
+      id = $(this).attr("id")
+      target = ".post.".concat(id);
+      $(target).append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")
+  afterUpdate: ->
+    $(".post-loading").click ->
+      id = $(this).attr("id")
+      target = ".post.".concat(id);
+      $(target).append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")   
+  beforeRemove: -> @$el.fadeOut 'slow', => @remove()
+  
 $ ->
   # init search ajax
   $("#search").on "ajax:success", (data,status,xhr) ->

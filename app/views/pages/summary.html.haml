@@ -1,5 +1,4 @@
 .summary
-
   %ul.nav.nav-pills
     %li
       %a{href: "#organization-summary", data: {toggle: "tab"}}
@@ -9,14 +8,6 @@
       %a{href: "#personnel-summary", data: {toggle: "tab"}}
         .fa.fa-users
         Personnel Summary
-    - if can? :update, @organization
-      %li
-        = link_to '#', data: {target: "#edit-org", toggle: "modal"} do
-          Edit Org
-    - if can? :update, current_user
-      %li
-        = link_to '#', data: {target: "#edit-user", toggle: "modal"} do
-          Edit user
           
           
 
@@ -92,7 +83,3 @@
                 %td
                   (<b>#{user.impact['positive']}</b>/#{user.impact['negative']}/#{user.impact['total']})
 
-= content_for :popups do
-
-  = render 'edit_org'
-  = render 'edit_user'

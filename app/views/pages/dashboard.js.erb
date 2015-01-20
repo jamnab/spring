@@ -1,8 +1,17 @@
 $(".loading-wrapper").remove();
-$('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>");
 <% if @populate == true %>
 	$('.test-modal').html("<%= j render(:partial => 'pages/post_discussion') %>");
 	$('#post-discussion').modal("show")
+	var loading = "<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>"
+	$("#new_comment").submit(function(){
+		var target = ".modal-content"
+		$(target).append(loading)
+	})
+	$(".comment-loading").click(function(){
+		var id = $(this).attr("id")
+		var target = ".modal-content.".concat(id);
+		$(target).append(loading)
+	})
 <% else %> 
 	$('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>");
 	<% if @query == "1" %>
@@ -27,5 +36,10 @@ $('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>");
 		$('#sort-posts.option > .text').text("MOST DICUSSED")
 	<%end%>
 	$('.post-board').html("<%= j render(:partial => 'pages/update_search') %>");
+	$(".post-loading").click(function(){
+      var id = $(this).attr("id")
+      var target = ".post.".concat(id);
+      $(target).append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")
+    })
 <%end%>
 

@@ -2,18 +2,41 @@ class PagesController < ApplicationController
   before_action :check_login, only: [:dashboard, :summary, :search, :archive]
 
   def home
-    @organization = current_organization
-    @organization = Organization.first if current_user.is_admin?
+    if current_user 
+      @organization = current_organization
+      @organization = Organization.first if current_user.is_admin?
+    end
   end
 
   def dashboard 
     @organization = current_organization
     @organization = Organization.first if current_user.is_admin?
+    @page = params[:page]
+    @page = "dashboard" if !params[:page]
+
     if current_user.is_admin?
-      @posts = Post.all
+      
+      if @page == "my_fav"
+        @posts = current_user.fav_posts
+      elsif @page == "archive"
+         @posts = Post.where(graveyard: true)
+      else 
+        @posts = Post.all
+      end
+
     else
-      @posts = current_organization.posts
+
+      if @page == "my_fav"
+        @posts = current_user.fav_posts
+      elsif @page == "archive"
+         @posts = current_organization.posts.where(graveyard: true)
+      else 
+        @posts = current_organization.posts
+      end
+
     end  
+
+
     if params[:sort].present?
       @sort = params[:sort]
       if @sort == "newest"
@@ -28,6 +51,8 @@ class PagesController < ApplicationController
     else
       @posts.order("created_at DESC")
     end
+
+
     if params[:query].present?
       @query = params[:query]
       if @query == "doit"
@@ -37,6 +62,7 @@ class PagesController < ApplicationController
       end
     end
     
+
     if params[:populate_disucssion_id].present?
       @populate = true
       @id = params[:populate_disucssion_id].to_i
@@ -49,19 +75,6 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.js
-    end
-  end
-
-
-  def my_favourites
-    @posts = current_user.fav_posts
-  end
-
-  def archive
-    if current_user.is_admin?
-      @posts = Post.where(graveyard: true)
-    else
-      @posts = current_organization.posts.where(graveyard: true)
     end
   end
 

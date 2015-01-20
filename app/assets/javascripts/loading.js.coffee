@@ -14,3 +14,6 @@ $ ->
 	$("#new_post").submit ->
 		target = "body"
 		$(target).append(loading)
+	$(".body-loading").click ->
+		target = "body"
+		$(target).append(loading)		
