@@ -6,7 +6,7 @@
       %span.caret
   %ul.dropdown-menu{:role => "menu"}
     %li
-      = link_to "all",dashboard_path(:sort=>params[:sort],:page=>params[:page]),remote: true, :id =>"filter-post-all"
+      = link_to "ALL",dashboard_path(:sort=>params[:sort],:page=>params[:page]),remote: true, :id =>"filter-post-all"
     %li
       = link_to "WORK",dashboard_path(:query => "0",:sort=>params[:sort],:page=>params[:page]),remote: true, :id =>"filter-post-work"
     %li
@@ -25,6 +25,6 @@
     %li
       = link_to "NEWEST",dashboard_path(:sort => "newest",:query=>params[:query],:page=>params[:page]),remote: true, :id =>"sort-post-newest"
     %li
-      = link_to "MOST  DISCUSSED",dashboard_path(:sort => "discussed",:query=>params[:query],:page=>params[:page]),remote: true, :id =>"sort-post-updated" 
+      = link_to "MOST  DISCUSSED",dashboard_path(:sort => "discussed",:query=>params[:query],:page=>params[:page]),remote: true, :id =>"sort-post-updated"
     %li
-      = link_to "MOST UPVOTED",dashboard_path(:sort => "upvoted",:query=>params[:query],:page=>params[:page]),remote: true, :id =>"sort-post-updated"  
+      = link_to "MOST UPVOTED",dashboard_path(:sort => "upvoted",:query=>params[:query],:page=>params[:page]),remote: true, :id =>"sort-post-updated"

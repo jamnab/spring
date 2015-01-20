@@ -107,20 +107,20 @@ html, body {
       background-color: $inverse_text_off !important;
     }
 
-    .filter-post-all{
+    #filter-post-all{
       background-color: rgba($inverse_text_off, 0.75) !important;
     }
-    .filter-post-work{
+    #filter-post-work{
       background-color: rgba($main_work, 0.75) !important;
     }
-    .filter-post-play{
+    #filter-post-play{
       background-color: rgba($main_play, 0.75) !important;
     }
-    .filter-post-facility{
+    #filter-post-facility{
       background-color: rgba($main_facility, 0.75) !important;
 
     }
-    .filter-post-doit{
+    #filter-post-doit{
       background-color: rgba($main_highlight, 0.75) !important;
     }
 

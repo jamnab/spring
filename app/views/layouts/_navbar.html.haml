@@ -10,14 +10,11 @@
       .navbar-brand.hidden-xs.hidden-sm
         / = image_tag "pindoit_logo.png"
         / = image_tag "pindoit_logo.png"
-        - if @organization == nil  
+        - if @organization.nil? || @organization.picture.nil?
           = image_tag "pindoit_logo.png"
         - else
-          - if @organization.picture == nil
-            = image_tag "pindoit_logo.png"
-          - else
-            = image_tag @organization.picture.image.url(:organization_image)
-      
+          = image_tag @organization.picture.image.url(:organization_image)
+
 
     #navbar-right.pull-right.col-xs-6
       %ul.nav.navbar-nav.navbar-right
