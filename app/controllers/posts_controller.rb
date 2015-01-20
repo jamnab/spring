@@ -51,8 +51,7 @@ class PostsController < ApplicationController
         }
         sync_new @post
         end
-        format.html { redirect_to :dashboard, notice: 'Post was successfully created.' }
-        format.js
+        redirect_to dashboard_path, format: "js"
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
