@@ -28,12 +28,12 @@
   .user-wrapper
     .user
 
-      - if !current_user
+      - if !current_user || current_user.picture.nil?
         = image_tag("profile_default.png")
-      - else 
+      - else
         = image_tag current_user.picture.image.url(:user_image)
 
-      
+
       - if current_user
         .name
           John Smith
@@ -46,21 +46,21 @@
           Please Login
   .sidenav
     - if current_user
-      
+
       = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading" do
         Home
 
       = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading" do
         My Favourites
-      
+
       = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading" do
         Archive
-      
+
       = link_to :summary do
         Summary
 
       .brand-link.org
-        - if @organization == nil  
+        - if @organization == nil
           = image_tag "pindoit_logo.png"
         - else
           - if @organization.picture == nil

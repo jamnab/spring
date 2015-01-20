@@ -4,9 +4,8 @@
 - class_type = "facility" if post.post_type == Post::FACILITY
 
 - if can? :read, post
-  .post-wrapper.col-xs-12.col-sm-6{class: ("doithidden" if post.doit?)}
+  .post-wrapper{class: ("doithidden" if post.doit?)}
     .post{class: "#{class_type} #{post.id}"}
-
       .header
         = post.title
         .traction{class: ("doit" if post.doit?)}
