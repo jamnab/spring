@@ -71,25 +71,12 @@ html, body {
     text-align: center;
 
     span:before {
-      font-size: 40px;
+      font-size: 24px;
       margin: 0px;
+      border-top-color: $default_text_main;
+      border-bottom-color: $default_text_main;
     }
   }
-
-  // #navbar-dropdown {
-  //   width: calc(100% - 120px);
-  //   float: right;
-  //   ul {
-  //     li {
-  //       width: 40%;
-  //       display: inline-block;
-  //       ul li {
-  //         display: block;
-  //         width: 100%;
-  //       }
-  //     }
-  //   }
-  // }
 
   #navbar-right {
     display: inline-block;
