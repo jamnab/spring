@@ -15,7 +15,18 @@
               = f.label :title
               = f.text_field :title, class: "form-control"
             .field.col-xs-12.nested_pics_form
-              = f.label :images 
+              .col-xs-12
+                = f.label "Remove Images"
+              - @post.pictures.each do |pic|
+                .col-xs-12{class: "pic_#{pic.id}"}
+                  - @filename = pic.image(:url)
+                  - @filename = @filename.split("?").first
+                  - @filename = @filename.split("/").last
+                  = @filename
+                  = "  "
+                  = link_to "x", picture_path(pic), method: :delete,remote:true, class:"delete_pic"
+            .field.col-xs-12.nested_pics_form
+              = f.label "Add Images"
               = file_field_tag "images[]",type: :file, multiple: true
 
             .field.col-xs-12

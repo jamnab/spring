@@ -30,7 +30,7 @@
                 .col-xs-2.no-padding
                   %button.btn.btn-main{:type => "submit"}
                     .fa.fa-search
-          %li.dropdown.hidden-xs.hidden-sm
+          %li.dropdown.hidden-xs
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               .fa.flaticon-black56
               %span.caret
@@ -42,7 +42,7 @@
                 = link_to '#', data: {target: "#edit-user", toggle: "modal"} do
                   Edit user
 
-          %li.hidden-xs.hidden-sm
+          %li.hidden-xs
             = link_to "Logout", :logout
         - else
           / %li.divider-vertical

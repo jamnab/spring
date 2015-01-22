@@ -32,12 +32,14 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user
+    if params[:suggestion]!= nil
+      @comment.suggestion = true
+    end
     respond_to do |format|
       if @comment.save
-        sync_new @comment
+        sync_new @comment, scope: @post
         if @comment.commentable_type == "Post"
         @post = @comment.commentable
-        sync_new @post
         end
         flash[:error] = "failed"
         format.html { redirect_to @comment.commentable, notice:  'Comment was successfully created.' }

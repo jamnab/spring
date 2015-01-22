@@ -5,7 +5,7 @@
 
 - if can? :read, post
   .post-wrapper{class: ("doithidden" if post.doit?)}
-    .post{class: "#{class_type} #{post.id}"}
+    .post{class: "#{class_type} #{post.id}", id: class_type}
       .header
         = post.title
         .traction{class: ("doit" if post.doit?)}

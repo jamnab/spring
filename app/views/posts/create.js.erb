@@ -1,2 +1,4 @@
 $("#new-post").modal("hide")
 $(".loading-wrapper").remove();
+$('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>")
+$('.post-board').html("<%= j render(:partial => 'pages/post_board') %>");

@@ -16,6 +16,16 @@ class PicturesController < ApplicationController
     end
   end
 
+  def destroy
+    @picture = Picture.find(params[:id])
+    @post = @picture.post
+    @id = @picture.id
+    @picture.destroy
+    respond_to do |format|
+      sync_update @post
+      format.js
+    end
+  end
   private
     
     # Never trust parameters from the scary internet, only allow the white list through.

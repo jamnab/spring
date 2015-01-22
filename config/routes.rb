@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :comments
 
+  resources :pictures
   resources :posts
 
   resources :project_memberships do

@@ -1,3 +1,8 @@
 $(".loading-wrapper").remove();
 $(".edit-modal").html("<%= j render(:partial => 'posts/edit_post_form') %>");
 $("#edit-post").modal("show")
+$('.delete_pic').click(function(){
+	 if (confirm('Are you sure you want to delete the image?'))
+    target = $(this).parent()
+    $(target).css("display","none")
+  })

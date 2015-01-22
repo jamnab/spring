@@ -5,8 +5,22 @@ class Sync.PostCard extends Sync.View
   
   beforeInsert: ($el) ->
     $el.hide()
-    @insert($el)
-
+    post = $el.children()
+    class_type = $(post).attr("id")
+    if $('.option.filter').attr("id") == "filter-post-play"
+      if class_type == "play"
+        @insert($el)
+    else if $('.option.filter').attr("id") == "filter-post-word"
+      if class_type == "word"
+        @insert($el)
+    else if $('.option.filter').attr("id") == "filter-post-facility"
+      if class_type == "facility"
+        @insert($el)
+    else if $('.option.filter').attr("id") == "filter-post-doit"
+      if $el.hasClass("doithidden")
+        @insert($el)
+    else
+      @insert($el)
   afterInsert: -> 
     $(".loading-wrapper").remove();
     @$el.fadeIn 'slow'
@@ -34,6 +48,7 @@ $ ->
   });
 
 $ ->
+  
   $(".nested_pics_button").click ->
     $('.nested_pics_form').append("<input class='nested_pics_button' id='images_' multiple='multiple' name='images[]' type='file'>")
 

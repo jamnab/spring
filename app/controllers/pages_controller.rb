@@ -13,7 +13,8 @@ class PagesController < ApplicationController
     @organization = Organization.first if current_user.is_admin?
     @page = params[:page]
     @page = "dashboard" if !params[:page]
-
+    @sort = params[:sort]
+    @query = params[:query]
     if current_user.is_admin?
       
       if @page == "my_fav"
@@ -37,8 +38,8 @@ class PagesController < ApplicationController
     end  
 
 
-    if params[:sort].present?
-      @sort = params[:sort]
+    if params[:sort] != nil
+      
       if @sort == "newest"
         @posts = @posts.order("created_at DESC")
       elsif @sort == "discussed"
@@ -49,12 +50,12 @@ class PagesController < ApplicationController
         @posts = @posts.order("created_at DESC")
       end
     else
-      @posts.order("created_at DESC")
+      @posts = @posts.order(created_at: :desc)
     end
 
 
     if params[:query].present?
-      @query = params[:query]
+      
       if @query == "doit"
         @posts=@posts.reject{|r| r.doit? == false }
       else

@@ -44,14 +44,21 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        @organization = current_organization
+        @organization.posts << @post
         if params[:images]
-        #===== The magic is here ;)
-        params[:images].each { |image|
-          @post.pictures.create(image: image)
-        }
-        sync_new @post
+          params[:images].each { |image|
+            @post.pictures.create(image: image)
+          }
         end
-        redirect_to dashboard_path, format: "js"
+        sync_new @post, scope: current_organization
+        if current_user.is_admin?
+          @posts=Post.all
+        else
+          @posts = current_organization.posts
+        end
+        format.html { redirect_to :dashboard, notice: 'Post was successfully created.' }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -62,6 +69,11 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    if params[:images]
+      params[:images].each { |image|
+        @post.pictures.create(image: image)
+      }
+    end
     respond_to do |format|
       if @post.update(post_params)
         sync_update @post
@@ -80,6 +92,7 @@ class PostsController < ApplicationController
     @organization = @post.organization
     @post.destroy
     respond_to do |format|
+      sync_destroy(@post)
       format.html { redirect_to @organization, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
