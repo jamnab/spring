@@ -2,6 +2,15 @@ class PagesController < ApplicationController
   before_action :check_login, only: [:dashboard, :summary, :search, :archive]
 
   def home
+    render layout: "homepage"
+  end
+
+  def price
+    render layout: "homepage"
+  end
+
+  def contacts
+    render layout: "homepage"
   end
 
   def dashboard

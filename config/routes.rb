@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get 'archive' => 'pages#archive', as: :archive
   get 'summary' => 'pages#summary', as: :summary
   get 'search' => 'pages#search', as: :search
+  get 'price' => 'pages#price', as: :price
+  get 'contact' => 'pages#contact', as: :contact
+
 
   resources :subscriptions
 
