@@ -30,7 +30,7 @@
       .content
         .col-xs-8
           = post.content
-        .col-xs-4.carousel-fade{id: "carousel-post-#{post.id}"}
+        .col-xs-4.carousel.slide.carousel-fade{id: "carousel-post-#{post.id}"}
           %ol.carousel-indicators
             - if post.pictures.empty?
               %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=>"0"}

@@ -6,6 +6,7 @@ $(window).scroll ->
 
 $ ->
   # Side bar toggling
+  $('.carousel').carousel();
   $(".sidebar-toggler").on "click", ->
     $(".body-wrapper").toggleClass "isOpen"
     $(".sidebar").toggleClass "isOpen"

@@ -11,16 +11,16 @@
         .row
           .col-xs-8
             = post.content
-          #carousel-discussion.col-xs-4
+          #carousel-discussion.col-xs-4.carousel.slide.carousel-fade
             %ol.carousel-indicators
               - if post.pictures.empty?
                 %li.active{"data-target"=> "#carousel-discussion", "data-slide-to"=>"0"}
               -else
                 -post.pictures.each_with_index do |pic,index|
                   - if index == 0
-                    %li.active{"data-target"=> "#carousel-post", "data-slide-to"=> index}
+                    %li.active{"data-target"=> "#carousel-discussion", "data-slide-to"=> index}
                   -else
-                    %li{"data-target"=> "#carousel-post", "data-slide-to"=> index}
+                    %li{"data-target"=> "#carousel-discussion", "data-slide-to"=> index}
             .carousel-inner
               - if post.pictures.empty?
                 .item.active
