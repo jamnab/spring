@@ -30,7 +30,7 @@
       .content
         .col-xs-8
           = post.content
-        .col-xs-4{id: "carousel-post-#{post.id}"}
+        .col-xs-4.carousel-fade{id: "carousel-post-#{post.id}"}
           %ol.carousel-indicators
             - if post.pictures.empty?
               %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=>"0"}
@@ -44,7 +44,7 @@
           .carousel-inner
             - if post.pictures.empty?
               .item.active
-                = image_tag ("//placehold.it/170x95")
+                = image_tag ("//placehold.it/150X100")
             -else
               -post.pictures.each_with_index do |pic,index|
                 - if index == 0

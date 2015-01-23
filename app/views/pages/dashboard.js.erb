@@ -1,5 +1,6 @@
+
 $(".loading-wrapper").remove();
-<% if @populate == true %>
+<% if @populate == true %> 
 	$('.test-modal').html("<%= j render(:partial => 'pages/post_discussion') %>");
 	$('#post-discussion').modal("show")
 	var loading = "<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>"
@@ -12,7 +13,18 @@ $(".loading-wrapper").remove();
 		var target = ".modal-content.".concat(id);
 		$(target).append(loading)
 	})
-<% else %> 
+	$("#comments").scroll(function(){
+    if($(this)[0].scrollHeight - $(this).scrollTop() <= $(this).outerHeight())
+    {
+        $('#next-comment-page').trigger('click');
+    }
+});
+<% elsif @next_page == true %> 
+	<% if !@posts.empty? %>
+		$('.post-board').append("<%= j render(:partial => 'pages/post_board') %>");
+	<% end %>
+	$('.page-num').html("<%= j render(:partial => 'pages/next_post_page') %>");
+<%else%>
 	$('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>");
 	<% if @query == "1" %>
 		$('.option.filter').attr('id','filter-post-play')
@@ -36,6 +48,7 @@ $(".loading-wrapper").remove();
 		$('#sort-posts.option > .text').text("MOST DICUSSED")
 	<%end%>
 	$('.post-board').html("<%= j render(:partial => 'pages/post_board') %>");
+	$('.page-num').html("<%= j render(:partial => 'pages/next_post_page') %>");
 	$(".post-loading").click(function(){
       var id = $(this).attr("id")
       var target = ".post.".concat(id);

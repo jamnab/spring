@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   resources :opinions
 
-  resources :comments
+  resources :comments do
+    collection do
+      get :filter_sort
+    end
+  end
 
   resources :pictures
   resources :posts

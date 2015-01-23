@@ -44,6 +44,9 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        # @msg = "Your post was created successfully"
+        # @class = "success"
+        flash[:success] ="Your post was created successfully"
         @organization = current_organization
         @organization.posts << @post
         if params[:images]

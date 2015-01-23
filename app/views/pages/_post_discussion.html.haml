@@ -49,24 +49,10 @@
               = f.submit 'Post Plain Comment', class: "btn btn-main off loading-comment-submit", id: "comment_plain", :name =>"plain"
               = f.submit 'Post as Suggestion', class: " .comment-loading btn btn-main on loading-comment-submit", id: "comment_suggestion", :name =>"suggestion"
       .modal-footer
-        .comment-sorts
-          = link_to '#' do
-            .btn.btn-sm.btn-main.on
-              NEWEST
-          = link_to '#' do
-            .btn.btn-sm.btn-main.off
-              MOST UPVOTED
-        .comment-filters
-          = link_to '#' do
-            .btn.btn-sm.btn-main.on
-              ALL
-          = link_to '#' do
-            .btn.btn-sm.btn-main.off
-              PLAIN
-          = link_to '#' do
-            .btn.btn-sm.btn-main.off
-              SUGGESTION
-        .comments
+        .filter-sort-comments
+          -@post = post
+          = render 'comments_filter_sort', :collection => @post
+        #comments.comments
           = sync_new partial: "card", resource: Comment.new, scope: post
-          - post.comments.order("created_at DESC").each do |comment|
+          - post.comments.order("created_at DESC").limit(4).each do |comment|
             = sync partial: "card", resource: comment

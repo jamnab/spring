@@ -1,9 +1,10 @@
+
 - user = User.first
 - class_type = comment.commentable.type?
 
 - if can? :read, comment
   .comment-wrapper
-    .comment{class: "inline_comment_#{comment.id}"}
+    .comment{class: "inline_comment_#{comment.id} suggestion_#{comment.suggestion}"}
       .col-xs-8
         .content
           = comment.content

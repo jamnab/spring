@@ -72,6 +72,15 @@ class PagesController < ApplicationController
       @populate = false
       @post = @posts.first
     end 
+    if params[:page_num] != nil
+      @posts = @posts.limit(4).offset(((params[:page_num].to_i - 1)*4))
+      @page_num = params[:page_num].to_i + 1
+      @next_page = true
+    else
+      @posts = @posts.limit(4)
+      @page_num = 2
+
+    end
 
     respond_to do |format|
       format.html # index.html.erb

@@ -27,6 +27,32 @@ class CommentsController < ApplicationController
     end
   end
 
+  def filter_sort
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments
+    @filter = params[:filter]
+    @sort = params[:sort]
+    @sort = "newest" if @sort == nil
+    @filter = "all" if @filter == nil
+    @comments_page_num = params[:comments_page_num]
+    if @filter == "plain"
+      @comments = @comments.where(:suggestion => false)
+    elsif @filter =='suggestion'
+      @comments = @comments.where(:suggestion => true)
+    end
+    if @sort == "newest"
+      @comments = @comments.order(created_at: :desc)
+    elsif @sort =="upvoted"
+      @comments = @comments.order(opinion: :desc)
+    end
+    if params[:comments_page_num] != nil
+
+      @comments = @comments.limit(4).offset((@comments_page_num.to_i)*(4))
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
   # POST /comments
   # POST /comments.json
   def create
@@ -40,8 +66,9 @@ class CommentsController < ApplicationController
         sync_new @comment, scope: @post
         if @comment.commentable_type == "Post"
         @post = @comment.commentable
+        @comments = @post.comments
         end
-        flash[:error] = "failed"
+        
         format.html { redirect_to @comment.commentable, notice:  'Comment was successfully created.' }
         format.js
       else
