@@ -12,7 +12,8 @@ class Comment < ActiveRecord::Base
   sync :all
 
   sync_scope :by_post, -> commentable {where(commentable_id: commentable.id, commentable_type: "Post")}
-  def doit?
+  
+def doit?
     self.opinion > self.commentable.threshold
   end
 
