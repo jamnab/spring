@@ -36,9 +36,9 @@
 
       - if current_user
         .name
-          John Smith
+          = current_user.full_name
         .username
-          (jsmith)
+          (#{current_user.username})
       - else
         .name
           Guest User
