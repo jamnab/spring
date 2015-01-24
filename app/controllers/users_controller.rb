@@ -74,9 +74,17 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     params[:user][:manager] = @user.manager
+    if params[:user][:pictures] != nil
+      @pic = Picture.new
+      @pic.image = params[:user][:pictures][:image]
+      if @pic.save
+        @user.picture = @pic
+        @user.save
+      end
+    end
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to :back, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }

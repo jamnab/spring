@@ -1,0 +1,4 @@
+- if current_user.is_admin?
+  = sync_new partial: "card", resource: Post.new
+- else
+  = sync_new partial: "card", resource: Post.new, scope: current_organization

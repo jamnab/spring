@@ -1,12 +1,53 @@
 @import 'presets';
+.filter-sort-comments{
+  height: 50px;
+}
+.carousel-fade {
+  .carousel-inner {
+    .item {
+      opacity: 0;
+      transition-property: opacity;
+    }
+
+    .active {
+      opacity: 1;
+    }
+
+    .active.left,
+    .active.right {
+      left: 0;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .next.left,
+    .prev.right {
+      opacity: 1;
+    }
+  }
+
+  .carousel-control {
+    z-index: 2;
+  }
+}
+
 
 html, body {
-  height: 100%;
+  // height: 100%;
   width: 100%;
   min-width: 715px;
   overflow-x: hidden;
 }
-
+.flash-msg{
+  .alert{
+   z-index: 100;
+  }
+}
+.alert{
+  position: fixed;  
+  top: 15px;
+  width: 100%;
+}
 .no-padding {
   padding: 0px;
 }
@@ -71,25 +112,12 @@ html, body {
     text-align: center;
 
     span:before {
-      font-size: 40px;
+      font-size: 24px;
       margin: 0px;
+      border-top-color: $default_text_main;
+      border-bottom-color: $default_text_main;
     }
   }
-
-  // #navbar-dropdown {
-  //   width: calc(100% - 120px);
-  //   float: right;
-  //   ul {
-  //     li {
-  //       width: 40%;
-  //       display: inline-block;
-  //       ul li {
-  //         display: block;
-  //         width: 100%;
-  //       }
-  //     }
-  //   }
-  // }
 
   #navbar-right {
     display: inline-block;
@@ -107,20 +135,20 @@ html, body {
       background-color: $inverse_text_off !important;
     }
 
-    .filter-post-all{
+    #filter-post-all{
       background-color: rgba($inverse_text_off, 0.75) !important;
     }
-    .filter-post-work{
+    #filter-post-work{
       background-color: rgba($main_work, 0.75) !important;
     }
-    .filter-post-play{
+    #filter-post-play{
       background-color: rgba($main_play, 0.75) !important;
     }
-    .filter-post-facility{
+    #filter-post-facility{
       background-color: rgba($main_facility, 0.75) !important;
 
     }
-    .filter-post-doit{
+    #filter-post-doit{
       background-color: rgba($main_highlight, 0.75) !important;
     }
 

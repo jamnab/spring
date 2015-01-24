@@ -4,11 +4,11 @@
     .icon.fa.fa-times-circle-o.hidden
   .navicons
     - if current_user
-      = link_to :dashboard do
+      = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading" do
         %span.flaticon-home7
-      = link_to :my_favourites do
+      = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading" do
         %span.flaticon-star6
-      = link_to :archive do
+      = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading" do
         %span.flaticon-lock9
       = link_to :summary do
         %span.flaticon-line31
@@ -27,7 +27,13 @@
 .sidebar
   .user-wrapper
     .user
-      = image_tag("profile_default.png")
+
+      - if !current_user || current_user.picture.nil?
+        = image_tag("profile_default.png")
+      - else
+        = image_tag current_user.picture.image.url(:user_image)
+
+
       - if current_user
         .name
           John Smith
@@ -40,17 +46,27 @@
           Please Login
   .sidenav
     - if current_user
-      = link_to :dashboard do
+
+      = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading" do
         Home
-      = link_to :my_favourites do
+
+      = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading" do
         My Favourites
-      = link_to :archive do
+
+      = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading" do
         Archive
+
       = link_to :summary do
         Summary
 
       .brand-link.org
-        = image_tag "seeds/ecl_logo2.png"
+        - if @organization == nil
+          = image_tag "pindoit_logo.png"
+        - else
+          - if @organization.picture == nil
+            = image_tag "pindoit_logo.png"
+          - else
+            = image_tag @organization.picture.image.url(:organization_image)
         %h4 Powered by Pindoit
         %h5 A Verse Software Lab Inc. Solution.
 

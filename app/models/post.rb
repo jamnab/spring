@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   searchkick
+  validates :content, length: { maximum: 256}
   belongs_to :user
   belongs_to :organization
 

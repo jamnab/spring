@@ -10,11 +10,6 @@ class OpinionsController < ApplicationController
     if @opinion.nil?
       @opinion = Opinion.new(opinion_params)
       @opinionable = @opinion.opinionable
-      if @opinion.opinionable.class.to_s == "Comment"
-        destination = @opinion.opinionable.commentable
-      else
-        destination = @opinion.opinionable
-      end
       # new opinion, value change by 1
       if @opinion.positive
         @opinionable.opinion += 1
@@ -24,11 +19,6 @@ class OpinionsController < ApplicationController
     else
       # old opinion, remove or value change 2
       @opinionable = @opinion.opinionable
-      if @opinion.opinionable.class.to_s == "Comment"
-        destination = @opinion.opinionable.commentable
-      else
-        destination = @opinion.opinionable
-      end
       if @opinion.positive.to_s == opinion_params[:positive]
         # remove
         if @opinion.positive
@@ -38,8 +28,9 @@ class OpinionsController < ApplicationController
         end
         @opinion.destroy
         @opinionable.save
-        sync_update destination
-        redirect_to destination and return
+        sync_update @opinion.opinionable
+        sync_update @opinion.opinionable.commentable if @opinion.opinionable.class.to_s == 'Comment'
+        # redirect_to @opinion.opinionable and return
       else
         @opinion.positive = opinion_params[:positive]
         if @opinion.positive
@@ -52,8 +43,9 @@ class OpinionsController < ApplicationController
 
     respond_to do |format|
       if @opinion.save && @opinionable.save
-        sync_update destination
-        format.html { redirect_to destination, notice: 'Opinion was successfully created.' }
+        sync_update @opinion.opinionable
+        sync_update @opinion.opinionable.commentable if @opinion.opinionable.class.to_s == 'Comment'
+        format.html { redirect_to @opinion.opinionable, notice: 'Opinion was successfully created.' }
         format.json { render action: 'show', status: :created, location: @opinion }
       else
         format.html { render action: 'new' }
@@ -68,12 +60,12 @@ class OpinionsController < ApplicationController
     @opinionable = @opinion.opinionable
     @opinion.destroy
     if @opinionable.class.to_s == "Comment"
-      destination = @opinionable.commentable
+      @opinion.opinionable = @opinionable.commentable
     else
-      destination = @opinionable
+      @opinion.opinionable = @opinionable
     end
     respond_to do |format|
-      format.html { redirect_to destination }
+      format.html { redirect_to @opinion.opinionable }
       format.json { head :no_content }
     end
   end
