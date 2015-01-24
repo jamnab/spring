@@ -72,13 +72,15 @@ class PagesController < ApplicationController
     end
 
     if params[:page_num] != nil
-      @posts = @posts.limit(@@page_limit).offset(((params[:page_num].to_i - 1)*@@page_limit))
+      offset = (params[:page_num].to_i - 1) * @@page_limit
+      @posts = @posts.slice(offset, @@page_limit)
+      # @posts = @posts.limit(@@page_limit).offset(((params[:page_num].to_i - 1) * @@page_limit))
       @page_num = params[:page_num].to_i + 1
       @next_page = true
     else
-      @posts = @posts.limit(@@page_limit)
+      @posts = @posts.slice(0, @@page_limit)
+      # @posts = @posts.limit(@@page_limit)
       @page_num = 2
-
     end
 
     respond_to do |format|
