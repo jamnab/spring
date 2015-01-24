@@ -1,14 +1,15 @@
 class PagesController < ApplicationController
   before_action :check_login, only: [:dashboard, :summary, :search, :archive]
+  @@page_limit = 10
 
   def home
-    if current_user 
+    if current_user
       @organization = current_organization
       @organization = Organization.first if current_user.is_admin?
     end
   end
 
-  def dashboard 
+  def dashboard
     @organization = current_organization
     @organization = Organization.first if current_user.is_admin?
     @page = params[:page]
@@ -16,12 +17,12 @@ class PagesController < ApplicationController
     @sort = params[:sort]
     @query = params[:query]
     if current_user.is_admin?
-      
+
       if @page == "my_fav"
         @posts = current_user.fav_posts
       elsif @page == "archive"
          @posts = Post.where(graveyard: true)
-      else 
+      else
         @posts = Post.all
       end
 
@@ -31,15 +32,14 @@ class PagesController < ApplicationController
         @posts = current_user.fav_posts
       elsif @page == "archive"
          @posts = current_organization.posts.where(graveyard: true)
-      else 
+      else
         @posts = current_organization.posts
       end
 
-    end  
-
+    end
 
     if params[:sort] != nil
-      
+
       if @sort == "newest"
         @posts = @posts.order("created_at DESC")
       elsif @sort == "discussed"
@@ -53,16 +53,14 @@ class PagesController < ApplicationController
       @posts = @posts.order(created_at: :desc)
     end
 
-
     if params[:query].present?
-      
+
       if @query == "doit"
         @posts=@posts.reject{|r| r.doit? == false }
       else
         @posts = @posts.where(:post_type => params[:query])
       end
     end
-    
 
     if params[:populate_disucssion_id].present?
       @populate = true
@@ -71,13 +69,14 @@ class PagesController < ApplicationController
     else
       @populate = false
       @post = @posts.first
-    end 
+    end
+
     if params[:page_num] != nil
-      @posts = @posts.limit(4).offset(((params[:page_num].to_i - 1)*4))
+      @posts = @posts.limit(@@page_limit).offset(((params[:page_num].to_i - 1)*@@page_limit))
       @page_num = params[:page_num].to_i + 1
       @next_page = true
     else
-      @posts = @posts.limit(4)
+      @posts = @posts.limit(@@page_limit)
       @page_num = 2
 
     end
