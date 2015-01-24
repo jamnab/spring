@@ -25,8 +25,16 @@ class Post < ActiveRecord::Base
            {'name' => 'Play', 'id' => PLAY},
            {'name' => 'Facility', 'id' => FACILITY}]
 
+  def self.all_doits
+    where("opinion >= threshold")
+  end
+
+  def self.all_alt_doits
+    Post.find_by_sql("SELECT `posts`.* FROM `posts` INNER JOIN `comments` ON `comments`.`commentable_id` = `posts`.`id` AND `comments`.`commentable_type` = 'Post'AND `comments`.opinion >= `posts`.threshold")
+  end
+
   def doit?
-    return (self.opinion > self.threshold) || self.alt_doit?
+    return (self.opinion >= self.threshold) || self.alt_doit?
   end
 
   def alt_doit?
