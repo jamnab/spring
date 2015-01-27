@@ -53,6 +53,7 @@
           -@post = post
           = render 'comments_filter_sort', :collection => @post
         #comments.comments
-          = sync_new partial: "card", resource: Comment.new, scope: post
+          - if @sort != "upvoted"
+            = sync_new partial: "card", resource: Comment.new, scope:post
           - post.comments.order("created_at DESC").limit(4).each do |comment|
             = sync partial: "card", resource: comment

@@ -63,10 +63,12 @@ class CommentsController < ApplicationController
     end
     respond_to do |format|
       if @comment.save
-        sync_new @comment, scope: @post
+        
         if @comment.commentable_type == "Post"
         @post = @comment.commentable
         @comments = @post.comments
+        sync_new @comment, scope:@post
+        sync_update @post
         end
         
         format.html { redirect_to @comment.commentable, notice:  'Comment was successfully created.' }

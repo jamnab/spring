@@ -55,6 +55,7 @@ class PostsController < ApplicationController
           }
         end
         sync_new @post, scope: current_organization
+        sync_new @post
         if current_user.is_admin?
           @posts=Post.all
         else

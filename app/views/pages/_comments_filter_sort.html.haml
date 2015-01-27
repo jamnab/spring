@@ -1,8 +1,14 @@
 
 .comment-sorts
   = link_to filter_sort_comments_path(:post_id => @post.id, :sort => "newest", :filter => @filter, :comments_page_num => 0), remote: true do
+    
     .btn.btn-sm.btn-main.on.btn-comments-sorts.comments-newest
       NEWEST
+    .circle.new-comment-number
+      - if @sort == "upvoted"
+        = sync_new partial: "notification", resource: Comment.new, scope: @post
+      %p.number
+
   = link_to filter_sort_comments_path(:post_id => @post.id, :sort => "upvoted", :filter => @filter, :comments_page_num => 0), remote: true do
     .btn.btn-sm.btn-main.off.btn-comments-sorts.comments-upvoted
       MOST UPVOTED
