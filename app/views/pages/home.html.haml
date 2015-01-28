@@ -23,6 +23,7 @@
         %p Employees create a pinned discussion around an array of workspace related topics on their mind
         .box
           .img
+            = image_tag 'card_greyscale.png', height: 187
             = image_tag 'card.png', height: 187
             / %img{:alt => "", :height => "187", :src => "../../common-files/img/content/ticket-navy-bw@2x.png", :width => "380"}/
             / %img{:alt => "", :height => "187", :src => "../../common-files/img/content/ticket-navy@2x.png", :width => "380"}/
@@ -35,6 +36,7 @@
             %p Majority rules. Every idea is treated equally until it meets a defined level of endorsement
             .box
               .img
+                = image_tag 'rocket_greyscale.png'
                 = image_tag 'rocket.png'
                 / %img{:alt => "", :height => "179", :src => "../../common-files/img/content/map-bw@2x.png", :width => "380"}/
                 / %img{:alt => "", :height => "179", :src => "../../common-files/img/content/map@2x.png", :width => "380"}/
@@ -50,6 +52,7 @@
             %p Once a workplace idea becomes endorsed, the star employee is recognized, and the idea becomes an DOIT! action item for Management
             .box
               .img
+                = image_tag 'idea_doit_greyscale.png'
                 = image_tag 'idea_doit.png'
                 / %img{:alt => "", :height => "193", :src => "../../common-files/img/content/ps-wire-imac-bw@2x.png", :width => "397"}/
                 / %img{:alt => "", :height => "193", :src => "../../common-files/img/content/ps-wire-imac@2x.png", :width => "397"}/
@@ -105,8 +108,8 @@
       %ul
         %li.active
           %a{:href => "/"} Home
-        %li
-          %a{:href => "#"} Features
+        / %li
+        /   %a{:href => "#"} Features
         %li
           %a{:href => "/price"} Price
         %li

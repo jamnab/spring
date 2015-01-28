@@ -9,7 +9,7 @@ class PagesController < ApplicationController
     render layout: "homepage"
   end
 
-  def contacts
+  def contact
     render layout: "homepage"
   end
 
