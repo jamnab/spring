@@ -11,8 +11,10 @@
           = "more clarity"
         %p Pindoit helps take your organization into the innovation age. Employees and management work together to push forward the great ideas that create immediate and lasting change
         .btns
-          %a.btn.btn-primary{:href => "#"}
+          %a.btn.btn-primary{:href => "#", data: {target: '#register', toggle: 'modal'}}
             %span Sign Up
+          %a.btn.btn-primary{href: '#', data: {target: '#login', toggle: 'modal'} }
+            %span Log in
 
 %section.content-31
   .container
