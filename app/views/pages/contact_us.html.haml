@@ -1,0 +1,36 @@
+/ contacts-2
+%section.contacts-2
+  .container
+    .row
+      .col-sm-8
+        %h3
+          We love what we do.
+          %br/
+          Tell us what’s on your mind.
+    .row
+      .col-sm-6
+        %form{action: 'email_us'}
+          %label.h6 Name / Last Name
+          %input.form-control{:type => "text", name: 'name'}/
+          %label.h6 E-mail
+          %input.form-control{:type => "text", }/
+          %label.h6 Message
+          %textarea.form-control{:rows => "7"}
+          %button.btn.btn-primary{:type => "submit"}
+            %span.fui-mail
+      .col-sm-5.col-sm-offset-1
+        %h6 Where to find us
+        %p We are located in the Communitech Hub
+        .map
+          / map
+          %iframe{:frameborder => "0", :height => "100%", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :src => "https://maps.google.com/?ie=UTF8&t=m&ll=43.451583,-80.49841&spn=0.04554,0.072956&z=17&output=embed", :width => "100%"}
+        %h6 Get in touch
+        %p For custom build and product inquiries please contact us at:
+        .links
+          / %a{:href => "#"}
+          /   %span.fui-phone
+          /   +1 347 523 34 90
+          / %br/
+          %a{:href => "mailto:clinton@versesoftwarelab.com"}
+            %span.fui-mail
+            clinton@versesoftwarelab.com

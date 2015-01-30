@@ -9,8 +9,15 @@ class PagesController < ApplicationController
     render layout: "homepage"
   end
 
-  def contact
+  def contact_us
     render layout: "homepage"
+  end
+
+  def email_us
+    PagesMailer.email_us(params[:name],params[:email],params[:message]).deliver
+
+    flash[:notice] = 'The email has been delivered. You will be contacted shortly.'
+    render :contact_us, layout: 'homepage'
   end
 
   def dashboard

@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   get 'summary' => 'pages#summary', as: :summary
   get 'search' => 'pages#search', as: :search
   get 'price' => 'pages#price', as: :price
-  get 'contact' => 'pages#contact', as: :contact
-
+  get 'contact_us' => 'pages#contact_us', as: :contact_us
+  get 'email_us' => 'pages#email_us', as: :email_us
 
   resources :subscriptions
 
