@@ -9,7 +9,7 @@
           Tell us what’s on your mind.
     .row
       .col-sm-6
-        %form{action: 'email_us'}
+        %form{action: 'email_us', method: 'POST'}
           %label.h6 Name / Last Name
           %input.form-control{:type => "text", name: 'name'}/
           %label.h6 E-mail
