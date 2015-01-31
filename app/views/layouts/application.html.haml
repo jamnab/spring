@@ -11,147 +11,10 @@
     = csrf_meta_tags
     = favicon_link_tag 'favicon.png'
   %body
-    .sidebar-icons
-      %a.sidebar-toggler
-        .icon.fa.fa-bars
-        .icon.fa.fa-times-circle-o.hidden
-      .navicons
-        - if current_user
-          = link_to :dashboard do
-            %span.flaticon-home7
-          = link_to :my_favourites do
-            %span.flaticon-star6
-          = link_to :archive do
-            %span.flaticon-lock9
-          = link_to :summary do
-            %span.flaticon-line31
-
-          .logo.brand-link
-            = image_tag "pindoit_vert.png"
-
-          = link_to '#', class: "logout-link" do
-            %span.flaticon-logout13
-        - else
-          = link_to '#', data: {target: "#login", toggle: "modal"} do
-            %span.flaticon-login17
-          = link_to '#', data: {target: "#register", toggle: "modal"} do
-            %span.flaticon-create1
-
-    .sidebar
-      .user-wrapper
-        .user
-          = image_tag("profile_default.png")
-          - if current_user
-            .name
-              John Smith
-            .username
-              (jsmith)
-          - else
-            .name
-              Guest User
-            .username
-              Please Login
-      .sidenav
-        - if current_user
-          = link_to :dashboard do
-            Home
-          = link_to :my_favourites do
-            My Favourites
-          = link_to :archive do
-            Archive
-          = link_to :summary do
-            Summary
-
-          .brand-link.org
-            = image_tag "seeds/ecl_logo2.png"
-            %h4 Powered by Pindoit
-            %h5 A Verse Software Lab Inc. Solution.
-
-          = link_to :logout, class: "logout-link" do
-            Logout
-        - else
-          = link_to '#', data: {target: "#login", toggle: "modal"} do
-            Log In
-          = link_to '#', data: {target: "#register", toggle: "modal"} do
-            Register
-
+    = render 'layouts/sidebar'
     .body-wrapper
-      %nav.navbar.navbar-default
-        .container
-          .navbar-header
-            / %button.navbar-toggle{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
-            /   %span.sr-only Toggle navigation
-            /   %span.icon-bar
-            /   %span.icon-bar
-            /   %span.icon-bar
+      = render 'layouts/navbar'
 
-            .navbar-brand
-              / = image_tag "pindoit_logo.png"
-              / = image_tag "pindoit_logo.png"
-              = image_tag "seeds/ecl_logo2.png"
-
-          #navbar-dropdown
-            %ul.nav.navbar-nav
-              %li.dropdown
-                %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-                  #filter-posts.option.filter
-                    .text{style: "float:left;"}
-                      ALL
-                    %span.caret
-                %ul.dropdown-menu{:role => "menu"}
-                  %li
-                    = link_to "ALL", dashboard_path(:query => "all"), remote: true, :id =>"filter-post-all"
-                  %li
-                    = link_to "WORK", dashboard_path(:query => "0"), remote: true, :id =>"filter-post-work"
-                  %li
-                    = link_to "PLAY", dashboard_path(:query => "1"), remote: true, :id =>"filter-post-play"
-                  %li
-                    = link_to "FACILITY", dashboard_path(:query => "2"), remote: true, :id =>"filter-post-facility"
-                  %li
-                    = link_to "DOIT", dashboard_path(:query => "doit"), remote: true, :id =>"filter-post-doit"
-              %li.dropdown
-                %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-                  #sort-posts.option
-                    NEWEST
-                    %span.caret
-                %ul.dropdown-menu{:role => "menu"}
-                  %li
-                    = link_to "NEWEST", dashboard_path(:sort => "newest"), remote: true, :id =>"sort-post-newest"
-                  %li
-                    = link_to "MOST DISCUSSED", dashboard_path(:sort => "discussed"), remote: true, :id =>"sort-post-discussed"
-                  %li
-                    = link_to "MOST UPVOTED", dashboard_path(:sort => "upvoted"), remote: true, :id =>"sort-post-upvoted"
-
-            / #search.search.search-open
-            /   %form
-            /     %input#search.search-input{:name => "search", :placeholder => "Enter your search term...", :type => "search", :value => ""}/
-            /     %input.search-submit{:type => "submit", :value => ""}/
-            /     %span.sb-icon-search
-            /       .fa.fa-search
-
-          #navbar.pull-right
-            %ul.nav.navbar-nav.navbar-right
-              - if current_user
-                / %li.divider-vertical
-                %li
-                  = form_tag search_path, class: "form-inline", remote: (request.path == '/search'), :method => :get do
-                    .form-group
-                      .input-group
-                        = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "search ..."
-                        / %input#search.form-control{:placeholder => "search ...", :type => "text"}
-                    %button.btn.btn-main{:type => "submit"}
-                      .fa.fa-search
-
-                %li= link_to "Logout", :logout
-              - else
-                / %li.divider-vertical
-                %li
-                  = link_to '#', data: {target: "#register", toggle: "modal"} do
-                    Register
-                / %li.divider-vertical
-                %li
-                  = link_to '#', data: {target: "#login", toggle: "modal"} do
-                    Log In
 
       / - if notice
       /   .alert.alert-warning
@@ -163,4 +26,7 @@
 
     = render 'layouts/login_form'
     = render 'layouts/register_form'
+    - if current_user && current_organization
+      = render 'pages/edit_org'
+      = render 'pages/edit_user'
     = yield :popups

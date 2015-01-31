@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   resources :favourites
 
   get 'dashboard' => 'pages#dashboard', as: :dashboard
-  get 'my_favourites' => 'pages#my_favourites', as: :my_favourites
-  get 'archive' => 'pages#archive', as: :archive
   get 'summary' => 'pages#summary', as: :summary
   get 'search' => 'pages#search', as: :search
   get 'price' => 'pages#price', as: :price
@@ -17,8 +15,13 @@ Rails.application.routes.draw do
 
   resources :opinions
 
-  resources :comments
+  resources :comments do
+    collection do
+      get :filter_sort
+    end
+  end
 
+  resources :pictures
   resources :posts
 
   resources :project_memberships do

@@ -18,7 +18,8 @@ class UserSessionsController < ApplicationController
 
     respond_to do |format|
       if @user_session.save
-        format.html { redirect_to(:dashboard, :notice => 'Login Successful') }
+        flash[:success] = "You are now logged In"
+        format.html { redirect_to(:dashboard) }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       else
         format.html { render :action => "new" }

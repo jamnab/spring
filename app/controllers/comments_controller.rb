@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
   def show
   end
 
+
   # GET /comments/new
   def new
     @comment = Comment.new
@@ -20,19 +21,54 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    @comment
+    respond_to do|format|
+      format.js
+    end
   end
 
+  def filter_sort
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments
+    @filter = params[:filter]
+    @sort = params[:sort]
+    @sort = "newest" if @sort == nil
+    @filter = "all" if @filter == nil
+    @comments_page_num = params[:comments_page_num]
+    if @filter == "plain"
+      @comments = @comments.where(:suggestion => false)
+    elsif @filter =='suggestion'
+      @comments = @comments.where(:suggestion => true)
+    end
+    if @sort == "newest"
+      @comments = @comments.order(created_at: :desc)
+    elsif @sort =="upvoted"
+      @comments = @comments.order(opinion: :desc)
+    end
+    if params[:comments_page_num] != nil
+
+      @comments = @comments.limit(4).offset((@comments_page_num.to_i)*(4))
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
   # POST /comments
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user
+    if params[:suggestion]!= nil
+      @comment.suggestion = true
+    end
     respond_to do |format|
       if @comment.save
-        sync_new @comment
+        sync_new @comment, scope: @post
         if @comment.commentable_type == "Post"
         @post = @comment.commentable
+        @comments = @post.comments
         end
+        
         format.html { redirect_to @comment.commentable, notice:  'Comment was successfully created.' }
         format.js
       else
@@ -47,10 +83,11 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        sentiment_update(@comment)
-
+        @post = @comment.commentable
+        sync_update @comment
+        sync_update @post
         format.html { redirect_to @comment.commentable, notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @comment }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @comment.errors, status: :unprocessable_entity }

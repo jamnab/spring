@@ -1,1 +1,6 @@
-alert('new form created')
+
+$("#new-post").modal("hide")
+$(".loading-wrapper").remove();
+$(".body-wrapper").prepend("<%= j render(:partial => 'layouts/flash_msg') %>")
+$('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>")
+$('.post-board').html("<%= j render(:partial => 'pages/post_board') %>");

@@ -1,9 +1,10 @@
+
 - user = User.first
 - class_type = comment.commentable.type?
 
 - if can? :read, comment
   .comment-wrapper
-    .comment
+    .comment{class: "inline_comment_#{comment.id} suggestion_#{comment.suggestion}"}
       .col-xs-8
         .content
           = comment.content
@@ -42,7 +43,7 @@
               (Contributor)
         .options
           - if can? :update, comment
-            = link_to '#' do
+            = link_to edit_comment_path(comment), remote: true do
               .btn.btn-sm{class: "btn-#{class_type}"}
                 %span.flaticon-edit7
           - if can? :destroy, comment

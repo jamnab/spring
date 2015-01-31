@@ -1,5 +1,12 @@
+
+$(window).scroll ->
+  if $(window).scrollTop() + $(window).height() is $(document).height()
+    $('#next-page').trigger('click');
+  return
+
 $ ->
   # Side bar toggling
+  $('.carousel').carousel();
   $(".sidebar-toggler").on "click", ->
     $(".body-wrapper").toggleClass "isOpen"
     $(".sidebar").toggleClass "isOpen"

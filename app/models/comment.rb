@@ -9,6 +9,9 @@ class Comment < ActiveRecord::Base
   # has_many :labels, through: :label_entries
 
   has_many :opinions, as: :opinionable
+  sync :all
+
+  sync_scope :by_post, -> (commentable) {where(commentable_id: commentable.id, commentable_type: "Post")}
 
   def doit?
     self.opinion > self.commentable.threshold

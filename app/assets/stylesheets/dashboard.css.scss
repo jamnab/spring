@@ -24,6 +24,16 @@
 //     margin-right: 10px;
 //   }
 // }
+.carousel-indicators{
+  position:absolute;
+  bottom:0px;
+  margin-bottom: -25px;
+  padding-bottom: 4px;
+  li{
+    border:2px solid #e2e2e2;
+    background-color:#e2e2e2;
+  }
+ } 
 .float-left{
   float:left;
 }
@@ -112,17 +122,22 @@
 
 .post-board {
   padding: 40px 20px;
+  text-align: center;
 }
 
 .post-wrapper {
   height: 250px;
   margin-bottom: 40px;
   padding: 0px 20px;
+  display: inline-block;
+  text-align: left;
 
   .post {
     position: relative;
     height: 100%;
-    width: 100%;
+    width: 540px;
+    // min-width: 500px;
+    margin: auto;
 
     .header {
       height: 50px;
@@ -166,6 +181,7 @@
       padding-top: 70px;
       font-size: 14px;
       line-height: 22px;
+
     }
   }
 

@@ -1,17 +1,14 @@
-.post-board
-  - if @posts.empty?
-    %h3.text-center There are no posts matching this criterion.
 
-  - if current_user.is_admin?
-    = sync_new partial: "card", resource: Post.new
-  - else
-    = sync_new partial: "card", resource: Post.new, scope: current_organization
-  - @posts.all.each do |post|
-    = sync partial: "card", resource: post
+.post-board
+  
+  = render 'post_board'
 
 = content_for :popups do
   .test-modal
     / = render 'post_discussion'
   = render 'new_post_form'
+  .edit-modal
   = link_to '#', data: {target: "#new-post", toggle: "modal", content: "Create a new post", placement: "left", trigger: "hover"}, class: "btn popover-trigger", id: "new-post-toggler" do
     %span.flaticon-plus9
+.page-num{style: "visibility:hidden"}
+  = render 'next_post_page'

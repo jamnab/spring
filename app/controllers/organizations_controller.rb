@@ -20,6 +20,7 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations/1/edit
   def edit
+    pics = @organization.build.picture
   end
 
   # POST /organizations
@@ -70,15 +71,20 @@ class OrganizationsController < ApplicationController
   # PATCH/PUT /organizations/1
   # PATCH/PUT /organizations/1.json
   def update
-    respond_to do |format|
-      if @organization.update(organization_params)
-        format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
-        format.json { render :show, status: :ok, location: @organization }
-      else
-        format.html { render :edit }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
+    @pic = Picture.new
+    if params[:organization][:pictures] != nil
+      @pic.image = params[:organization][:pictures][:image]
+      if @pic.save
+        @organization.picture = @pic
+        @organization.save
       end
     end
+    if @organization.update(organization_params)
+        redirect_to :back
+      else
+        @pic.delete
+        redirect_to :back
+      end
   end
 
   # DELETE /organizations/1

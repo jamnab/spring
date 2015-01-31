@@ -1,6 +1,63 @@
-<% if @populate == true %>
+
+$(".loading-wrapper").remove();
+
+<% if @populate == true %> 
 	$('.test-modal').html("<%= j render(:partial => 'pages/post_discussion') %>");
 	$('#post-discussion').modal("show")
-<% else %>
-	$('.post-board').html("<%= j render(:partial => 'pages/update_search') %>");
+	var loading = "<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>"
+	$("#new_comment").submit(function(){
+		var target = ".modal-content"
+		$(target).append(loading)
+	})
+	$(".comment-loading").click(function(){
+		var id = $(this).attr("id")
+		var target = ".modal-content.".concat(id);
+		$(target).append(loading)
+	})
+	$("#comments").scroll(function(){
+    if($(this)[0].scrollHeight - $(this).scrollTop() <= $(this).outerHeight())
+    {
+        $('#next-comment-page').trigger('click');
+    }
+});
+<% elsif @next_page == true %> 
+	<% if !@posts.empty? %>
+		$('.post-board').append("<%= j render(:partial => 'pages/post_board') %>");
+	<% end %>
+	$('.page-num').html("<%= j render(:partial => 'pages/next_post_page') %>");
+<%else%>
+	$('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>");
+	
+
+	<% if @query == "1" %>
+		$('.option.filter').attr('id','filter-post-play')
+		$('.option.filter > .text').text("PLAY")
+	<% elsif @query == "0" %>
+		$('.option.filter').attr('id','filter-post-work')
+		$('.option.filter > .text').text("WORK")
+	<% elsif @query == "2" %>
+		$('.option.filter').attr('id','filter-post-facility')
+		$('.option.filter > .text').text("FACILITY")
+	<% elsif @query == "doit" %>
+		$('.option.filter').attr('id','filter-post-doit')
+		$('.option.filter > .text').text("DOIT")
+	<%end%>
+
+	<% if @sort == "newest" %>
+		$('#sort-posts.option > .text').text("NEWEST")
+	<% elsif @sort == "upvoted" %>
+		$('#sort-posts.option > .text').text("MOST UPVOTED")
+	<% elsif @sort == "discussed" %>
+		$('#sort-posts.option > .text').text("MOST DICUSSED")
+	<%end%>
+	$('.post-board').html("<%= j render(:partial => 'pages/post_board') %>");
+	$('.page-num').html("<%= j render(:partial => 'pages/next_post_page') %>");
+	$(".post-loading").click(function(){
+      var id = $(this).attr("id")
+      var target = ".post.".concat(id);
+      $(target).append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")
+    })
 <%end%>
+$(".body-loading").click(function() {
+	$('body').append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")
+});

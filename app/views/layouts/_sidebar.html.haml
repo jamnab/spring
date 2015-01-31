@@ -1,0 +1,79 @@
+.sidebar-icons
+  %a.sidebar-toggler
+    .icon.fa.fa-bars
+    .icon.fa.fa-times-circle-o.hidden
+  .navicons
+    - if current_user
+      = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading" do
+        %span.flaticon-home7
+      = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading" do
+        %span.flaticon-star6
+      = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading" do
+        %span.flaticon-lock9
+      = link_to :summary do
+        %span.flaticon-line31
+
+      .logo.brand-link
+        = image_tag "pindoit_vert.png"
+
+      = link_to '#', class: "logout-link" do
+        %span.flaticon-logout13
+    - else
+      = link_to '#', data: {target: "#login", toggle: "modal"} do
+        %span.flaticon-login17
+      = link_to '#', data: {target: "#register", toggle: "modal"} do
+        %span.flaticon-create1
+
+.sidebar
+  .user-wrapper
+    .user
+
+      - if !current_user || current_user.picture.nil?
+        = image_tag("profile_default.png")
+      - else
+        = image_tag current_user.picture.image.url(:user_image)
+
+
+      - if current_user
+        .name
+          = current_user.full_name
+        .username
+          (#{current_user.username})
+      - else
+        .name
+          Guest User
+        .username
+          Please Login
+  .sidenav
+    - if current_user
+
+      = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading" do
+        Home
+
+      = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading" do
+        My Favourites
+
+      = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading" do
+        Archive
+
+      = link_to :summary do
+        Summary
+
+      .brand-link.org
+        - if @organization == nil
+          = image_tag "pindoit_logo.png"
+        - else
+          - if @organization.picture == nil
+            = image_tag "pindoit_logo.png"
+          - else
+            = image_tag @organization.picture.image.url(:organization_image)
+        %h4 Powered by Pindoit
+        %h5 A Verse Software Lab Inc. Solution.
+
+      = link_to :logout, class: "logout-link" do
+        Logout
+    - else
+      = link_to '#', data: {target: "#login", toggle: "modal"} do
+        Log In
+      = link_to '#', data: {target: "#register", toggle: "modal"} do
+        Register

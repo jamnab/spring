@@ -1,11 +1,44 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-
+class Sync.PostCard extends Sync.View
+  
+  beforeInsert: ($el) ->
+    $el.hide()
+    post = $el.children()
+    class_type = $(post).attr("id")
+    if $('.option.filter').attr("id") == "filter-post-play"
+      if class_type == "play"
+        @insert($el)
+    else if $('.option.filter').attr("id") == "filter-post-word"
+      if class_type == "word"
+        @insert($el)
+    else if $('.option.filter').attr("id") == "filter-post-facility"
+      if class_type == "facility"
+        @insert($el)
+    else if $('.option.filter').attr("id") == "filter-post-doit"
+      if $el.hasClass("doithidden")
+        @insert($el)
+    else
+      @insert($el)
+  afterInsert: -> 
+    $(".loading-wrapper").remove();
+    @$el.fadeIn 'slow'
+    $(".post-loading").click ->
+      id = $(this).attr("id")
+      target = ".post.".concat(id);
+      $(target).append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")
+  afterUpdate: ->
+    $(".post-loading").click ->
+      id = $(this).attr("id")
+      target = ".post.".concat(id);
+      $(target).append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")   
+  beforeRemove: -> @$el.fadeOut 'slow', => @remove()
+  
 $ ->
   # init search ajax
-	$("#search").on "ajax:success", (data,status,xhr) ->
-		 $("#reportalert").text "Done."
+  $("#search").on "ajax:success", (data,status,xhr) ->
+     $("#reportalert").text "Done."
 
   # init datatable for personnel
   $('#personnel-table').dataTable({
@@ -15,22 +48,60 @@ $ ->
   });
 
 $ ->
-	$(".nested_pics_button").click ->
-		$('.nested_pics_form').append("<input class='nested_pics_button' id='images_' multiple='multiple' name='images[]' type='file'>")
-	$('#filter-post-play').click ->
-		$('.option.filter').attr('id','filter-post-play')
-		$('.option.filter > .text').text("PLAY")
-	$('#filter-post-work').click ->
-		$('.option.filter').attr('id','filter-post-work')
-		$('.option.filter > .text').text("WORK")
-	$('#filter-post-facility').click ->
-		$('.option.filter').attr('id','filter-post-facility')
-		$('.option.filter > .text').text("FACILITY")
-	$('#filter-post-doit').click ->
-		$('.option.filter').attr('id','filter-post-doit')
-		$('.option.filter > .text').text("DOIT")
-		# $('.post-wrapper').css("display",'none')
-		# $('.doithidden').css('display','block')
+  
+  $(".nested_pics_button").click ->
+    $('.nested_pics_form').append("<input class='nested_pics_button' id='images_' multiple='multiple' name='images[]' type='file'>")
+
+  # $('#filter-post-work').click ->
+  #   $('#filter-posts').removeClass()
+  #   $('#filter-posts').addClass('filter-post-work option filter')
+  #   $('#filter-posts .text').text("WORK")
+
+  # $('#filter-post-play').click ->
+  #   $('#filter-posts').removeClass()
+  #   $('#filter-posts').addClass('filter-post-play option filter')
+  #   $('#filter-posts .text').text("PLAY")
+
+  # $('#filter-post-facility').click ->
+  #   $('#filter-posts').removeClass()
+  #   $('#filter-posts').addClass('filter-post-facility option filter')
+  #   $('#filter-posts .text').text("FACILITY")
+
+  # $('#filter-post-doit').click ->
+  #   $('#filter-posts').removeClass()
+  #   $('#filter-posts').addClass('filter-post-doit option filter')
+  #   $('#filter-posts .text').text("DOIT")
+
+  # $('#filter-post-all').click ->
+  #   $('#filter-posts').removeClass()
+  #   $('#filter-posts').addClass('filter-post-all option filter')
+  #   $('#filter-posts .text').text("ALL")
+
+  # $('#sort-post-newest').click ->
+  #   $('#sort-posts .text').text("NEWEST")
+  # $('#sort-post-discussed').click ->
+  #   $('#sort-posts .text').text("MOST DISCUSSED")
+  # $('#sort-post-upvoted').click ->
+  #   $('#sort-posts .text').text("MOST UPVOTED")
+
+  $('.filter-sort-link').click ->
+    query = "all"
+    sort = "newest"
+
+    query = "all" if $('#filter-posts .text').text() == "ALL"
+    query = "0" if $('#filter-posts .text').text() == "WORK"
+    query = "1" if $('#filter-posts .text').text() == "PLAY"
+    query = "2" if $('#filter-posts .text').text() == "FACILITY"
+    query = "doit" if $('#filter-posts .text').text() == "DOIT"
+
+    sort = "doit" if $('#sort-posts .text').text() == "NEWEST"
+    sort = "discussed" if $('#sort-posts .text').text() == "MOST DISCUSSED"
+    sort = "upvoted" if $('#sort-posts .text').text() == "MOST UPVOTED"
+
+    $(this).attr("href", $(this).data("base-url")+"?query=#{query}&sort=#{sort}")
+
+    console.log($(this).attr("href"))
+    # console.log($('#filter-posts .text').text() + " " + $('#sort-posts .text').text())
 
 # sample chart
 $ ->
@@ -63,5 +134,7 @@ $ ->
     ]
   }
 
-  chart_canvas = $("#org-graph-canvas").get(0).getContext("2d")
+
+  chart_canvas = $(".org-graph-canvas").get(0).getContext("2d")
   org_graph = new Chart(chart_canvas).Line(data, {bezierCurveTension : 0.0})
+

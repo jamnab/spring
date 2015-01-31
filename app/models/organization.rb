@@ -1,6 +1,9 @@
+
 class Organization < ActiveRecord::Base
   attr_accessor :username
   has_many :posts
+  has_one :picture
+  accepts_nested_attributes_for :picture
   has_many :comments, through: :posts
 
   # has_many :posts, through: :projects

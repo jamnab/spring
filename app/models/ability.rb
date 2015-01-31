@@ -36,6 +36,9 @@ class Ability
       can @cr, Comment do |com|
         com.commentable.try(:organization) == user.organization
       end
+      can :filter_sort, Comment do |com|
+        com.commentable.try(:organization) == user.organization
+      end
 
       # Misc models that are not guarded
       # Opinions

@@ -1,3 +1,4 @@
+
 = sync_new partial: "card", resource: Comment.new, scope: @post
-- @post.comments.order("created_at DESc").each do |comment|
+- @comments.each do |comment|
   = sync partial: "card", resource: comment

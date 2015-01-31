@@ -1,0 +1,37 @@
+<% if @comments_page_num.to_i != 0 %>
+	$('.filter-sort-comments').html("<%= j render(:partial => 'pages/comments_filter_sort') %>")
+	$('.comments').append("<%= j render(:partial => 'comments/update_comments') %>");
+<%else%>
+	$('#comments').scrollTop(0);
+	$('.filter-sort-comments').html("<%= j render(:partial => 'pages/comments_filter_sort') %>")
+	$('.comments').empty()
+	$('.comments').html("<%= j render(:partial => 'comments/update_comments') %>");
+<%end%>
+<% if @sort == "newest"%>
+		$('.btn-comments-sorts').removeClass("on")
+		$('.btn-comments-sorts').addClass("off")
+		$('.comments-newest').removeClass("off")
+		$('.comments-newest').addClass("on")
+	<% elsif @sort == "upvoted"%>
+		$('.btn-comments-sorts').removeClass("on")
+		$('.btn-comments-sorts').addClass("off")
+		$('.comments-upvoted').removeClass("off")
+		$('.comments-upvoted').addClass("on")
+	<%end%>
+	<% if @filter == "all"%>
+		$('.btn-comments-filters').removeClass("on")
+		$('.btn-comments-filters').addClass("off")
+		$('.comments-all').removeClass("off")
+		$('.comments-all').addClass("on")
+	<% elsif @filter == "plain"%>
+		$('.btn-comments-filters').removeClass("on")
+		$('.btn-comments-filters').addClass("off")
+		$('.comments-plain').removeClass("off")
+		$('.comments-plain').addClass("on")
+	<% elsif @filter == "suggestion"%>
+		$('.btn-comments-filters').removeClass("on")
+		$('.btn-comments-filters').addClass("off")
+		$('.comments-suggestion').removeClass("off")
+		$('.comments-suggestion').addClass("on")
+	<%end%>
+$(".loading-wrapper").remove()
