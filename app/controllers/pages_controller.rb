@@ -14,7 +14,7 @@ class PagesController < ApplicationController
   end
 
   def email_us
-    PagesMailer.email_us(params[:name],params[:email],params[:message]).deliver
+    # PagesMailer.email_us(params[:name],params[:email],params[:message]).deliver
 
     flash[:notice] = 'The email has been delivered. You will be contacted shortly.'
     render :contact_us, layout: 'homepage'
