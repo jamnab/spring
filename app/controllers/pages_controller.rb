@@ -3,10 +3,22 @@ class PagesController < ApplicationController
   @@page_limit = 10
 
   def home
-    if current_user
-      @organization = current_organization
-      @organization = Organization.first if current_user.is_admin?
-    end
+    render layout: "homepage"
+  end
+
+  def price
+    render layout: "homepage"
+  end
+
+  def contact_us
+    render layout: "homepage"
+  end
+
+  def email_us
+    PagesMailer.email_us(params[:name],params[:email],params[:message]).deliver
+
+    flash[:notice] = 'The email has been delivered. You will be contacted shortly.'
+    render :contact_us, layout: 'homepage'
   end
 
   def dashboard

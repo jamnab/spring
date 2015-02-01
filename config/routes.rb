@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get 'dashboard' => 'pages#dashboard', as: :dashboard
   get 'summary' => 'pages#summary', as: :summary
   get 'search' => 'pages#search', as: :search
+  get 'price' => 'pages#price', as: :price
+  get 'contact_us' => 'pages#contact_us', as: :contact_us
+  post 'email_us' => 'pages#email_us', as: :email_us
 
   resources :subscriptions
 

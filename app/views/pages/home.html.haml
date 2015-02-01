@@ -1,0 +1,126 @@
+%section.header-19-sub
+  .background  
+  = image_tag 'ipad@2x.png', class: 'hidden-xs'
+  / %img.hidden-xs{:alt => "", :src => "../../common-files/img/header/ipad@2x.png"}/
+  .container
+    .row
+      .col-sm-7
+        %h1
+          = "less noise,"
+          %br
+          = "more clarity"
+        %p Pindoit helps take your organization into the innovation age. Employees and management work together to push forward the great ideas that create immediate and lasting change
+        .btns
+          %a.btn.btn-primary{:href => "#", data: {target: '#register', toggle: 'modal'}}
+            %span Sign Up
+          %a.btn.btn-primary{href: '#', data: {target: '#login', toggle: 'modal'} }
+            %span Log in
+
+%section.content-31
+  .container
+    .row
+      .number 1
+      .col-sm-8.col-sm-offset-2
+        %h3 Change starts with an idea
+        %p Employees create a pinned discussion around an array of workspace related topics on their mind
+        .box
+          .img
+            = image_tag 'card_greyscale.png', height: 187
+            = image_tag 'card.png', height: 187
+            / %img{:alt => "", :height => "187", :src => "../../common-files/img/content/ticket-navy-bw@2x.png", :width => "380"}/
+            / %img{:alt => "", :height => "187", :src => "../../common-files/img/content/ticket-navy@2x.png", :width => "380"}/
+    .row
+      .number 2
+      .col-sm-8.col-sm-offset-2
+        #pt-1.page-transitions.pt-perspective
+          .pt-page.pt-page-current
+            %h3 Employees Collaborate to define initiatives
+            %p Majority rules. Every idea is treated equally until it meets a defined level of endorsement
+            .box
+              .img
+                = image_tag 'rocket_greyscale.png'
+                = image_tag 'rocket.png'
+                / %img{:alt => "", :height => "179", :src => "../../common-files/img/content/map-bw@2x.png", :width => "380"}/
+                / %img{:alt => "", :height => "179", :src => "../../common-files/img/content/map@2x.png", :width => "380"}/
+          .pt-controls
+            %a.pt-control-prev{:href => "#"}
+            %a.pt-control-next{:href => "#"}
+    .row
+      .number 3
+      .col-sm-8.col-sm-offset-2
+        #pt-2.page-transitions.pt-perspective
+          .pt-page.pt-page-current
+            %h3 Ideas spring into Action
+            %p Once a workplace idea becomes endorsed, the star employee is recognized, and the idea becomes a 'doit' action item for Management
+            .box
+              .img
+                = image_tag 'idea_doit_greyscale.png'
+                = image_tag 'idea_doit.png'
+                / %img{:alt => "", :height => "193", :src => "../../common-files/img/content/ps-wire-imac-bw@2x.png", :width => "397"}/
+                / %img{:alt => "", :height => "193", :src => "../../common-files/img/content/ps-wire-imac@2x.png", :width => "397"}/
+          .pt-controls
+            %a.pt-control-prev{:href => "#"}
+            %a.pt-control-next{:href => "#"}
+
+%section.content-18
+  .container
+    %h1 Sometimes it's best to let others do the talking
+    #c-18_myCarousel.carousel.slide{"data-interval" => "600000"}
+      .controls
+        %a.carousel-control.left.disabled{"data-slide" => "prev", :href => "#"}
+        %a.carousel-control.right{"data-slide" => "next", :href => "#c-18_myCarousel"}
+      .carousel-inner
+        .item.active
+          .quote-text
+            Pindoit helps me better engage my employees. We have been agile in addressing important ideas and key contributors... In short, it's a killer tool at a great price.
+          .quote-author @SyncI&D, syncidlabs.com
+        / .item
+        /   .quote-text
+        /     Colored, stylish icons can easily be modified and used in a wide variety of projects
+        /   .quote-author @stSilent, DesignModo.com
+        / .item
+        /   .quote-text
+        /     Colored, stylish icons can easily be modified and used in a wide variety of projects
+        /   .quote-author @stSilent, DesignModo.com
+    / .row.quotes
+    /   .col-sm-3
+    /     %h6 @mc
+    /     Easy to change and easy to create new elements with color.
+    /   .col-sm-4.col-sm-offset-1
+    /     %h6 @madbyte
+    /     Awesome Kit. It’s more easiest way to make my startup. Thanks!
+    /   .col-sm-3.col-sm-offset-1
+    /     %h6 @stSilent
+    /     Create new elements with color swatches. Wow!
+
+%section.content-11
+  .container
+    %span Less than a cup of coffee a day
+    %a.btn.btn-large.btn-danger{:href => "/price"} BUY IT NOW
+
+%footer.footer-12
+  .container
+    Made with
+    %span.fui-heart
+    in Waterloo
+
+%footer.footer-2
+  .container
+    %nav.pull-left
+      %ul
+        %li.active
+          %a{:href => "/"} Home
+        / %li
+        /   %a{:href => "#"} Features
+        %li
+          %a{:href => "/price"} Price
+        %li
+          %a{:href => "/contact_us"} Contact Us
+    .social-btns.pull-right
+      %a{:href => "#"}
+        .fui-facebook
+        .fui-facebook
+      %a{:href => "#"}
+        .fui-twitter
+        .fui-twitter
+
