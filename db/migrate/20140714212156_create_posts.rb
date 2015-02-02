@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration
       t.string :title
       t.text :content
       t.boolean :anonymous, default: false
-      t.integer :threshold
+      t.integer :threshold, default: 20
       t.integer :opinion, default: 0
       t.integer :user_id
       t.integer :organization_id

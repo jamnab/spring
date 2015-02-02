@@ -11,7 +11,7 @@
     .btn.btn-sm.btn-main.on.comments-all.btn-comments-filters
       ALL
   = link_to filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => "plain", :comments_page_num => 0), remote: true do
-    .btn.btn-sm.btn-main.off.comments-plain.btn-comments-filters 
+    .btn.btn-sm.btn-main.off.comments-plain.btn-comments-filters
       PLAIN
   = link_to filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => "suggestion", :comments_page_num => 0), remote: true do
     .btn.btn-sm.btn-main.off.comments-suggestion.btn-comments-filters
@@ -19,5 +19,5 @@
 .comments-infinte-scroll{style: "visibility:hidden"}
   - if @comments_page_num != nil
     = link_to "next_page",filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => @filter, :comments_page_num => @comments_page_num.to_i + 1), remote: true, id: "next-comment-page"
-  -else
+  - else
     = link_to "next_page",filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => @filter, :comments_page_num => 1), remote: true, id: "next-comment-page"

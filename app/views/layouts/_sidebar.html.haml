@@ -5,16 +5,16 @@
   .navicons
     - if current_user
       = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading" do
-        %span.flaticon-home7
+        %span.flaticon-house28
       = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading" do
-        %span.flaticon-star6
+        %span.flaticon-favourites7
       = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading" do
-        %span.flaticon-lock9
+        %span.flaticon-archive18
       = link_to :summary do
-        %span.flaticon-line31
+        %span.flaticon-business155
 
       .logo.brand-link
-        = image_tag "pindoit_vert.png"
+        = image_tag "pindoit_logo_vert.png"
 
       = link_to '#', class: "logout-link" do
         %span.flaticon-logout13

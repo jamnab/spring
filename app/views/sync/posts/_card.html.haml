@@ -23,9 +23,9 @@
               = f.hidden_field :opinionable_id, value: post.id
               = f.hidden_field :opinionable_type, value: 'Post'
               .btn.btn-sm.post-loading.btn-like{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
-                %span.flaticon-thumbs7
+                %span.flaticon-thumb31
               .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
-                %span.flaticon-thumbs8
+                %span.flaticon-thumbs17
 
       .content
         .col-xs-8
@@ -75,16 +75,16 @@
           - if can? :update, post
             = link_to edit_post_path(post), remote:true do
               .btn.btn-sm.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {content: "Edit", placement: "top", trigger: "hover"}}
-                %span.flaticon-edit7
+                %span.flaticon-edit45
           - if can? :update, post.organization
             - if post.graveyard
               = link_to "#", remote: true do
-                .btn.btn-sm.btn-archive.post-loading{id: "#{post.id}", class: "popover-trigger btn-#{class_type}", data: {value: 'false', content: "Unarchive", placement: "top", trigger: "hover"}}
-                  %span.flaticon-unlock
+                .btn.btn-sm.btn-on.post-loading{id: "#{post.id}", class: "popover-trigger btn-#{class_type}", data: {value: 'false', content: "Unarchive", placement: "top", trigger: "hover"}}
+                  %span.flaticon-archive18
             - else
               = link_to '#' do
-                .btn.btn-sm.btn-archive.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {value: 'true', content: "Archive", placement: "top", trigger: "hover"}}
-                  %span.flaticon-lock9
+                .btn.btn-sm.btn-off.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {value: 'true', content: "Archive", placement: "top", trigger: "hover"}}
+                  %span.flaticon-archive18
           - if can? :destroy, post
             = link_to post, method: :delete, class: "popover-trigger", data: {confirm: "Are you sure about this?", content: "Delete", placement: "top", trigger: "hover"}, remote: true do
               .btn.btn-sm.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
@@ -94,7 +94,7 @@
 
           = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "popover-trigger post-discussion-toggler", data: {content: "Discussion", placement: "top", trigger: "hover"} do
             .btn.btn-sm.post-loading.btn-counter{id: "#{post.id}",class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}
-              %span.flaticon-speech29
+              %span.flaticon-comments8
               .count
                 = post.comments.count
 
@@ -102,11 +102,11 @@
           - if fav.nil?
             = link_to '#' do
               .btn.btn-sm.btn-off.btn-fav.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {content: "Favourite", placement: "top", trigger: "hover"}}
-                %span.flaticon-star6
+                %span.flaticon-favourites7
             = form_for Favourite.new, remote: true do |f|
               = f.hidden_field :fav_post_id, value: post.id
               = f.hidden_field :user_id, value: current_user.id
           - else
             = link_to fav, class: "popover-trigger", data: {content: "Unfavourite", placement: "top", trigger: "hover"}, method: :delete, remote: true do
               .btn.btn-sm.btn-on.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
-                %span.flaticon-star6
+                %span.flaticon-favourites7
