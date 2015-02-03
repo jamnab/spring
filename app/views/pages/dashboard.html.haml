@@ -1,6 +1,6 @@
 
 .post-board
-  
+
   = render 'post_board'
 
 = content_for :popups do
@@ -9,6 +9,6 @@
   = render 'new_post_form'
   .edit-modal
   = link_to '#', data: {target: "#new-post", toggle: "modal", content: "Create a new post", placement: "left", trigger: "hover"}, class: "btn popover-trigger", id: "new-post-toggler" do
-    %span.flaticon-plus9
+    %span.flaticon-add155
 .page-num{style: "visibility:hidden"}
   = render 'next_post_page'

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :favourites
 
   get 'dashboard' => 'pages#dashboard', as: :dashboard
+  get 'newsfeed' => 'pages#newsfeed', as: :newsfeed
   get 'summary' => 'pages#summary', as: :summary
   get 'search' => 'pages#search', as: :search
 

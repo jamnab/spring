@@ -16,12 +16,13 @@ class PagesController < ApplicationController
     @page = "dashboard" if !params[:page]
     @sort = params[:sort]
     @query = params[:query]
+
     if current_user.is_admin?
 
       if @page == "my_fav"
         @posts = current_user.fav_posts
       elsif @page == "archive"
-         @posts = Post.where(graveyard: true)
+        @posts = Post.where(graveyard: true)
       else
         @posts = Post.all
       end
@@ -53,9 +54,8 @@ class PagesController < ApplicationController
       @posts = @posts.order(created_at: :desc)
     end
 
-    if params[:query].present?
-
-      if @query == "doit"
+    if params[:query].present? || params[:page] == 'doit'
+      if @query == 'doit' || @page == 'doit'
         @posts=@posts.reject{|r| r.doit? == false }
       else
         @posts = @posts.where(:post_type => params[:query])
@@ -109,12 +109,15 @@ class PagesController < ApplicationController
     # if current_user.is_manager?
     #   redirect_to :back, notice: "No permission" and return
     # end
-
     @organization = current_organization
     @organization = Organization.first if current_user.is_admin?
-
     @users = @organization.users
     @sorted_users = @users.sort_by{|x| -(x.contribution['total']+x.impact['total'])}
+  end
+
+  def newsfeed
+    @organization = current_organization
+    @organization = Organization.first if current_user.is_admin?
   end
 
   private

@@ -57,7 +57,7 @@
 
       .signature
         .user
-          - if post.doit?
+          - if !post.anonymous || post.doit?
             = image_tag("profile_default.png")
             .name
               %b= user.full_name

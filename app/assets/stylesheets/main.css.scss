@@ -44,7 +44,7 @@ html, body {
   }
 }
 .alert{
-  position: fixed;  
+  position: fixed;
   top: 15px;
   width: 100%;
 }
@@ -418,8 +418,8 @@ a:hover {
   }
 
   .navicons {
-    margin-top: 65px;
-    border-top: 1px solid $default_text_off;
+    margin-top: -4px;
+    // border-top: 1px solid $default_text_off;
 
     a {
       display: block;
@@ -437,6 +437,11 @@ a:hover {
         font-size: 40px;
         line-height: 50px;
         margin: 0px;
+      }
+
+      img {
+        margin-top: 5px;
+        width: 40px;
       }
     }
   }

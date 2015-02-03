@@ -4,6 +4,8 @@
     .icon.fa.fa-times-circle-o.hidden
   .navicons
     - if current_user
+      = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading" do
+        = image_tag 'doit.png'
       = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading" do
         %span.flaticon-house28
       = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading" do
@@ -12,22 +14,23 @@
         %span.flaticon-archive18
       = link_to :summary do
         %span.flaticon-business155
+      = link_to :newsfeed do
+        %span.flaticon-internet62
 
       .logo.brand-link
         = image_tag "pindoit_logo_vert.png"
 
       = link_to '#', class: "logout-link" do
-        %span.flaticon-logout13
+        %span.flaticon-door9
     - else
       = link_to '#', data: {target: "#login", toggle: "modal"} do
-        %span.flaticon-login17
+        %span.flaticon-enter3
       = link_to '#', data: {target: "#register", toggle: "modal"} do
-        %span.flaticon-create1
+        %span.flaticon-add155
 
 .sidebar
   .user-wrapper
     .user
-
       - if !current_user || current_user.picture.nil?
         = image_tag("profile_default.png")
       - else
@@ -57,7 +60,10 @@
         Archive
 
       = link_to :summary do
-        Summary
+        Analytics
+
+      = link_to :newsfeed do
+        Newsfeed
 
       .brand-link.org
         - if @organization == nil

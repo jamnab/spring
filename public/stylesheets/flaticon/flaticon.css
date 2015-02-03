@@ -14,36 +14,42 @@
         font-size: 20px;
 font-style: normal;
 margin-left: 20px;
-}.flaticon-archive18:before {
+}.flaticon-add155:before {
 	content: "\e000";
 }
-.flaticon-business155:before {
+.flaticon-archive18:before {
 	content: "\e001";
 }
-.flaticon-comments8:before {
+.flaticon-business155:before {
 	content: "\e002";
 }
-.flaticon-delete48:before {
+.flaticon-comments8:before {
 	content: "\e003";
 }
-.flaticon-edit45:before {
+.flaticon-delete48:before {
 	content: "\e004";
 }
-.flaticon-favourites7:before {
+.flaticon-door9:before {
 	content: "\e005";
 }
-.flaticon-house28:before {
+.flaticon-edit45:before {
 	content: "\e006";
 }
-.flaticon-login17:before {
+.flaticon-enter3:before {
 	content: "\e007";
 }
-.flaticon-login18:before {
+.flaticon-favourites7:before {
 	content: "\e008";
 }
-.flaticon-thumb31:before {
+.flaticon-house28:before {
 	content: "\e009";
 }
-.flaticon-thumbs17:before {
+.flaticon-internet62:before {
 	content: "\e00a";
+}
+.flaticon-thumb31:before {
+	content: "\e00b";
+}
+.flaticon-thumbs17:before {
+	content: "\e00c";
 }
