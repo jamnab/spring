@@ -25,4 +25,4 @@
 //= require skrollr.menu
 //= require sync
 //= require Chart
-//= require_tree .
+//= require_tree ./controllers
