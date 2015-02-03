@@ -3,7 +3,7 @@ class CreatePosts < ActiveRecord::Migration
     create_table :posts do |t|
       t.string :title
       t.text :content
-      t.boolean :anonymous, default: false
+      t.boolean :anonymous, default: true
       t.integer :threshold, default: 20
       t.integer :opinion, default: 0
       t.integer :user_id
