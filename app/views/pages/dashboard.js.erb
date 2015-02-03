@@ -38,7 +38,7 @@ $(".loading-wrapper").remove();
 	<% elsif @query == "2" %>
 		$('.option.filter').attr('id','filter-post-facility')
 		$('.option.filter > .text').text("FACILITY")
-	<% elsif @query == "doit" %>
+	<% elsif @query == "doit" || @page == 'doit' %>
 		$('.option.filter').attr('id','filter-post-doit')
 		$('.option.filter > .text').text("DOIT")
 	<%end%>
@@ -58,6 +58,10 @@ $(".loading-wrapper").remove();
       $(target).append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")
     })
 <%end%>
+
 $(".body-loading").click(function() {
 	$('body').append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")
 });
+
+var stateObj = { page: "dashboard" };
+history.pushState(stateObj, "Dashboard", "dashboard");

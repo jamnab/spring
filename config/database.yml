@@ -12,8 +12,8 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  username: root
-  password: Abc20080205
+  username: pindoit
+  password: 8twpBsPCKHq6nL6CxBaqnP4a
 
 development:
   <<: *default

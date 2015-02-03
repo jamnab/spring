@@ -55,7 +55,6 @@ class PagesController < ApplicationController
     end
 
     if params[:sort] != nil
-
       if @sort == "newest"
         @posts = @posts.order("created_at DESC")
       elsif @sort == "discussed"
@@ -69,12 +68,16 @@ class PagesController < ApplicationController
       @posts = @posts.order(created_at: :desc)
     end
 
-    if params[:query].present? || params[:page] == 'doit'
-      if @query == 'doit' || @page == 'doit'
-        @posts=@posts.reject{|r| r.doit? == false }
+    if params[:query].present?
+      if @query == 'doit'
+        @posts = @posts.reject{|r| r.doit? == false }
       else
         @posts = @posts.where(:post_type => params[:query])
       end
+    end
+
+    if @page == 'doit'
+      @posts = @posts.reject{|r| r.doit? == false }
     end
 
     if params[:populate_disucssion_id].present?
@@ -97,6 +100,11 @@ class PagesController < ApplicationController
       # @posts = @posts.limit(@@page_limit)
       @page_num = 2
     end
+
+    @page_title = 'Post Listing'
+    @page_title = 'Doit Aciton Items' if @page == 'doit'
+    @page_title = 'Favourited Posts' if @page == 'my_fav'
+    @page_title = 'Archived Posts' if @page == 'archive'
 
     respond_to do |format|
       format.html # index.html.erb
