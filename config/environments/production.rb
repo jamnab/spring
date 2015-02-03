@@ -80,4 +80,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+end
+
+# auto launch faye
+Thread.new do
+  system("rackup sync.ru -E production")
 end
