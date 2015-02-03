@@ -48,5 +48,3 @@ test:
 production:
   <<: *default
   database: pindoit_production
-  username: pindoit
-  password: <%= ENV['COLLAB_DATABASE_PASSWORD'] %>

@@ -10,9 +10,9 @@ class PagesController < ApplicationController
   end
   
   #used to load pics for the main bord 
-  def load_picture
+  def load_pictures
 
-    raise
+    @picture = Picture.find(params[:pic_id])
     respond_to do |format|
       format.html # index.html.erb
       format.js

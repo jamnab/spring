@@ -24,5 +24,6 @@
 //= require skrollr.ie
 //= require skrollr.menu
 //= require sync
+//= require lightbox
 //= require Chart
 //= require_tree .

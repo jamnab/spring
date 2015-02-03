@@ -1,0 +1,16 @@
+
+- @settings.each do |setting|
+	= form_for setting do |f|
+		.row
+			.col-xs-3
+				= setting.settings_for
+				=":"
+				- if setting.timed_task_id != nil
+					= TimedTask.find(setting.timed_task_id).measure_of_time
+			
+			.btn.btn-info.col-xs-3.change-btn
+				Change
+			.col-xs-3.timed-form
+				= f.select :timed_task_id, TimedTask.all.collect {|x| [x.measure_of_time, x.id]}, {}, :multiple => true
+			.col-xs-3
+				= f.submit "save", class: "btn btn-info col-xs-12"

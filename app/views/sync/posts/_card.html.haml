@@ -49,11 +49,11 @@
               -post.pictures.each_with_index do |pic,index|
                 - if index == 0
                   .item.active
-                    = link_to picture(:pic_id => pic.id) do
+                    %a{"href"=> pic.image.url, "data-lightbox" => post.title}
                       = image_tag pic.image.url(:post_image)
                 -else
                   .item
-                    = link_to picture(:pic_id => pic.id) do
+                    %a{"href"=> pic.image.url, "data-lightbox" => post.title}
                       = image_tag pic.image.url(:post_image)
 
 

@@ -1,0 +1,51 @@
+!!!
+%html
+  %head
+    %title Pindoit
+    = stylesheet_link_tag 'homepage', media: 'all'
+    / = stylesheet_link_tag    'flaticon/flaticon.css'
+    / = stylesheet_link_tag    'flaticon-pack2/flaticon.css'
+    = javascript_include_tag 'homepage'
+    = csrf_meta_tags
+    = favicon_link_tag 'favicon.png'
+  %body
+    = render 'layouts/login_form'
+    = render 'layouts/register_form'
+    = render 'layouts/feedback_box'
+    .page-wrapper
+      %header.header-19
+        .container
+          .row
+            .navbar.col-sm-12{:role => "navigation"}
+              .navbar-header
+                %button.navbar-toggle{:type => "button"}
+                %a.brand{:href => "/"}
+                  = image_tag 'pindoit_logo.png'
+                  / %img{:alt => "", :height => "50", :src => "/pindoit_logo.png", :width => "50"}/
+                  / %span Startup
+              .navbar-collapse.collapse
+                %ul.nav
+                  %li.active
+                    %a{:href => "/"} Home
+                  %li
+                    %a{:href => "/price"} Price
+                  %li
+                    %a{:href => "/contact_us"} Contact Us
+                  %li
+                    %a{href: '#', data: {target: '#login', toggle: 'modal'}} Log In
+                / %ul.subnav
+                /   %li
+                /     %a{:href => "#"} Privacy
+                /   %li
+                /     %a{:href => "#"} Terms
+                /   %li
+                /     %a{:href => "#"} Advertise
+                /   %li
+                /     %a{:href => "#"} Affiliates
+                /   %li
+                /     %a{:href => "#"} Newsletter
+                /   %li
+                /     %a{:href => "#"} About
+                /   %li
+                /     %a{:href => "#"} Contact Us
+      = yield

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 
+gem 'lightboxjs', :git => "https://github.com/prophotos/lightboxjs.git"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 
@@ -21,6 +22,8 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
+
+gem 'public_activity'
 gem 'haml-rails'
 gem 'authlogic'
 gem 'whenever'
@@ -43,6 +46,7 @@ gem 'chart-js-rails'
 gem 'jquery-datatables-rails', '~> 3.1.1'
 gem 'to_words'
 # gem 'redcarpet'
+gem 'therubyracer'
 
 group :development do
   gem 'better_errors'
@@ -58,6 +62,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
+
+gem 'less-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

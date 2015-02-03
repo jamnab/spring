@@ -5,8 +5,8 @@ $(window).scroll ->
   return
 
 $ ->
-  # Side bar toggling
   $('.carousel').carousel();
+  # Side bar toggling
   $(".sidebar-toggler").on "click", ->
     $(".body-wrapper").toggleClass "isOpen"
     $(".sidebar").toggleClass "isOpen"

@@ -1,0 +1,20 @@
+-@pictures = Post.last.pictures
+#pic-lightbox.lightbox.hide.fade{"tabindex" => "-1", "role" => "dialog", "aria-hidden"=>"true"}
+  .lightbox-content
+    -if @pictures != nil
+      .carousel.slide.carousel-fade{id: "lightbox-gallery"}
+        %ol.carousel-indicators
+          -@pictures.each_with_index do |pic,index|
+            - if index == 0
+              %li.active{"data-target"=> "#lightbox-gallery", "data-slide-to"=> index}
+            -else
+              %li{"data-target"=> "#lightbox-gallery", "data-slide-to"=> index}
+
+        .carousel-inner
+          -@pictures.each_with_index do |pic,index|
+            - if index == 0
+              .item.active
+                = image_tag pic.image.url
+            -else
+              .item
+                = image_tag pic.image.url
