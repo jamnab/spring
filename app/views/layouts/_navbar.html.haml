@@ -31,7 +31,8 @@
                     .fa.fa-search
           %li.dropdown.hidden-xs
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-              %span.flaticon-black56
+              / %span.flaticon-black56
+              .fa.fa-gear
               %span.caret
             %ul.dropdown-menu{:role => "menu"}
               - if can? :update, current_user

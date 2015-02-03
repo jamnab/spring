@@ -1,98 +1,126 @@
-#skrollr-body
-  %main.home-page
-    %section#slide-1.img-slide
-      .bcg{"data-anchor-target" => "#slide-2", "data-bottom-top" => "background-position: 50% 70px;", "data-top-bottom" => "background-position: 50% -70px;"}
-        .container
-          = image_tag 'logo_white.png', class: 'img-responsive'
-          .tagline
-            A software as a service (SaaS), semi-anonymous social platform that allows employers to capture employee opinions and emotions.
+%section.header-19-sub
+  .background  
+  = image_tag 'ipad@2x.png', class: 'hidden-xs'
+  / %img.hidden-xs{:alt => "", :src => "../../common-files/img/header/ipad@2x.png"}/
+  .container
+    .row
+      .col-sm-7
+        %h1
+          = "less noise,"
+          %br
+          = "more clarity"
+        %p Pindoit helps take your organization into the innovation age. Employees and management work together to push forward the great ideas that create immediate and lasting change
+        .btns
+          %a.btn.btn-primary{:href => "#", data: {target: '#register', toggle: 'modal'}}
+            %span Sign Up
+          %a.btn.btn-primary{href: '#', data: {target: '#login', toggle: 'modal'} }
+            %span Log In
 
-#skrollr-body
-  %main.home-page
-    %section#slide-2.info-slide
-      .container
-        .content
-          .title About InThought
-          .text
-            InThought is a SaaS product for workplaces of all sizes that want to be more engaged with their employees.
+%section.content-31
+  .container
+    .row
+      .number 1
+      .col-sm-8.col-sm-offset-2
+        %h3 Change starts with an idea
+        %p Employees create a pinned discussion around an array of workspace related topics on their mind
+        .box
+          .img
+            = image_tag 'card_greyscale.png', height: 187
+            = image_tag 'card.png', height: 187
+            / %img{:alt => "", :height => "187", :src => "../../common-files/img/content/ticket-navy-bw@2x.png", :width => "380"}/
+            / %img{:alt => "", :height => "187", :src => "../../common-files/img/content/ticket-navy@2x.png", :width => "380"}/
+    .row
+      .number 2
+      .col-sm-8.col-sm-offset-2
+        #pt-1.page-transitions.pt-perspective
+          .pt-page.pt-page-current
+            %h3 Employees Collaborate to define initiatives
+            %p Majority rules. Every idea is treated equally until it meets a defined level of endorsement
+            .box
+              .img
+                = image_tag 'rocket_greyscale.png'
+                = image_tag 'rocket.png'
+                / %img{:alt => "", :height => "179", :src => "../../common-files/img/content/map-bw@2x.png", :width => "380"}/
+                / %img{:alt => "", :height => "179", :src => "../../common-files/img/content/map@2x.png", :width => "380"}/
+          .pt-controls
+            %a.pt-control-prev{:href => "#"}
+            %a.pt-control-next{:href => "#"}
+    .row
+      .number 3
+      .col-sm-8.col-sm-offset-2
+        #pt-2.page-transitions.pt-perspective
+          .pt-page.pt-page-current
+            %h3 Ideas spring into Action
+            %p Once a workplace idea becomes endorsed, the star employee is recognized, and the idea becomes a 'doit' action item for Management
+            .box
+              .img
+                = image_tag 'idea_doit_greyscale.png'
+                = image_tag 'idea_doit.png'
+                / %img{:alt => "", :height => "193", :src => "../../common-files/img/content/ps-wire-imac-bw@2x.png", :width => "397"}/
+                / %img{:alt => "", :height => "193", :src => "../../common-files/img/content/ps-wire-imac@2x.png", :width => "397"}/
+          .pt-controls
+            %a.pt-control-prev{:href => "#"}
+            %a.pt-control-next{:href => "#"}
 
-#skrollr-body
-  %main.home-page
-    %section#slide-3.img-slide
-      .bcg{"data-anchor-target" => "#slide-3", "data-bottom-top" => "background-position: 50% 70px;", "data-top-bottom" => "background-position: 50% -70px;"}
-        .container
-          .content
-            .title Flexible Communication
-            .text
-              Both employers and employees can post and interact over the platform. Receive update notifications, create timed questions/responses, and also modify the visibility of the threads.
+%section.content-18
+  .container
+    %h1 Sometimes it's best to let others do the talking
+    #c-18_myCarousel.carousel.slide{"data-interval" => "600000"}
+      .controls
+        %a.carousel-control.left.disabled{"data-slide" => "prev", :href => "#"}
+        %a.carousel-control.right{"data-slide" => "next", :href => "#c-18_myCarousel"}
+      .carousel-inner
+        .item.active
+          .quote-text
+            Pindoit helps me better engage my employees. We have been agile in addressing important ideas and key contributors... In short, it's a killer tool at a great price.
+          .quote-author @SyncI&D, syncidlabs.com
+        / .item
+        /   .quote-text
+        /     Colored, stylish icons can easily be modified and used in a wide variety of projects
+        /   .quote-author @stSilent, DesignModo.com
+        / .item
+        /   .quote-text
+        /     Colored, stylish icons can easily be modified and used in a wide variety of projects
+        /   .quote-author @stSilent, DesignModo.com
+    / .row.quotes
+    /   .col-sm-3
+    /     %h6 @mc
+    /     Easy to change and easy to create new elements with color.
+    /   .col-sm-4.col-sm-offset-1
+    /     %h6 @madbyte
+    /     Awesome Kit. It’s more easiest way to make my startup. Thanks!
+    /   .col-sm-3.col-sm-offset-1
+    /     %h6 @stSilent
+    /     Create new elements with color swatches. Wow!
 
-#skrollr-body
-  %main.home-page
-    %section#slide-4.info-slide
-      .container
-        .content
-          .title Employee Engagement
-          .text
-            We allow employees to anonymously interact with one another over posts created about any kind of topic in the work place.Managers see trending posts, and the sentiment of the messages.
+%section.content-11
+  .container
+    %span Less than a cup of coffee a day
+    %a.btn.btn-large.btn-danger{:href => "/price"} BUY IT NOW
 
-#skrollr-body
-  %main.home-page
-    %section#slide-5.img-slide
-      .bcg{"data-anchor-target" => "#slide-5", "data-bottom-top" => "background-position: 50% 70px;", "data-top-bottom" => "background-position: 50% -70px;"}
-        .container
-          .content
-            .title Key Contributor Identity
-            .text
-              Finally there is a platform when you can speak your mind, and not worry about offending a co-worker. We are interested in what’s really on worker minds’, because this is where true change can be found - for managers its valuable input that can transform thoughts into actionable items.
+%footer.footer-12
+  .container
+    Made with
+    %span.fui-heart
+    in Waterloo
 
+%footer.footer-2
+  .container
+    %nav.pull-left
+      %ul
+        %li.active
+          %a{:href => "/"} Home
+        / %li
+        /   %a{:href => "#"} Features
+        %li
+          %a{:href => "/price"} Price
+        %li
+          %a{:href => "/contact_us"} Contact Us
+    .social-btns.pull-right
+      %a{:href => "#"}
+        .fui-facebook
+        .fui-facebook
+      %a{:href => "#"}
+        .fui-twitter
+        .fui-twitter
 
-#skrollr-body
-  %main.home-page
-    %section#slide-6.info-slide
-      .container
-        .content
-          .title Prioritizing and Management
-          .text
-            Managers have a top-level view of trending posts and initiatives between employees, making sense of valuable data and identifying key contributors through sentiment analysis from within the workforce. All through our easy to use and intuitive dashboard.
-
-#skrollr-body
-  %main.home-page
-    %section#slide-7.img-slide
-      .bcg{"data-anchor-target" => "#slide-7", "data-bottom-top" => "background-position: 50% 70px;", "data-top-bottom" => "background-position: 50% -70px;"}
-        .container
-          .content
-            .title Stay Updated
-            .text
-              / %h4 Input your email to stay up to date.
-              .row
-                .col-xs-12.col-sm-6.col-sm-offset-6
-                  = form_for Subscription.new do |f|
-                    .field
-                      = f.text_field :email, placeholder: 'Email', class: 'form-control'
-                    .field
-                      = f.text_area :note, placeholder: 'Additional Notes...', class: 'form-control'
-                    .field
-                      = f.submit 'Keep Me Updated', class: 'btn btn-success'
-#skrollr-body.footer
-  .footer-logo
-    .footer-logo-img-wrapper
-      = image_tag "verse_logo_white.png", class: 'img-responsive'
-  .footer-content
-    .col-sm-6
-      %p
-        Contact us:
-        = mail_to 'clinton@versesoftwarelab.com'
-      %p
-        About us:
-        = link_to 'www.versesoftwarelab.com', 'http://www.versesoftwarelab.com'
-      %p
-        151 Charles St W, Kitchener, ON N2G 1H6
-
-/ .modal.fade{:id => "info", :role => "dialog"}
-/   .modal-dialog
-/     .modal-content
-/       .modal-header
-/         %button.close{"data-dismiss" => "modal", :type => "button"}
-/           %span{"aria-hidden" => "true"} ×
-/           %span.sr-only Close
-/         = image_tag 'home/tactic_hive_info_package.png', class: 'img-responsive'

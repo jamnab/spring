@@ -1,7 +1,7 @@
 # Faye
 development:
-  server: "http://localhost:9292/faye"
-  adapter_javascript_url: "http://localhost:9292/faye/faye.js"
+  server: "http://pindoit.com:9292/faye"
+  adapter_javascript_url: "http://pindoit.com:9292/faye/faye.js"
   auth_token: binhao12345678910
   adapter: "Faye"
   async: true
@@ -20,15 +20,15 @@ development:
 #   adapter: false
 
 test:
-  server: "http://localhost:9292/faye"
-  adapter_javascript_url: "http://localhost:9292/faye/faye.js"
+  server: "http://pindoit.com:9292/faye"
+  adapter_javascript_url: "http://pindoit.com:9292/faye/faye.js"
   adapter: "Faye"
   auth_token: "secret"
   async: false
 
 production:
-  server: "http://example.com/faye"
-  adapter_javascript_url: "http://localhost:9292/faye/faye.js"
+  server: "http://pindoit.com:9292/faye"
+  adapter_javascript_url: "http://pindoit.com:9292/faye/faye.js"
   adapter: "Faye"
   auth_token: "f6adfdda9d41b7ad42860f4bc92d8134e0516b260ebfd8e087c822a56fb088e5"
   async: true

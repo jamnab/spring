@@ -377,7 +377,7 @@
   span:before {
     display: block;
     font-size: 45px;
-    line-height: 68px;
+    line-height: 62px;
     margin: 0px;
   }
 }
@@ -392,4 +392,8 @@
   option:nth-child(3) {
     background-color: $main-facility;
   }
+}
+
+.dataTables_wrapper select {
+  line-height: 20px !important;
 }
