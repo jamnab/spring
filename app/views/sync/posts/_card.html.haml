@@ -49,10 +49,12 @@
               -post.pictures.each_with_index do |pic,index|
                 - if index == 0
                   .item.active
-                    = image_tag pic.image.url(:post_image)
+                    = link_to picture(:pic_id => pic.id) do
+                      = image_tag pic.image.url(:post_image)
                 -else
                   .item
-                    = image_tag pic.image.url(:post_image)
+                    = link_to picture(:pic_id => pic.id) do
+                      = image_tag pic.image.url(:post_image)
 
 
       .signature

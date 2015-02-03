@@ -8,6 +8,16 @@ class PagesController < ApplicationController
       @organization = Organization.first if current_user.is_admin?
     end
   end
+  
+  #used to load pics for the main bord 
+  def load_picture
+
+    raise
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
+    end
+  end
 
   def dashboard
     @organization = current_organization

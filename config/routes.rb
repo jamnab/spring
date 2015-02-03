@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'dashboard' => 'pages#dashboard', as: :dashboard
   get 'summary' => 'pages#summary', as: :summary
+  get 'load_pictures' => 'pages#load_pictures', as: :picture 
   get 'search' => 'pages#search', as: :search
 
   resources :subscriptions
