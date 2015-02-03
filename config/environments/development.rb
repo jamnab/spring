@@ -33,8 +33,3 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
-
-# auto launch faye
-Thread.new do
-  system("rackup sync.ru -E development")
-end
