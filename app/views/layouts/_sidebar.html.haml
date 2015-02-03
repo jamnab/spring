@@ -4,23 +4,23 @@
     .icon.fa.fa-times-circle-o.hidden
   .navicons
     - if current_user
-      = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading" do
+      = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Doits", placement: "right", trigger: "hover"} do
         = image_tag 'doit.png'
-      = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading" do
+      = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading popover-trigger" , data: {content: "Dashboard", placement: "right", trigger: "hover"} do
         %span.flaticon-house28
-      = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading" do
+      = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Favourites", placement: "right", trigger: "hover"} do
         %span.flaticon-favourites7
-      = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading" do
+      = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Archived", placement: "right", trigger: "hover"} do
         %span.flaticon-archive18
-      = link_to :summary do
+      = link_to :summary, class: 'popover-trigger', data: {content: "Analytics", placement: "right", trigger: "hover"} do
         %span.flaticon-business155
-      = link_to :newsfeed do
+      = link_to :newsfeed, class: 'popover-trigger', data: {content: "Newsfeed", placement: "right", trigger: "hover"} do
         %span.flaticon-internet62
 
       .logo.brand-link
         = image_tag "pindoit_logo_vert.png"
 
-      = link_to '#', class: "logout-link" do
+      = link_to '#', class: "logout-link popover-trigger", data: {content: "Logout", placement: "right", trigger: "hover"} do
         %span.flaticon-door9
     - else
       = link_to '#', data: {target: "#login", toggle: "modal"} do
