@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
-  before_action :check_login, only: [:dashboard, :summary, :search, :archive]
+  before_action :check_login, only: [:pending_approval, :dashboard, :summary, :search, :archive]
+  before_action :set_organization, only: [:pending_approval, :dashboard, :summary, :search, :archive]
+  before_action :check_org_activation, only: [:dashboard, :summary, :search, :archive]
+
   @@page_limit = 10
 
   def home
@@ -25,8 +28,6 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @organization = current_organization
-    @organization = Organization.first if current_user.is_admin?
     @page = params[:page]
     @page = "dashboard" if !params[:page]
     @sort = params[:sort]
@@ -113,9 +114,6 @@ class PagesController < ApplicationController
   end
 
   def search
-    @organization = current_organization
-    @organization = Organization.first if current_user.is_admin?
-
     if params[:query].present?
       @posts = @organization.posts.search(params[:query])
     else
@@ -132,21 +130,31 @@ class PagesController < ApplicationController
     # if current_user.is_manager?
     #   redirect_to :back, notice: "No permission" and return
     # end
-    @organization = current_organization
-    @organization = Organization.first if current_user.is_admin?
     @users = @organization.users
     @sorted_users = @users.sort_by{|x| -(x.contribution['total']+x.impact['total'])}
   end
 
+  def pending_approval
+  end
+
   def newsfeed
-    @organization = current_organization
-    @organization = Organization.first if current_user.is_admin?
   end
 
   private
     def check_login
       if current_user.nil?
         redirect_to :root and return
+      end
+    end
+
+    def set_organization
+      @organization = current_organization
+      @organization = Organization.first if current_user.is_admin?
+    end
+
+    def check_org_activation
+      if !@organization.activated
+        redirect_to :pending_approval and return
       end
     end
 end
