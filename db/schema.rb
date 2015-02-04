@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112155737) do
+ActiveRecord::Schema.define(version: 20150204215559) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -83,9 +83,12 @@ ActiveRecord::Schema.define(version: 20150112155737) do
   create_table "organizations", force: true do |t|
     t.string   "name"
     t.string   "access_token"
-    t.boolean  "activated",    default: false
+    t.boolean  "activated",            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "twitter_handle"
+    t.string   "twitter_widget_id"
+    t.string   "facebook_page_handle"
   end
 
   create_table "pictures", force: true do |t|

@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
-  before_action :check_login, only: [:pending_approval, :dashboard, :summary, :search, :archive]
-  before_action :set_organization, only: [:pending_approval, :dashboard, :summary, :search, :archive]
-  before_action :check_org_activation, only: [:dashboard, :summary, :search, :archive]
+  before_action :check_login, only: [:pending_approval, :dashboard, :summary, :search, :archive, :newsfeed]
+  before_action :set_organization, only: [:pending_approval, :dashboard, :summary, :search, :archive, :newsfeed]
+  before_action :check_org_activation, only: [:dashboard, :summary, :search, :archive, :newsfeed]
 
   @@page_limit = 10
 
@@ -50,7 +50,7 @@ class PagesController < ApplicationController
       elsif @page == "archive"
          @posts = current_organization.posts.where(graveyard: true)
       else
-        @posts = current_organization.posts
+        @posts = current_organization.posts.where(graveyard: false)
       end
 
     end
@@ -138,6 +138,8 @@ class PagesController < ApplicationController
   end
 
   def newsfeed
+    @posts = current_organization.posts.where(graveyard: false)
+    @posts = @posts.reject{|r| r.doit? == false }
   end
 
   private

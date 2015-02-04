@@ -133,8 +133,6 @@ $ ->
       }
     ]
   }
-
-
   chart_canvas = $(".org-graph-canvas").get(0).getContext("2d")
   org_graph = new Chart(chart_canvas).Line(data, {bezierCurveTension : 0.0})
 

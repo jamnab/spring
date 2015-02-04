@@ -1,7 +1,9 @@
-
-$(window).scroll ->
-  if $(window).scrollTop() + $(window).height() is $(document).height()
-    $('#next-page').trigger('click');
+$ ->
+  $(window).scroll ->
+    alert($(window).scrollTop())
+    if $(window).scrollTop() + $(window).height() is $(document).height()
+      # console.log("#{$(window).scrollTop() + $(window).height()} vs #{$(document).height()}")
+      $('#next-page').trigger('click');
 
 $ ->
   # Side bar toggling
