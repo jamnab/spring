@@ -58,13 +58,13 @@
   padding: 20px 40px;
 
   #newsfeed-carousel {
-    .carousel-indicators { width: 100% }
     .item { height: 490px; }
   }
 
-  .post-broad {
+  .post-board {
     overflow-x: hidden;
     overflow-y: scroll;
+    margin: 0px -44px;
   }
 
   #leaderboards {

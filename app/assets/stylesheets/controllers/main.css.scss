@@ -31,11 +31,6 @@
   }
 }
 
-.carousel-indicators {
-  padding: 0px;
-  margin-left: -50%;
-}
-
 html, body {
   // height: 100%;
   width: 100%;
@@ -521,6 +516,7 @@ a:hover {
 }
 
 .body-wrapper {
+  overflow: hidden;
   width: calc(100% - 70px);
 }
 
