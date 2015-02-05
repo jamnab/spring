@@ -140,6 +140,13 @@ class PagesController < ApplicationController
   def newsfeed
     @posts = current_organization.posts.where(graveyard: false)
     @posts = @posts.reject{|r| r.doit? == false }
+
+    @users = @organization.users
+    @sorted_users_by_post_type = {
+      Post::WORK => @users.sort_by{|x| -x.performance_by_post_type(Post::WORK)['performance']},
+      Post::PLAY => @users.sort_by{|x| -x.performance_by_post_type(Post::PLAY)['performance']},
+      Post::FACILITY => @users.sort_by{|x| -x.performance_by_post_type(Post::FACILITY)['performance']},
+    }
   end
 
   private

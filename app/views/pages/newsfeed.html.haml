@@ -42,18 +42,22 @@
             - else
               .fb-like-box{"data-colorscheme" => "light", "data-header" => "true", "data-href" => "https://www.facebook.com/#{@organization.facebook_page_handle}", "data-show-border" => "true", "data-show-faces" => "false", "data-stream" => "true", height: '470'}
       #leaderboards.item.fade
-        .leaderboard
-          .leader-badge
-            = image_tag 'ribbon_work.png', class: 'img-responsive'
-          .top-performers
-        .leaderboard
-          .leader-badge
-            = image_tag 'ribbon_play.png', class: 'img-responsive'
-          .top-performers
-        .leaderboard
-          .leader-badge
-            = image_tag 'ribbon_facility.png', class: 'img-responsive'
-          .top-performers
+        - Post::TYPES.each do |post_type|
+          .leaderboard.col-xs-6
+            .leader-badge.pull-left
+              = image_tag "ribbon_#{post_type['id']}.png", class: 'img-responsive'
+            .top-performers.pull-left
+              %h4 Top Performers in #{post_type['name']}
+              - @sorted_users_by_post_type[post_type['id']][0..4].each do |user|
+                %p.performace
+                  = image_tag user.profile_image_url
+                  %b= user.full_name
+                  \|
+                  Performace Index:
+                  = user.performance_by_post_type(post_type['id'])['performance']
+                  (#{user.performance_by_post_type(post_type['id'])['contribution']} + #{user.performance_by_post_type(post_type['id'])['positive_impact']})
+
+
       #doit-list.item.fade
         / TODO: Enforce list view when implemented
         .post-board
