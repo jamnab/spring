@@ -15,7 +15,7 @@
  *= require font-awesome
  *= require_self
  *= require lightbox
- *= require_tree .
+ *= require_tree ./controllers
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  */
 

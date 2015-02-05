@@ -21,7 +21,7 @@ class Sync.CommentNotification extends Sync.View
    
   
 class Sync.PostCard extends Sync.View
-  
+
   beforeInsert: ($el) ->
     $el.hide()
     post = $el.children()
@@ -40,7 +40,7 @@ class Sync.PostCard extends Sync.View
         @insert($el)
     else
       @insert($el)
-  afterInsert: -> 
+  afterInsert: ->
     $(".loading-wrapper").remove();
     @$el.fadeIn 'slow'
     $(".post-loading").click ->
@@ -51,9 +51,9 @@ class Sync.PostCard extends Sync.View
     $(".post-loading").click ->
       id = $(this).attr("id")
       target = ".post.".concat(id);
-      $(target).append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")   
+      $(target).append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")
   beforeRemove: -> @$el.fadeOut 'slow', => @remove()
-  
+
 $ ->
   # init search ajax
   $('.new-post-number').change ->
@@ -70,7 +70,7 @@ $ ->
   });
 
 $ ->
-  
+
   $(".nested_pics_button").click ->
     $('.nested_pics_form').append("<input class='nested_pics_button' id='images_' multiple='multiple' name='images[]' type='file'>")
 

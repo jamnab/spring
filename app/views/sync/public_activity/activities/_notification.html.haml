@@ -1,0 +1,9 @@
+.notification-card.col-xs-12{class: "read_#{activity.read}" }
+	= link_to activity.owner do
+		= activity.owner.username
+	= (((activity.key).split(".")[1].sub! "_", " ").sub! "_", " ")
+	= link_to activity.trackable do
+		= activity.trackable_type
+	= activity.collected
+- activity.read = true
+- activity.save

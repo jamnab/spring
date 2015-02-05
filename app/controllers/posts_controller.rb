@@ -48,7 +48,7 @@ class PostsController < ApplicationController
           @activity = PublicActivity::Activity.create(owner: current_user,
           key: 'Post.made_a_new',recipient: u, trackable:@post)
           if @activity.id != nil 
-            sync_new @activity, scope: @vendor.user
+            sync_new @activity, scope: u
             sync_new @activity
           end
         end
