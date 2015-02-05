@@ -30,7 +30,7 @@ class Post < ActiveRecord::Base
   end
 
   def self.all_alt_doits
-    Post.find_by_sql("SELECT `posts`.* FROM `posts` INNER JOIN `comments` ON `comments`.`commentable_id` = `posts`.`id` AND `comments`.`commentable_type` = 'Post'AND `comments`.opinion >= `posts`.threshold")
+    Post.find_by_sql("SELECT `posts`.* FROM `posts` INNER JOIN `comments` ON `comments`.`commentable_id` = `posts`.`id` AND `comments`.`commentable_type` = 'Post' AND `comments`.opinion >= `posts`.threshold")
   end
 
   def doit?

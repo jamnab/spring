@@ -131,7 +131,7 @@ class PagesController < ApplicationController
     #   redirect_to :back, notice: "No permission" and return
     # end
     @users = @organization.users
-    @sorted_users = @users.sort_by{|x| -(x.contribution['total']+x.impact['total'])}
+    @sorted_users = @users.sort_by{|x| -(x.contribution['total']+x.impact['positive'])}
   end
 
   def pending_approval

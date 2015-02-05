@@ -50,10 +50,21 @@ class User < ActiveRecord::Base
 
   def impact
     # overall received opinions
-    opinions = self.posts.map{|x| x.opinions}.flatten + self.comments.map{|x| x.opinions}.flatten
-    {'total' => opinions.count,
-     'positive' => opinions.select{|x| x.positive}.count,
-     'negative' => opinions.select{|x| !x.positive}.count }
+    opinions_from_posts = Opinion.where(positive: true) \
+      .joins( "INNER JOIN `posts` ON `opinions`.`opinionable_id` = `posts`.`id`" ) \
+      .where( :opinions => { opinionable_type: 'Post' } ) \
+      .where( :posts => { user_id: self.id } )
+
+    opinions_from_comments = Opinion \
+      .joins( "INNER JOIN `comments` ON `opinions`.`opinionable_id` = `comments`.`id`" ) \
+      .where( :opinions => { opinionable_type: 'Comment' } ) \
+      .joins( "INNER JOIN `posts` ON `comments`.`commentable_id` = `posts`.`id`" ) \
+      .where( :comments => { commentable_type: 'Post' } ) \
+      .where( :posts => { user_id: self.id} )
+
+    {'total' => opinions_from_posts.count + opinions_from_comments.count,
+     'positive' => opinions_from_posts.like.count + opinions_from_comments.like.count,
+     'negative' => opinions_from_posts.dislike.count + opinions_from_comments.dislike.count }
   end
 
   def performance_by_post_type(post_type)
@@ -76,14 +87,14 @@ class User < ActiveRecord::Base
     impact_from_posts = Opinion.where(positive: true) \
       .joins( "INNER JOIN `posts` ON `opinions`.`opinionable_id` = `posts`.`id`" ) \
       .where( :opinions => { opinionable_type: 'Post' } ) \
-      .where( :posts => { user_id: self.id } ).count
+      .where( :posts => { user_id: self.id, post_type: post_type } ).count
 
     impact_from_comments = Opinion \
       .joins( "INNER JOIN `comments` ON `opinions`.`opinionable_id` = `comments`.`id`" ) \
       .where( :opinions => { opinionable_type: 'Comment' } ) \
       .joins( "INNER JOIN `posts` ON `comments`.`commentable_id` = `posts`.`id`" ) \
       .where( :comments => { commentable_type: 'Post' } ) \
-      .where( :posts => { user_id: self.id } ).count
+      .where( :posts => { user_id: self.id, post_type: post_type } ).count
 
     impact = impact_from_posts + impact_from_comments
 
