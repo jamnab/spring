@@ -6,7 +6,7 @@
 - if @posts.empty?
   %h3.text-center There are no posts matching this criterion.
 
--if @sort != "discussed" && @sort != "upvoted"
+- if @sort != "discussed" && @sort != "upvoted"
   = render 'pages/new_post_partial'
 
 - @posts.each do |post|
