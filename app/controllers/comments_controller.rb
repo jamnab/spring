@@ -63,10 +63,25 @@ class CommentsController < ApplicationController
     end
     respond_to do |format|
       if @comment.save
-        sync_new @comment, scope: @post
+        
         if @comment.commentable_type == "Post"
         @post = @comment.commentable
         @comments = @post.comments
+        sync_new @comment, scope:@post
+        sync_update @post
+        @activity = PublicActivity::Activity.create(owner: current_user,
+          key: 'Comment.commented_on_a', trackable:@comment)
+        @u_activity = PublicActivity::Activity.create(owner: current_user,key: 'Comment.commmented_on_your',trackable:@comment)
+
+        @post.comments.each do |c|
+          if c.user != @post.user
+            @activity.users << c.user
+            sync_new @activity, scope:c.user
+          end
+        end
+        @u_activity.users << @post.user
+        sync_new @u_activity, scope:@post.user
+
         end
         
         format.html { redirect_to @comment.commentable, notice:  'Comment was successfully created.' }

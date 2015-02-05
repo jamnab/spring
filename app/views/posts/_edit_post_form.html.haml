@@ -32,7 +32,7 @@
               = f.text_field :threshold, class: "form-control"
             .field.col-xs-12
               = f.label :content
-              = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5
+              = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5, maxlength: 250
             .field.col-xs-12
               = f.label :post_type
               = f.select(:post_type, Post::TYPES.collect {|e| [ e['name'], e['id'] ]}, {}, { class: "form-control" })

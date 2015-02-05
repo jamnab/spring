@@ -265,6 +265,20 @@ h3.page_title {
   }
 }
 
+.post .header .title {
+  width: 320px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+  float: left;
+}
+
+.modal h4.modal-title {
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+}
+
 .post, .comment {
 
   .header, .signature {

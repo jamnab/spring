@@ -7,13 +7,10 @@
   .post-wrapper{class: ("doithidden" if post.doit?)}
     .post{class: "#{class_type} #{post.id}", id: class_type}
       .header
-        = post.title
+        %span.title= post.title
         .traction{class: ("doit" if post.doit?)}
           - if post.doit?
             = image_tag "doit.png"
-          - else
-            Support:
-
           #{post.opinion} / #{post.threshold}
           .tags
             - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
@@ -34,27 +31,22 @@
           %ol.carousel-indicators
             - if post.pictures.empty?
               %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=>"0"}
-            -else
+            - else
               -post.pictures.each_with_index do |pic,index|
                 - if index == 0
                   %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
-                -else
+                - else
                   %li{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
 
           .carousel-inner
             - if post.pictures.empty?
               .item.active
-                = image_tag ("//placehold.it/150X100")
-            -else
-              -post.pictures.each_with_index do |pic,index|
-                - if index == 0
-                  .item.active
+                = image_tag ("no_image.png")
+            - else
+              - post.pictures.each_with_index do |pic,index|
+                .item{class: ("active" if index == 0)}
+                  %a{"href"=> pic.image.url, "data-lightbox" => post.title}
                     = image_tag pic.image.url(:post_image)
-                -else
-                  .item
-                    = image_tag pic.image.url(:post_image)
-
-
       .signature
         .user
           - if !post.anonymous || post.doit?

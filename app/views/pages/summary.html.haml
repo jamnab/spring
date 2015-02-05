@@ -41,7 +41,7 @@
       .col-xs-12
         %h4
           Number of Personnels:
-          %b 69
+          %b= @sorted_users.length
         %h4
           Top Performers this week:
           %b= @sorted_users[0..2].map{|x| x.full_name} * ', '
@@ -60,10 +60,11 @@
             %th First Name
             %th Last Name
             %th Job Title
-            %th # Posts (<u>W</u>/M/T)
-            %th # Comments (<u>W</u>/M/T)
-            %th Contribution (<u>T</u>/+ve/-ve)
-            %th Impact (<u>+ve</u>/-ve/T)
+            %th # Posts
+            %th # Comments
+            %th # Doits
+            %th Opinions Given (<u>Total</u>/+/-)
+            %th Opinions Received (<u>+</u>/-/Total)
           %tbody.text-center
             - @users.each do |user|
               %tr
@@ -72,9 +73,11 @@
                 %td= user.last_name
                 %td= user.job_title
                 %td
-                  (<b>#{user.posts.count}</b>/-/-)
+                  #{user.posts.count}
                 %td
-                  (<b>#{user.comments.count}</b>/-/-)
+                  #{user.comments.count}
+                %td
+                  #{user.posts.all_doits.count + user.comments.all_doits.count}
                 %td
                   (<b>#{user.contribution['total']}</b>/#{user.contribution['positive']}/#{user.contribution['negative']})
                 %td

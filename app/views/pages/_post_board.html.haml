@@ -11,6 +11,7 @@
 
 - @posts.each do |post|
   = sync partial: "card", resource: post
+.last-elm{style:"height:1px;width:1px;"}
 
 / -if @sort == "discussed" || @sort == "upvoted"
 /   = render 'pages/new_post_partial'

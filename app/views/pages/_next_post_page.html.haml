@@ -1,1 +1,2 @@
-= link_to "next", dashboard_path(:query => @query, :sort => @sort, :page => @page, :page_num => @page_num), remote: true, id: "next-page"
+- if (@page_num.to_i-1) != @total_pages.to_i 
+	= link_to "next", dashboard_path(:query => @query, :sort => @sort, :page => @page, :page_num => @page_num,:last_page => (@page_num.to_i-1)), remote: true, id: "next-page"

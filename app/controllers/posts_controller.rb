@@ -44,6 +44,15 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        @activity = PublicActivity::Activity.create(owner: current_user,
+          key: 'Post.made_a_new', trackable:@post)
+        if @activity.id != nil
+          sync_new @activity
+        end
+        current_user.organization.users.each do |u|
+          @activity.users << u
+          sync_new @activity, scope:u
+        end
         # @msg = "Your post was created successfully"
         # @class = "success"
         flash[:success] ="Your post was created successfully"
@@ -55,16 +64,13 @@ class PostsController < ApplicationController
           }
         end
         sync_new @post, scope: current_organization
+        sync_new @post
         if current_user.is_admin?
           @posts=Post.all
         else
           @posts = current_organization.posts
         end
-        format.html { redirect_to :dashboard, notice: 'Post was successfully created.' }
         format.js
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -79,6 +85,15 @@ class PostsController < ApplicationController
     end
     respond_to do |format|
       if @post.update(post_params)
+        @activity = PublicActivity::Activity.create(owner: current_user,
+          key: 'Post.edited_a', trackable:@post)
+        if @activity.id != nil
+          sync_new @activity
+        end
+        current_user.organization.users.each do |u|
+          @activity.users << u
+          sync_new @activity, scope:u
+        end
         sync_update @post
         format.html { redirect_to :dashboard, notice: 'Post was successfully updated.' }
         format.js

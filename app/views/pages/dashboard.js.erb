@@ -21,10 +21,15 @@ $(".loading-wrapper").remove();
     }
 });
 <% elsif @next_page == true %>
-	<% if !@posts.empty? %>
+	$('.last-elm').remove()
+	<% if @posts != nil %>
 		$('.post-board').append("<%= j render(:partial => 'pages/post_board') %>");
 	<% end %>
 	$('.page-num').html("<%= j render(:partial => 'pages/next_post_page') %>");
+	if ($("body").height() < $(window).height()) {
+		alert("3")
+		$('#next-page').trigger('click');
+	}
 <%else%>
 	$('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>");
 

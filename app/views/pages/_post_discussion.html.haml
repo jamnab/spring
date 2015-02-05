@@ -15,32 +15,28 @@
             %ol.carousel-indicators
               - if post.pictures.empty?
                 %li.active{"data-target"=> "#carousel-discussion", "data-slide-to"=>"0"}
-              -else
-                -post.pictures.each_with_index do |pic,index|
+              - else
+                - post.pictures.each_with_index do |pic,index|
                   - if index == 0
                     %li.active{"data-target"=> "#carousel-discussion", "data-slide-to"=> index}
-                  -else
+                  - else
                     %li{"data-target"=> "#carousel-discussion", "data-slide-to"=> index}
             .carousel-inner
               - if post.pictures.empty?
                 .item.active
-                  = image_tag ("//placehold.it/170x95")
-              -else
-                -post.pictures.each_with_index do |pic,index|
-                  - if index == 0
-                    .item.active
+                  = image_tag ("no_image.png")
+              - else
+                - post.pictures.each_with_index do |pic,index|
+                  .item{class: ("active" if index == 0)}
+                    %a{"href"=> pic.image.url, "data-lightbox" => post.title}
                       = image_tag pic.image.url(:post_image)
-                  -else
-                    .item
-                      = image_tag pic.image.url(:post_image)
-            
         %hr
         .row
           = form_for Comment.new, remote: true do |f|
             = f.hidden_field :commentable_id, :value => post.id
             = f.hidden_field :commentable_type, :value => "Post"
             .field.col-xs-12
-              = f.text_area :content, class: "form-control", placeholder: "Enter your comment here ...", rows: 3
+              = f.text_area :content, class: "form-control", placeholder: "Enter your comment here ...", rows: 3, maxlength: 200
 
             / .field.col-xs-12.text-right
             /   = check_box_tag("comment[anonymous]", "1", false, class: "checkbox")
@@ -53,6 +49,7 @@
           -@post = post
           = render 'comments_filter_sort', :collection => @post
         #comments.comments
-          = sync_new partial: "card", resource: Comment.new, scope: post
+          - if @sort != "upvoted"
+            = sync_new partial: "card", resource: Comment.new, scope:post
           - post.comments.order("created_at DESC").limit(4).each do |comment|
             = sync partial: "card", resource: comment

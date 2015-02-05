@@ -1,4 +1,3 @@
-
 - user = User.first
 - class_type = comment.commentable.type?
 
@@ -9,14 +8,14 @@
         .content
           = comment.content
       .col-xs-4
-        .traction
-          %h4{class: ("doit" if false)}
-            #{comment.opinion} / #{comment.commentable.threshold}
-          .indicator
-            - if comment.doit?
-              = image_tag "doit.png"
-        .controls
-          - if comment.is_suggestion?
+        - if comment.is_suggestion?
+          .traction
+            %h4{class: ("doit" if false)}
+              #{comment.opinion} / #{comment.commentable.threshold}
+            .indicator
+              - if comment.doit?
+                = image_tag "doit.png"
+          .controls
             - opinion = Opinion.where(opinionable_type: "Comment", opinionable_id: comment.id, user_id: current_user.id).first
             = form_for Opinion.new, remote: true do |f|
               = f.hidden_field :positive, value: 'true'

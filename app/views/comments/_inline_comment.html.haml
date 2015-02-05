@@ -1,8 +1,8 @@
 - class_type = @comment.commentable.type?
 =form_for @comment, remote: true do |f|
   .col-xs-12
-    .content 
-      = f.text_area :content, class: "form-control", rows: 3
+    .content
+      = f.text_area :content, class: "form-control", rows: 3, maxlength: 200
   .signature
     .user
       - if @comment.doit?
@@ -21,4 +21,4 @@
       - if can? :update, @comment
         = f.submit "save",  class: "btn btn-sm btn-#{class_type}"
 
-      
+

@@ -19,12 +19,15 @@ class PagesController < ApplicationController
   def contact_us
     render layout: "homepage"
   end
+  
+  #used to load pics for the main bord 
+  def load_pictures
 
-  def email_us
-    PagesMailer.email_us(params[:name],params[:email],params[:message]).deliver
-
-    flash[:notice] = 'The email has been delivered. You will be contacted shortly.'
-    render :contact_us, layout: 'homepage'
+    @picture = Picture.find(params[:pic_id])
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
+    end
   end
 
   def dashboard
@@ -40,7 +43,7 @@ class PagesController < ApplicationController
       elsif @page == "archive"
         @posts = Post.where(graveyard: true)
       else
-        @posts = Post.all
+        @posts = Post.where(graveyard: false)
       end
 
     else
@@ -91,6 +94,7 @@ class PagesController < ApplicationController
     end
 
     if params[:page_num] != nil
+      @total_pages =  ((@posts.count.to_f)/@@page_limit.to_f).ceil
       offset = (params[:page_num].to_i - 1) * @@page_limit
       @posts = @posts.slice(offset, @@page_limit)
       # @posts = @posts.limit(@@page_limit).offset(((params[:page_num].to_i - 1) * @@page_limit))
@@ -131,7 +135,7 @@ class PagesController < ApplicationController
     #   redirect_to :back, notice: "No permission" and return
     # end
     @users = @organization.users
-    @sorted_users = @users.sort_by{|x| -(x.contribution['total']+x.impact['total'])}
+    @sorted_users = @users.sort_by{|x| -(x.contribution['total']+x.impact['positive'])}
   end
 
   def pending_approval
