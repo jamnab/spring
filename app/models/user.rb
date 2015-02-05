@@ -12,7 +12,9 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :picture
   has_many :favourites
   has_many :fav_posts, through: :favourites
-
+  has_many :notifications
+  has_many :activities,:class_name => "PublicActivity::Activity", through: :notifications
+  has_many :email_notification_settings
   # has_many :project_memberships, dependent: :destroy
   # has_many :projects, through: :project_memberships
 

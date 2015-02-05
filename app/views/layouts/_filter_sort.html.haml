@@ -16,6 +16,14 @@
     %li
       = link_to "DOIT",dashboard_path(:query => "doit",:sort=>@sort,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-doit"
 %li.dropdown
+  .circle.new-post-number.col-xs-1
+    -if current_user
+      - if current_user.is_admin?
+        = sync_new partial: "notification", resource: Post.new
+      - else
+        = sync_new partial: "notification", resource: Post.new, scope: current_organization, resource: Post.new
+    %p.number
+    
   %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
     #sort-posts.option
       .text{style: "float:left;"}

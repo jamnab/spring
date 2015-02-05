@@ -1,13 +1,22 @@
 $ ->
   $(window).unbind("scroll")
+  if ($("body").height() < $(window).height())
+    $('#next-page').trigger('click')
   $(window).scroll ->
-    if $(window).scrollTop() + $(window).height() is $(document).height()
+    $myElt       = $('.last-elm');
+    $window      = $(window);
+    myTop        = $myElt.offset().top;
+    windowTop    = $window.scrollTop();
+    windowBottom = windowTop + $window.height()
+    if (myTop > windowTop && myTop < windowBottom )
       $('#next-page').trigger('click');
-    return
+    # if $(window).scrollTop() + $(window).height() is $(document).height()
+    #   $('#next-page').trigger('click');
+    # return
 
 $ ->
-  # Side bar toggling
   $('.carousel').carousel();
+  # Side bar toggling
   $(".sidebar-toggler").on "click", ->
     $(".body-wrapper").toggleClass "isOpen"
     $(".sidebar").toggleClass "isOpen"

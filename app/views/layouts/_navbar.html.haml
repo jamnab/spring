@@ -31,6 +31,7 @@
                     .fa.fa-search
           %li.dropdown.hidden-xs
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+              %span.flaticon-three115
               / %span.flaticon-black56
               .fa.fa-gear
               %span.caret
@@ -43,6 +44,17 @@
                 %li
                   = link_to '#', data: {target: "#edit-org", toggle: "modal"} do
                     Edit Organization
+          %li.dropdown.hidden-xs
+            %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+              .fa.fa-bell
+              %span.caret
+            %ul.dropdown-menu.notification{:role => "menu"}
+              .new
+                = sync_new partial: 'notification', resource: PublicActivity::Activity.new, scope:current_user
+              - @notifications = current_user.notifications
+              - @notifications.each do |n|
+                - activity = n.activity
+                = sync partial: 'notification', resource: activity
 
           %li.hidden-xs
             = link_to "Logout", :logout

@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  include PublicActivity::Common
+  
   searchkick
   validates :content, length: { maximum: 256}
   belongs_to :user

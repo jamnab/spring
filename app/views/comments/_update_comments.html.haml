@@ -1,4 +1,4 @@
-
-= sync_new partial: "card", resource: Comment.new, scope: @post
+- if @sort != "upvoted"
+  = sync_new partial: "card", resource: Comment.new, scope: @post
 - @comments.each do |comment|
   = sync partial: "card", resource: comment

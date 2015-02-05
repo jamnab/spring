@@ -9,9 +9,6 @@ class Comment < ActiveRecord::Base
   # has_many :labels, through: :label_entries
 
   has_many :opinions, as: :opinionable
-  sync :all
-
-  sync_scope :by_post, -> commentable {where(commentable_id: commentable.id, commentable_type: "Post")}
 
   def self.all_doits
     joins( "INNER JOIN `posts` ON `comments`.`commentable_id` = `posts`.`id`" ) \

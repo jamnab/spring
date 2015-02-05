@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204215559) do
+ActiveRecord::Schema.define(version: 20150205110021) do
+
+  create_table "activities", force: true do |t|
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "key"
+    t.boolean  "read",           default: false
+    t.boolean  "collected",      default: false
+    t.text     "parameters"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -42,6 +61,17 @@ ActiveRecord::Schema.define(version: 20150204215559) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "email_notification_settings", force: true do |t|
+    t.string   "settings_for"
+    t.integer  "timed_task_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "email_notification_settings", ["timed_task_id"], name: "index_email_notification_settings_on_timed_task_id", using: :btree
+  add_index "email_notification_settings", ["user_id"], name: "index_email_notification_settings_on_user_id", using: :btree
+
   create_table "favourites", force: true do |t|
     t.integer  "user_id"
     t.integer  "fav_post_id"
@@ -59,6 +89,13 @@ ActiveRecord::Schema.define(version: 20150204215559) do
 
   create_table "labels", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notifications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "activity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -106,8 +143,8 @@ ActiveRecord::Schema.define(version: 20150204215559) do
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
-    t.boolean  "anonymous",         default: false
-    t.integer  "threshold"
+    t.boolean  "anonymous",         default: true
+    t.integer  "threshold",         default: 20
     t.integer  "opinion",           default: 0
     t.integer  "user_id"
     t.integer  "organization_id"
@@ -156,6 +193,13 @@ ActiveRecord::Schema.define(version: 20150204215559) do
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "timed_tasks", force: true do |t|
+    t.integer  "interval"
+    t.string   "measure_of_time"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "users", force: true do |t|

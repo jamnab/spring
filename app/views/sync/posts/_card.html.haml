@@ -31,27 +31,22 @@
           %ol.carousel-indicators
             - if post.pictures.empty?
               %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=>"0"}
-            -else
+            - else
               -post.pictures.each_with_index do |pic,index|
                 - if index == 0
                   %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
-                -else
+                - else
                   %li{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
 
           .carousel-inner
             - if post.pictures.empty?
               .item.active
-                = image_tag ("//placehold.it/150X100")
-            -else
-              -post.pictures.each_with_index do |pic,index|
-                - if index == 0
-                  .item.active
+                = image_tag ("no_image.png")
+            - else
+              - post.pictures.each_with_index do |pic,index|
+                .item{class: ("active" if index == 0)}
+                  %a{"href"=> pic.image.url, "data-lightbox" => post.title}
                     = image_tag pic.image.url(:post_image)
-                -else
-                  .item
-                    = image_tag pic.image.url(:post_image)
-
-
       .signature
         .user
           - if !post.anonymous || post.doit?

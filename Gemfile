@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 
+gem 'lightboxjs', :git => "https://github.com/prophotos/lightboxjs.git"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 
@@ -21,6 +22,8 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
+
+gem 'public_activity'
 gem 'haml-rails'
 gem 'authlogic'
 gem 'whenever'

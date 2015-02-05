@@ -1,8 +1,25 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-class Sync.PostCard extends Sync.View
+# class Sync.CommentNotification extends Sync.View
+#   afterInsert: ->
+#     $('.new-comment-number').fadeIn("slow")
+#     count = $('.new-comment-number > .new-comment-notification').length
+#     $('.new-comment-number > .number').text(count)
+class Sync.PostNotification extends Sync.View
+  afterInsert: ->
+    $('.new-post-number').fadeIn("slow")
+    count = $('.new-post-number > .new-post-notification').length
+    $('.new-post-number > .number').text(count)
 
+class Sync.CommentNotification extends Sync.View
+  afterInsert: ->
+    $('.new-comment-number').fadeIn("slow")
+    count = $('.new-comment-number > .new-comment-notification').length
+    $('.new-comment-number > .number').text(count)
+
+
+class Sync.PostCard extends Sync.View
   beforeInsert: ($el) ->
     $el.hide()
     post = $el.children()
@@ -37,6 +54,9 @@ class Sync.PostCard extends Sync.View
 
 $ ->
   # init search ajax
+  $('.new-post-number').change ->
+    alert("change")
+
   $("#search").on "ajax:success", (data,status,xhr) ->
      $("#reportalert").text "Done."
 
