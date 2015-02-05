@@ -53,3 +53,64 @@
     }
   }
 }
+
+.page-wrapper {
+  padding: 20px 40px;
+
+  #newsfeed-carousel {
+    .item { height: 490px; }
+  }
+
+  .post-board {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin: 0px -44px;
+  }
+
+  #leaderboards {
+    .leaderboard {
+      // height: 160px;
+      // width: 100%;
+
+      .leader-badge {
+        height: 100%;
+        width: 140px;
+        margin-left: 20px;
+        padding: 40px 20px 20px 20px;
+      }
+
+      .top-performers {
+        height: 100%;
+        margin-left: 20px;
+        padding-top: 20px;
+
+        .performace {
+          img {
+            width: 24px;
+            border-radius: 12px;
+          }
+        }
+      }
+    }
+  }
+
+  ul li {
+    border-radius: 5px;
+    background-color: $main-highlight;
+    margin: 0px 10px;
+    cursor: pointer;
+    a { color: $inverse_text_main; }
+  }
+
+  .social-feeds {
+    padding: 20px 0px;
+  }
+
+  iframe {
+    width: 99% !important;
+  }
+
+  .fb-like-box, .fb-like-box span {
+    width: 100% !important;
+  }
+}

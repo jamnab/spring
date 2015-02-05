@@ -1,7 +1,7 @@
 
 $(".loading-wrapper").remove();
 
-<% if @populate == true %> 
+<% if @populate == true %>
 	$('.test-modal').html("<%= j render(:partial => 'pages/post_discussion') %>");
 	$('#post-discussion').modal("show")
 	var loading = "<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>"
@@ -17,17 +17,17 @@ $(".loading-wrapper").remove();
 	$("#comments").scroll(function(){
     if($(this)[0].scrollHeight - $(this).scrollTop() <= $(this).outerHeight())
     {
-        $('#next-comment-page').trigger('click');
+      $('#next-comment-page').trigger('click');
     }
 });
-<% elsif @next_page == true %> 
+<% elsif @next_page == true %>
 	<% if !@posts.empty? %>
 		$('.post-board').append("<%= j render(:partial => 'pages/post_board') %>");
 	<% end %>
 	$('.page-num').html("<%= j render(:partial => 'pages/next_post_page') %>");
 <%else%>
 	$('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>");
-	
+
 
 	<% if @query == "1" %>
 		$('.option.filter').attr('id','filter-post-play')
@@ -38,7 +38,7 @@ $(".loading-wrapper").remove();
 	<% elsif @query == "2" %>
 		$('.option.filter').attr('id','filter-post-facility')
 		$('.option.filter > .text').text("FACILITY")
-	<% elsif @query == "doit" %>
+	<% elsif @query == "doit" || @page == 'doit' %>
 		$('.option.filter').attr('id','filter-post-doit')
 		$('.option.filter > .text').text("DOIT")
 	<%end%>
@@ -58,6 +58,10 @@ $(".loading-wrapper").remove();
       $(target).append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")
     })
 <%end%>
+
 $(".body-loading").click(function() {
 	$('body').append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")
 });
+
+var stateObj = { page: "dashboard" };
+history.pushState(stateObj, "Dashboard", "dashboard");

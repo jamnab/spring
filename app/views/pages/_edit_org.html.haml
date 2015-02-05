@@ -6,7 +6,7 @@
           %span{"aria-hidden" => "true"} ×
         %h4.modal-title
           Edit Organization
-      .slide-1 
+      .slide-1
         = form_for @organization, :html => { multipart: true }  do |f|
           .modal-body.row
             .field.col-xs-12
@@ -16,6 +16,15 @@
               = f.fields_for :pictures do |p|
                 = p.label :image
                 = p.file_field :image
+            .field.col-xs-12
+              = f.label :twitter_handle
+              = f.text_field :twitter_handle, class: "form-control"
+            .field.col-xs-12
+              = f.label :twitter_widget_id
+              = f.text_field :twitter_widget_id, class: "form-control"
+            .field.col-xs-12
+              = f.label :facebook_page_handle
+              = f.text_field :facebook_page_handle, class: "form-control"
           .modal-footer
             .actions
               = f.submit 'Save', class: "btn btn-main"

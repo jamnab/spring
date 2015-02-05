@@ -24,9 +24,9 @@
               = f.hidden_field :opinionable_id, value: comment.id
               = f.hidden_field :opinionable_type, value: 'Comment'
               .btn.btn-sm.btn-like{class: "btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}"}
-                %span.flaticon-thumbs7
+                %span.flaticon-thumb31
               .btn.btn-sm.btn-dislike{class: "btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}"}
-                %span.flaticon-thumbs8
+                %span.flaticon-thumbs17
       .signature
         .user
           - if comment.doit?
@@ -45,7 +45,7 @@
           - if can? :update, comment
             = link_to edit_comment_path(comment), remote: true do
               .btn.btn-sm{class: "btn-#{class_type}"}
-                %span.flaticon-edit7
+                %span.flaticon-edit45
           - if can? :destroy, comment
             = link_to comment, method: :delete, data: { confirm: "Are you sure about this?"}, remote: true do
               .btn.btn-sm{class: "btn-#{class_type}"}

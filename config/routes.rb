@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   resources :favourites
 
+  get 'pending_approval' => 'pages#pending_approval', as: :pending_approval
   get 'dashboard' => 'pages#dashboard', as: :dashboard
+  get 'newsfeed' => 'pages#newsfeed', as: :newsfeed
   get 'summary' => 'pages#summary', as: :summary
   get 'search' => 'pages#search', as: :search
   get 'price' => 'pages#price', as: :price
