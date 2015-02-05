@@ -58,10 +58,8 @@
   padding: 20px 40px;
 
   #newsfeed-carousel {
-    .item {
-      height: 490px;
-      // background-color: $inverse_text_highlight;
-    }
+    .carousel-indicators { width: 100% }
+    .item { height: 490px; }
   }
 
   .post-broad {
