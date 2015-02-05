@@ -1,8 +1,20 @@
-
-$(window).scroll ->
-  if $(window).scrollTop() + $(window).height() is $(document).height()
-    $('#next-page').trigger('click');
-  return
+$ ->
+  $(window).unbind("scroll")
+  if ($("body").height() < $(window).height())
+    $('#next-page').trigger('click') 
+    alert("1")
+  $(window).scroll ->
+    $myElt       = $('.last-elm');      
+    $window      = $(window);           
+    myTop        = $myElt.offset().top;  
+    windowTop    = $window.scrollTop();          
+    windowBottom = windowTop + $window.height()
+    if (myTop > windowTop && myTop < windowBottom )
+      $('#next-page').trigger('click');
+      alert("2")
+    # if $(window).scrollTop() + $(window).height() is $(document).height()
+    #   $('#next-page').trigger('click');
+    # return
 
 $ ->
   $('.carousel').carousel();

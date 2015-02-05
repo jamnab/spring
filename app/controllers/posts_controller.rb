@@ -44,13 +44,14 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        @activity = PublicActivity::Activity.create(owner: current_user,
+          key: 'Post.made_a_new', trackable:@post)
+        if @activity.id != nil 
+          sync_new @activity
+        end
         current_user.organization.users.each do |u|
-          @activity = PublicActivity::Activity.create(owner: current_user,
-          key: 'Post.made_a_new',recipient: u, trackable:@post)
-          if @activity.id != nil 
-            sync_new @activity, scope: u
-            sync_new @activity
-          end
+          @activity.users << u
+          sync_new @activity, scope:u
         end
         # @msg = "Your post was created successfully"
         # @class = "success"
@@ -84,13 +85,15 @@ class PostsController < ApplicationController
     end
     respond_to do |format|
       if @post.update(post_params)
+        @activity = PublicActivity::Activity.create(owner: current_user,
+          key: 'Post.edited_a', trackable:@post)
+        if @activity.id != nil 
+          sync_new @activity
+        end
         current_user.organization.users.each do |u|
-          @activity = PublicActivity::Activity.create(owner: current_user,
-          key: 'Post.has_edited_a',recipient: u, trackable:@post)
-          if @activity.id != nil 
-            sync_new @activity, scope: u
-            sync_new @activity
-          end
+          @activity.users << u
+          sync_new @activity, scope:u
+        end
         end
         sync_update @post
         format.html { redirect_to :dashboard, notice: 'Post was successfully updated.' }

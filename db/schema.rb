@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203191719) do
+ActiveRecord::Schema.define(version: 20150205110021) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -93,6 +93,13 @@ ActiveRecord::Schema.define(version: 20150203191719) do
     t.datetime "updated_at"
   end
 
+  create_table "notifications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "activity_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "opinions", force: true do |t|
     t.boolean  "positive",         default: true
     t.integer  "opinionable_id"
@@ -113,9 +120,12 @@ ActiveRecord::Schema.define(version: 20150203191719) do
   create_table "organizations", force: true do |t|
     t.string   "name"
     t.string   "access_token"
-    t.boolean  "activated",    default: false
+    t.boolean  "activated",            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "twitter_handle"
+    t.string   "twitter_widget_id"
+    t.string   "facebook_page_handle"
   end
 
   create_table "pictures", force: true do |t|
@@ -133,8 +143,8 @@ ActiveRecord::Schema.define(version: 20150203191719) do
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
-    t.boolean  "anonymous",         default: false
-    t.integer  "threshold"
+    t.boolean  "anonymous",         default: true
+    t.integer  "threshold",         default: 20
     t.integer  "opinion",           default: 0
     t.integer  "user_id"
     t.integer  "organization_id"

@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
   resources :favourites
-
+  
+  get 'notification_settings' => 'email_notification_settings#index', :as => :notification_settings
+  get 'pending_approval' => 'pages#pending_approval', as: :pending_approval
   get 'dashboard' => 'pages#dashboard', as: :dashboard
+  get 'newsfeed' => 'pages#newsfeed', as: :newsfeed
   get 'summary' => 'pages#summary', as: :summary
   get 'load_pictures' => 'pages#load_pictures', as: :picture 
   get 'search' => 'pages#search', as: :search

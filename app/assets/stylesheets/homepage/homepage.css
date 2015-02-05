@@ -3,6 +3,6 @@
  *= require animations
  *= require jquery.bxslider
  *= require flat-ui
- *= require home
+ *= require controllers/home
  *= require_self
  */

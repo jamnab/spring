@@ -1,0 +1,64 @@
+:javascript
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+:javascript
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+.page-wrapper
+  #newsfeed-carousel.carousel.slide.carousel-fade
+    %ul.nav.nav-pills
+      %li
+        %a{data: {target: '#newsfeed-carousel', slide_to: '0'}}
+          Social Feeds
+      %li
+        %a{data: {target: '#newsfeed-carousel', slide_to: '1'}}
+          Leaderboard
+      %li
+        %a{data: {target: '#newsfeed-carousel', slide_to: '2'}}
+          Doit Action Items
+
+    %ol.carousel-indicators
+      %li.active{data: {target: "#newsfeed-carousel", slide_to: '0'}}
+      %li{data: {target: "#newsfeed-carousel", slide_to: '1'}}
+      %li{data: {target: "#newsfeed-carousel", slide_to: '2'}}
+    .carousel-inner
+      #social-feeds.item.fade.in.active
+        .row.social-feeds
+          .col-xs-6
+            - if @organization.twitter_handle.blank? || @organization.twitter_widget_id.blank?
+              %h4.text-center Twitter Credentials not Configured
+            - else
+              = link_to "https://twitter.com/#{@organization.twitter_handle}", class: 'twitter-timeline', data: {widget_id: @organization.twitter_widget_id} do
+                Tweets by @findcongwang
+          .col-xs-6
+            - if @organization.facebook_page_handle.blank?
+              %h4.text-center Facebook Credentials not Configured
+            - else
+              .fb-like-box{"data-colorscheme" => "light", "data-header" => "true", "data-href" => "https://www.facebook.com/#{@organization.facebook_page_handle}", "data-show-border" => "true", "data-show-faces" => "false", "data-stream" => "true", height: '470'}
+      #leaderboards.item.fade
+        - Post::TYPES.each do |post_type|
+          .leaderboard.col-xs-6
+            .leader-badge.pull-left
+              = image_tag "ribbon_#{post_type['id']}.png", class: 'img-responsive'
+            .top-performers.pull-left
+              %h4 Top Performers in #{post_type['name']}
+              - @sorted_users_by_post_type[post_type['id']][0..4].each do |user|
+                %p.performace
+                  = image_tag user.profile_image_url
+                  %b= user.full_name
+                  \|
+                  Performace Index:
+                  = user.performance_by_post_type(post_type['id'])['performance']
+                  (#{user.performance_by_post_type(post_type['id'])['contribution']} + #{user.performance_by_post_type(post_type['id'])['positive_impact']})
+
+
+      #doit-list.item.fade
+        / TODO: Enforce list view when implemented
+        .post-board
+          = render 'post_board'

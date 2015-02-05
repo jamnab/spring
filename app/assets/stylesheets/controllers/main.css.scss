@@ -1,5 +1,13 @@
 
+
 @import 'presets';
+.notification-card{
+  color: rgb(124, 139, 155);
+  display: inline;
+}
+.notification-link:visited{
+  color: transparent
+}
 .new-post-number{
   position:relative;
   margin-top:2px; 
@@ -66,20 +74,20 @@
   }
 }
 
-
 html, body {
   // height: 100%;
   width: 100%;
   min-width: 715px;
   overflow-x: hidden;
 }
+
 .flash-msg{
   .alert{
    z-index: 100;
   }
 }
 .alert{
-  position: fixed;  
+  position: fixed;
   top: 15px;
   width: 100%;
 }
@@ -453,8 +461,8 @@ a:hover {
   }
 
   .navicons {
-    margin-top: 65px;
-    border-top: 1px solid $default_text_off;
+    margin-top: -4px;
+    // border-top: 1px solid $default_text_off;
 
     a {
       display: block;
@@ -472,6 +480,11 @@ a:hover {
         font-size: 40px;
         line-height: 50px;
         margin: 0px;
+      }
+
+      img {
+        margin-top: 5px;
+        width: 40px;
       }
     }
   }
@@ -547,6 +560,7 @@ a:hover {
 }
 
 .body-wrapper {
+  overflow: hidden;
   width: calc(100% - 70px);
 }
 

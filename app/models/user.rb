@@ -12,7 +12,9 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :picture
   has_many :favourites
   has_many :fav_posts, through: :favourites
-
+  has_many :notifications
+  has_many :activities,:class_name => "PublicActivity::Activity", through: :notifications
+  has_many :email_notification_settings
   # has_many :project_memberships, dependent: :destroy
   # has_many :projects, through: :project_memberships
 
@@ -33,6 +35,14 @@ class User < ActiveRecord::Base
     self.admin
   end
 
+  def profile_image_url
+    if self.picture.nil?
+      "profile_default.png"
+    else
+      self.picture.image.url(:user_image)
+    end
+  end
+
   def contribution
     # number of opinions given
     {'total' => self.opinions.count,
@@ -46,5 +56,44 @@ class User < ActiveRecord::Base
     {'total' => opinions.count,
      'positive' => opinions.select{|x| x.positive}.count,
      'negative' => opinions.select{|x| !x.positive}.count }
+  end
+
+  def performance_by_post_type(post_type)
+    # contribution
+    contribution_from_posts = Opinion.where(user_id: self.id) \
+      .joins( "INNER JOIN `posts` ON `opinions`.`opinionable_id` = `posts`.`id`" ) \
+      .where( :opinions => { opinionable_type: 'Post' } ) \
+      .where( :posts => { post_type: post_type } ).count
+
+    contribution_from_comments = Opinion.where(user_id: self.id) \
+      .joins( "INNER JOIN `comments` ON `opinions`.`opinionable_id` = `comments`.`id`" ) \
+      .where( :opinions => { opinionable_type: 'Comment' } ) \
+      .joins( "INNER JOIN `posts` ON `comments`.`commentable_id` = `posts`.`id`" ) \
+      .where( :comments => { commentable_type: 'Post' } ) \
+      .where( :posts => { post_type: post_type } ).count
+
+    contribution = contribution_from_posts + contribution_from_comments
+
+    # impact
+    impact_from_posts = Opinion.where(positive: true) \
+      .joins( "INNER JOIN `posts` ON `opinions`.`opinionable_id` = `posts`.`id`" ) \
+      .where( :opinions => { opinionable_type: 'Post' } ) \
+      .where( :posts => { user_id: self.id } ).count
+
+    impact_from_comments = Opinion \
+      .joins( "INNER JOIN `comments` ON `opinions`.`opinionable_id` = `comments`.`id`" ) \
+      .where( :opinions => { opinionable_type: 'Comment' } ) \
+      .joins( "INNER JOIN `posts` ON `comments`.`commentable_id` = `posts`.`id`" ) \
+      .where( :comments => { commentable_type: 'Post' } ) \
+      .where( :posts => { user_id: self.id } ).count
+
+    impact = impact_from_posts + impact_from_comments
+
+    # performance = contribution['total'] + impact['positive']
+    performance = contribution + impact
+
+    { 'contribution' => contribution,
+      'positive_impact' => impact,
+      'performance' => performance }
   end
 end

@@ -15,7 +15,6 @@ default: &default
   username: root
   password: 
 
-
 development:
   <<: *default
   database: pindoit_development

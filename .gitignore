@@ -15,4 +15,7 @@
 /log/*.log
 /tmp
 
+/public/assets/*
 /public/images/*
+/config/sync.yml
+!/public/assets/flaticon/*
