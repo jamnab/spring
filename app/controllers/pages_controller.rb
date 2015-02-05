@@ -138,7 +138,7 @@ class PagesController < ApplicationController
   end
 
   def newsfeed
-    @posts = current_organization.posts.where(graveyard: false)
+    @posts = @organization.posts.where(graveyard: false)
     @posts = @posts.reject{|r| r.doit? == false }
 
     @users = @organization.users

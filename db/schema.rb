@@ -106,8 +106,8 @@ ActiveRecord::Schema.define(version: 20150204215559) do
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
-    t.boolean  "anonymous",         default: true
-    t.integer  "threshold",         default: 20
+    t.boolean  "anonymous",         default: false
+    t.integer  "threshold"
     t.integer  "opinion",           default: 0
     t.integer  "user_id"
     t.integer  "organization_id"
