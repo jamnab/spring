@@ -7,13 +7,10 @@
   .post-wrapper{class: ("doithidden" if post.doit?)}
     .post{class: "#{class_type} #{post.id}", id: class_type}
       .header
-        = post.title
+        %span.title= post.title
         .traction{class: ("doit" if post.doit?)}
           - if post.doit?
             = image_tag "doit.png"
-          - else
-            Support:
-
           #{post.opinion} / #{post.threshold}
           .tags
             - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first

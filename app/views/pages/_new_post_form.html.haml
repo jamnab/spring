@@ -26,7 +26,7 @@
               = f.text_field :threshold, class: "form-control"
             .field.col-xs-12
               = f.label :content
-              = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5
+              = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5, maxlength: 250
             .field.col-xs-12
               %i Posts are by default anonymous, and the poster identity is always revealed when a post becomes a doit action item.
               - if can? :update, current_organization

@@ -33,14 +33,14 @@
                   -else
                     .item
                       = image_tag pic.image.url(:post_image)
-            
+
         %hr
         .row
           = form_for Comment.new, remote: true do |f|
             = f.hidden_field :commentable_id, :value => post.id
             = f.hidden_field :commentable_type, :value => "Post"
             .field.col-xs-12
-              = f.text_area :content, class: "form-control", placeholder: "Enter your comment here ...", rows: 3
+              = f.text_area :content, class: "form-control", placeholder: "Enter your comment here ...", rows: 3, maxlength: 200
 
             / .field.col-xs-12.text-right
             /   = check_box_tag("comment[anonymous]", "1", false, class: "checkbox")
