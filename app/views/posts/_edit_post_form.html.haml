@@ -22,7 +22,7 @@
                   - @filename = @filename.split("/").last
                   = @filename
                   = "  "
-                  = link_to "x", picture_path(pic), method: :delete,remote:true, class:"delete_pic"
+                  = link_to "x", "/pictures/#{pic.id}", method: :delete,remote: true, class: "delete_pic"
             .field.col-xs-12.nested_pics_form
               = f.label "Add Images"
               = file_field_tag "images[]",type: :file, multiple: true

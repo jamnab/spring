@@ -28,7 +28,7 @@
               - else
                 - post.pictures.each_with_index do |pic,index|
                   .item{class: ("active" if index == 0)}
-                    %a{"href"=> pic.image.url, "data-lightbox" => post.title}
+                    %a{"href"=> pic.image.url, "data-lightbox" => "#{post.title}-discussion"}
                       = image_tag pic.image.url(:post_image)
         %hr
         .row
