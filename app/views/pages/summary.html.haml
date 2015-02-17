@@ -49,8 +49,9 @@
           Bottom Performers this week:
           %b= @sorted_users[-3..-1].reverse.map{|x| x.full_name} * ', '
 
-        .btn.btn-main
-          Generate Invite Email
+        = link_to generate_code_organization_path(@organization), data: {:confirm => 'This will send you the invite email, invitation token will expire in 24 hours.'} do
+          .btn.btn-sm.btn-primary
+            Generate Invite Email
 
         %hr
 

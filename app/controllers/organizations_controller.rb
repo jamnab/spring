@@ -32,7 +32,7 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.save
         OrganizationMembership.create(user_id: current_user.id, organization_id: @organization.id, admin: true)
-        format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
+        format.html { redirect_to :dashboard, notice: 'Organization was successfully created.' }
         format.json { render :show, status: :created, location: @organization }
       else
         format.html { render :new }
@@ -47,10 +47,10 @@ class OrganizationsController < ApplicationController
     @organization.update_attribute(:access_token, @new)
     @user = current_user
     @url = Rails.env.production? ? request.host : request.host_with_port
-    Notifier.register_form(@user,@organization,@url).deliver!
-    @organization.delay(run_at: 1.minute.from_now).update_attribute(:access_token, nil)
+    Notifier.register_form(@user, @organization,@url).deliver!
+    @organization.delay(run_at: 1.day.from_now).update_attribute(:access_token, nil)
     @time = Time.now
-    redirect_to @organization, notice: 'New access code generated.'
+    redirect_to :back, notice: 'New access code generated.'
   end
 
   def join_by_code

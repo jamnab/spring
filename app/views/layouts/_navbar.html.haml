@@ -44,6 +44,9 @@
                 %li
                   = link_to '#', data: {target: "#edit-org", toggle: "modal"} do
                     Edit Organization
+                %li
+                  = link_to generate_code_organization_path(current_organization), data: {:confirm => 'This will send you the invite email, invitation token will expire in 24 hours.'} do
+                    Generate Invite Email
           %li.dropdown.hidden-xs
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               .fa.fa-bell

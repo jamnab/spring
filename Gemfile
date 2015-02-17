@@ -22,7 +22,6 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
-
 gem 'public_activity'
 gem 'haml-rails'
 gem 'authlogic'
@@ -46,6 +45,8 @@ gem 'chart-js-rails'
 gem 'jquery-datatables-rails', '~> 3.1.1'
 gem 'to_words'
 # gem 'redcarpet'
+
+gem 'backup'
 
 group :development do
   gem 'better_errors'

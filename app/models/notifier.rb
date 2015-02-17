@@ -5,10 +5,10 @@ class Notifier < ActionMailer::Base
     @organization = organization
     @url = url
     mail(
-      subject: "Message",
-      from: "infosyncidlabs@gmail.com",
+      subject: "Invitation Email",
+      from: "no_reply@pindoit.com",
       to: user.email ,
       date: Time.now)
   end
-  
+
 end

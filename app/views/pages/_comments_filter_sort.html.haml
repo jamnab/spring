@@ -1,7 +1,7 @@
 
 .comment-sorts
   = link_to filter_sort_comments_path(:post_id => @post.id, :sort => "newest", :filter => @filter, :comments_page_num => 0), remote: true do
-    
+
     .btn.btn-sm.btn-main.on.btn-comments-sorts.comments-newest
       NEWEST
     .circle.new-comment-number
@@ -18,10 +18,10 @@
       ALL
   = link_to filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => "plain", :comments_page_num => 0), remote: true do
     .btn.btn-sm.btn-main.off.comments-plain.btn-comments-filters
-      PLAIN
+      COMMENTS
   = link_to filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => "suggestion", :comments_page_num => 0), remote: true do
     .btn.btn-sm.btn-main.off.comments-suggestion.btn-comments-filters
-      SUGGESTION
+      ALTERNATIVES
 .comments-infinte-scroll{style: "visibility:hidden"}
   - if @comments_page_num != nil
     = link_to "next_page",filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => @filter, :comments_page_num => @comments_page_num.to_i + 1), remote: true, id: "next-comment-page"

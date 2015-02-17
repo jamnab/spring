@@ -1,4 +1,3 @@
-
 class Organization < ActiveRecord::Base
   attr_accessor :username
   has_many :posts

@@ -6,6 +6,8 @@ class Ability
     @cru = [:read, :create, :update]
     @crud = [:read, :create, :update, :destroy]
 
+    can :create, User
+
     user ||= User.new
 
     if user.is_admin?

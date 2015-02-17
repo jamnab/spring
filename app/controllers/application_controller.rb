@@ -9,7 +9,11 @@ class ApplicationController < ActionController::Base
   private
 
   def current_organization
-    current_user.organization
+    if current_user.is_admin?
+      @organization = Organization.first
+    else
+      current_user.organization
+    end
   end
 
   def current_user_session
