@@ -19,8 +19,8 @@ class PagesController < ApplicationController
   def contact_us
     render layout: "homepage"
   end
-  
-  #used to load pics for the main bord 
+
+  #used to load pics for the main bord
   def load_pictures
 
     @picture = Picture.find(params[:pic_id])

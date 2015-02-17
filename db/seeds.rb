@@ -8,14 +8,19 @@ User.create(username: "pindoit", email: "info@pindoit.com",
             admin: true, first_name: "Pindoit", last_name: "Admin",
             job_title: "System Admin")
 
-# demo organization
+# demo
 Organization.create(name: "Demo Company Inc.", activated: true)
-
-# demo manager
 User.create(username: "demoman", email: "man@demo.com",
             password: "demoman", password_confirmation: "demoman",
             first_name: "Manager", last_name: "Demoson",
             job_title: "Manager", organization_id: 1, manager: true)
+
+# ECL Demo
+Organization.create(name: "ECL Inc.", activated: true)
+User.create(username: "ecldemo", email: "info@ecl.com",
+            password: "ecldemo", password_confirmation: "ecldemo",
+            first_name: "ECL", last_name: "Manager",
+            job_title: "Manager", organization_id: 2, manager: true)
 
 # demo personnel
 40.times do |i|

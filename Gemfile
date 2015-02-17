@@ -22,7 +22,6 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
-
 gem 'public_activity'
 gem 'haml-rails'
 gem 'authlogic'

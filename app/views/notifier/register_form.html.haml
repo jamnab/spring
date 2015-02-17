@@ -1,3 +1,8 @@
 %html
-	-@full = "http://"+@url+new_user_path(:name=> @organization.name,:token=> @organization.access_token)
-	%a{ href: @full} Register 
+  - @full = "http://"+@url+new_user_path(:name=> @organization.name,:token=> @organization.access_token)
+
+  %h5 Invite users to #{@organization.name}
+  %p Please forward this invitation to all desired recipients, the invitation token expires in 24 hours.
+
+  %h5
+    %a{href: @full} Register Here

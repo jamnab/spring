@@ -27,9 +27,11 @@
             .field.col-xs-6
               = f.label :password_confirmation
               = f.password_field :password_confirmation, class: "form-control"
+          .row
             .field.col-xs-12
               = f.label :job_title
               = f.text_field :job_title, class: "form-control"
+          .row
             .field.col-xs-12
               = f.fields_for :pictures do |p|
                 = p.label :image
