@@ -15,13 +15,6 @@ User.create(username: "demoman", email: "man@demo.com",
             first_name: "Manager", last_name: "Demoson",
             job_title: "Manager", organization_id: 1, manager: true)
 
-# ECL Demo
-Organization.create(name: "ECL Inc.", activated: true)
-User.create(username: "ecldemo", email: "info@ecl.com",
-            password: "ecldemo", password_confirmation: "ecldemo",
-            first_name: "ECL", last_name: "Manager",
-            job_title: "Manager", organization_id: 2, manager: true)
-
 # demo personnel
 40.times do |i|
   name = i.to_words.delete(' ')
@@ -121,27 +114,9 @@ end
   doit_com.update(opinion: 35)
 end
 
-# sample posts
-# 3.times do |i|
-#   post_type = "Work" if i == Post::WORK
-#   post_type = "Play" if i == Post::PLAY
-#   post_type = "Facility" if i == Post::FACILITY
-
-#   Post.create(title: "Regular #{post_type} Post",
-#               content: Forgery(:lorem_ipsum).words(34).capitalize,
-#               threshold: 20,
-#               user_id: 1,
-#               organization_id: 1,
-#               post_type: i)
-
-#   Post.create(title: "Graveyard #{post_type} Post",
-#               content: Forgery(:lorem_ipsum).words(34).capitalize,
-#               threshold: 20,
-#               user_id: 1,
-#               organization_id: 1,
-#               post_type: i,
-#               graveyard: true)
-
-#   Post.create(title: "Doit #{post_type} Post",
-#               content: Forgery(:lorem_ipsum).words(34).capitalize,
-#               threshold: 20,
+# ECL Demo
+Organization.create(name: "ECL Inc.", activated: true)
+User.create(username: "ecldemo", email: "info@ecl.com",
+            password: "ecldemo", password_confirmation: "ecldemo",
+            first_name: "ECL", last_name: "Manager",
+            job_title: "Manager", organization_id: 2, manager: true)
