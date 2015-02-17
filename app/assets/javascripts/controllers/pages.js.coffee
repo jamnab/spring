@@ -54,8 +54,8 @@ class Sync.PostCard extends Sync.View
 
 $ ->
   # init search ajax
-  $('.new-post-number').change ->
-    alert("change")
+  # $('.new-post-number').change ->
+  #   alert("change")
 
   $("#search").on "ajax:success", (data,status,xhr) ->
      $("#reportalert").text "Done."
