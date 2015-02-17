@@ -26,7 +26,7 @@ $(".loading-wrapper").remove();
 		$('.post-board').append("<%= j render(:partial => 'pages/post_board') %>");
 	<% end %>
 	$('.page-num').html("<%= j render(:partial => 'pages/next_post_page') %>");
-	if ($("body").height() < $(window).height()) {
+	if !@posts.empty? && ($("body").height() < $(window).height()) {
 		$('#next-page').trigger('click');
 	}
 <%else%>
