@@ -27,7 +27,6 @@ $(".loading-wrapper").remove();
 	<% end %>
 	$('.page-num').html("<%= j render(:partial => 'pages/next_post_page') %>");
 	if ($("body").height() < $(window).height()) {
-		alert("3")
 		$('#next-page').trigger('click');
 	}
 <%else%>
