@@ -7,6 +7,7 @@ class Ability
     @crud = [:read, :create, :update, :destroy]
 
     can :create, User
+    can :join_by_code, Organization
 
     user ||= User.new
 
@@ -20,6 +21,10 @@ class Ability
 
       # Organizations
       can @cru, Organization do |org|
+        user.manager && user.organization == org
+      end
+
+      can :generate_code, Organization do |org|
         user.manager && user.organization == org
       end
 
