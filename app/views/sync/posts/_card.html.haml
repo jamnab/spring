@@ -1,6 +1,6 @@
 - user = post.user
-- class_type = "work" if post.post_type == Post::WORK
-- class_type = "play" if post.post_type == Post::PLAY
+- class_type = "project" if post.post_type == Post::PROJECT
+- class_type = "fun" if post.post_type == Post::FUN
 - class_type = "facility" if post.post_type == Post::FACILITY
 
 - if can? :read, post
@@ -9,9 +9,6 @@
       .header
         %span.title= post.title
         .traction{class: ("doit" if post.doit?)}
-          - if post.doit?
-            = image_tag "doit.png"
-          #{post.opinion} / #{post.threshold}
           .tags
             - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
             = form_for Opinion.new, remote: true do |f|
@@ -20,10 +17,19 @@
               = f.hidden_field :opinionable_id, value: post.id
               = f.hidden_field :opinionable_type, value: 'Post'
               .btn.btn-sm.post-loading.btn-like{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
-                %span.flaticon-thumb31
+                %span.fa.fa-angle-up
               .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
-                %span.flaticon-thumbs17
-
+                %span.fa.fa-angle-down
+        .post-badge{class: ("doit" if post.doit?)}
+          - if post.doit?
+            D
+          - else
+            = class_type[0].upcase
+        .progress
+          - progress = post.opinion * 100 / post.threshold
+          - progress = 100 if progress > 100
+          .progress-bar{style: "width: #{progress}%; min-width: 5em;", class: "progress-#{class_type} #{("doit" if post.doit?)}"}
+            #{post.opinion} / #{post.threshold}
       .content
         .col-xs-8
           = post.content

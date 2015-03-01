@@ -181,11 +181,11 @@ html, body {
     #filter-post-all{
       background-color: rgba($inverse_text_off, 0.75) !important;
     }
-    #filter-post-work{
-      background-color: rgba($main_work, 0.75) !important;
+    #filter-post-project{
+      background-color: rgba($main_project, 0.75) !important;
     }
-    #filter-post-play{
-      background-color: rgba($main_play, 0.75) !important;
+    #filter-post-fun{
+      background-color: rgba($main_fun, 0.75) !important;
     }
     #filter-post-facility{
       background-color: rgba($main_facility, 0.75) !important;
@@ -358,7 +358,7 @@ html, body {
 }
 
 .btn {
-  color: #fff !important;
+  color: #fff;
 }
 
 a:hover {
@@ -613,17 +613,17 @@ a:hover {
 
   .btn-off {
     background-color: transparent;
-    color: $inverse_text_highlight !important;
+    color: $inverse_text_highlight;
     border: 1px solid $inverse_text_highlight;
 
-    &:hover.btn-work {
-      background-color: $main_work;
+    &:hover.btn-project {
+      background-color: $main_project;
       color: $default_background !important;
       border: 1px solid $default_background;
     }
 
-    &:hover.btn-play {
-      background-color: $main_play;
+    &:hover.btn-fun {
+      background-color: $main_fun;
       color: $default_background !important;
       border: 1px solid $default_background;
     }
@@ -685,19 +685,19 @@ a:hover {
 //   }
 // }
 
-.btn-work, .btn-play, .btn-facility {
+.btn-project, .btn-fun, .btn-facility {
   color: $default_background;
   &:hover {
     opacity: 0.75;
   }
 }
 
-.btn-work {
-  background-color: $main_work;
+.btn-project {
+  background-color: $main_project;
 }
 
-.btn-play {
-  background-color: $main_play;
+.btn-fun {
+  background-color: $main_fun;
 }
 
 .btn-facility {
@@ -720,23 +720,23 @@ a:hover {
   .modal-content {
     height: 100%;
 
-    &.work {
+    &.project {
       .modal-header {
-        background-color: $main_work;
+        background-color: $main_project;
         color: $inverse_text_main;
       }
       .btn.btn-main {
-        background-color: $main_work;
+        background-color: $main_project;
       }
     }
 
-    &.play {
+    &.fun {
       .modal-header {
-        background-color: $main_play;
+        background-color: $main_fun;
         color: $inverse_text_main;
       }
       .btn.btn-main {
-        background-color: $main_play;
+        background-color: $main_fun;
       }
     }
 

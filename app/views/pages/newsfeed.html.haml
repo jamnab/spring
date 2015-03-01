@@ -45,6 +45,11 @@
         - Post::TYPES.each do |post_type|
           .leaderboard.col-xs-6
             .leader-badge.pull-left
+              - top_user = @sorted_users_by_post_type[post_type['id']].first
+              - if !top_user || top_user.picture.nil?
+                = image_tag "profile_default.png", class: 'top-user'
+              - else
+                = image_tag top_user.picture.image.url(:user_image), class: 'top-user'
               = image_tag "ribbon_#{post_type['id']}.png", class: 'img-responsive'
             .top-performers.pull-left
               %h4 Top Performers in #{post_type['name']}

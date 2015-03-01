@@ -131,7 +131,7 @@ h3.page_title {
 }
 
 .post-wrapper {
-  height: 250px;
+  height: 265px;
   margin-bottom: 40px;
   padding: 0px 20px;
   display: inline-block;
@@ -157,7 +157,15 @@ h3.page_title {
         position: relative;
         float: right;
         font-weight: bold;
-        color: $inverse_text_highlight;
+        color: #555;
+
+        .btn {
+          border: 1px solid $default_text_main;
+          color: $default_text_main;
+          &.btn-on {
+            color: $inverse_text_main;
+          }
+        }
 
         img {
           position: absolute;
@@ -183,40 +191,49 @@ h3.page_title {
 
     .content {
       color: #555;
-      padding-top: 70px;
+      padding-top: 85px;
       font-size: 14px;
       line-height: 22px;
 
     }
   }
 
-  .work {
-    background-color: rgba($main-work, 0.05);
+  .project {
+    background-color: rgba($main-project, 0.05);
     .header {
-      background-color: rgba($main-work, 0.75);
+      background-color: rgba($main-project, 0.15);
+    }
+    .header .post-badge {
+      background-color: rgba($main-project, 0.75);
     }
     .signature {
-      background-color: rgba($main-work, 0.25);
+      background-color: rgba($main-project, 0.15);
     }
   }
 
-  .play {
-    background-color: rgba($main-play, 0.05);
+  .fun {
+    background-color: rgba($main-fun, 0.05);
     .header {
-      background-color: rgba($main-play, 0.75);
+      background-color: rgba($main-fun, 0.15);
+    }
+    .header .post-badge {
+      background-color: rgba($main-fun, 0.75);
     }
     .signature {
-      background-color: rgba($main-play, 0.25);
+      background-color: rgba($main-fun, 0.15);
     }
   }
 
   .facility {
     background-color: rgba($main-facility, 0.05);
     .header {
+      background-color: rgba($main-facility, 0.15);
+    }
+    .header .post-badge {
       background-color: rgba($main-facility, 0.75);
     }
     .signature {
-      background-color: rgba($main-facility, 0.25);
+      background-color: rgba($main-facility, 0.15);
     }
   }
 }
@@ -265,12 +282,60 @@ h3.page_title {
   }
 }
 
-.post .header .title {
-  width: 320px;
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow: ellipsis;
-  float: left;
+.post {
+  .header {
+    .post-badge {
+      background-color: inherit;
+      border-radius: 20px;
+      width: 38px;
+      height: 38px;
+      margin-top: -10px;
+      margin-left: -10px;
+      padding: 10px 13px;
+
+      &.doit {
+        background-color: rgba($main_highlight, 0.75);
+      }
+    }
+
+    .title {
+      color: #555;
+      width: 384px;
+      overflow:hidden;
+      white-space:nowrap;
+      text-overflow: ellipsis;
+      float: left;
+      position: absolute;
+      margin-left: 36px;
+    }
+  }
+
+  .progress {
+    margin: 5px -16px;
+    border: none;
+    border-radius: 0px;
+    background-color: inherit;
+
+    .progress-bar {
+      border: none;
+
+      &.progress-project {
+        background-color: rgba($main_project, 0.50);
+      }
+
+      &.progress-fun {
+        background-color: rgba($main_fun, 0.50);
+      }
+
+      &.progress-facility {
+        background-color: rgba($main_facility, 0.50);
+      }
+
+      &.doit {
+        background-color: rgba($main_highlight, 0.50) !important;
+      }
+    }
+  }
 }
 
 .modal h4.modal-title {
@@ -403,10 +468,10 @@ h3.page_title {
 
 #post_post_type {
   option:nth-child(1) {
-    background-color: $main-work;
+    background-color: $main-project;
   }
   option:nth-child(2) {
-    background-color: $main-play;
+    background-color: $main-fun;
   }
   option:nth-child(3) {
     background-color: $main-facility;

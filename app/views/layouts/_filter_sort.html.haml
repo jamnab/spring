@@ -8,9 +8,9 @@
     %li
       = link_to "ALL",dashboard_path(:sort=>@sort,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-all"
     %li
-      = link_to "WORK",dashboard_path(:query => "0",:sort=>@sort,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-work"
+      = link_to "PROJECT",dashboard_path(:query => "0",:sort=>@sort,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-work"
     %li
-      = link_to "PLAY",dashboard_path(:query => "1",:sort=>@sort,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-play"
+      = link_to "FUN",dashboard_path(:query => "1",:sort=>@sort,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-play"
     %li
       = link_to "FACILITY",dashboard_path(:query => "2",:sort=>@sort,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-facility"
     %li
@@ -23,7 +23,7 @@
       - else
         = sync_new partial: "notification", resource: Post.new, scope: current_organization, resource: Post.new
     %p.number
-    
+
   %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
     #sort-posts.option
       .text{style: "float:left;"}

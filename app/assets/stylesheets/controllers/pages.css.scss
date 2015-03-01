@@ -40,12 +40,12 @@
         height: 100%;
         z-index: 100;
         background-color: rgba(#fff, 0.5);
-        border: 3px solid $main_work;
+        border: 3px solid $main_project;
         border-radius: 10px;
         margin: 0px -10px;
 
         h1 {
-          color: $main_work;
+          color: $main_project;
           text-align: center;
           margin-top: 240px;
         }
@@ -77,6 +77,13 @@
         width: 140px;
         margin-left: 20px;
         padding: 40px 20px 20px 20px;
+
+        .top-user {
+          position: absolute;
+          width: 60px;
+          border-radius: 50px;
+          margin: 18px 20px;
+        }
       }
 
       .top-performers {

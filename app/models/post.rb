@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   include PublicActivity::Common
-  
+
   searchkick
   validates :content, length: { maximum: 256}
   belongs_to :user
@@ -20,11 +20,11 @@ class Post < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :opinions, as: :opinionable, dependent: :destroy
 
-  WORK = 0
-  PLAY = 1
+  PROJECT = 0
+  FUN = 1
   FACILITY = 2
-  TYPES = [{'name' => 'Work', 'id' => WORK},
-           {'name' => 'Play', 'id' => PLAY},
+  TYPES = [{'name' => 'Project', 'id' => PROJECT},
+           {'name' => 'Fun', 'id' => FUN},
            {'name' => 'Facility', 'id' => FACILITY}]
 
   def self.all_doits

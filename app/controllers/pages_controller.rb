@@ -147,8 +147,8 @@ class PagesController < ApplicationController
 
     @users = @organization.users
     @sorted_users_by_post_type = {
-      Post::WORK => @users.sort_by{|x| -x.performance_by_post_type(Post::WORK)['performance']},
-      Post::PLAY => @users.sort_by{|x| -x.performance_by_post_type(Post::PLAY)['performance']},
+      Post::PROJECT => @users.sort_by{|x| -x.performance_by_post_type(Post::PROJECT)['performance']},
+      Post::FUN => @users.sort_by{|x| -x.performance_by_post_type(Post::FUN)['performance']},
       Post::FACILITY => @users.sort_by{|x| -x.performance_by_post_type(Post::FACILITY)['performance']},
     }
   end
