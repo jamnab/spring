@@ -143,6 +143,7 @@ h3.page_title {
     width: 540px;
     // min-width: 500px;
     margin: auto;
+    border: 1px solid $default_text_main !important;
 
     .header {
       height: 50px;
@@ -194,46 +195,49 @@ h3.page_title {
       padding-top: 85px;
       font-size: 14px;
       line-height: 22px;
+    }
 
+    .signature {
+      border-top: 1px solid $default_text_main;
     }
   }
 
   .project {
-    background-color: rgba($main-project, 0.05);
+    background-color: rgba($main-project, 0.00);
     .header {
-      background-color: rgba($main-project, 0.15);
+      background-color: rgba($main-project, 0.00);
     }
     .header .post-badge {
       background-color: rgba($main-project, 0.75);
     }
     .signature {
-      background-color: rgba($main-project, 0.15);
+      background-color: rgba($main-project, 0.00);
     }
   }
 
   .fun {
-    background-color: rgba($main-fun, 0.05);
+    background-color: rgba($main-fun, 0.00);
     .header {
-      background-color: rgba($main-fun, 0.15);
+      background-color: rgba($main-fun, 0.00);
     }
     .header .post-badge {
       background-color: rgba($main-fun, 0.75);
     }
     .signature {
-      background-color: rgba($main-fun, 0.15);
+      background-color: rgba($main-fun, 0.00);
     }
   }
 
   .facility {
-    background-color: rgba($main-facility, 0.05);
+    background-color: rgba($main-facility, 0.00);
     .header {
-      background-color: rgba($main-facility, 0.15);
+      background-color: rgba($main-facility, 0.00);
     }
     .header .post-badge {
       background-color: rgba($main-facility, 0.75);
     }
     .signature {
-      background-color: rgba($main-facility, 0.15);
+      background-color: rgba($main-facility, 0.00);
     }
   }
 }
@@ -312,7 +316,8 @@ h3.page_title {
 
   .progress {
     margin: 5px -16px;
-    border: none;
+    border-top: 1px solid $default_text_main;
+    border-bottom: 1px solid $default_text_main;
     border-radius: 0px;
     background-color: inherit;
 
@@ -331,9 +336,9 @@ h3.page_title {
         background-color: rgba($main_facility, 0.50);
       }
 
-      &.doit {
-        background-color: rgba($main_highlight, 0.50) !important;
-      }
+      // &.doit {
+      //   background-color: rgba($main_highlight, 0.50) !important;
+      // }
     }
   }
 }
@@ -430,7 +435,6 @@ h3.page_title {
 
 .post-wrapper, .post {
   border-radius: 10px;
-  border: none !important;
 
   .header {
     border-radius: 10px 10px 0px 0px;
@@ -452,6 +456,7 @@ h3.page_title {
   border-radius: 50px;
   background-color: $inverse_text_off;
   opacity: 0.75;
+  color: $inverse_text_main;
 
   &:hover {
     background-color: $inverse_text_off !important;
