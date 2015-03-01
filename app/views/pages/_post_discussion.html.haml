@@ -51,5 +51,9 @@
         #comments.comments
           - if @sort != "upvoted"
             = sync_new partial: "card", resource: Comment.new, scope:post
-          - post.comments.order("created_at DESC").limit(4).each do |comment|
+          - if @post.alt_doit?
+            - comments = post.comments.order("opinion DESC")
+          - else
+            - comments = post.comments.order("created_at DESC")
+          - comments.limit(4).each do |comment|
             = sync partial: "card", resource: comment
