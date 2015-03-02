@@ -53,11 +53,11 @@ class Post < ActiveRecord::Base
 
   def type?
     if self.post_type == 0
-      return "work"
+      return 'project'
     elsif self.post_type == 1
-      return "play"
+      return 'fun'
     else
-      return "facility"
+      return 'facility'
     end
   end
 end
