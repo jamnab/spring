@@ -35,6 +35,7 @@ class PagesController < ApplicationController
     @page = "dashboard" if !params[:page]
     @sort = params[:sort]
     @query = params[:query]
+    @viewmode = params[:viewmode]
 
     if current_user.is_admin?
 

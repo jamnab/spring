@@ -181,10 +181,10 @@ html, body {
     #filter-post-all{
       background-color: rgba($inverse_text_off, 0.75) !important;
     }
-    #filter-post-project{
+    #filter-post-project, #filter-post-work{
       background-color: rgba($main_project, 0.75) !important;
     }
-    #filter-post-fun{
+    #filter-post-fun, #filter-post-play{
       background-color: rgba($main_fun, 0.75) !important;
     }
     #filter-post-facility{

@@ -60,6 +60,13 @@
   cursor:pointer
 }
 
+.view-controls {
+  margin-top: -20px;
+  padding: 20px 30px;
+
+  .btn {margin-right: 5px;}
+}
+
 .comment-filters {
   text-align: left;
   height: 50px;
@@ -137,6 +144,39 @@ h3.page_title {
   display: inline-block;
   text-align: left;
 
+  &.listview {
+    height: 70px;
+    width: 100%;
+    margin-bottom: 10px;
+
+    .post {
+      border-radius: 0px;
+      width: 100%;
+
+      .header {
+        .traction {
+          display: inline-block;
+          float: right;
+        }
+        .user {
+          display: inline-block;
+          float: right;
+          padding: 0px 0px 0px 20px;
+          margin-top: -4px;
+          .name {
+            font-size: 14px;
+            font-weight: normal;
+          }
+        }
+        .options {
+          margin-top: -6px;
+          display: inline-block;
+          float: right;
+        }
+      }
+    }
+  }
+
   .post {
     position: relative;
     height: 100%;
@@ -154,19 +194,22 @@ h3.page_title {
       font-size: 18px;
       line-height: 20px;
 
+      .btn {
+        border: 1px solid $default_text_main;
+        color: $default_text_main;
+        &.btn-on {
+          color: $inverse_text_main;
+        }
+        &.btn-header {
+          color: $inverse_text_main;
+        }
+      }
+
       .traction {
         position: relative;
         float: right;
         font-weight: bold;
         color: #555;
-
-        .btn {
-          border: 1px solid $default_text_main;
-          color: $default_text_main;
-          &.btn-on {
-            color: $inverse_text_main;
-          }
-        }
 
         img {
           position: absolute;
@@ -192,7 +235,6 @@ h3.page_title {
 
     .content {
       color: #555;
-      padding-top: 85px;
       font-size: 14px;
       line-height: 22px;
     }
@@ -296,6 +338,7 @@ h3.page_title {
       margin-top: -10px;
       margin-left: -10px;
       padding: 10px 13px;
+      float: left;
 
       &.doit {
         background-color: rgba($main_highlight, 0.75);
@@ -315,7 +358,7 @@ h3.page_title {
   }
 
   .progress {
-    margin: 5px -16px;
+    margin-top: 49px;
     border-top: 1px solid $default_text_main;
     border-bottom: 1px solid $default_text_main;
     border-radius: 0px;
@@ -362,9 +405,23 @@ h3.page_title {
       border-right: 1px solid #fff;
     }
 
-    .user img {
-      width: 35px;
-      height: 35px;
+    .user {
+      padding: 11px 15px;
+      text-align: left;
+
+      img {
+        margin-top: -15px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        width: 35px;
+        height: 35px;
+      }
+      .name {
+        display: inline-block;
+        padding: 0px 5px;
+        line-height: 14px;
+        color: #555;
+      }
     }
   }
 
@@ -387,23 +444,6 @@ h3.page_title {
   .signature {
     height: 50px;
     bottom: 0;
-
-    .user {
-      padding: 11px 15px;
-      text-align: left;
-
-      img {
-        margin-top: -15px;
-        border: 1px solid #ddd;
-        border-radius: 20px;
-      }
-      .name {
-        display: inline-block;
-        padding: 0px 5px;
-        line-height: 14px;
-        color: #555;
-      }
-    }
 
     .options {
       float: right;

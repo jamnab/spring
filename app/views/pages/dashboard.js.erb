@@ -66,5 +66,6 @@ $(".body-loading").click(function() {
 	$('body').append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")
 });
 
-var stateObj = { page: "dashboard" };
-history.pushState(stateObj, "Dashboard", "dashboard");
+var stateObj = { page: "dashboard"};
+history.pushState(stateObj, "Dashboard", "dashboard<%='?viewmode=list' if @viewmode == 'list'%>");
+
