@@ -237,6 +237,9 @@ h3.page_title {
       color: #555;
       font-size: 14px;
       line-height: 22px;
+      .image-wrapper {
+        max-height: 100px;
+      }
     }
 
     .signature {

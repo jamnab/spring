@@ -108,7 +108,7 @@ class PagesController < ApplicationController
     end
 
     @page_title = 'Post Listing'
-    @page_title = 'Launch Aciton Items' if @page == 'doit'
+    @page_title = 'Launch Action Items' if @page == 'doit'
     @page_title = 'Favourited Posts' if @page == 'my_fav'
     @page_title = 'Archived Posts' if @page == 'archive'
 

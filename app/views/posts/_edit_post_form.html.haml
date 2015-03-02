@@ -29,7 +29,7 @@
 
             .field.col-xs-12
               = f.label :threshold
-              = f.text_field :threshold, class: "form-control"
+              = f.number_field :threshold, class: "form-control"
             .field.col-xs-12
               = f.label :content
               = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5, maxlength: 250
