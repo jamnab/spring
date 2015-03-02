@@ -77,7 +77,7 @@ end
                  content: "Alternative solution here!", suggestion: true)
 
   # doit (post), one plain comment
-  doit = Post.create(title: "Doit #{post_type} Post",
+  doit = Post.create(title: "Launch #{post_type} Post",
               content: Forgery(:lorem_ipsum).words(34).capitalize,
               threshold: 20,
               user_id: 2 + rand(30),
@@ -92,7 +92,7 @@ end
                  content: "Great idea!", suggestion: false)
 
   # doit (alt), three plain comment, two suggestions (one doit)
-  alt_doit = Post.create(title: "Alt Doit #{post_type} Post",
+  alt_doit = Post.create(title: "Alt Launch #{post_type} Post",
               content: Forgery(:lorem_ipsum).words(34).capitalize,
               threshold: 20,
               user_id: 2 + rand(30),
