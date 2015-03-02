@@ -11,7 +11,7 @@
         / = image_tag "pindoit_logo.png"
         / = image_tag "pindoit_logo.png"
         - if @organization.nil? || @organization.picture.nil?
-          = image_tag "pindoit_logo.png"
+          = image_tag "logo.png"
         - else
           = image_tag @organization.picture.image.url(:organization_image)
 

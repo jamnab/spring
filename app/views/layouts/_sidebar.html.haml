@@ -5,7 +5,7 @@
   .navicons
     - if current_user
       = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Doits", placement: "right", trigger: "hover"} do
-        = image_tag 'doit.png'
+        = image_tag 'launch.png'
       = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading popover-trigger" , data: {content: "Dashboard", placement: "right", trigger: "hover"} do
         %span.flaticon-house28
       = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Favourites", placement: "right", trigger: "hover"} do
@@ -18,7 +18,7 @@
         %span.flaticon-internet62
 
       .logo.brand-link
-        = image_tag "pindoit_logo_vert.png"
+        = image_tag "logo_vert.png"
 
       = link_to '#', class: "logout-link popover-trigger", data: {content: "Logout", placement: "right", trigger: "hover"} do
         %span.flaticon-door9
@@ -67,13 +67,13 @@
 
       .brand-link.org
         - if @organization == nil
-          = image_tag "pindoit_logo.png"
+          = image_tag "logo.png"
         - else
           - if @organization.picture == nil
-            = image_tag "pindoit_logo.png"
+            = image_tag "logo.png"
           - else
             = image_tag @organization.picture.image.url(:organization_image)
-        %h4 Powered by Pindoit
+        %h4 Powered by LaunchBoard
         %h5 A Verse Software Lab Inc. Solution.
 
       = link_to :logout, class: "logout-link" do

@@ -320,6 +320,9 @@ h3.page_title {
       text-align: left;
       color: #555;
       padding: 5px 15px;
+      &.doit {
+        background-color: rgba($main_highlight, 0.1);
+      }
     }
 
     .signature {

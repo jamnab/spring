@@ -5,16 +5,16 @@
   .comment-wrapper
     .comment{class: "inline_comment_#{comment.id} suggestion_#{comment.suggestion}"}
       .col-xs-8
-        .content
+        .content{class: ("doit" if comment.doit?)}
           = comment.content
       .col-xs-4
         - if comment.is_suggestion?
           .traction
-            %h4{class: ("doit" if false)}
+            %h4
               #{comment.opinion} / #{comment.commentable.threshold}
             .indicator
               - if comment.doit?
-                = image_tag "doit.png"
+                = image_tag "launch.png"
           .controls
             - opinion = Opinion.where(opinionable_type: "Comment", opinionable_id: comment.id, user_id: current_user.id).first
             = form_for Opinion.new, remote: true do |f|

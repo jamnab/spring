@@ -143,6 +143,7 @@ class PagesController < ApplicationController
   end
 
   def newsfeed
+    @viewmode = 'list'
     @posts = @organization.posts.where(graveyard: false)
     @posts = @posts.reject{|r| r.doit? == false }
 
