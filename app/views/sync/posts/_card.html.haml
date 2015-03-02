@@ -126,7 +126,7 @@
                   - else
                     %li{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
 
-            .carousel-inner
+            .carousel-inner.image-wrapper
               - if post.pictures.empty?
                 .item.active
                   = image_tag ("no_image.png")
