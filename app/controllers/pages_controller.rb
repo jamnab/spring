@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_action :set_organization, only: [:pending_approval, :dashboard, :summary, :search, :archive, :newsfeed]
   before_action :check_org_activation, only: [:dashboard, :summary, :search, :archive, :newsfeed]
 
-  @@page_limit = 10
+  @@page_limit = 20
 
   def home
     if current_user
