@@ -4,7 +4,7 @@
     .icon.fa.fa-times-circle-o.hidden
   .navicons
     - if current_user
-      = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Doits", placement: "right", trigger: "hover"} do
+      = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Launch", placement: "right", trigger: "hover"} do
         = image_tag 'launch.png'
       = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading popover-trigger" , data: {content: "Dashboard", placement: "right", trigger: "hover"} do
         %span.flaticon-house28
