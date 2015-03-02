@@ -60,6 +60,13 @@
   cursor:pointer
 }
 
+.view-controls {
+  margin-top: -20px;
+  padding: 20px 30px;
+
+  .btn {margin-right: 5px;}
+}
+
 .comment-filters {
   text-align: left;
   height: 50px;
@@ -131,11 +138,44 @@ h3.page_title {
 }
 
 .post-wrapper {
-  height: 250px;
+  height: 265px;
   margin-bottom: 40px;
   padding: 0px 20px;
   display: inline-block;
   text-align: left;
+
+  &.listview {
+    height: 70px;
+    width: 100%;
+    margin-bottom: 10px;
+
+    .post {
+      border-radius: 0px;
+      width: 100%;
+
+      .header {
+        .traction {
+          display: inline-block;
+          float: right;
+        }
+        .user {
+          display: inline-block;
+          float: right;
+          padding: 0px 0px 0px 20px;
+          margin-top: -4px;
+          .name {
+            font-size: 14px;
+            font-weight: normal;
+          }
+        }
+        .options {
+          margin-top: -6px;
+          display: inline-block;
+          float: right;
+        }
+      }
+    }
+  }
 
   .post {
     position: relative;
@@ -143,6 +183,7 @@ h3.page_title {
     width: 540px;
     // min-width: 500px;
     margin: auto;
+    border: 1px solid $default_text_main !important;
 
     .header {
       height: 50px;
@@ -153,11 +194,22 @@ h3.page_title {
       font-size: 18px;
       line-height: 20px;
 
+      .btn {
+        border: 1px solid $default_text_main;
+        color: $default_text_main;
+        &.btn-on {
+          color: $inverse_text_main;
+        }
+        &.btn-header {
+          color: $inverse_text_main;
+        }
+      }
+
       .traction {
         position: relative;
         float: right;
         font-weight: bold;
-        color: $inverse_text_highlight;
+        color: #555;
 
         img {
           position: absolute;
@@ -183,40 +235,51 @@ h3.page_title {
 
     .content {
       color: #555;
-      padding-top: 70px;
       font-size: 14px;
       line-height: 22px;
+    }
 
+    .signature {
+      border-top: 1px solid $default_text_main;
     }
   }
 
-  .work {
-    background-color: rgba($main-work, 0.05);
+  .project {
+    background-color: rgba($main-project, 0.00);
     .header {
-      background-color: rgba($main-work, 0.75);
+      background-color: rgba($main-project, 0.00);
+    }
+    .header .post-badge {
+      background-color: rgba($main-project, 0.75);
     }
     .signature {
-      background-color: rgba($main-work, 0.25);
+      background-color: rgba($main-project, 0.00);
     }
   }
 
-  .play {
-    background-color: rgba($main-play, 0.05);
+  .fun {
+    background-color: rgba($main-fun, 0.00);
     .header {
-      background-color: rgba($main-play, 0.75);
+      background-color: rgba($main-fun, 0.00);
+    }
+    .header .post-badge {
+      background-color: rgba($main-fun, 0.75);
     }
     .signature {
-      background-color: rgba($main-play, 0.25);
+      background-color: rgba($main-fun, 0.00);
     }
   }
 
   .facility {
-    background-color: rgba($main-facility, 0.05);
+    background-color: rgba($main-facility, 0.00);
     .header {
+      background-color: rgba($main-facility, 0.00);
+    }
+    .header .post-badge {
       background-color: rgba($main-facility, 0.75);
     }
     .signature {
-      background-color: rgba($main-facility, 0.25);
+      background-color: rgba($main-facility, 0.00);
     }
   }
 }
@@ -257,6 +320,9 @@ h3.page_title {
       text-align: left;
       color: #555;
       padding: 5px 15px;
+      &.doit {
+        background-color: rgba($main_highlight, 0.1);
+      }
     }
 
     .signature {
@@ -265,12 +331,62 @@ h3.page_title {
   }
 }
 
-.post .header .title {
-  width: 320px;
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow: ellipsis;
-  float: left;
+.post {
+  .header {
+    .post-badge {
+      background-color: inherit;
+      border-radius: 20px;
+      width: 38px;
+      height: 38px;
+      margin-top: -10px;
+      margin-left: -10px;
+      padding: 10px 13px;
+      float: left;
+
+      &.doit {
+        background-color: rgba($main_highlight, 0.75);
+      }
+    }
+
+    .title {
+      color: #555;
+      width: 384px;
+      overflow:hidden;
+      white-space:nowrap;
+      text-overflow: ellipsis;
+      float: left;
+      position: absolute;
+      margin-left: 36px;
+    }
+  }
+
+  .progress {
+    margin-top: 49px;
+    border-top: 1px solid $default_text_main;
+    border-bottom: 1px solid $default_text_main;
+    border-radius: 0px;
+    background-color: inherit;
+
+    .progress-bar {
+      border: none;
+
+      &.progress-project {
+        background-color: rgba($main_project, 0.50);
+      }
+
+      &.progress-fun {
+        background-color: rgba($main_fun, 0.50);
+      }
+
+      &.progress-facility {
+        background-color: rgba($main_facility, 0.50);
+      }
+
+      // &.doit {
+      //   background-color: rgba($main_highlight, 0.50) !important;
+      // }
+    }
+  }
 }
 
 .modal h4.modal-title {
@@ -292,9 +408,23 @@ h3.page_title {
       border-right: 1px solid #fff;
     }
 
-    .user img {
-      width: 35px;
-      height: 35px;
+    .user {
+      padding: 11px 15px;
+      text-align: left;
+
+      img {
+        margin-top: -15px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        width: 35px;
+        height: 35px;
+      }
+      .name {
+        display: inline-block;
+        padding: 0px 5px;
+        line-height: 14px;
+        color: #555;
+      }
     }
   }
 
@@ -317,23 +447,6 @@ h3.page_title {
   .signature {
     height: 50px;
     bottom: 0;
-
-    .user {
-      padding: 11px 15px;
-      text-align: left;
-
-      img {
-        margin-top: -15px;
-        border: 1px solid #ddd;
-        border-radius: 20px;
-      }
-      .name {
-        display: inline-block;
-        padding: 0px 5px;
-        line-height: 14px;
-        color: #555;
-      }
-    }
 
     .options {
       float: right;
@@ -365,7 +478,6 @@ h3.page_title {
 
 .post-wrapper, .post {
   border-radius: 10px;
-  border: none !important;
 
   .header {
     border-radius: 10px 10px 0px 0px;
@@ -387,6 +499,7 @@ h3.page_title {
   border-radius: 50px;
   background-color: $inverse_text_off;
   opacity: 0.75;
+  color: $inverse_text_main;
 
   &:hover {
     background-color: $inverse_text_off !important;
@@ -403,10 +516,10 @@ h3.page_title {
 
 #post_post_type {
   option:nth-child(1) {
-    background-color: $main-work;
+    background-color: $main-project;
   }
   option:nth-child(2) {
-    background-color: $main-play;
+    background-color: $main-fun;
   }
   option:nth-child(3) {
     background-color: $main-facility;

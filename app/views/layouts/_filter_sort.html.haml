@@ -6,15 +6,15 @@
       %span.caret
   %ul.dropdown-menu{:role => "menu"}
     %li
-      = link_to "ALL",dashboard_path(:sort=>@sort,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-all"
+      = link_to "ALL",dashboard_path(:sort=>@sort,:page=>@page,:viewmode=>@viewmode),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-all"
     %li
-      = link_to "WORK",dashboard_path(:query => "0",:sort=>@sort,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-work"
+      = link_to "PROJECT",dashboard_path(:query => "0",:sort=>@sort,:page=>@page,:viewmode=>@viewmode),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-project"
     %li
-      = link_to "PLAY",dashboard_path(:query => "1",:sort=>@sort,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-play"
+      = link_to "FUN",dashboard_path(:query => "1",:sort=>@sort,:page=>@page,:viewmode=>@viewmode),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-fun"
     %li
-      = link_to "FACILITY",dashboard_path(:query => "2",:sort=>@sort,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-facility"
+      = link_to "FACILITY",dashboard_path(:query => "2",:sort=>@sort,:page=>@page,:viewmode=>@viewmode),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-facility"
     %li
-      = link_to "DOIT",dashboard_path(:query => "doit",:sort=>@sort,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-doit"
+      = link_to "LAUNCH",dashboard_path(:query => "doit",:sort=>@sort,:page=>@page,:viewmode=>@viewmode),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"filter-post-doit"
 %li.dropdown
   .circle.new-post-number.col-xs-1
     -if current_user
@@ -23,7 +23,7 @@
       - else
         = sync_new partial: "notification", resource: Post.new, scope: current_organization, resource: Post.new
     %p.number
-    
+
   %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
     #sort-posts.option
       .text{style: "float:left;"}
@@ -31,8 +31,8 @@
       %span.caret
   %ul.dropdown-menu{:role => "menu"}
     %li
-      = link_to "NEWEST",dashboard_path(:sort => "newest",:query=>@query,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"sort-post-newest"
+      = link_to "NEWEST",dashboard_path(:sort => "newest",:query=>@query,:page=>@page,:viewmode=>@viewmode),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"sort-post-newest"
     %li
-      = link_to "MOST  DISCUSSED",dashboard_path(:sort => "discussed",:query=>@query,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"sort-post-updated"
+      = link_to "MOST  DISCUSSED",dashboard_path(:sort => "discussed",:query=>@query,:page=>@page,:viewmode=>@viewmode),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"sort-post-updated"
     %li
-      = link_to "MOST UPVOTED",dashboard_path(:sort => "upvoted",:query=>@query,:page=>@page),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"sort-post-updated"
+      = link_to "MOST UPVOTED",dashboard_path(:sort => "upvoted",:query=>@query,:page=>@page,:viewmode=>@viewmode),remote: (request.path =="/dashboard"),class: "body-loading", :id =>"sort-post-updated"

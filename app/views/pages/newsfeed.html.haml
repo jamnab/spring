@@ -42,21 +42,29 @@
             - else
               .fb-like-box{"data-colorscheme" => "light", "data-header" => "true", "data-href" => "https://www.facebook.com/#{@organization.facebook_page_handle}", "data-show-border" => "true", "data-show-faces" => "false", "data-stream" => "true", height: '470'}
       #leaderboards.item.fade
-        - Post::TYPES.each do |post_type|
-          .leaderboard.col-xs-6
-            .leader-badge.pull-left
-              = image_tag "ribbon_#{post_type['id']}.png", class: 'img-responsive'
-            .top-performers.pull-left
-              %h4 Top Performers in #{post_type['name']}
-              - @sorted_users_by_post_type[post_type['id']][0..4].each do |user|
-                %p.performace
-                  = image_tag user.profile_image_url
-                  %b= user.full_name
-                  \|
-                  Performace Index:
-                  = user.performance_by_post_type(post_type['id'])['performance']
-                  (#{user.performance_by_post_type(post_type['id'])['contribution']} + #{user.performance_by_post_type(post_type['id'])['positive_impact']})
-
+        .row
+          - Post::TYPES.each do |post_type|
+            .leaderboard.col-xs-6
+              .leader-badge.pull-left
+                - top_user = @sorted_users_by_post_type[post_type['id']].first
+                - if !top_user || top_user.picture.nil?
+                  = image_tag "profile_default.png", class: 'top-user'
+                - else
+                  = image_tag top_user.picture.image.url(:user_image), class: 'top-user'
+                = image_tag "ribbon_#{post_type['id']}.png", class: 'img-responsive'
+              .top-performers.pull-left
+                %h4 Top Performers in #{post_type['name']}
+                - @sorted_users_by_post_type[post_type['id']][0..4].each do |user|
+                  %p.performace
+                    = image_tag user.profile_image_url
+                    %b= user.full_name
+                    \|
+                    Performace Index:
+                    = user.performance_by_post_type(post_type['id'])['performance']
+                    (#{user.performance_by_post_type(post_type['id'])['contribution']} + #{user.performance_by_post_type(post_type['id'])['positive_impact']})
+        .row
+          .col-xs-12.text-right
+            Note: Performance index is calculated as the sum of the opinions given and likes received.
 
       #doit-list.item.fade
         / TODO: Enforce list view when implemented

@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_action :set_organization, only: [:pending_approval, :dashboard, :summary, :search, :archive, :newsfeed]
   before_action :check_org_activation, only: [:dashboard, :summary, :search, :archive, :newsfeed]
 
-  @@page_limit = 10
+  @@page_limit = 20
 
   def home
     if current_user
@@ -35,6 +35,7 @@ class PagesController < ApplicationController
     @page = "dashboard" if !params[:page]
     @sort = params[:sort]
     @query = params[:query]
+    @viewmode = params[:viewmode]
 
     if current_user.is_admin?
 
@@ -142,13 +143,14 @@ class PagesController < ApplicationController
   end
 
   def newsfeed
+    @viewmode = 'list'
     @posts = @organization.posts.where(graveyard: false)
     @posts = @posts.reject{|r| r.doit? == false }
 
     @users = @organization.users
     @sorted_users_by_post_type = {
-      Post::WORK => @users.sort_by{|x| -x.performance_by_post_type(Post::WORK)['performance']},
-      Post::PLAY => @users.sort_by{|x| -x.performance_by_post_type(Post::PLAY)['performance']},
+      Post::PROJECT => @users.sort_by{|x| -x.performance_by_post_type(Post::PROJECT)['performance']},
+      Post::FUN => @users.sort_by{|x| -x.performance_by_post_type(Post::FUN)['performance']},
       Post::FACILITY => @users.sort_by{|x| -x.performance_by_post_type(Post::FACILITY)['performance']},
     }
   end

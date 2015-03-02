@@ -3,9 +3,9 @@
 #
 # Demo Company Inc.
 
-User.create(username: "pindoit", email: "info@pindoit.com",
-            password: "pindoit", password_confirmation: "pindoit",
-            admin: true, first_name: "Pindoit", last_name: "Admin",
+User.create(username: "launchboard", email: "info@launchboard.com",
+            password: "launchboard", password_confirmation: "launchboard",
+            admin: true, first_name: "LaunchBoard", last_name: "Admin",
             job_title: "System Admin")
 
 # demo
@@ -18,17 +18,21 @@ User.create(username: "demoman", email: "man@demo.com",
 # demo personnel
 40.times do |i|
   name = i.to_words.delete(' ')
-  User.create(username: name, email: "#{name}@demo.com",
+  user = User.create(username: name, email: "#{name}@demo.com",
               password: name, password_confirmation: name,
               first_name: name.capitalize,
               last_name: "Demoson",
               job_title: "Employee", organization_id: 1)
+  Picture.create({
+    user_id: user.id,
+    image: File.new("#{Rails.root}/app/assets/images/seeds/demo_users/User #{i+1}.png"),
+  })
 end
 
 # demo posts
 3.times do |type|
-  post_type = "Work" if type == Post::WORK
-  post_type = "Play" if type == Post::PLAY
+  post_type = "Project" if type == Post::PROJECT
+  post_type = "Fun" if type == Post::FUN
   post_type = "Facility" if type == Post::FACILITY
 
   # archived

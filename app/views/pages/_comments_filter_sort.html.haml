@@ -1,8 +1,6 @@
-
 .comment-sorts
   = link_to filter_sort_comments_path(:post_id => @post.id, :sort => "newest", :filter => @filter, :comments_page_num => 0), remote: true do
-
-    .btn.btn-sm.btn-main.on.btn-comments-sorts.comments-newest
+    .btn.btn-sm.btn-main.btn-comments-sorts.comments-newest{class: (!@post.alt_doit? ? "on" : "off")}
       NEWEST
     .circle.new-comment-number
       - if @sort == "upvoted"
@@ -10,8 +8,9 @@
       %p.number
 
   = link_to filter_sort_comments_path(:post_id => @post.id, :sort => "upvoted", :filter => @filter, :comments_page_num => 0), remote: true do
-    .btn.btn-sm.btn-main.off.btn-comments-sorts.comments-upvoted
+    .btn.btn-sm.btn-main.btn-comments-sorts.comments-upvoted{class: (@post.alt_doit? ? "on" : "off")}
       MOST UPVOTED
+
 .comment-filters
   = link_to filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => "all", :comments_page_num => 0), remote: true do
     .btn.btn-sm.btn-main.on.comments-all.btn-comments-filters
