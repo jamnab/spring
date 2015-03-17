@@ -1,19 +1,24 @@
-- if  activity.trackable_type == "Post"
-	= link_to dashboard_path(:populate_disucssion_id => activity.trackable.id), remote: true, class: "notification-link" do
-		.notification-card.col-xs-12{class: "read_#{activity.read}" }
-			= activity.owner.username
-			= (((activity.key).split(".")[1].sub! "_", " ").sub! "_", " ")
-			= activity.trackable_type
-			/ = activity.collected
-			/ - activity.read = true
-			/ - activity.save
+- if activity.trackable.nil?
+	= activity.owner.username
+	= (((activity.key).split(".")[1].sub! "_", " ").sub! "_", " ")
+	= Deleted Entity
+- else
+	- if  activity.trackable_type == "Post"
+		= link_to dashboard_path(:populate_disucssion_id => activity.trackable.id), remote: true, class: "notification-link" do
+			.notification-card.col-xs-12{class: "read_#{activity.read}" }
+				= activity.owner.username
+				= (((activity.key).split(".")[1].sub! "_", " ").sub! "_", " ")
+				= activity.trackable_type
+				/ = activity.collected
+				/ - activity.read = true
+				/ - activity.save
 
-- if  activity.trackable_type == "Comment"
-	= link_to dashboard_path(:populate_disucssion_id => activity.trackable.commentable.id), remote: true, class: "notification-link" do
-		.notification-card.col-xs-12{class: "read_#{activity.read}" }
-			= activity.owner.username
-			= (((activity.key).split(".")[1].sub! "_", " ").sub! "_", " ")
-			= activity.trackable_type
-			/ = activity.collected
-			/ - activity.read = true
-			/ - activity.save
+	- if  activity.trackable_type == "Comment"
+		= link_to dashboard_path(:populate_disucssion_id => activity.trackable.commentable.id), remote: true, class: "notification-link" do
+			.notification-card.col-xs-12{class: "read_#{activity.read}" }
+				= activity.owner.username
+				= (((activity.key).split(".")[1].sub! "_", " ").sub! "_", " ")
+				= activity.trackable_type
+				/ = activity.collected
+				/ - activity.read = true
+				/ - activity.save
