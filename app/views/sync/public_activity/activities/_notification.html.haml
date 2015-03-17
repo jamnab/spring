@@ -1,7 +1,7 @@
 - if activity.trackable.nil?
 	= activity.owner.username
 	= (((activity.key).split(".")[1].sub! "_", " ").sub! "_", " ")
-	= Deleted Entity
+	Deleted Entity
 - else
 	- if  activity.trackable_type == "Post"
 		= link_to dashboard_path(:populate_disucssion_id => activity.trackable.id), remote: true, class: "notification-link" do
