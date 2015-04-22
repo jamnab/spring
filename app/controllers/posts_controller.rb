@@ -50,8 +50,8 @@ class PostsController < ApplicationController
           sync_new @activity
         end
         current_user.organization.users.each do |u|
-          @activity.users << u
-          sync_new @activity, scope:u
+          Notification.create(user: u, activity: @activity)
+          sync_new @activity, scope: u
         end
         # @msg = "Your post was created successfully"
         # @class = "success"
@@ -95,12 +95,14 @@ class PostsController < ApplicationController
           sync_new @activity
         end
         current_user.organization.users.each do |u|
-          @activity.users << u
+          Notification.create(user: u, activity: @activity)
           sync_new @activity, scope:u
         end
-        @post.department_entries.destroy_all
-        params[:departments].each do |d_id|
-          DepartmentEntry.create(context: @post, department_id: d_id)
+        if !params[:departments].nil?
+          @post.department_entries.destroy_all
+          params[:departments].each do |d_id|
+            DepartmentEntry.create(context: @post, department_id: d_id)
+          end
         end
         sync_update @post
         format.html { redirect_to :dashboard, notice: 'Post was successfully updated.' }
