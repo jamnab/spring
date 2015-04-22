@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205110021) do
+ActiveRecord::Schema.define(version: 20150422181212) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -60,6 +60,20 @@ ActiveRecord::Schema.define(version: 20150205110021) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "department_entries", force: true do |t|
+    t.integer  "context_id"
+    t.string   "context_type"
+    t.integer  "department_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "departments", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "email_notification_settings", force: true do |t|
     t.string   "settings_for"
@@ -154,6 +168,7 @@ ActiveRecord::Schema.define(version: 20150205110021) do
     t.datetime "updated_at"
     t.boolean  "comment_anonymity", default: false
     t.integer  "comments_count",    default: 0
+    t.boolean  "approved",          default: false
   end
 
   create_table "project_memberships", force: true do |t|

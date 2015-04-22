@@ -1,0 +1,12 @@
+/ assume context is passed
+
+.row
+  .col-xs-12
+    %h5
+      %b Departments
+  - departments.all.each do |department|
+    - entry = DepartmentEntry.where(context: context, department: department).first
+    .col-xs-6
+      %span
+        = department.name
+      = check_box_tag 'departments[]', department.id, !entry.nil?

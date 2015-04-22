@@ -1,6 +1,9 @@
-
-
 @import 'presets';
+
+html, body, h1, h2, h3, h4, h5, h6, p, input, li, a {
+  font-family: 'Lato', sans-serif !important;
+}
+
 .notification-card{
   color: rgb(124, 139, 155);
   display: inline;
@@ -190,6 +193,9 @@ html, body {
     #filter-post-facility{
       background-color: rgba($main_facility, 0.75) !important;
 
+    }
+    #filter-post-pending{
+      background-color: rgba($main_facility, 0.75) !important;
     }
     #filter-post-doit{
       background-color: rgba($main_highlight, 0.75) !important;
@@ -685,7 +691,8 @@ a:hover {
 //   }
 // }
 
-.btn-project, .btn-fun, .btn-facility {
+.btn-project, .btn-fun, .btn-facility, .btn-approval-true, .btn-approval-false {
+  background-color: $default_text_main;
   color: $default_background;
   &:hover {
     opacity: 0.75;

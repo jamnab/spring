@@ -32,6 +32,9 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.save
         OrganizationMembership.create(user_id: current_user.id, organization_id: @organization.id, admin: true)
+        params[:departments].each do |d_id|
+          DepartmentEntry.create(context: @organization, department_id: d_id)
+        end
         format.html { redirect_to :dashboard, notice: 'Organization was successfully created.' }
         format.json { render :show, status: :created, location: @organization }
       else
@@ -80,11 +83,16 @@ class OrganizationsController < ApplicationController
       end
     end
     if @organization.update(organization_params)
-        redirect_to :back
-      else
-        @pic.delete
-        redirect_to :back
+      # set new department entries
+      @organization.department_entries.destroy_all
+      params[:departments].each do |d_id|
+        DepartmentEntry.create(context: @organization, department_id: d_id)
       end
+      redirect_to :back
+    else
+      @pic.delete
+      redirect_to :back
+    end
   end
 
   # DELETE /organizations/1

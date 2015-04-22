@@ -63,10 +63,13 @@ class PostsController < ApplicationController
             @post.pictures.create(image: image)
           }
         end
+        params[:departments].each do |d_id|
+          DepartmentEntry.create(context: @post, department_id: d_id)
+        end
         sync_new @post, scope: current_organization
         sync_new @post
         if current_user.is_admin?
-          @posts=Post.all
+          @posts = Post.all
         else
           @posts = current_organization.posts
         end
@@ -83,6 +86,7 @@ class PostsController < ApplicationController
         @post.pictures.create(image: image)
       }
     end
+    @viewmode = params[:viewmode]
     respond_to do |format|
       if @post.update(post_params)
         @activity = PublicActivity::Activity.create(owner: current_user,
@@ -93,6 +97,10 @@ class PostsController < ApplicationController
         current_user.organization.users.each do |u|
           @activity.users << u
           sync_new @activity, scope:u
+        end
+        @post.department_entries.destroy_all
+        params[:departments].each do |d_id|
+          DepartmentEntry.create(context: @post, department_id: d_id)
         end
         sync_update @post
         format.html { redirect_to :dashboard, notice: 'Post was successfully updated.' }
@@ -125,6 +133,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content,:post_type, :endorsed, :anonymous, :threshold, :user_id, :comment_anonymity, :pictures,:graveyard)
+      params.require(:post).permit(:title, :content, :post_type, :endorsed, :anonymous, :threshold, :user_id, :comment_anonymity, :pictures, :graveyard, :approved)
     end
 end

@@ -135,17 +135,19 @@ h3.page_title {
 .post-board {
   padding: 40px 20px;
   text-align: center;
+  min-height: 400px;
 }
 
 .post-wrapper {
   height: 265px;
   margin-bottom: 40px;
   padding: 0px 20px;
+  vertical-align: top;
   display: inline-block;
   text-align: left;
 
   &.listview {
-    height: 70px;
+    height: 90px;
     width: 100%;
     margin-bottom: 10px;
 
@@ -237,13 +239,38 @@ h3.page_title {
       color: #555;
       font-size: 14px;
       line-height: 22px;
-      .image-wrapper {
-        max-height: 100px;
-      }
+      .carousel { margin-top: -10px; }
+      .image-wrapper { max-height: 100px; }
     }
 
     .signature {
       border-top: 1px solid $default_text_main;
+    }
+  }
+
+  .approval-true {
+    background-color: rgba($main-project, 0.00);
+    .header {
+      background-color: rgba($main-project, 0.00);
+    }
+    .header .post-badge {
+      background-color: rgba($main-project, 0.75);
+    }
+    .signature {
+      background-color: rgba($main-project, 0.00);
+    }
+  }
+
+  .approval-false {
+    background-color: rgba($main-facility, 0.00);
+    .header {
+      background-color: rgba($main-facility, 0.00);
+    }
+    .header .post-badge {
+      background-color: rgba($main-facility, 0.75);
+    }
+    .signature {
+      background-color: rgba($main-facility, 0.00);
     }
   }
 
@@ -363,8 +390,16 @@ h3.page_title {
     }
   }
 
+  .departments {
+    margin-top: 4px;
+    padding: 2px 10px;
+    height: 23px;
+  }
+
   .progress {
     margin-top: 49px;
+    margin-bottom: 0px;
+    height: 6px;
     border-top: 1px solid $default_text_main;
     border-bottom: 1px solid $default_text_main;
     border-radius: 0px;

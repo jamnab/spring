@@ -1,6 +1,6 @@
 %html
   - if Rails.env.production?
-    - host = 'pindoit.com'
+    - host = 'golaunchboard.com'
   - else
     - host = @url
   - @full = "http://" + host + new_user_path(:name=> @organization.name,:token=> @organization.access_token)

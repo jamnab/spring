@@ -60,6 +60,8 @@ $ ->
     $("#post-discussion .comment .btn-sm").removeClass("btn-facility")
 
   # like/dislike setting positive to true/false before submitting
+  $("body").on "click", ".btn-approve", (e) ->
+    $(this).parent().submit()
   $("body").on "click", ".btn-like", (e) ->
     $(this).siblings("#opinion_positive").attr("value", "true")
     $(this).parent().submit()

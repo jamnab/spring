@@ -31,16 +31,12 @@ $(".loading-wrapper").remove();
 	}
 <%else%>
 	$('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>");
-
-	<% if @query == "1" %>
-		$('.option.filter').attr('id','filter-post-play')
-		$('.option.filter > .text').text("FUN")
-	<% elsif @query == "0" %>
-		$('.option.filter').attr('id','filter-post-work')
-		$('.option.filter > .text').text("PROJECT")
-	<% elsif @query == "2" %>
-		$('.option.filter').attr('id','filter-post-facility')
-		$('.option.filter > .text').text("FACILITY")
+	<% if (@query.to_i.to_s == @query) %>
+		$('.option.filter').attr('id',"filter-post-"+<%=@query%>);
+		$('.option.filter > .text').text("FILTERS");
+	<% elsif @query == "pending" %>
+		$('.option.filter').attr('id','filter-post-pending')
+		$('.option.filter > .text').text("PENDING")
 	<% elsif @query == "doit" || @page == 'doit' %>
 		$('.option.filter').attr('id','filter-post-doit')
 		$('.option.filter > .text').text("LAUNCH")
@@ -56,7 +52,7 @@ $(".loading-wrapper").remove();
 	$('.post-board').html("<%= j render(:partial => 'pages/post_board') %>");
 	$('.page-num').html("<%= j render(:partial => 'pages/next_post_page') %>");
 	$(".post-loading").click(function(){
-      var id = $(this).attr("id")
+      var id = $(this).attr("id");
       var target = ".post.".concat(id);
       $(target).append("<div class='loading-wrapper'><div class='loading-container'><div class='loading'></div><div id='loading-text'>Loading</div></div></div>")
     })

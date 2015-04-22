@@ -32,6 +32,9 @@ class Ability
       can @crud, Post do |post|
         post.user == user
       end
+      can :update, Post do |post|
+        user.manager && user.organization == post.organization
+      end
       can @cr, Post do |post|
         post.organization == user.organization
       end

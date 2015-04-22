@@ -1,31 +1,41 @@
 - user = post.user
-- class_type = "project" if post.post_type == Post::PROJECT
-- class_type = "fun" if post.post_type == Post::FUN
-- class_type = "facility" if post.post_type == Post::FACILITY
+- class_type = "approval-#{post.approved.to_s}"
+/ # - class_type = "project" if post.post_type == Post::PROJECT
+/ # - class_type = "fun" if post.post_type == Post::FUN
+/ # - class_type = "facility" if post.post_type == Post::FACILITY
 
 - if can? :read, post
   - if @viewmode == 'list'
     .post-wrapper{class: "#{('doithidden' if post.doit?)} #{('listview') if @viewmode == 'list'}"}
       .post{class: "#{class_type} #{post.id}", id: class_type}
+        - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
         .header
           %span.title= post.title
           .post-badge{class: ("doit" if post.doit?)}
             - if post.doit?
               L
             - else
-              = class_type[0].upcase
+              &nbsp;
           .traction{class: ("doit" if post.doit?)}
             .tags
-              - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
-              = form_for Opinion.new, remote: true do |f|
-                = f.hidden_field :positive, value: 'true'
-                = f.hidden_field :user_id, value: current_user.id
-                = f.hidden_field :opinionable_id, value: post.id
-                = f.hidden_field :opinionable_type, value: 'Post'
-                .btn.btn-sm.post-loading.btn-like{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
-                  %span.fa.fa-angle-up
-                .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
-                  %span.fa.fa-angle-down
+              - if !post.approved
+                - if can? :update, current_organization
+                  = form_for post, remote: true do |f|
+                    = hidden_field_tag 'viewmode', @viewmode
+                    = f.hidden_field :approved, value: 'true'
+                    .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Approve", placement: "bottom", trigger: "hover"}}
+                      %span.fa.fa-check
+              - else
+                = form_for Opinion.new, remote: true do |f|
+                  = f.hidden_field :positive, value: 'true'
+                  = f.hidden_field :user_id, value: current_user.id
+                  = f.hidden_field :opinionable_id, value: post.id
+                  = f.hidden_field :opinionable_type, value: 'Post'
+                  .btn.btn-sm.post-loading.btn-like{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
+                    %span.fa.fa-angle-up
+                  .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
+                    %span.fa.fa-angle-down
+
           .user
             - if !post.anonymous || post.doit?
               = image_tag(user.profile_image_url)
@@ -62,11 +72,12 @@
 
             .divider
 
-            = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "popover-trigger post-discussion-toggler", data: {content: "Discussion", placement: "top", trigger: "hover"} do
-              .btn.btn-sm.post-loading.btn-counter{id: "#{post.id}",class: "btn-header btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}
-                %span.flaticon-comments8
-                .count
-                  = post.comments.count
+            - if !opinion.nil?
+              = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "popover-trigger post-discussion-toggler", data: {content: "Discussion", placement: "top", trigger: "hover"} do
+                .btn.btn-sm.post-loading.btn-counter{id: "#{post.id}",class: "btn-header btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}
+                  %span.flaticon-comments8
+                  .count
+                    = post.comments.count
 
             - fav = post.favourited?(current_user)
             - if fav.nil?
@@ -83,8 +94,11 @@
         .progress
           - progress = post.opinion * 100 / post.threshold
           - progress = 100 if progress > 100
-          .progress-bar{style: "width: #{progress}%; min-width: 5em;", class: "progress-#{class_type} #{("doit" if post.doit?)}"}
-            #{post.opinion} / #{post.threshold}
+          .progress-bar{style: "width: #{progress}%;", class: "progress-#{class_type} #{("doit" if post.doit?)}"}
+        .departments
+          - post.departments.each do |department|
+            .badge
+              = department.name
   - else
     .post-wrapper{class: ("doithidden" if post.doit?)}
       .post{class: "#{class_type} #{post.id}", id: class_type}
@@ -92,26 +106,37 @@
           %span.title= post.title
           .traction{class: ("doit" if post.doit?)}
             .tags
-              - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
-              = form_for Opinion.new, remote: true do |f|
-                = f.hidden_field :positive, value: 'true'
-                = f.hidden_field :user_id, value: current_user.id
-                = f.hidden_field :opinionable_id, value: post.id
-                = f.hidden_field :opinionable_type, value: 'Post'
-                .btn.btn-sm.post-loading.btn-like{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
-                  %span.fa.fa-angle-up
-                .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
-                  %span.fa.fa-angle-down
+              - if !post.approved
+                - if can? :update, current_organization
+                  = form_for post, remote: true do |f|
+                    = hidden_field_tag 'viewmode', @viewmode
+                    = f.hidden_field :approved, value: 'true'
+                    .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Approve", placement: "bottom", trigger: "hover"}}
+                      %span.fa.fa-check
+              - else
+                - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
+                = form_for Opinion.new, remote: true do |f|
+                  = f.hidden_field :positive, value: 'true'
+                  = f.hidden_field :user_id, value: current_user.id
+                  = f.hidden_field :opinionable_id, value: post.id
+                  = f.hidden_field :opinionable_type, value: 'Post'
+                  .btn.btn-sm.post-loading.btn-like{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
+                    %span.fa.fa-angle-up
+                  .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
+                    %span.fa.fa-angle-down
           .post-badge{class: ("doit" if post.doit?)}
             - if post.doit?
               L
             - else
-              = class_type[0].upcase
+              &nbsp;
         .progress
           - progress = post.opinion * 100 / post.threshold
           - progress = 100 if progress > 100
-          .progress-bar{style: "width: #{progress}%; min-width: 5em;", class: "progress-#{class_type} #{("doit" if post.doit?)}"}
-            #{post.opinion} / #{post.threshold}
+          .progress-bar{style: "width: #{progress}%;", class: "progress-#{class_type} #{("doit" if post.doit?)}"}
+        .departments
+          - post.departments.each do |department|
+            .badge
+              = department.name
         .content
           .col-xs-8
             = post.content
@@ -172,11 +197,12 @@
 
             .divider
 
-            = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "popover-trigger post-discussion-toggler", data: {content: "Discussion", placement: "top", trigger: "hover"} do
-              .btn.btn-sm.post-loading.btn-counter{id: "#{post.id}",class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}
-                %span.flaticon-comments8
-                .count
-                  = post.comments.count
+            - if !opinion.nil?
+              = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "popover-trigger post-discussion-toggler", data: {content: "Discussion", placement: "top", trigger: "hover"} do
+                .btn.btn-sm.post-loading.btn-counter{id: "#{post.id}",class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}
+                  %span.flaticon-comments8
+                  .count
+                    = post.comments.count
 
             - fav = post.favourited?(current_user)
             - if fav.nil?
