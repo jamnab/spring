@@ -247,6 +247,32 @@ h3.page_title {
     }
   }
 
+  .approval-true {
+    background-color: rgba($main-project, 0.00);
+    .header {
+      background-color: rgba($main-project, 0.00);
+    }
+    .header .post-badge {
+      background-color: rgba($main-project, 0.75);
+    }
+    .signature {
+      background-color: rgba($main-project, 0.00);
+    }
+  }
+
+  .approval-false {
+    background-color: rgba($main-facility, 0.00);
+    .header {
+      background-color: rgba($main-facility, 0.00);
+    }
+    .header .post-badge {
+      background-color: rgba($main-facility, 0.75);
+    }
+    .signature {
+      background-color: rgba($main-facility, 0.00);
+    }
+  }
+
   .project {
     background-color: rgba($main-project, 0.00);
     .header {

@@ -688,7 +688,8 @@ a:hover {
 //   }
 // }
 
-.btn-project, .btn-fun, .btn-facility {
+.btn-project, .btn-fun, .btn-facility, .btn-approval-true, .btn-approval-false {
+  background-color: $default_text_main;
   color: $default_background;
   &:hover {
     opacity: 0.75;
