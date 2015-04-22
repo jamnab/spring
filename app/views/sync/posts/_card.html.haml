@@ -130,6 +130,10 @@
           - progress = 100 if progress > 100
           .progress-bar{style: "width: #{progress}%; min-width: 5em;", class: "progress-#{class_type} #{("doit" if post.doit?)}"}
             #{post.opinion} / #{post.threshold}
+        .departments
+          - @post.departments.each do |department|
+            .badge
+              = department.name
         .content
           .col-xs-8
             = post.content

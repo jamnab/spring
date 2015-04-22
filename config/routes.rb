@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :department_entries
+
   resources :favourites
   
   get 'notification_settings' => 'email_notification_settings#index', :as => :notification_settings

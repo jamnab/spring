@@ -5,6 +5,8 @@ class Post < ActiveRecord::Base
   validates :content, length: { maximum: 256}
   belongs_to :user
   belongs_to :organization
+  has_many :department_entries, as: :context
+  has_many :departments, through: :department_entries
 
   has_many :favourites
 

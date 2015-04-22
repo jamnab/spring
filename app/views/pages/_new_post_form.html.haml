@@ -20,10 +20,8 @@
             .field.col-xs-12.nested_pics_form
               = f.label :images
               = file_field_tag "images[]",type: :file, multiple: true
-
             .field.col-xs-12
-              = f.label :threshold
-              = f.number_field :threshold, class: "form-control"
+              = render 'layouts/department_selector', context: nil, departments: current_organization.departments
             .field.col-xs-12
               = f.label :content
               = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5, maxlength: 250
