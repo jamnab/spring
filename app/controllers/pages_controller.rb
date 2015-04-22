@@ -38,7 +38,7 @@ class PagesController < ApplicationController
     @viewmode = params[:viewmode]
 
     if current_user.is_admin?
-
+      # user is super admin
       if @page == "my_fav"
         @posts = current_user.fav_posts
       elsif @page == "archive"
@@ -46,9 +46,8 @@ class PagesController < ApplicationController
       else
         @posts = Post.where(graveyard: false)
       end
-
     else
-
+      # user is part of an org
       if @page == "my_fav"
         @posts = current_user.fav_posts
       elsif @page == "archive"
@@ -56,7 +55,11 @@ class PagesController < ApplicationController
       else
         @posts = current_organization.posts.where(graveyard: false)
       end
+    end
 
+    # only show approved unless you're admin
+    if cannot? :update, current_organization
+      @posts = @posts.where(approved: true)
     end
 
     if params[:sort] != nil
