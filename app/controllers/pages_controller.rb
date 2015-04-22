@@ -79,8 +79,10 @@ class PagesController < ApplicationController
     if params[:query].present?
       if @query == 'doit'
         @posts = @posts.reject{|r| r.doit? == false }
+      elsif @query == 'pending'
+        @posts = @posts.where(approved: false)
       else
-        @posts = @posts.where(:post_type => params[:query])
+        @posts = @posts.joins(:department_entries).where(department_entries: {department_id: @query})
       end
     end
 

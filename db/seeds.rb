@@ -4,7 +4,7 @@
 
 Department.create(name: 'Events')
 Department.create(name: 'Marketing')
-Department.create(name: 'Human Resources ')
+Department.create(name: 'Human Resources')
 Department.create(name: 'Finance')
 Department.create(name: 'Purchasing')
 Department.create(name: 'Sales')
