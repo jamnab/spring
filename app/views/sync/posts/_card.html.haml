@@ -93,8 +93,11 @@
         .progress
           - progress = post.opinion * 100 / post.threshold
           - progress = 100 if progress > 100
-          .progress-bar{style: "width: #{progress}%; min-width: 5em;", class: "progress-#{class_type} #{("doit" if post.doit?)}"}
-            #{post.opinion} / #{post.threshold}
+          .progress-bar{style: "width: #{progress}%;", class: "progress-#{class_type} #{("doit" if post.doit?)}"}
+        .departments
+          - post.departments.each do |department|
+            .badge
+              = department.name
   - else
     .post-wrapper{class: ("doithidden" if post.doit?)}
       .post{class: "#{class_type} #{post.id}", id: class_type}
@@ -128,10 +131,9 @@
         .progress
           - progress = post.opinion * 100 / post.threshold
           - progress = 100 if progress > 100
-          .progress-bar{style: "width: #{progress}%; min-width: 5em;", class: "progress-#{class_type} #{("doit" if post.doit?)}"}
-            #{post.opinion} / #{post.threshold}
+          .progress-bar{style: "width: #{progress}%;", class: "progress-#{class_type} #{("doit" if post.doit?)}"}
         .departments
-          - @post.departments.each do |department|
+          - post.departments.each do |department|
             .badge
               = department.name
         .content
