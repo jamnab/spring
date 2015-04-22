@@ -8,6 +8,7 @@
           Edit Post
       .slide-1
         = form_for @post, :html => { multipart: true },remote: true do |f|
+          = hidden_field_tag 'viewmode', @viewmode
           .modal-body.row
             .field.col-xs-12
               = f.label :title

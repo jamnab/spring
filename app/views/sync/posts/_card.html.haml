@@ -27,13 +27,14 @@
                       %span.fa.fa-check
               - else
                 = form_for Opinion.new, remote: true do |f|
+                  = hidden_field_tag 'viewmode', @viewmode
                   = f.hidden_field :positive, value: 'true'
                   = f.hidden_field :user_id, value: current_user.id
                   = f.hidden_field :opinionable_id, value: post.id
                   = f.hidden_field :opinionable_type, value: 'Post'
-                  .btn.btn-sm.post-loading.btn-like{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
+                  .btn.btn-sm.post-loading.btn-like{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
                     %span.fa.fa-angle-up
-                  .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
+                  .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
                     %span.fa.fa-angle-down
 
           .user
@@ -116,13 +117,14 @@
               - else
                 - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
                 = form_for Opinion.new, remote: true do |f|
+                  = hidden_field_tag 'viewmode', @viewmode
                   = f.hidden_field :positive, value: 'true'
                   = f.hidden_field :user_id, value: current_user.id
                   = f.hidden_field :opinionable_id, value: post.id
                   = f.hidden_field :opinionable_type, value: 'Post'
-                  .btn.btn-sm.post-loading.btn-like{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
+                  .btn.btn-sm.post-loading.btn-like{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'} #{'btn-like'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
                     %span.fa.fa-angle-up
-                  .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}",class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
+                  .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
                     %span.fa.fa-angle-down
           .post-badge{class: ("doit" if post.doit?)}
             - if post.doit?
