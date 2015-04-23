@@ -30,6 +30,7 @@ $(".loading-wrapper").remove();
 		$('#next-page').trigger('click');
 	}
 <%else%>
+	$('.view-controls').html("<%= j render(:partial => 'pages/department_nav') %>");
 	$('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>");
 	<% if (@query.to_i.to_s == @query) %>
 		$('.option.filter').attr('id',"filter-post-"+<%=@query%>);

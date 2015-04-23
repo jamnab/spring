@@ -1,18 +1,9 @@
 - if @page_num == 2
   / show title if only first page on infinite scroll
-
 .row
-  %h3.page_title
-    = @page_title
-
-  .view-controls.col-xs-12.text-right
-    = link_to dashboard_path(sort: @sort, query: @query, page: @page, viewmode: 'grid'), remote: (request.path =="/dashboard"), class: "body-loading" do
-      .btn.btn-main
-        .fa.fa-th
-    = link_to dashboard_path(sort: @sort, query: @query, page: @page, viewmode: 'list'), remote: (request.path =="/dashboard"), class: "body-loading" do
-      .btn.btn-main
-        .fa.fa-list
-
+  %ul.view-controls.col-xs-12
+    .nav.nav-pills
+      = render 'department_nav'
 .row
   - if @posts.empty?
     %h3.text-center There are no posts matching this criterion.

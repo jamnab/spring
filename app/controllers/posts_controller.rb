@@ -99,7 +99,7 @@ class PostsController < ApplicationController
           sync_new @activity, scope:u
         end
         if !params[:departments].nil?
-          @post.department_entries.destroy_all
+          @post.department_entries.each{|x| x.destroy}
           params[:departments].each do |d_id|
             DepartmentEntry.create(context: @post, department_id: d_id)
           end

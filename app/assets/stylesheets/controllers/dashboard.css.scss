@@ -61,10 +61,18 @@
 }
 
 .view-controls {
-  margin-top: -20px;
-  padding: 20px 30px;
-
-  .btn {margin-right: 5px;}
+  margin-top: -35px;
+  padding: 10px 40px;
+  li a {
+    background-color: $default_text_main;
+    color: $default_background;
+    margin-right: 10px;
+    &.no-right-margin{ margin-right: 0px; }
+    &:hover, &.active {
+      background-color: $main_project !important;
+      color: $default_background !important;
+    }
+  }
 }
 
 .comment-filters {
