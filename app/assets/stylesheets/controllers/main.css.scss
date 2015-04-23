@@ -125,9 +125,23 @@ html, body {
     margin: 0px;
   }
 
+  li.profile {
+    padding: 10px;
+    font-size: 18px;
+    color: $default_text_main;
+    span {
+      padding: 10px;
+      line-height: 40px;
+    }
+    img {
+      border-radius: 50px;
+      width: 50px;
+    }
+  }
+
   li a {
     line-height: 40px;
-    padding: 15px 20px;
+    padding: 15px;
     font-size: 18px;
     height: 70px;
 
@@ -165,7 +179,7 @@ html, body {
     }
   }
 
-  #navbar-right {
+  #navbar-right, .nav-left {
     display: inline-block;
 
     button {

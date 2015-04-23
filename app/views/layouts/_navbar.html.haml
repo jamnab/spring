@@ -19,16 +19,13 @@
       %ul.nav.navbar-nav.navbar-right
         - if current_user
           / %li.divider-vertical
-          %li
-            = form_tag search_path, class: "form-inline", remote: (request.path == '/search'), :method => :get do
-              .form-group
-                .col-xs-10
-                  .input-group
-                    = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "search ..."
-                    / %input#search.form-control{:placeholder => "search ...", :type => "text"}
-                .col-xs-2.no-padding
-                  %button.btn.btn-main{:type => "submit"}
-                    .fa.fa-search
+          %li.profile
+            %span
+              Welcome, #{current_user.first_name}
+            - if !current_user || current_user.picture.nil?
+              = image_tag("profile_default.png")
+            - else
+              = image_tag current_user.picture.image.url(:user_image)
           %li.dropdown.hidden-xs
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               %span.flaticon-three115
@@ -38,15 +35,17 @@
             %ul.dropdown-menu{:role => "menu"}
               - if can? :update, current_user
                 %li
-                  = link_to '#', data: {target: "#edit-user", toggle: "modal"} do
+                  = link_to '#', class: 'popover-trigger', data: {target: "#edit-user", toggle: "modal", content: "Edit personal account details", placement: "right", trigger: "hover"} do
                     Edit User Profile
               - if can? :update, current_organization
                 %li
-                  = link_to '#', data: {target: "#edit-org", toggle: "modal"} do
+                  = link_to '#', class: 'popover-trigger', data: {target: "#edit-org", toggle: "modal", content: "Edit organzation details and departments", placement: "right", trigger: "hover"} do
                     Edit Organization
                 %li
-                  = link_to generate_code_organization_path(current_organization), data: {:confirm => 'This will send you the invite email, invitation token will expire in 24 hours.'} do
-                    Generate Invite Email
+                  = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Previously launched, completed, and failed items", placement: "right", trigger: "hover"} do
+                    Archive
+                %li
+                  %a{href: '#'} Manage Users
           %li.dropdown.hidden-xs
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               .fa.fa-bell
@@ -58,8 +57,7 @@
               - @notifications[0,10].each do |n|
                 - activity = n.activity
                 = sync partial: 'notification', resource: activity
-
-          %li.hidden-xs
+          %li
             = link_to "Logout", :logout
         - else
           / %li.divider-vertical
@@ -70,14 +68,16 @@
           %li
             = link_to '#', data: {target: "#login", toggle: "modal"} do
               Log In
-
     #navbar-dropdown.pull-left.nav-left
       %ul.nav.navbar-nav.filter-sort
         = render 'layouts/filter_sort'
-
-      / #search.search.search-open
-      /   %form
-      /     %input#search.search-input{:name => "search", :placeholder => "Enter your search term...", :type => "search", :value => ""}/
-      /     %input.search-submit{:type => "submit", :value => ""}/
-      /     %span.sb-icon-search
-      /       .fa.fa-search
+        %li
+          = form_tag search_path, class: "form-inline", remote: (request.path == '/search'), :method => :get do
+            .form-group
+              .col-xs-10
+                .input-group
+                  = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "search ..."
+                  / %input#search.form-control{:placeholder => "search ...", :type => "text"}
+              .col-xs-2.no-padding
+                %button.btn.btn-main{:type => "submit"}
+                  .fa.fa-search
