@@ -408,7 +408,7 @@ h3.page_title {
     .progress-bar {
       border: none;
 
-      &.progress-project {
+      &.progress-positive {
         background-color: rgba($main_project, 0.50);
       }
 
@@ -416,7 +416,7 @@ h3.page_title {
         background-color: rgba($main_fun, 0.50);
       }
 
-      &.progress-facility {
+      &.progress-negative {
         background-color: rgba($main_facility, 0.50);
       }
 

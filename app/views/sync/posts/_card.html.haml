@@ -5,10 +5,23 @@
 / # - class_type = "facility" if post.post_type == Post::FACILITY
 
 - if can? :read, post
+
+  - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
+  - post_opinions = post.opinions
+  - total_count = post_opinions.count
+  - if total_count > 0
+    - pos_count = post_opinions.like.count
+    - neg_count = post_opinions.dislike.count
+    - pos_progress = pos_count * 100 / total_count
+    - neg_progress = neg_count * 100 / total_count
+  - else
+    - pos_progress = 0
+    - neg_progress = 0
+
   - if @viewmode == 'list'
     .post-wrapper{class: "#{('doithidden' if post.doit?)} #{('listview') if @viewmode == 'list'}"}
       .post{class: "#{class_type} #{post.id}", id: class_type}
-        - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
+
         .header
           %span.title= post.title
           .post-badge{class: ("doit" if post.doit?)}
@@ -93,9 +106,8 @@
                 .btn.btn-sm.btn-on.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
                   %span.flaticon-favourites7
         .progress
-          - progress = post.opinion * 100 / post.threshold
-          - progress = 100 if progress > 100
-          .progress-bar{style: "width: #{progress}%;", class: "progress-#{class_type} #{("doit" if post.doit?)}"}
+          .progress-bar{style: "width: #{pos_progress}%;", class: "progress-positive"}
+          .progress-bar{style: "width: #{neg_progress}%;", class: "progress-negative"}
         .departments
           - post.departments.each do |department|
             .badge
@@ -132,9 +144,8 @@
             - else
               &nbsp;
         .progress
-          - progress = post.opinion * 100 / post.threshold
-          - progress = 100 if progress > 100
-          .progress-bar{style: "width: #{progress}%;", class: "progress-#{class_type} #{("doit" if post.doit?)}"}
+          .progress-bar{style: "width: #{pos_progress}%;", class: "progress-positive"}
+          .progress-bar{style: "width: #{neg_progress}%;", class: "progress-negative"}
         .departments
           - post.departments.each do |department|
             .badge
