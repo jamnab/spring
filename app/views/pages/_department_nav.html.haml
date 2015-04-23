@@ -1,0 +1,14 @@
+%li.pull-left
+  = link_to "All", dashboard_path(:sort=>@sort, :page=>@page, :viewmode=>@viewmode), remote: (request.path =="/dashboard"), class: "body-loading #{'active' if @query.nil?}", :id =>"filter-post-all"
+
+- current_organization.departments.each do |department|
+  %li.pull-left
+    = link_to department.name, dashboard_path(:query => department.id, :sort=>@sort, :page=>@page, :viewmode=>@viewmode), remote: (request.path =="/dashboard"), class: "body-loading #{('active' if @query == department.id.to_s)}", id: "filter-post-department#{department.id}"
+
+%li.pull-right
+  = link_to dashboard_path(sort: @sort, query: @query, page: @page, viewmode: 'list'), remote: (request.path =="/dashboard"), class: "body-loading no-right-margin #{'active' if @viewmode == 'list'}" do
+    .fa.fa-list
+
+%li.pull-right
+  = link_to dashboard_path(sort: @sort, query: @query, page: @page, viewmode: 'grid'), remote: (request.path =="/dashboard"), class: "body-loading #{'active' if @viewmode != 'list'}" do
+    .fa.fa-th
