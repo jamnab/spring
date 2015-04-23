@@ -125,9 +125,23 @@ html, body {
     margin: 0px;
   }
 
+  li.profile {
+    padding: 10px;
+    font-size: 18px;
+    color: $default_text_main;
+    span {
+      padding: 10px;
+      line-height: 40px;
+    }
+    img {
+      border-radius: 50px;
+      width: 50px;
+    }
+  }
+
   li a {
     line-height: 40px;
-    padding: 15px 20px;
+    padding: 15px;
     font-size: 18px;
     height: 70px;
 
@@ -165,7 +179,7 @@ html, body {
     }
   }
 
-  #navbar-right {
+  #navbar-right, .nav-left {
     display: inline-block;
 
     button {
@@ -175,7 +189,6 @@ html, body {
 
   .dropdown {
     display: inline-block;
-    color: $inverse_text_main;
 
     &.open {
       background-color: $inverse_text_off !important;
@@ -227,16 +240,15 @@ html, body {
 
       li a {
         text-align: left;
-        color: $inverse_text_main !important;
-        background-color: $inverse_text_off;
         padding: 5px 15px;
         height: 50px;
         font-size: 16px;
         font-weight: bold;
+        background-color: $default_background;
+        color: $default_text_main;
 
         &:hover {
-          background-color: $default_background;
-          opacity: 0.75;
+          background-color: $inverse_text_highlight;
         }
       }
     }
@@ -467,8 +479,9 @@ a:hover {
   }
 
   .navicons {
-    margin-top: -4px;
-    // border-top: 1px solid $default_text_off;
+    // margin-top: -4px;
+    margin-top: 66px;
+    border-top: 1px solid $default_text_off;
 
     a {
       display: block;
@@ -480,6 +493,8 @@ a:hover {
       background: $default_background;
       position: relative;
       z-index: 20;
+      font-size: 40px;
+      line-height: 50px;
 
       span:before {
         display: block;
@@ -489,7 +504,6 @@ a:hover {
       }
 
       img {
-        margin-top: 5px;
         width: 40px;
       }
     }

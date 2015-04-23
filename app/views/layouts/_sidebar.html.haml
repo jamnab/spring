@@ -4,18 +4,21 @@
     .icon.fa.fa-times-circle-o.hidden
   .navicons
     - if current_user
+      / = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Launch", placement: "right", trigger: "hover"} do
+      /   = image_tag 'launch.png'
+      = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "right", trigger: "hover"} do
+        .fa.fa-lightbulb-o
+      = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Following", placement: "right", trigger: "hover"} do
+        %span.flaticon-favourites7
+      / = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Archived", placement: "right", trigger: "hover"} do
+      /   %span.flaticon-archive18
       = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Launch", placement: "right", trigger: "hover"} do
         = image_tag 'launch.png'
-      = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading popover-trigger" , data: {content: "Dashboard", placement: "right", trigger: "hover"} do
-        %span.flaticon-house28
-      = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Favourites", placement: "right", trigger: "hover"} do
-        %span.flaticon-favourites7
-      = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Archived", placement: "right", trigger: "hover"} do
-        %span.flaticon-archive18
-      = link_to :summary, class: 'popover-trigger', data: {content: "Summary", placement: "right", trigger: "hover"} do
+      / = link_to :summary, class: 'popover-trigger', data: {content: "Summary", placement: "right", trigger: "hover"} do
+      /   %span.flaticon-business155
+      = link_to :newsfeed, class: 'popover-trigger', data: {content: "Leaderboard", placement: "right", trigger: "hover"} do
         %span.flaticon-business155
-      = link_to :newsfeed, class: 'popover-trigger', data: {content: "Newsfeed", placement: "right", trigger: "hover"} do
-        %span.flaticon-internet62
+        / %span.flaticon-internet62
 
       .logo.brand-link
         = image_tag "logo_vert.png"
@@ -51,19 +54,16 @@
     - if current_user
 
       = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading" do
-        Home
+        Ideas
 
       = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading" do
-        My Favourites
+        Following
 
       = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading" do
-        Archive
-
-      = link_to :summary do
-        Analytics
+        Launch Items
 
       = link_to :newsfeed do
-        Newsfeed
+        Leaderboard
 
       .brand-link.org
         - if @organization == nil

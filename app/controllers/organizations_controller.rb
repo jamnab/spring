@@ -84,7 +84,7 @@ class OrganizationsController < ApplicationController
     end
     if @organization.update(organization_params)
       # set new department entries
-      @organization.department_entries.destroy_all
+      @organization.department_entries.each{|x| x.destroy}
       params[:departments].each do |d_id|
         DepartmentEntry.create(context: @organization, department_id: d_id)
       end
