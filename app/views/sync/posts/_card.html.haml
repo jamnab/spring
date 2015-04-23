@@ -112,6 +112,30 @@
           - post.departments.each do |department|
             .badge
               = department.name
+        .content
+          .col-xs-10
+            = post.content
+          .col-xs-2.carousel.slide.carousel-fade{id: "carousel-post-#{post.id}"}
+            %ol.carousel-indicators
+              - if post.pictures.empty?
+                %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=>"0"}
+              - else
+                - post.pictures.each_with_index do |pic,index|
+                  - if index == 0
+                    %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
+                  - else
+                    %li{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
+
+            .carousel-inner.image-wrapper
+              - if post.pictures.empty?
+                .item.active
+                  = image_tag ("no_image.png")
+              - else
+                - post.pictures.each_with_index do |pic,index|
+                  .item{class: ("active" if index == 0)}
+                    %a{"href"=> pic.image.url(:post_image), "data-lightbox" => post.title}
+                      = image_tag pic.image.url(:post_image)
+
   - else
     .post-wrapper{class: ("doithidden" if post.doit?)}
       .post{class: "#{class_type} #{post.id}", id: class_type}

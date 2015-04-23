@@ -148,14 +148,14 @@ h3.page_title {
 
 .post-wrapper {
   height: 265px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   padding: 0px 20px;
   vertical-align: top;
   display: inline-block;
   text-align: left;
 
   &.listview {
-    height: 90px;
+    height: 145px;
     width: 100%;
     margin-bottom: 10px;
 
@@ -183,6 +183,11 @@ h3.page_title {
           display: inline-block;
           float: right;
         }
+      }
+
+      .content {
+        .carousel { margin-top: -20px; }
+        .image-wrapper { max-height: 60px; }
       }
     }
   }
