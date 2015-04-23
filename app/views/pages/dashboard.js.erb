@@ -31,17 +31,17 @@ $(".loading-wrapper").remove();
 	}
 <%else%>
 	$('.view-controls').html("<%= j render(:partial => 'pages/department_nav') %>");
-	$('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>");
-	<% if (@query.to_i.to_s == @query) %>
-		$('.option.filter').attr('id',"filter-post-"+<%=@query%>);
-		$('.option.filter > .text').text("FILTERS");
-	<% elsif @query == "pending" %>
-		$('.option.filter').attr('id','filter-post-pending')
-		$('.option.filter > .text').text("PENDING")
-	<% elsif @query == "doit" || @page == 'doit' %>
-		$('.option.filter').attr('id','filter-post-doit')
-		$('.option.filter > .text').text("LAUNCH")
-	<%end%>
+	// $('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>");
+	// <% if (@query.to_i.to_s == @query) %>
+	// 	$('.option.filter').attr('id',"filter-post-"+<%=@query%>);
+	// 	$('.option.filter > .text').text("FILTERS");
+	// <% elsif @query == "pending" %>
+	// 	$('.option.filter').attr('id','filter-post-pending')
+	// 	$('.option.filter > .text').text("PENDING")
+	// <% elsif @query == "doit" || @page == 'doit' %>
+	// 	$('.option.filter').attr('id','filter-post-doit')
+	// 	$('.option.filter > .text').text("LAUNCH")
+	// <%end%>
 
 	<% if @sort == "newest" %>
 		$('#sort-posts.option > .text').text("NEWEST")

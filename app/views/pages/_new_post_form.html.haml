@@ -12,9 +12,6 @@
             = f.hidden_field :user_id, value: current_user.try(:id)
             = f.hidden_field :organization_id, value: current_user.try(:organization).try(:id)
             .field.col-xs-12
-              = f.label :post_type
-              = f.select(:post_type, Post::TYPES.collect {|e| [ e['name'], e['id'] ]}, {}, { class: "form-control" })
-            .field.col-xs-12
               = f.label :title
               = f.text_field :title, class: "form-control"
             .field.col-xs-12.nested_pics_form

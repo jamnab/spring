@@ -33,9 +33,6 @@
               = f.label :content
               = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5, maxlength: 250
             .field.col-xs-12
-              = f.label :post_type
-              = f.select(:post_type, Post::TYPES.collect {|e| [ e['name'], e['id'] ]}, {}, { class: "form-control" })
-            .field.col-xs-12
               %i Posts are by default anonymous, and the poster identity is always revealed when a post becomes a doit action item.
               - if can? :update, current_organization
                 = f.label 'Post as Anonymous'
