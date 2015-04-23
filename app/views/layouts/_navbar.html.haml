@@ -42,10 +42,13 @@
                   = link_to '#', class: 'popover-trigger', data: {target: "#edit-org", toggle: "modal", content: "Edit organzation details and departments", placement: "right", trigger: "hover"} do
                     Edit Organization
                 %li
+                  = link_to :summary, class: 'popover-trigger', data: {content: "Performance indices and metrics", placement: "right", trigger: "hover"} do
+                    Analytics
+                %li
                   = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Previously launched, completed, and failed items", placement: "right", trigger: "hover"} do
                     Archive
                 %li
-                  %a{href: '#'} Manage Users
+                  %a{href: '#', class: "popover-trigger", data: {content: "Coming soon", placement: "right", trigger: "hover"}} Manage Users
           %li.dropdown.hidden-xs
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               .fa.fa-bell

@@ -479,8 +479,9 @@ a:hover {
   }
 
   .navicons {
-    margin-top: -4px;
-    // border-top: 1px solid $default_text_off;
+    // margin-top: -4px;
+    margin-top: 66px;
+    border-top: 1px solid $default_text_off;
 
     a {
       display: block;
@@ -492,6 +493,8 @@ a:hover {
       background: $default_background;
       position: relative;
       z-index: 20;
+      font-size: 40px;
+      line-height: 50px;
 
       span:before {
         display: block;
@@ -501,7 +504,6 @@ a:hover {
       }
 
       img {
-        margin-top: 5px;
         width: 40px;
       }
     }
