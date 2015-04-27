@@ -3,7 +3,7 @@
     - host = 'golaunchboard.com'
   - else
     - host = @url
-  - @full = "http://" + host + new_user_path(:name=> @organization.name,:token=> @organization.access_token)
+  - @full = "http://" + host + new_user_path(:name=> @organization.name, :token=> @organization.access_token)
 
   %h5 Invite users to #{@organization.name}
   %p Please forward this invitation to all desired recipients, the invitation token expires in 24 hours.

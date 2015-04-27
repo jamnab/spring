@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
 
   belongs_to :organization
 
+  has_many :department_entry_memberships, dependent: :destroy
+  has_many :department_entries, through: :department_entry_memberships
+  has_many :departments, through: :department_entries
+
   # has_one :organization_membership, dependent: :destroy
   # has_one :organization, through: :organization_membership
 

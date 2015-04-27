@@ -1,0 +1,13 @@
+%html
+  - if Rails.env.production?
+    - host = 'golaunchboard.com'
+  - else
+    - host = @url
+
+  - @full = "http://" + host + new_user_path(name: @organization.name, email: @email)
+
+  %h5 LaunchBoard Invite
+  %p You have been invited by #{@sender.full_name} to #{@organization.name}.
+
+  %h5
+    %a{href: @full} Complete Registration

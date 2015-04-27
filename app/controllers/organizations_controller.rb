@@ -73,6 +73,55 @@ class OrganizationsController < ApplicationController
 
   # POST /organizations/1/manage_users
   def manage_users
+    # if ask to manage users
+    if !params[:department_entry_id].nil?
+      @url = Rails.env.production? ? request.host : request.host_with_port
+      @department_entry = DepartmentEntry.find(params[:department_entry_id])
+      @department = @department_entry.department
+      @organization = @department_entry.context
+
+      params[:invitee_list].split(/[,;]/).each do |target_email|
+        @user = User.where(email: target_email).first
+        if @user.nil?
+          # generate invite, send email
+          existing_invite = UserInvite.where(email: target_email, department_entry: @department_entry).first
+          if !existing_invite
+            UserInvite.create(email: target_email, department_entry: @department_entry)
+          end
+          Notifier.user_invitation(target_email, @organization, @url, current_user).deliver!
+        else
+          # add & send email about update
+          existing_membership = DepartmentEntryMembership.where(department_entry: @department_entry, user: @user).first
+          if !existing_membership
+            DepartmentEntryMembership.create(department_entry: @department_entry, user: @user)
+            Notifier.new_department_assignment(@user, @organization, @url, @department).deliver!
+          end
+        end
+      end
+      params[:admin_list].split(/[,;]/).each do |target_email|
+        @user = User.where(email: target_email).first
+        if @user.nil?
+          # generate invite, send email, decision maker
+          existing_invite = UserInvite.where(email: target_email, department_entry: @department_entry).first
+          if !existing_invite
+            UserInvite.create(email: target_email, department_entry: @department_entry, admin: true)
+          elsif !existing_invite.admin
+            existing_invite.update(admin: true)
+          end
+          Notifier.user_invitation(target_email, @organization, @url, current_user).deliver!
+        else
+          # add & send email about update, decision maker
+          existing_membership = DepartmentEntryMembership.where(department_entry: @department_entry, user: @user).first
+          if !existing_membership
+            DepartmentEntryMembership.create(department_entry: @department_entry, user: @user)
+            Notifier.new_department_assignment(@user, @organization, @url, @department).deliver!
+          elsif !existing_membership.admin
+            existing_membership.update(admin: true)
+          end
+        end
+      end
+    end
+
     respond_to do |format|
       format.html { redirect_to :back }
       format.js

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427134330) do
+ActiveRecord::Schema.define(version: 20150427174203) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -223,6 +223,14 @@ ActiveRecord::Schema.define(version: 20150427134330) do
     t.string   "measure_of_time"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "user_invites", force: true do |t|
+    t.string   "email"
+    t.integer  "department_entry_id"
+    t.boolean  "admin",               default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

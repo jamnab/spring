@@ -13,7 +13,10 @@
         = f.text_field :username, class: "form-control", id: "register_username"
       .field.col-xs-6
         = f.label :email
-        = f.text_field :email, class: "form-control"
+        - if !params[:email].nil?
+          = f.text_field :email, value: params[:email], class: "form-control", :readonly => "readonly"
+        - else
+          = f.text_field :email, class: "form-control"
       .field.col-xs-6
         = f.label :first_name
         = f.text_field :first_name, class: "form-control"
@@ -29,19 +32,12 @@
     .row.user_new
       .field.col-xs-12
         = f.label :organization_name
-        - if params[:token] != nil && params[:name] != nil
+        - if !params[:name].nil?
           = f.text_field :organization_name, value: params[:name], class: "form-control", :readonly => "readonly"
         - else
           = f.text_field :organization_name, class: "form-control"
       .field.col-xs-12
         = f.label :job_title
         = f.text_field :job_title, class: "form-control"
-      .field.col-xs-12
-        = f.label 'Organization access token'
-        - if params[:token] != nil && params[:name] != nil
-          = f.text_field :organization_token, class: "form-control", value: params[:token], :readonly => "readonly"
-        - else
-          = f.text_field :organization_token, class: "form-control"
-
       .actions.col-xs-12
         = f.submit 'Register', class: 'btn btn-success'
