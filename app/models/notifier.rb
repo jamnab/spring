@@ -31,7 +31,17 @@ class Notifier < ActionMailer::Base
     mail(
       subject: "LaunchBoard Invitation",
       from: "no_reply@golaunchboard.com",
-      to: email ,
+      to: email,
+      date: Time.now)
+  end
+
+  def post_update(post)
+    @post = post
+    @url = url
+    mail(
+      subject: "Post Update",
+      from: "no_reply@golaunchboard.com",
+      to: post.user.email,
       date: Time.now)
   end
 

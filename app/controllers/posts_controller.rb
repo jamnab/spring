@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :judge, :destroy]
   include ProjectsHelper
 
   # GET /posts
@@ -81,7 +81,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    if params[:images]
+    if !params[:images].nil?
       params[:images].each { |image|
         @post.pictures.create(image: image)
       }
@@ -114,6 +114,35 @@ class PostsController < ApplicationController
     end
   end
 
+  def judge
+    @viewmode = params[:viewmode]
+
+    # listing approval
+    if !params[:approved].nil?
+      if params[:approved]
+        @post.update(approved: true)
+      else
+        @post.update(graveyard: true)
+      end
+      Notifier.post_update(@post).deliver!
+    end
+
+    # launch approval
+    if !params[:launch_approved].nil?
+      @post.update(launch_approved: params[:launch_approved])
+      if !params[:action_date].nil?
+        @post.update(action_date: params[:action_date])
+      end
+      Notifier.post_update(@post).deliver!
+    end
+
+    # TODO: need to generate activity and notification
+    respond_to do |format|
+      format.html { redirect_to :dashboard, notice: 'Post was successfully updated.' }
+      format.js { render action: "update" }
+    end
+  end
+
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
@@ -135,6 +164,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :post_type, :endorsed, :anonymous, :threshold, :user_id, :comment_anonymity, :pictures, :graveyard, :approved)
+      params.require(:post).permit(:title, :content, :post_type, :endorsed, :anonymous, :threshold, :user_id, :comment_anonymity, :pictures, :graveyard)
     end
 end
