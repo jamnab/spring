@@ -24,10 +24,9 @@ class User < ActiveRecord::Base
   has_many :department_entries, through: :department_entry_memberships
   has_many :departments, through: :department_entries
 
-  def decision_department_memberships
-    self.department_entry_memberships.where(admin: true)
+  def decision_departments
+    self.department_entry_memberships.where(admin: true).map{|x| x.department}
   end
-  has_many :decision_departments, through: :decision_department_memberships
 
   # has_one :organization_membership, dependent: :destroy
   # has_one :organization, through: :organization_membership

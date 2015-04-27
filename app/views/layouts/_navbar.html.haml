@@ -45,6 +45,9 @@
                   = link_to :summary, class: 'popover-trigger', data: {content: "Performance indices and metrics", placement: "right", trigger: "hover"} do
                     Analytics
                 %li
+                  = link_to :newsfeed, class: 'popover-trigger', data: {content: "Leaderboard", placement: "right", trigger: "hover"} do
+                    Leaderboard
+                %li
                   = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Previously launched, completed, and failed items", placement: "right", trigger: "hover"} do
                     Archive
                 %li

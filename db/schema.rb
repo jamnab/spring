@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427190117) do
+ActiveRecord::Schema.define(version: 20150427192629) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -166,7 +166,6 @@ ActiveRecord::Schema.define(version: 20150427190117) do
     t.string   "title"
     t.text     "content"
     t.boolean  "anonymous",         default: true
-    t.integer  "threshold",         default: 20
     t.integer  "opinion",           default: 0
     t.integer  "user_id"
     t.integer  "organization_id"
