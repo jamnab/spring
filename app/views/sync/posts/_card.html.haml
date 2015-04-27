@@ -21,7 +21,31 @@
   .post-wrapper{class: ("doithidden" if post.doit?)}
     .post{class: "#{class_type} #{post.id}", id: class_type}
       .header
-        %span.title= post.title
+        %span.title
+          - if post.doit?
+            / launch item, pre-approve and post approve
+            - if post.launch_approved
+              Launched Item
+            - else
+              Pending Launch Approval
+          - elsif post.graveyard
+            / archived post
+            Archived Post
+          - elsif !opinion.nil? && opinion.positive
+            / following, voted positive
+            - if post.departments.empty?
+              No Related Department
+            - else
+              = post.departments.map{|x| x.name} * ', '
+          - elsif post.approved
+            / in ideas
+            - if post.departments.empty?
+              No Related Department
+            - else
+              = post.departments.map{|x| x.name} * ', '
+          - else
+            / pending listing approval
+            Pending Listing Approval
         .traction{class: ("doit" if post.doit?)}
           .tags
             - if !post.approved
@@ -45,14 +69,19 @@
                   %span.fa.fa-angle-down
         .post-badge{class: ("doit" if post.doit?)}
           - if post.doit?
+            / launch item, pre-approve and post approve
             = image_tag 'launch.png'
           - elsif post.graveyard
+            / archived post
             .fa.fa-archive
           - elsif !opinion.nil? && opinion.positive
+            / following, voted positive
             .fa.fa-eye
           - elsif post.approved
+            / in ideas
             .fa.fa-lightbulb-o
           - else
+            / pending listing approval
             .fa.fa-clock-o
       .progress
         .progress-bar{style: "width: #{pos_progress}%;", class: "progress-positive"}
