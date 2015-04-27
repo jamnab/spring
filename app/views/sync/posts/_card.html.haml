@@ -18,7 +18,7 @@
     - neg_progress = 0
 
   / - if @viewmode == 'list'
-  .post-wrapper{class: ("doithidden" if post.doit?)}
+  .post-wrapper{class: "#{('listview' if @viewmode == 'list')} #{('doithidden' if post.doit?)}"}
     .post{class: "#{class_type} #{post.id}", id: class_type}
       .header
         %span.title
@@ -46,27 +46,6 @@
           - else
             / pending listing approval
             Pending Listing Approval
-        .traction{class: ("doit" if post.doit?)}
-          .tags
-            - if !post.approved
-              - if can? :update, current_organization
-                = form_for post, remote: true do |f|
-                  = hidden_field_tag 'viewmode', @viewmode
-                  = f.hidden_field :approved, value: 'true'
-                  .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Approve", placement: "bottom", trigger: "hover"}}
-                    %span.fa.fa-check
-            - else
-              - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
-              = form_for Opinion.new, remote: true do |f|
-                = hidden_field_tag 'viewmode', @viewmode
-                = f.hidden_field :positive, value: 'true'
-                = f.hidden_field :user_id, value: current_user.id
-                = f.hidden_field :opinionable_id, value: post.id
-                = f.hidden_field :opinionable_type, value: 'Post'
-                .btn.btn-sm.post-loading.btn-like{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'} #{'btn-like'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
-                  %span.fa.fa-angle-up
-                .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
-                  %span.fa.fa-angle-down
         .post-badge{class: ("doit" if post.doit?)}
           - if post.doit?
             / launch item, pre-approve and post approve
@@ -84,16 +63,15 @@
             / pending listing approval
             .fa.fa-clock-o
       .progress
-        .progress-bar{style: "width: #{pos_progress}%;", class: "progress-positive"}
-        .progress-bar{style: "width: #{neg_progress}%;", class: "progress-negative"}
+        - if !opinion.nil?
+          .progress-bar{style: "width: #{pos_progress}%;", class: "progress-positive"}
+          .progress-bar{style: "width: #{neg_progress}%;", class: "progress-negative"}
       .departments
         - post.departments.each do |department|
           .badge
             = department.name
       .content
-        .col-xs-8
-          = post.content
-        .col-xs-4.carousel.slide.carousel-fade{id: "carousel-post-#{post.id}"}
+        .carousel.slide.carousel-fade{id: "carousel-post-#{post.id}", class: (@viewmode == 'list' ? 'col-xs-2' : 'col-xs-12')}
           %ol.carousel-indicators
             - if post.pictures.empty?
               %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=>"0"}
@@ -103,7 +81,6 @@
                   %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
                 - else
                   %li{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
-
           .carousel-inner.image-wrapper
             - if post.pictures.empty?
               .item.active
@@ -113,20 +90,10 @@
                 .item{class: ("active" if index == 0)}
                   %a{"href"=> pic.image.url(:post_image), "data-lightbox" => post.title}
                     = image_tag pic.image.url(:post_image)
-      .signature
-        .user
-          - if !post.anonymous || post.doit?
-            = image_tag(user.profile_image_url)
-            .name
-              %b= user.full_name
-              %br
-              (#{user.job_title})
-          - else
-            = image_tag("profile_default.png")
-            .name
-              Anonymous User
-              %br
-              (Contributor)
+        %div{ class: (@viewmode == 'list' ? 'col-xs-10' : 'col-xs-12') }
+          %h4.bolded= post.title
+          = post.content
+
         .options
           = form_for post, remote: true do |f|
             = f.hidden_field :graveyard, value: 'false'
@@ -148,24 +115,57 @@
               .btn.btn-sm.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
                 %span.flaticon-delete48
 
-          .divider
+          / - fav = post.favourited?(current_user)
+          / - if fav.nil?
+          /   = link_to '#' do
+          /     .btn.btn-sm.btn-off.btn-fav.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {content: "Favourite", placement: "top", trigger: "hover"}}
+          /       %span.flaticon-favourites7
+          /   = form_for Favourite.new, remote: true do |f|
+          /     = f.hidden_field :fav_post_id, value: post.id
+          /     = f.hidden_field :user_id, value: current_user.id
+          / - else
+          /   = link_to fav, class: "popover-trigger", data: {content: "Unfavourite", placement: "top", trigger: "hover"}, method: :delete, remote: true do
+          /     .btn.btn-sm.btn-on.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
+          /       %span.flaticon-favourites7
 
-          - if !opinion.nil?
+      .signature
+        .user
+          - if !post.anonymous || post.doit?
+            = image_tag(user.profile_image_url)
+            .name
+              %b= user.full_name
+              %br
+              (#{user.job_title})
+          - else
+            = image_tag("profile_default.png")
+            .name
+              Anonymous User
+              %br
+              (Contributor)
+        .options
+          - if opinion.nil?
+            - if !post.approved
+              - if can? :update, current_organization
+                = form_for post, remote: true do |f|
+                  = hidden_field_tag 'viewmode', @viewmode
+                  = f.hidden_field :approved, value: 'true'
+                  .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Approve", placement: "bottom", trigger: "hover"}}
+                    %span.fa.fa-check
+            - else
+              - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
+              = form_for Opinion.new, remote: true do |f|
+                = hidden_field_tag 'viewmode', @viewmode
+                = f.hidden_field :positive, value: 'true'
+                = f.hidden_field :user_id, value: current_user.id
+                = f.hidden_field :opinionable_id, value: post.id
+                = f.hidden_field :opinionable_type, value: 'Post'
+                .btn.btn-sm.post-loading.btn-like{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'} #{'btn-like'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
+                  %span.fa.fa-angle-up
+                .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
+                  %span.fa.fa-angle-down
+          - else
             = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "popover-trigger post-discussion-toggler", data: {content: "Discussion", placement: "top", trigger: "hover"} do
               .btn.btn-sm.post-loading.btn-counter{id: "#{post.id}",class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}
                 %span.flaticon-comments8
                 .count
                   = post.comments.count
-
-          - fav = post.favourited?(current_user)
-          - if fav.nil?
-            = link_to '#' do
-              .btn.btn-sm.btn-off.btn-fav.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {content: "Favourite", placement: "top", trigger: "hover"}}
-                %span.flaticon-favourites7
-            = form_for Favourite.new, remote: true do |f|
-              = f.hidden_field :fav_post_id, value: post.id
-              = f.hidden_field :user_id, value: current_user.id
-          - else
-            = link_to fav, class: "popover-trigger", data: {content: "Unfavourite", placement: "top", trigger: "hover"}, method: :delete, remote: true do
-              .btn.btn-sm.btn-on.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
-                %span.flaticon-favourites7
