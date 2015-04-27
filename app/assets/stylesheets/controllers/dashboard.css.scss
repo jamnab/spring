@@ -267,7 +267,8 @@ h3.page_title {
       background-color: rgba($main-project, 0.00);
     }
     .header .post-badge {
-      background-color: rgba($main-project, 0.75);
+      // background-color: rgba($main-project, 0.75);
+      background-color: transparent;
     }
     .signature {
       background-color: rgba($main-project, 0.00);
@@ -280,7 +281,8 @@ h3.page_title {
       background-color: rgba($main-facility, 0.00);
     }
     .header .post-badge {
-      background-color: rgba($main-facility, 0.75);
+      // background-color: rgba($main-facility, 0.75);
+      background-color: transparent;
     }
     .signature {
       background-color: rgba($main-facility, 0.00);
@@ -293,7 +295,8 @@ h3.page_title {
       background-color: rgba($main-project, 0.00);
     }
     .header .post-badge {
-      background-color: rgba($main-project, 0.75);
+      // background-color: rgba($main-project, 0.75);
+      background-color: transparent;
     }
     .signature {
       background-color: rgba($main-project, 0.00);
@@ -306,7 +309,8 @@ h3.page_title {
       background-color: rgba($main-fun, 0.00);
     }
     .header .post-badge {
-      background-color: rgba($main-fun, 0.75);
+      // background-color: rgba($main-fun, 0.75);
+      background-color: transparent;
     }
     .signature {
       background-color: rgba($main-fun, 0.00);
@@ -319,7 +323,8 @@ h3.page_title {
       background-color: rgba($main-facility, 0.00);
     }
     .header .post-badge {
-      background-color: rgba($main-facility, 0.75);
+      // background-color: rgba($main-facility, 0.75);
+      background-color: transparent;
     }
     .signature {
       background-color: rgba($main-facility, 0.00);
@@ -378,16 +383,26 @@ h3.page_title {
   .header {
     .post-badge {
       background-color: inherit;
+      text-align: center;
       border-radius: 20px;
       width: 38px;
       height: 38px;
       margin-top: -10px;
       margin-left: -10px;
-      padding: 10px 13px;
+      padding: 5px 0px;
       float: left;
+      line-height: 10px;
+      color: $default_text_main;
+      font-size: 26px;
+
+      border: 1px solid $default_text_main;
+      img {
+        width: 28px;
+      }
 
       &.doit {
-        background-color: rgba($main_highlight, 0.75);
+        // background-color: rgba($main_highlight, 0.75);
+        background-color: transparent;
       }
     }
 
