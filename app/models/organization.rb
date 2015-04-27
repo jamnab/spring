@@ -3,13 +3,13 @@ class Organization < ActiveRecord::Base
   has_many :posts
   has_one :picture
   accepts_nested_attributes_for :picture
+
   has_many :comments, through: :posts
+
   has_many :department_entries, as: :context
   has_many :departments, through: :department_entries
-
-  # has_many :posts, through: :projects
-
-  has_many :users
+  has_many :department_entry_memberships, through: :department_entries
+  has_many :users, through: :department_entry_memberships
 
   validates :name, uniqueness: true
 

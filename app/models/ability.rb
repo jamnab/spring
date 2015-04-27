@@ -24,7 +24,7 @@ class Ability
         user.manager && user.organization == org
       end
 
-      can :generate_code, Organization do |org|
+      can [:update_departments, :manage_users], Organization do |org|
         user.manager && user.organization == org
       end
 

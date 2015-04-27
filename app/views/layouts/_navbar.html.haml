@@ -48,7 +48,8 @@
                   = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Previously launched, completed, and failed items", placement: "right", trigger: "hover"} do
                     Archive
                 %li
-                  %a{href: '#', class: "popover-trigger", data: {content: "Coming soon", placement: "right", trigger: "hover"}} Manage Users
+                  = link_to manage_users_organization_path(current_organization), remote: true, class: "popover-trigger", data: {content: "Manage departments and members", placement: "right", trigger: "hover"} do
+                    Manage Users
           %li.dropdown.hidden-xs
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               .fa.fa-bell
