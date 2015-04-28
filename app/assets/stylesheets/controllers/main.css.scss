@@ -167,6 +167,11 @@ html, body {
     }
   }
 
+  li h3 {
+    line-height: 31px;
+    color: $default_text_main;
+  }
+
   li.divider-vertical {
     margin-top: 20px;
   }

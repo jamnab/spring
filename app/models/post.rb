@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
   belongs_to :organization
   has_many :department_entries, as: :context
   has_many :departments, through: :department_entries
-  has_many :users, through: :department_entries
+  # has_many :users, through: :department_entries
 
   has_many :favourites
 
@@ -31,7 +31,13 @@ class Post < ActiveRecord::Base
            {'name' => 'Facility', 'id' => FACILITY}]
 
   def threshold
-    self.users.count
+    org = self.organization
+    if self.departments.count == 0
+      org_departments = org.department_entries
+    else
+      org_departments = DepartmentEntry.where(context: org).where('department_id in (?)', self.departments.map{|x| x.id})
+    end
+    org_departments.map{|x| x.users.count}.inject(0, :+)
   end
 
   def self.all_doits

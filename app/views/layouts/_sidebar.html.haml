@@ -8,7 +8,7 @@
       /   = image_tag 'launch.png'
       = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "right", trigger: "hover"} do
         .fa.fa-lightbulb-o
-      = link_to dashboard_path(:page => "pending"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Following", placement: "right", trigger: "hover"} do
+      = link_to dashboard_path(:page => "pending"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Pending", placement: "right", trigger: "hover"} do
         .fa.fa-clock-o
       = link_to dashboard_path(:page => "following"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Following", placement: "right", trigger: "hover"} do
         .fa.fa-eye
