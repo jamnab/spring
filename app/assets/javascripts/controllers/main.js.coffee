@@ -78,3 +78,5 @@ $ ->
   $(".popover-trigger").popover();
   $("body").on "mouseover", ".popover-trigger", (e) ->
     $(this).popover()
+
+  $("#user_management").modal('show')

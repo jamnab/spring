@@ -39,21 +39,26 @@ class PagesController < ApplicationController
 
     if current_user.is_admin?
       # user is super admin
-      if @page == "my_fav"
-        @posts = current_user.fav_posts
+      if @page == "following"
+        # @posts = current_user.fav_posts
+        @posts = Post.joins(:opinions).where(opinions: {positive: true, user: current_user})
+      elsif @page == 'pending'
+        @posts = Post.where(approved: false, graveyard: false)
       elsif @page == "archive"
         @posts = Post.where(graveyard: true)
       else
-        @posts = Post.where(graveyard: false)
+        @posts = Post.where(approved: true, graveyard: false)
       end
     else
       # user is part of an org
-      if @page == "my_fav"
-        @posts = current_user.fav_posts
+      if @page == "following"
+        @posts = Post.joins(:opinions).where(opinions: {positive: true, user: current_user})
+      elsif @page == 'pending'
+        @posts = current_organization.posts.where(approved: false, graveyard: false)
       elsif @page == "archive"
          @posts = current_organization.posts.where(graveyard: true)
       else
-        @posts = current_organization.posts.where(graveyard: false)
+        @posts = current_organization.posts.where(approved: true, graveyard: false)
       end
     end
 
@@ -79,8 +84,6 @@ class PagesController < ApplicationController
     if params[:query].present?
       if @query == 'doit'
         @posts = @posts.reject{|r| r.doit? == false }
-      elsif @query == 'pending'
-        @posts = @posts.where(approved: false)
       else
         @posts = @posts.joins(:department_entries).where(department_entries: {department_id: @query})
       end
@@ -112,9 +115,10 @@ class PagesController < ApplicationController
       @page_num = 2
     end
 
-    @page_title = 'Post Listing'
+    @page_title = 'Idea Board'
     @page_title = 'Launch Action Items' if @page == 'doit'
-    @page_title = 'Favourited Posts' if @page == 'my_fav'
+    @page_title = 'Pending Posts' if @page == 'pending'
+    @page_title = 'Following Posts' if @page == 'following'
     @page_title = 'Archived Posts' if @page == 'archive'
 
     respond_to do |format|

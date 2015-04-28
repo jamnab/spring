@@ -4,6 +4,10 @@ html, body, h1, h2, h3, h4, h5, h6, p, input, li, a {
   font-family: 'Lato', sans-serif !important;
 }
 
+.bolded {
+  font-weight: bold;
+}
+
 .notification-card{
   color: rgb(124, 139, 155);
   display: inline;
@@ -161,6 +165,11 @@ html, body {
       margin-top: -5px;
       border-radius: 5px !important;
     }
+  }
+
+  li h3 {
+    line-height: 31px;
+    color: $default_text_main;
   }
 
   li.divider-vertical {
@@ -800,6 +809,14 @@ a:hover {
   color: $default_text_main;
   font-weight: normal;
   font-size: 14px;
+}
+
+body .modal-dialog {
+  width: 960px;
+
+  @media (max-width: 960px) {
+    width: 600px;
+  }
 }
 
 // #comment_plain, #comment_content, #comment_suggestion {

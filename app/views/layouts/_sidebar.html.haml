@@ -8,17 +8,14 @@
       /   = image_tag 'launch.png'
       = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "right", trigger: "hover"} do
         .fa.fa-lightbulb-o
-      = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Following", placement: "right", trigger: "hover"} do
-        %span.flaticon-favourites7
-      / = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Archived", placement: "right", trigger: "hover"} do
-      /   %span.flaticon-archive18
+      = link_to dashboard_path(:page => "pending"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Pending", placement: "right", trigger: "hover"} do
+        .fa.fa-clock-o
+      = link_to dashboard_path(:page => "following"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Following", placement: "right", trigger: "hover"} do
+        .fa.fa-eye
       = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Launch", placement: "right", trigger: "hover"} do
         = image_tag 'launch.png'
       / = link_to :summary, class: 'popover-trigger', data: {content: "Summary", placement: "right", trigger: "hover"} do
       /   %span.flaticon-business155
-      = link_to :newsfeed, class: 'popover-trigger', data: {content: "Leaderboard", placement: "right", trigger: "hover"} do
-        %span.flaticon-business155
-        / %span.flaticon-internet62
 
       .logo.brand-link
         = image_tag "logo_vert.png"
@@ -56,14 +53,14 @@
       = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading" do
         Ideas
 
-      = link_to dashboard_path(:page => "my_fav"), remote: request.path == "/dashboard", class: "body-loading" do
+      = link_to dashboard_path(:page => "pending"), remote: request.path == "/dashboard", class: "body-loading" do
+        Pending
+
+      = link_to dashboard_path(:page => "following"), remote: request.path == "/dashboard", class: "body-loading" do
         Following
 
-      = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading" do
+      = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading" do
         Launch Items
-
-      = link_to :newsfeed do
-        Leaderboard
 
       .brand-link.org
         - if @organization == nil

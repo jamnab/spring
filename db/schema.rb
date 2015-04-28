@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422181212) do
+ActiveRecord::Schema.define(version: 20150427192629) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -65,6 +65,14 @@ ActiveRecord::Schema.define(version: 20150422181212) do
     t.integer  "context_id"
     t.string   "context_type"
     t.integer  "department_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "department_entry_memberships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "department_entry_id"
+    t.boolean  "admin",               default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -158,7 +166,6 @@ ActiveRecord::Schema.define(version: 20150422181212) do
     t.string   "title"
     t.text     "content"
     t.boolean  "anonymous",         default: true
-    t.integer  "threshold",         default: 20
     t.integer  "opinion",           default: 0
     t.integer  "user_id"
     t.integer  "organization_id"
@@ -169,6 +176,8 @@ ActiveRecord::Schema.define(version: 20150422181212) do
     t.boolean  "comment_anonymity", default: false
     t.integer  "comments_count",    default: 0
     t.boolean  "approved",          default: false
+    t.date     "action_date"
+    t.boolean  "launch_approved",   default: false
   end
 
   create_table "project_memberships", force: true do |t|
@@ -215,6 +224,14 @@ ActiveRecord::Schema.define(version: 20150422181212) do
     t.string   "measure_of_time"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "user_invites", force: true do |t|
+    t.string   "email"
+    t.integer  "department_entry_id"
+    t.boolean  "admin",               default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   belongs_to :organization
   has_many :department_entries, as: :context
   has_many :departments, through: :department_entries
+  # has_many :users, through: :department_entries
 
   has_many :favourites
 
@@ -29,12 +30,22 @@ class Post < ActiveRecord::Base
            {'name' => 'Fun', 'id' => FUN},
            {'name' => 'Facility', 'id' => FACILITY}]
 
+  def threshold
+    org = self.organization
+    if self.departments.count == 0
+      org_departments = org.department_entries
+    else
+      org_departments = DepartmentEntry.where(context: org).where('department_id in (?)', self.departments.map{|x| x.id})
+    end
+    org_departments.map{|x| x.users.count}.inject(0, :+)
+  end
+
   def self.all_doits
-    where("opinion >= threshold")
+    where("opinion >= ?", self.threshold)
   end
 
   def self.all_alt_doits
-    Post.find_by_sql("SELECT `posts`.* FROM `posts` INNER JOIN `comments` ON `comments`.`commentable_id` = `posts`.`id` AND `comments`.`commentable_type` = 'Post' AND `comments`.opinion >= `posts`.threshold")
+    Post.find_by_sql("SELECT `posts`.* FROM `posts` INNER JOIN `comments` ON `comments`.`commentable_id` = `posts`.`id` AND `comments`.`commentable_type` = 'Post' AND `comments`.opinion >= ?", self.threshold)
   end
 
   def doit?

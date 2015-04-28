@@ -1,4 +1,12 @@
 class DepartmentEntry < ActiveRecord::Base
   belongs_to :context, polymorphic: true
   belongs_to :department
+  belongs_to :decision_maker, class_name: 'User'
+
+  has_many :department_entry_memberships, dependent: :destroy
+  has_many :users, through: :department_entry_memberships
+
+  def department_name
+    self.department.name
+  end
 end

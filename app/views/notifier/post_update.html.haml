@@ -1,0 +1,23 @@
+%html
+  - if Rails.env.production?
+    - host = 'golaunchboard.com'
+  - else
+    - host = @url
+
+  - @full = "http://" + host + "/dashboard"
+
+  - if @post.launch_approved
+    - if @post.action_date.nil?
+      - msg = "launch approved, date TBD"
+    - else
+      - msg = "launch approved for #{@post.action_date.strftime('%b %d, %Y')}"
+  - elsif @post.approved
+    - msg = "approved for listing"
+  - elsif @post.graveyard
+    - msg = "rejected from listing"
+
+  %h5 Post Update
+  %p Your post #{@post.title} has been #{msg}.
+
+  %h5
+    %a{href: @full} See Dashboard

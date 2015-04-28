@@ -1,12 +1,23 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  # require "sentimentalizer"
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
 
   helper_method :current_user
   helper_method :current_organization
+  helper_method :current_departments
 
   private
+
+  def current_departments
+    if current_user.is_manager?
+      current_organization.departments.uniq
+    else
+      current_user.departments.uniq
+    end
+  end
 
   def current_organization
     if current_user.is_admin?

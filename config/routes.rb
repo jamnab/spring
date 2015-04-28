@@ -3,13 +3,13 @@ Rails.application.routes.draw do
   resources :department_entries
 
   resources :favourites
-  
+
   get 'notification_settings' => 'email_notification_settings#index', :as => :notification_settings
   get 'pending_approval' => 'pages#pending_approval', as: :pending_approval
   get 'dashboard' => 'pages#dashboard', as: :dashboard
   get 'newsfeed' => 'pages#newsfeed', as: :newsfeed
   get 'summary' => 'pages#summary', as: :summary
-  get 'load_pictures' => 'pages#load_pictures', as: :picture 
+  get 'load_pictures' => 'pages#load_pictures', as: :picture
   get 'search' => 'pages#search', as: :search
   get 'price' => 'pages#price', as: :price
   get 'contact_us' => 'pages#contact_us', as: :contact_us
@@ -36,11 +36,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :organization_memberships do
-    member do
-      get :toggle
-    end
-  end
+  # resources :organization_memberships do
+  #   member do
+  #     get :toggle
+  #   end
+  # end
 
   resources :projects do
     collection do
@@ -54,11 +54,10 @@ Rails.application.routes.draw do
   end
 
   resources :organizations do
-    collection do
-      post :join_by_code
-    end
     member do
-      get :generate_code
+      get :manage_users
+      post :manage_users
+      post :update_departments
     end
   end
 

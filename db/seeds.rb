@@ -2,27 +2,27 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 
-Department.create(name: 'Events')
-Department.create(name: 'Marketing')
-Department.create(name: 'Human Resources')
-Department.create(name: 'Finance')
-Department.create(name: 'Purchasing')
-Department.create(name: 'Sales')
-Department.create(name: 'IT')
-Department.create(name: 'Inventory')
-Department.create(name: 'Quality Assurance')
-Department.create(name: 'Insurance')
-Department.create(name: 'Licenses')
-Department.create(name: 'Operations')
-Department.create(name: 'Customers')
-Department.create(name: 'Staff')
-Department.create(name: 'Customer Services')
-Department.create(name: 'Client Services')
-Department.create(name: 'Research & Development')
-Department.create(name: 'Market Development')
-Department.create(name: 'Business Development')
-Department.create(name: 'Management')
-Department.create(name: 'Engineering')
+# Department.create(name: 'Events')
+# Department.create(name: 'Marketing')
+# Department.create(name: 'Human Resources')
+# Department.create(name: 'Finance')
+# Department.create(name: 'Purchasing')
+# Department.create(name: 'Sales')
+# Department.create(name: 'IT')
+# Department.create(name: 'Inventory')
+# Department.create(name: 'Quality Assurance')
+# Department.create(name: 'Insurance')
+# Department.create(name: 'Licenses')
+# Department.create(name: 'Operations')
+# Department.create(name: 'Customers')
+# Department.create(name: 'Staff')
+# Department.create(name: 'Customer Services')
+# Department.create(name: 'Client Services')
+# Department.create(name: 'Research & Development')
+# Department.create(name: 'Market Development')
+# Department.create(name: 'Business Development')
+# Department.create(name: 'Management')
+# Department.create(name: 'Engineering')
 
 # Demo Company Inc.
 
@@ -51,6 +51,13 @@ Department.create(name: 'Engineering')
 #     image: File.new("#{Rails.root}/app/assets/images/seeds/demo_users/User #{i+1}.png"),
 #   })
 # end
+
+demo_org = Organization.where(name: "Demo Company Inc.").first
+User.where(organization_id: demo_org.id).each do |u|
+  count = demo_org.department_entries.count
+  index = u.id % count
+  DepartmentEntryMembership.create(department_entry: demo_org.department_entries[index], user: u)
+end
 
 # # demo posts
 # 3.times do |type|

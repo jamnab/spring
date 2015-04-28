@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  department_entry: 1
+  admin: false
+
+two:
+  user_id: 1
+  department_entry: 1
+  admin: false

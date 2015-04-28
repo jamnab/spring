@@ -44,31 +44,97 @@ class OrganizationsController < ApplicationController
     end
   end
 
-  def generate_code
-    @prev = @organization.access_token
-    @new = ('a'..'z').to_a.shuffle[0,32].join
-    @organization.update_attribute(:access_token, @new)
-    @user = current_user
-    @url = Rails.env.production? ? request.host : request.host_with_port
-    Notifier.register_form(@user, @organization,@url).deliver!
-    @organization.delay(run_at: 1.day.from_now).update_attribute(:access_token, nil)
-    @time = Time.now
-    redirect_to :back, notice: 'New access code generated.'
+  # def generate_code
+  #   @prev = @organization.access_token
+  #   @new = ('a'..'z').to_a.shuffle[0,32].join
+  #   @organization.update_attribute(:access_token, @new)
+  #   @user = current_user
+  #   @url = Rails.env.production? ? request.host : request.host_with_port
+  #   Notifier.register_form(@user, @organization,@url).deliver!
+  #   @organization.delay(run_at: 1.day.from_now).update_attribute(:access_token, nil)
+  #   @time = Time.now
+  #   redirect_to :back, notice: 'New access code generated.'
+  # end
+
+  # def join_by_code
+  #   target_organization = Organization.where(name: params[:name]).first
+
+  #   if target_organization.nil?
+  #     redirect_to :back, notice: 'Organization does not exist.' and return
+  #   end
+
+  #   if target_organization.access_code != params[:access_code]
+  #     redirect_to :back, notice: 'Wrong access code.' and return
+  #   end
+
+  #   OrganizationMembership.create(organization_id: target_organization.id, user_id: params[:user_id], admin: false)
+  #   redirect_to target_organization, notice: 'Successfully joined organization.'
+  # end
+
+  # POST /organizations/1/manage_users
+  def manage_users
+    # if ask to manage users
+    if !params[:department_entry_id].nil?
+      @url = Rails.env.production? ? request.host : request.host_with_port
+      @department_entry = DepartmentEntry.find(params[:department_entry_id])
+      @department = @department_entry.department
+      @organization = @department_entry.context
+
+      params[:invitee_list].split(/[,;]/).each do |target_email|
+        @user = User.where(email: target_email).first
+        if @user.nil?
+          # generate invite, send email
+          existing_invite = UserInvite.where(email: target_email, department_entry: @department_entry).first
+          if !existing_invite
+            UserInvite.create(email: target_email, department_entry: @department_entry)
+          end
+          Notifier.user_invitation(target_email, @organization, @url, current_user).deliver!
+        else
+          # add & send email about update
+          existing_membership = DepartmentEntryMembership.where(department_entry: @department_entry, user: @user).first
+          if !existing_membership
+            DepartmentEntryMembership.create(department_entry: @department_entry, user: @user)
+            Notifier.new_department_assignment(@user, @organization, @url, @department).deliver!
+          end
+        end
+      end
+      params[:admin_list].split(/[,;]/).each do |target_email|
+        @user = User.where(email: target_email).first
+        if @user.nil?
+          # generate invite, send email, decision maker
+          existing_invite = UserInvite.where(email: target_email, department_entry: @department_entry).first
+          if !existing_invite
+            UserInvite.create(email: target_email, department_entry: @department_entry, admin: true)
+          elsif !existing_invite.admin
+            existing_invite.update(admin: true)
+          end
+          Notifier.user_invitation(target_email, @organization, @url, current_user).deliver!
+        else
+          # add & send email about update, decision maker
+          existing_membership = DepartmentEntryMembership.where(department_entry: @department_entry, user: @user).first
+          if !existing_membership
+            DepartmentEntryMembership.create(department_entry: @department_entry, user: @user)
+            Notifier.new_department_assignment(@user, @organization, @url, @department).deliver!
+          elsif !existing_membership.admin
+            existing_membership.update(admin: true)
+          end
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end
   end
 
-  def join_by_code
-    target_organization = Organization.where(name: params[:name]).first
-
-    if target_organization.nil?
-      redirect_to :back, notice: 'Organization does not exist.' and return
+  def update_departments
+    # set new department entries
+    @organization.department_entries.each{|x| x.destroy}
+    params[:departments].each do |d_id|
+      DepartmentEntry.create(context: @organization, department_id: d_id)
     end
-
-    if target_organization.access_code != params[:access_code]
-      redirect_to :back, notice: 'Wrong access code.' and return
-    end
-
-    OrganizationMembership.create(organization_id: target_organization.id, user_id: params[:user_id], admin: false)
-    redirect_to target_organization, notice: 'Successfully joined organization.'
+    redirect_to :back
   end
 
   # PATCH/PUT /organizations/1
@@ -83,11 +149,6 @@ class OrganizationsController < ApplicationController
       end
     end
     if @organization.update(organization_params)
-      # set new department entries
-      @organization.department_entries.each{|x| x.destroy}
-      params[:departments].each do |d_id|
-        DepartmentEntry.create(context: @organization, department_id: d_id)
-      end
       redirect_to :back
     else
       @pic.delete

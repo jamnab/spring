@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @organization = Organization.where(name: @user.organization_name).first
-
+    @invites = UserInvite.where(email: @user.email)
     new_org = false
 
     # allow if new organization or has embedded token
@@ -45,12 +45,12 @@ class UsersController < ApplicationController
     elsif !@user.is_manager? && @organization.nil?
       redirect_to :back, notice: "Error: Cannot join, organization does not exist." and return
     else
-      # check for token
-      if @organization.access_token == @user.organization_token
+      # check for invite
+      if !@invites.empty?
         # joins existing organization
         @user.organization_id = @organization.id
       else
-        redirect_to :back, notice: "Error: Cannot join, access token not detected." and return
+        redirect_to :back, notice: "Error: Cannot join, there are no invites associated with this email address." and return
       end
     end
 
@@ -60,10 +60,14 @@ class UsersController < ApplicationController
           @organization = Organization.create(name: @user.organization_name)
           @user.update(organization_id: @organization.id)
         end
+        @invites.each do |invite|
+          # join department, remove invite
+          DepartmentEntryMembership.create(user: @user, department_entry: invite.department_entry, admin: invite.admin)
+          invite.destroy
+        end
         format.html { redirect_to :dashboard, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
-        - raise
         format.html { render :new }
         # format.json { render json: @user.errors, status: :unprocessable_entity }
       end

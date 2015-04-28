@@ -24,7 +24,7 @@ class Ability
         user.manager && user.organization == org
       end
 
-      can :generate_code, Organization do |org|
+      can [:update_departments, :manage_users], Organization do |org|
         user.manager && user.organization == org
       end
 
@@ -32,8 +32,11 @@ class Ability
       can @crud, Post do |post|
         post.user == user
       end
-      can :update, Post do |post|
+      can [:update, :judge], Post do |post|
         user.manager && user.organization == post.organization
+      end
+      can [:update, :judge], Post do |post|
+        !(post.departments & user.decision_departments).empty?
       end
       can @cr, Post do |post|
         post.organization == user.organization

@@ -18,8 +18,6 @@
                   = p.label :image
                   = p.file_field :image
               .field.col-xs-12
-                = render 'layouts/department_selector', context: current_organization, departments: Department.all
-              .field.col-xs-12
                 = f.label :twitter_handle
                 = f.text_field :twitter_handle, class: "form-control"
               .field.col-xs-12
