@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   before_action :set_organization, only: [:pending_approval, :dashboard, :summary, :search, :archive, :newsfeed]
   before_action :check_org_activation, only: [:dashboard, :summary, :search, :archive, :newsfeed]
 
+  @@global_limit = 200
   @@page_limit = 200
 
   def home
@@ -61,6 +62,8 @@ class PagesController < ApplicationController
         @posts = current_organization.posts.where(approved: true, graveyard: false)
       end
     end
+
+    @posts = @posts.limit(@@global_limit)
 
     # only show approved unless you're admin
     if cannot? :update, current_organization
