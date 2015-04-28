@@ -815,6 +815,10 @@ a:hover {
   border: none;
 }
 
+#post-discussion, #carousel-discussion {
+  .item { max-height: 150px; }
+}
+
 #comment_plain {
   margin-right: 10px;
 }
