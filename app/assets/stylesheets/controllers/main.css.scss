@@ -105,7 +105,7 @@ html, body {
 .navbar{
   // background-color: #5b6e84;
   // background-color: transparent;
-  background-color: $default_background;
+  background-color: $nav_background;
   border-radius: 0px;
   border: 0px;
   color: #ddd;
@@ -149,9 +149,9 @@ html, body {
     font-size: 18px;
     height: 70px;
 
-    &:hover {
+    &:hover, &:focus, &:active {
       color: $inverse_text_main !important;
-      background-color: $inverse_background !important;
+      background-color: $nav_hover !important;
     }
   }
 
@@ -590,6 +590,7 @@ a:hover {
 
 .body-wrapper {
   overflow: hidden;
+  background-color: $body_background;
   width: calc(100% - 70px);
 }
 
@@ -744,48 +745,61 @@ a:hover {
   padding-bottom: 0px;
 }
 
+
+.modal-dialog {
+  .modal-content {
+    .modal-header {
+      background-color: $nav_background;
+      color: $inverse_text_main;
+    }
+    .btn.btn-main {
+      background-color: $nav_background;
+    }
+  }
+}
+
 #post-discussion .modal-dialog {
   height: 100%;
 
   .modal-content {
     height: 100%;
 
-    &.project {
-      .modal-header {
-        background-color: $main_project;
-        color: $inverse_text_main;
-      }
-      .btn.btn-main {
-        background-color: $main_project;
-      }
-    }
+    // &.project {
+    //   .modal-header {
+    //     background-color: $main_project;
+    //     color: $inverse_text_main;
+    //   }
+    //   .btn.btn-main {
+    //     background-color: $main_project;
+    //   }
+    // }
 
-    &.fun {
-      .modal-header {
-        background-color: $main_fun;
-        color: $inverse_text_main;
-      }
-      .btn.btn-main {
-        background-color: $main_fun;
-      }
-    }
+    // &.fun {
+    //   .modal-header {
+    //     background-color: $main_fun;
+    //     color: $inverse_text_main;
+    //   }
+    //   .btn.btn-main {
+    //     background-color: $main_fun;
+    //   }
+    // }
 
-    &.facility {
-      .modal-header {
-        background-color: $main_facility;
-        color: $inverse_text_main;
-      }
-      .btn.btn-main {
-        background-color: $main_facility;
-      }
-    }
+    // &.facility {
+    //   .modal-header {
+    //     background-color: $main_facility;
+    //     color: $inverse_text_main;
+    //   }
+    //   .btn.btn-main {
+    //     background-color: $main_facility;
+    //   }
+    // }
 
     .modal-body {
       padding-bottom: 10px;
     }
 
     .modal-footer {
-      height: calc(100% - 368px);
+      height: calc(100% - 410px);
 
       .comments {
         height: calc(100% - 50px);

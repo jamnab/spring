@@ -46,18 +46,18 @@ $ ->
   $("#login").on "shown.bs.modal", ->
     $("#login_username").focus()
 
-  # add/remove discussion color theme
-  $(".post-discussion-toggler").on "click", ->
-    $("#post-discussion .modal-content").addClass($(this).data('type'))
-    $("#post-discussion .comment .btn-sm").addClass("btn-#{$(this).data('type')}")
+  # # add/remove discussion color theme
+  # $(".post-discussion-toggler").on "click", ->
+  #   $("#post-discussion .modal-content").addClass($(this).data('type'))
+  #   $("#post-discussion .comment .btn-sm").addClass("btn-#{$(this).data('type')}")
 
-  $("#post-discussion").on "hidden.bs.modal", ->
-    $("#post-discussion .modal-content").removeClass("work")
-    $("#post-discussion .modal-content").removeClass("play")
-    $("#post-discussion .modal-content").removeClass("facility")
-    $("#post-discussion .comment .btn-sm").removeClass("btn-work")
-    $("#post-discussion .comment .btn-sm").removeClass("btn-play")
-    $("#post-discussion .comment .btn-sm").removeClass("btn-facility")
+  # $("#post-discussion").on "hidden.bs.modal", ->
+  #   $("#post-discussion .modal-content").removeClass("work")
+  #   $("#post-discussion .modal-content").removeClass("play")
+  #   $("#post-discussion .modal-content").removeClass("facility")
+  #   $("#post-discussion .comment .btn-sm").removeClass("btn-work")
+  #   $("#post-discussion .comment .btn-sm").removeClass("btn-play")
+  #   $("#post-discussion .comment .btn-sm").removeClass("btn-facility")
 
   # like/dislike setting positive to true/false before submitting
   $("body").on "click", ".btn-approve", (e) ->
