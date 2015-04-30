@@ -7,13 +7,13 @@
       /   %span.icon-bar
       /   %span.icon-bar
 
-      .navbar-brand.hidden-xs.hidden-sm
-        / = image_tag "pindoit_logo.png"
-        / = image_tag "pindoit_logo.png"
-        - if @organization.nil? || @organization.picture.nil?
-          = image_tag "logo.png"
-        - else
-          = image_tag @organization.picture.image.url(:organization_image)
+      / .navbar-brand.hidden-xs.hidden-sm
+      /   / = image_tag "pindoit_logo.png"
+      /   / = image_tag "pindoit_logo.png"
+      /   - if @organization.nil? || @organization.picture.nil?
+      /     = image_tag "logo.png"
+      /   - else
+      /     = image_tag @organization.picture.image.url(:organization_image)
 
     #navbar-right.pull-right.nav-right
       %ul.nav.navbar-nav.navbar-right

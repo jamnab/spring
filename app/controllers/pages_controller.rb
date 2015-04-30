@@ -92,7 +92,7 @@ class PagesController < ApplicationController
       if @query == 'doit'
         @posts = @posts.reject{|r| r.doit? == false }
       else
-        @posts = @posts.joins(:department_entries).where(department_entries: {department_id: @query})
+        @posts = @posts.joins(:department_entries).where(department_entries: {id: @query})
       end
     end
 

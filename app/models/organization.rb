@@ -1,17 +1,24 @@
 class Organization < ActiveRecord::Base
   attr_accessor :username
-  has_many :posts
+  # has_many :posts
   has_one :picture
   accepts_nested_attributes_for :picture
 
   has_many :comments, through: :posts
 
   has_many :department_entries, as: :context
-  has_many :departments, through: :department_entries
+  has_many :posts, through: :department_entries
+
   has_many :department_entry_memberships, through: :department_entries
   has_many :users, through: :department_entry_memberships
 
+  DEP_LIMIT = 5
+
   validates :name, uniqueness: true
+
+  def departments
+    self.department_entries.map{|x| x.department_name}
+  end
 
   def new_token
   	access_token = (0...50).map { ('a'..'z').to_a[rand(26)] }.join

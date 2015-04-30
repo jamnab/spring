@@ -1,16 +1,15 @@
 / assume context is passed
 
 %table.table.table-bordered.text-center
-  - departments.all.each_slice(2) do |department_pair|
+  - department_entries.each_slice(2) do |department_pair|
     %tr
-      - department_pair.each do |department|
-        - entry = DepartmentEntry.where(context: context, department: department).first
+      - department_pair.each do |department_entry|
         %td
-          = department.name
-          - if !entry.nil?
-            (#{entry.users.count} members)
+          = department_entry.department_name
+          - if !department_entry.nil?
+            (#{department_entry.users.count} members)
         %td
-          = check_box_tag 'departments[]', department.id, !entry.nil?
+          = check_box_tag 'departments[]', department_entry.id,department_entry.posts.include?(context)
       - if department_pair.count < 2
         %td
         %td

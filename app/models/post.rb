@@ -5,9 +5,13 @@ class Post < ActiveRecord::Base
   validates :content, length: { maximum: 256}
   belongs_to :user
   belongs_to :organization
-  has_many :department_entries, as: :context
-  has_many :departments, through: :department_entries
-  # has_many :users, through: :department_entries
+
+  has_many :post_department_entries
+  has_many :department_entries, through: :post_department_entries
+
+  def departments
+    self.department_entries.map{|x| x.department_name}
+  end
 
   has_many :favourites
 
@@ -35,7 +39,7 @@ class Post < ActiveRecord::Base
     if self.departments.count == 0
       org_departments = org.department_entries
     else
-      org_departments = DepartmentEntry.where(context: org).where('department_id in (?)', self.departments.map{|x| x.id})
+      org_departments = DepartmentEntry.where(context: org).where('department_name in (?)', self.departments)
     end
     (0.7 * org_departments.map{|x| x.users.count}.inject(0, :+)).to_i
   end

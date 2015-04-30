@@ -8,7 +8,7 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :opinion, default: 0
       t.integer :user_id
       t.integer :organization_id
-      t.integer :post_type
+      # t.integer :post_type
       t.boolean :graveyard, default: false
 
       t.timestamps
