@@ -26,33 +26,36 @@
 
 # Demo Company Inc.
 
-# User.create(username: "launchboard", email: "info@launchboard.com",
-#             password: "launchboard", password_confirmation: "launchboard",
-#             admin: true, first_name: "LaunchBoard", last_name: "Admin",
-#             job_title: "System Admin")
+User.create(username: "launchboard", email: "info@launchboard.com",
+            password: "launchboard", password_confirmation: "launchboard",
+            admin: true, first_name: "LaunchBoard", last_name: "Admin",
+            job_title: "System Admin")
 
-# # demo
-# Organization.create(name: "Demo Company Inc.", activated: true)
-# User.create(username: "demoman", email: "man@demo.com",
-#             password: "demoman", password_confirmation: "demoman",
-#             first_name: "Manager", last_name: "Demoson",
-#             job_title: "Manager", organization_id: 1, manager: true)
+# demo
+Organization.create(name: "Demo Company Inc.", activated: true)
+User.create(username: "demoman", email: "man@demo.com",
+            password: "demoman", password_confirmation: "demoman",
+            first_name: "Manager", last_name: "Demoson",
+            job_title: "Manager", organization_id: 1, manager: true)
 
-# # demo personnel
-# 40.times do |i|
-#   name = i.to_words.delete(' ')
-#   user = User.create(username: name, email: "#{name}@demo.com",
-#               password: name, password_confirmation: name,
-#               first_name: name.capitalize,
-#               last_name: "Demoson",
-#               job_title: "Employee", organization_id: 1)
-#   Picture.create({
-#     user_id: user.id,
-#     image: File.new("#{Rails.root}/app/assets/images/seeds/demo_users/User #{i+1}.png"),
-#   })
-# end
+# demo personnel
+40.times do |i|
+  name = i.to_words.delete(' ')
+  user = User.create(username: name, email: "#{name}@demo.com",
+              password: name, password_confirmation: name,
+              first_name: name.capitalize,
+              last_name: "Demoson",
+              job_title: "Employee", organization_id: 1)
+  Picture.create({
+    user_id: user.id,
+    image: File.new("#{Rails.root}/app/assets/images/seeds/demo_users/User #{i+1}.png"),
+  })
+end
 
 demo_org = Organization.where(name: "Demo Company Inc.").first
+DepartmentEntry.create(department_name: 'Sub-Division 1', context: demo_org)
+DepartmentEntry.create(department_name: 'Sub-Division 2', context: demo_org)
+DepartmentEntry.create(department_name: 'Sub-Division 3', context: demo_org)
 User.where(organization_id: demo_org.id).each do |u|
   count = demo_org.department_entries.count
   index = u.id % count

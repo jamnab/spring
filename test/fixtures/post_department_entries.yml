@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  department_entry_idLinteger: MyString
+  post_id: 1
+
+two:
+  department_entry_idLinteger: MyString
+  post_id: 1

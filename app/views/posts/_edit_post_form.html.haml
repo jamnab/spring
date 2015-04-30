@@ -28,7 +28,7 @@
               = f.label "Add Images"
               = file_field_tag "images[]",type: :file, multiple: true
             .field.col-xs-12
-              = render 'layouts/department_selector', context: @post, departments: current_organization.departments
+              = render 'layouts/department_selector', context: @post, department_entries: current_organization.department_entries
             .field.col-xs-12
               = f.label :content
               = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5, maxlength: 250

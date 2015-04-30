@@ -28,7 +28,11 @@ Rails.application.routes.draw do
   end
 
   resources :pictures
-  resources :posts
+  resources :posts do
+    member do
+      post :judge
+    end
+  end
 
   resources :project_memberships do
     member do

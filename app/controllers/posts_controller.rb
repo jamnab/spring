@@ -56,15 +56,16 @@ class PostsController < ApplicationController
         # @msg = "Your post was created successfully"
         # @class = "success"
         flash[:success] ="Your post was created successfully"
-        @organization = current_organization
-        @organization.posts << @post
+        @post.update(organization: current_organization)
         if params[:images]
           params[:images].each { |image|
             @post.pictures.create(image: image)
           }
         end
-        params[:departments].each do |d_id|
-          DepartmentEntry.create(context: @post, department_id: d_id)
+        if !params[:departments].nil?
+          params[:departments].each do |de_id|
+            PostDepartmentEntry.create(post: @post, department_entry_id: de_id)
+          end
         end
         sync_new @post, scope: current_organization
         sync_new @post
@@ -99,9 +100,9 @@ class PostsController < ApplicationController
           sync_new @activity, scope:u
         end
         if !params[:departments].nil?
-          @post.department_entries.each{|x| x.destroy}
-          params[:departments].each do |d_id|
-            DepartmentEntry.create(context: @post, department_id: d_id)
+          @post.post_department_entries.each{|x| x.destroy}
+          params[:departments].each do |de_id|
+            PostDepartmentEntry.create(post: @post, department_entry_id: de_id)
           end
         end
         sync_update @post

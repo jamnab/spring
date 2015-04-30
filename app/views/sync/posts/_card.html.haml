@@ -25,7 +25,7 @@
           - if post.doit?
             / launch item, pre-approve and post approve
             - if post.launch_approved
-              Launched Item
+              Launched Item - #{post.action_date}
             - else
               Pending Launch Approval
           - elsif post.graveyard
@@ -33,16 +33,16 @@
             Archived Post
           - elsif !opinion.nil? && opinion.positive
             / following, voted positive
-            - if post.departments.count == 0
+            - if post.departments.count > 0
               No Related Department
             - else
-              = post.departments.map{|x| x.name} * ', '
+              = post.departments.map * ', '
           - elsif post.approved
             / in ideas
-            - if post.departments.count == 0
+            - if post.departments.count > 0
               No Related Department
             - else
-              = post.departments.map{|x| x.name} * ', '
+              = post.departments.map * ', '
           - else
             / pending listing approval
             Pending Listing Approval
@@ -69,7 +69,7 @@
       .departments
         - post.departments.each do |department|
           .badge
-            = department.name
+            = department
       .content
         .carousel.slide.carousel-fade{id: "carousel-post-#{post.id}", class: (@viewmode == 'list' ? 'col-xs-2' : 'col-xs-12')}
           %ol.carousel-indicators
@@ -95,25 +95,26 @@
           = post.content
 
         .options
-          = form_for post, remote: true do |f|
-            = f.hidden_field :graveyard, value: 'false'
-          - if can? :update, post
+          / = form_for post, remote: true do |f|
+          /  = f.hidden_field :graveyard, value: 'false'
+          - if (can? :update, post) && !post.launch_approved
             = link_to edit_post_path(post), remote:true do
               .btn.btn-sm.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {content: "Edit", placement: "top", trigger: "hover"}}
                 %span.flaticon-edit45
-          - if can? :update, post.organization
-            - if post.graveyard
-              = link_to "#", remote: true do
-                .btn.btn-sm.btn-on.post-loading{id: "#{post.id}", class: "popover-trigger btn-#{class_type}", data: {value: 'false', content: "Unarchive", placement: "top", trigger: "hover"}}
-                  %span.flaticon-archive18
-            - else
-              = link_to '#' do
-                .btn.btn-sm.btn-off.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {value: 'true', content: "Archive", placement: "top", trigger: "hover"}}
-                  %span.flaticon-archive18
+
           - if can? :destroy, post
             = link_to post, method: :delete, class: "popover-trigger", data: {confirm: "Are you sure about this?", content: "Delete", placement: "top", trigger: "hover"}, remote: true do
               .btn.btn-sm.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
                 %span.flaticon-delete48
+
+          - if post.doit? && !post.launch_approved
+            = form_tag judge_post_path(post), remote: true, class: 'form-inline' do
+              = hidden_field_tag 'viewmode', @viewmode
+              = hidden_field_tag 'launch_approved', 'true'
+              .form-group
+                = text_field_tag 'action_date', nil, {class: 'form-control', placeholder: 'pick action date ...' , 'data-provide' => 'datepicker'}
+              .btn.btn-sm.post-loading.btn-launch-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Approve for Launch", placement: "bottom", trigger: "hover"}}
+                = image_tag 'launch.png'
 
           / - fav = post.favourited?(current_user)
           / - if fav.nil?
@@ -146,11 +147,16 @@
           - if opinion.nil?
             - if !post.approved
               - if can? :update, current_organization
-                = form_for post, remote: true do |f|
+                = form_tag judge_post_path(post), remote: true do
                   = hidden_field_tag 'viewmode', @viewmode
-                  = f.hidden_field :approved, value: 'true'
+                  = hidden_field_tag 'approved', 'true'
                   .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Approve", placement: "bottom", trigger: "hover"}}
                     %span.fa.fa-check
+                = form_tag judge_post_path(post), remote: true do
+                  = hidden_field_tag 'viewmode', @viewmode
+                  = hidden_field_tag 'approved', 'false'
+                  .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Approve", placement: "bottom", trigger: "hover"}}
+                    %span.fa.fa-times
             - else
               - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
               = form_for Opinion.new, remote: true do |f|

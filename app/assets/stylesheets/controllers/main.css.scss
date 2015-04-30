@@ -141,6 +141,7 @@ html, body {
     img {
       border-radius: 50px;
       width: 50px;
+      height: 50px;
     }
   }
 
@@ -809,10 +810,13 @@ a:hover {
   }
 }
 
-#post-discussion .modal-footer {
-  padding: 0px;
-  margin-top: 0px;
-  border: none;
+#post-discussion {
+  .actions { margin-top: 10px; }
+  .modal-footer {
+    padding: 0px;
+    margin-top: 0px;
+    border: none;
+  }
 }
 
 #post-discussion, #carousel-discussion {
@@ -840,3 +844,11 @@ body .modal-dialog {
 // #comment_plain, #comment_content, #comment_suggestion {
 //   margin-top: 10px;
 // }
+
+form .field {
+  margin-top: 10px;
+}
+
+.department_form {
+  margin-bottom: 10px;
+}

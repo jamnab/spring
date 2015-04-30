@@ -58,6 +58,8 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (1.4.0)
+      railties (>= 3.0)
     builder (3.2.2)
     cancancan (1.10.1)
     chart-js-rails (0.0.9)
@@ -274,6 +276,7 @@ DEPENDENCIES
   authlogic
   better_errors
   binding_of_caller
+  bootstrap-datepicker-rails
   cancancan
   chart-js-rails
   coffee-rails (~> 4.0.0)

@@ -27,8 +27,6 @@
             .row
               .col-xs-12
                 %h4.bolded Update Integrated Departments
-                = form_tag update_departments_organization_path(current_organization) do
-                  .field
-                    = render 'layouts/department_selector', context: current_organization, departments: Department.all
-                  .field
-                    = submit_tag 'Update Department List', class: "btn btn-main pull-right"
+                %h5 You current membership allows up to #{Organization::DEP_LIMIT} departments.
+                .organization_departments
+                  = render 'layouts/department_editor', context: current_organization

@@ -19,6 +19,7 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require bootstrap.min
 //= require bootstrap-switch.min
+//= require bootstrap-datepicker
 //= require prefixfree.min
 //= require skrollr
 //= require skrollr.ie

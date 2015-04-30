@@ -8,14 +8,19 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_organization
   helper_method :current_departments
+  helper_method :current_department_entries
 
   private
 
   def current_departments
+    current_department_entries.map{|x| x.name}
+  end
+
+  def current_department_entries
     if current_user.is_manager?
-      current_organization.departments.uniq
+      current_organization.department_entries
     else
-      current_user.departments.uniq
+      current_user.department_entries
     end
   end
 

@@ -44,6 +44,7 @@ gem 'delayed_job_active_record'
 gem 'chart-js-rails'
 gem 'jquery-datatables-rails', '~> 3.1.1'
 gem 'to_words'
+gem 'bootstrap-datepicker-rails'
 # gem 'redcarpet'
 
 group :development do
