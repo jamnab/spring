@@ -112,7 +112,7 @@
               = hidden_field_tag 'viewmode', @viewmode
               = hidden_field_tag 'launch_approved', 'true'
               .form-group
-                = text_field_tag 'action_date', nil, {class: 'form-control', placeholder: 'pick action date' , 'data-provide' => 'datepicker'}
+                = text_field_tag 'action_date', nil, {class: 'form-control', placeholder: 'pick action date ...' , 'data-provide' => 'datepicker'}
               .btn.btn-sm.post-loading.btn-launch-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Approve for Launch", placement: "bottom", trigger: "hover"}}
                 = image_tag 'launch.png'
 

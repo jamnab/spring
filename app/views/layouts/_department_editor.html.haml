@@ -18,7 +18,7 @@
         .col-xs-8
           = f.hidden_field :context_type, value: context.class.to_s
           = f.hidden_field :context_id, value: context.id
-          = f.text_field :department_name, class: 'form-control'
+          = f.text_field :department_name, class: 'form-control', placeholder: 'enter new department name ...'
         .col-xs-4
           = f.submit 'Add', class: 'btn btn-main'
 

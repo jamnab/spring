@@ -52,12 +52,15 @@ User.create(username: "demoman", email: "man@demo.com",
   })
 end
 
-# demo_org = Organization.where(name: "Demo Company Inc.").first
-# User.where(organization_id: demo_org.id).each do |u|
-#   count = demo_org.department_entries.count
-#   index = u.id % count
-#   DepartmentEntryMembership.create(department_entry: demo_org.department_entries[index], user: u)
-# end
+demo_org = Organization.where(name: "Demo Company Inc.").first
+DepartmentEntry.create(department_name: 'Sub-Division 1', context: demo_org)
+DepartmentEntry.create(department_name: 'Sub-Division 2', context: demo_org)
+DepartmentEntry.create(department_name: 'Sub-Division 3', context: demo_org)
+User.where(organization_id: demo_org.id).each do |u|
+  count = demo_org.department_entries.count
+  index = u.id % count
+  DepartmentEntryMembership.create(department_entry: demo_org.department_entries[index], user: u)
+end
 
 # # demo posts
 # 3.times do |type|
