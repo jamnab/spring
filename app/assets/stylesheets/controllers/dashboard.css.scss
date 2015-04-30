@@ -239,6 +239,14 @@ h3.page_title {
         float: right;
         margin-top: 10px;
         padding-right: 15px;
+        a, form {
+          display: inline-block;
+        }
+        form {
+          padding-left: 10px;
+          .btn-launch-approve { padding: 0px }
+          img { width: 32px; }
+        }
       }
     }
 
