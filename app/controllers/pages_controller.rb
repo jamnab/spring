@@ -55,7 +55,11 @@ class PagesController < ApplicationController
       if @page == "following"
         @posts = Post.joins(:opinions).where(opinions: {positive: true, user: current_user})
       elsif @page == 'pending'
-        @posts = current_organization.posts.where(approved: false, graveyard: false)
+        if can? :judge, current_organization
+          @posts = current_organization.posts.where(approved: false, graveyard: false)
+        else
+          @posts = current_user.posts.where(approved: false, graveyard: false)
+        end
       elsif @page == "archive"
          @posts = current_organization.posts.where(graveyard: true)
       else

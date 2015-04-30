@@ -37,7 +37,7 @@ class Post < ActiveRecord::Base
     else
       org_departments = DepartmentEntry.where(context: org).where('department_id in (?)', self.departments.map{|x| x.id})
     end
-    org_departments.map{|x| x.users.count}.inject(0, :+)
+    (0.7 * org_departments.map{|x| x.users.count}.inject(0, :+)).to_i
   end
 
   def self.all_doits
