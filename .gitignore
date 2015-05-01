@@ -17,5 +17,5 @@
 
 /public/assets/*
 /public/images/*
-# /config/sync.yml
+/config/sync.yml
 !/public/assets/flaticon/*
