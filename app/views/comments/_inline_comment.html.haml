@@ -1,5 +1,5 @@
-- class_type = @comment.commentable.type?
-=form_for @comment, remote: true do |f|
+- class_type = 'main'
+= form_for @comment, remote: true do |f|
   .col-xs-12
     .content
       = f.text_area :content, class: "form-control", rows: 3, maxlength: 200

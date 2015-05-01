@@ -116,6 +116,7 @@ class PostsController < ApplicationController
   end
 
   def judge
+    @url = Rails.env.production? ? request.host : request.host_with_port
     @viewmode = params[:viewmode]
 
     # listing approval
@@ -125,7 +126,7 @@ class PostsController < ApplicationController
       else
         @post.update(graveyard: true)
       end
-      Notifier.post_update(@post).deliver!
+      Notifier.post_update(@post, @url).deliver!
     end
 
     # launch approval
@@ -134,7 +135,7 @@ class PostsController < ApplicationController
       if !params[:action_date].nil?
         @post.update(action_date: params[:action_date])
       end
-      Notifier.post_update(@post).deliver!
+      Notifier.post_update(@post, @url).deliver!
     end
 
     # TODO: need to generate activity and notification

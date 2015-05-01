@@ -33,16 +33,16 @@
             Archived Post
           - elsif !opinion.nil? && opinion.positive
             / following, voted positive
-            - if post.departments.count > 0
+            - if post.departments.empty?
               No Related Department
             - else
-              = post.departments.map * ', '
+              = post.departments * ', '
           - elsif post.approved
             / in ideas
-            - if post.departments.count > 0
+            - if post.departments.empty?
               No Related Department
             - else
-              = post.departments.map * ', '
+              = post.departments * ', '
           - else
             / pending listing approval
             Pending Listing Approval
@@ -155,7 +155,7 @@
                 = form_tag judge_post_path(post), remote: true do
                   = hidden_field_tag 'viewmode', @viewmode
                   = hidden_field_tag 'approved', 'false'
-                  .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Approve", placement: "bottom", trigger: "hover"}}
+                  .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Disapprove", placement: "bottom", trigger: "hover"}}
                     %span.fa.fa-times
             - else
               - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first

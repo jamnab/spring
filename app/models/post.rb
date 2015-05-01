@@ -27,12 +27,12 @@ class Post < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :opinions, as: :opinionable, dependent: :destroy
 
-  PROJECT = 0
-  FUN = 1
-  FACILITY = 2
-  TYPES = [{'name' => 'Project', 'id' => PROJECT},
-           {'name' => 'Fun', 'id' => FUN},
-           {'name' => 'Facility', 'id' => FACILITY}]
+  # PROJECT = 0
+  # FUN = 1
+  # FACILITY = 2
+  # TYPES = [{'name' => 'Project', 'id' => PROJECT},
+  #          {'name' => 'Fun', 'id' => FUN},
+  #          {'name' => 'Facility', 'id' => FACILITY}]
 
   def threshold
     org = self.organization
@@ -67,16 +67,4 @@ class Post < ActiveRecord::Base
     end
     return nil
   end
-
-  def type?
-    if self.post_type == 0
-      return 'project'
-    elsif self.post_type == 1
-      return 'fun'
-    else
-      return 'facility'
-    end
-  end
 end
-# joins(:chapters).
-#                  select('books.id, count(chapters.id) as n_chapters').

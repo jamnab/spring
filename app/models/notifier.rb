@@ -35,7 +35,7 @@ class Notifier < ActionMailer::Base
       date: Time.now)
   end
 
-  def post_update(post)
+  def post_update(post,url)
     @post = post
     @url = url
     mail(
