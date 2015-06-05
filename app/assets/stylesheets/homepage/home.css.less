@@ -109,7 +109,7 @@
         line-height: 1.5;
     }
     .btn {
-        width: 92px;
+        width: 160px;
         padding-left: 18px;
         padding-right: 18px;
     }
@@ -557,6 +557,20 @@
     }
 }
 
+.content-18.custom {
+    background-color: white !important;
+
+    .col-sm-5 {
+        display: inline-block;
+        line-height: 257px;
+
+        a {
+            height: 41px;
+            vertical-align: middle;
+        }
+    }
+}
+
 .content-11 {
     position:relative;
     text-align: center;
@@ -688,13 +702,12 @@
                 display: block;
                 position: relative;
                 top: 0;
-                .transition(0.25s top);
                 &:first-child {
-                    color: @silver;
+                    color: white;
                 }
             }
             &:hover > * {
-                top: -100%;
+                color: inherit;
             }
         }
     }
