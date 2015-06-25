@@ -6,23 +6,21 @@
     .row
       .col-sm-7
         %h1
-          = "less noise,"
+          = "your digital"
           %br
-          = "more clarity"
-        %p LaunchBoard helps take your organization into the innovation age. Employees and management work together to push forward the great ideas that create immediate and lasting change
+          = "suggestion box."
+        %p A private platform for questions, thoughts, and concerns that help focus on what matters. Tap into great ideas, identify key contributors who create real value, and foster a culture of innovation.
         .btns
-          %a.btn.btn-primary{:href => "#", data: {target: '#register', toggle: 'modal'}}
-            %span Sign Up
-          %a.btn.btn-primary{href: '#', data: {target: '#login', toggle: 'modal'} }
-            %span Log In
+          %a.btn.btn-primary{href: '#feature-panel'}
+            %span Learn more
 
 %section.content-31
   .container
-    .row
+    .row#feature-panel
       .number 1
       .col-sm-8.col-sm-offset-2
-        %h3 Change starts with an idea
-        %p Employees create a pinned discussion around an array of workspace related topics on their mind
+        %h3 It starts with a spark
+        %p Members create a post around whatever is on their mind, and pending approval it is viewable to an audience for voting. The poster remains anonymous until the votes are in, which helps eliminate any decision bias.
         .box
           .img
             = image_tag 'card_greyscale.png', height: 187
@@ -34,8 +32,8 @@
       .col-sm-8.col-sm-offset-2
         #pt-1.page-transitions.pt-perspective
           .pt-page.pt-page-current
-            %h3 Employees Collaborate to define initiatives
-            %p Majority rules. Every idea is treated equally until it meets a defined level of endorsement
+            %h3 Initiatives take flight
+            %p Majority audience support advances important posts, with contributor ideas sent to a decision maker for approval & timeline setting
             .box
               .img
                 = image_tag 'rocket_greyscale.png'
@@ -51,7 +49,7 @@
         #pt-2.page-transitions.pt-perspective
           .pt-page.pt-page-current
             %h3 Ideas spring into Action
-            %p Once a workplace idea becomes endorsed, the star employee is recognized, and the idea becomes a 'doit' action item for Management
+            %p Efficiently monitor ideas from inception to reality. You can easily see what initiatives are in launch stage, keep track of everyone via a leaderboard & analytics, and feel comfort knowing that your information is kept secure.
             .box
               .img
                 = image_tag 'idea_doit_greyscale.png'
@@ -92,35 +90,49 @@
     /   .col-sm-3.col-sm-offset-1
     /     %h6 @stSilent
     /     Create new elements with color swatches. Wow!
-
-%section.content-11
+%section.content-18.custom
   .container
-    %span Less than a cup of coffee a day
-    %a.btn.btn-large.btn-danger{:href => "/price"} BUY IT NOW
-
-%footer.footer-12
-  .container
-    Made with
-    %span.fui-heart
-    in Waterloo
-
+    .row
+      .col-sm-6.col-sm-offset-1
+        %h4
+          %b For:
+        %h5
+          %i
+            Associations & clubs
+        %h5
+          %i
+            Business
+        %h5
+          %i
+            Not-for-profits & social ventures
+        %h5
+          %i
+            Think-tanks
+        %h5
+          %i
+            Incubators
+        %h5
+          %i
+            Government & political
+      .col-sm-5
+        %a.btn.btn-large.btn-danger{:href => "#", data: {target: '#register', toggle: 'modal'}} GET IT NOW
 %footer.footer-2
   .container
     %nav.pull-left
       %ul
         %li.active
           %a{:href => "/"} Home
-        / %li
-        /   %a{:href => "#"} Features
         %li
-          %a{:href => "/price"} Price
+          %a{:href => "#feature-panel"} Features
+        / %li
+        /   %a{:href => "/price"} Price
         %li
           %a{:href => "/contact_us"} Contact Us
     .social-btns.pull-right
-      %a{:href => "#"}
-        .fui-facebook
-        .fui-facebook
-      %a{:href => "#"}
+      / %a{:href => "#"}
+      /   .fui-facebook
+      /   .fui-facebook
+      %a{:href => "https://twitter.com/launchboard", target: '_blank'}
         .fui-twitter
         .fui-twitter
 
