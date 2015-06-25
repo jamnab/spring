@@ -164,11 +164,11 @@ class PagesController < ApplicationController
     @posts = @posts.reject{|r| r.doit? == false }
 
     @users = @organization.users
-    @sorted_users_by_post_type = {
-      Post::PROJECT => @users.sort_by{|x| -x.performance_by_post_type(Post::PROJECT)['performance']},
-      Post::FUN => @users.sort_by{|x| -x.performance_by_post_type(Post::FUN)['performance']},
-      Post::FACILITY => @users.sort_by{|x| -x.performance_by_post_type(Post::FACILITY)['performance']},
-    }
+    # @sorted_users_by_post_type = {
+    #   Post::PROJECT => @users.sort_by{|x| -x.performance_by_post_type(Post::PROJECT)['performance']},
+    #   Post::FUN => @users.sort_by{|x| -x.performance_by_post_type(Post::FUN)['performance']},
+    #   Post::FACILITY => @users.sort_by{|x| -x.performance_by_post_type(Post::FACILITY)['performance']},
+    # }
   end
 
   private

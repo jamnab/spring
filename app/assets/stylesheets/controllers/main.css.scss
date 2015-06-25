@@ -151,6 +151,10 @@ html, body {
     font-size: 18px;
     height: 70px;
 
+    &.dropdown-toggle {
+      height: 69px;
+    }
+
     &:hover, &:focus, &:active {
       color: $inverse_text_main !important;
       background-color: $nav_hover !important;
@@ -851,4 +855,5 @@ form .field {
 
 .department_form {
   margin-bottom: 10px;
+
 }

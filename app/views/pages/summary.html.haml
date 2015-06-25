@@ -49,9 +49,9 @@
           Bottom Performers this week:
           %b= @sorted_users[-3..-1].reverse.map{|x| x.full_name} * ', '
 
-        = link_to generate_code_organization_path(@organization), data: {:confirm => 'This will send you the invite email, invitation token will expire in 24 hours.'} do
-          .btn.btn-sm.btn-primary
-            Generate Invite Email
+        / = link_to generate_code_organization_path(@organization), data: {:confirm => 'This will send you the invite email, invitation token will expire in 24 hours.'} do
+        /   .btn.btn-sm.btn-primary
+        /     Generate Invite Email
 
         %hr
 
@@ -63,7 +63,7 @@
             %th Job Title
             %th # Posts
             %th # Comments
-            %th # Doits
+            / %th # Doits
             %th Opinions Given (<u>Total</u>/+/-)
             %th Opinions Received (<u>+</u>/-/Total)
           %tbody.text-center
@@ -77,8 +77,8 @@
                   #{user.posts.count}
                 %td
                   #{user.comments.count}
-                %td
-                  #{user.posts.all_doits.count + user.comments.all_doits.count}
+                / %td
+                /   #{user.posts.all_doits.count + user.comments.all_doits.count}
                 %td
                   (<b>#{user.contribution['total']}</b>/#{user.contribution['positive']}/#{user.contribution['negative']})
                 %td

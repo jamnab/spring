@@ -45,7 +45,8 @@ class Post < ActiveRecord::Base
   end
 
   def self.all_doits
-    where("opinion >= ?", self.threshold)
+    # no more threshold field... what to do...
+    # where("opinion >= ?", self.threshold)
   end
 
   def self.all_alt_doits
