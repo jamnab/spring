@@ -1,8 +1,46 @@
 @import 'presets';
 
 .summary {
-  padding: 30px 40px;
+  padding: 20px 20px;
   color: $inverse-text-off;
+
+  .no-hover {
+    cursor: default;
+  }
+
+  #analytics-carousel .carousel-inner {
+    margin-top: 60px;
+  }
+
+  #analytics-carousel .carousel-indicators {
+    top: -60px;
+    width: 100%;
+    text-align: center;
+    margin: 0px !important;
+    left: 0px;
+  }
+  #analytics-carousel .carousel-indicators > li,
+  #analytics-carousel .carousel-indicators > li.active{
+    width: auto;
+    height: 60px;
+    margin: 0px 20px;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    text-align: right;
+    text-indent: 0;
+
+    .headline {
+      font-size: 24px;
+    }
+    .subline {
+      font-size: 14px;
+      margin-left: -10px;
+    }
+  }
+  #analytics-carousel .carousel-indicators > li.active {
+    border-bottom: 2px solid $nav_background;
+  }
 
   .nav-pills {
     li {
@@ -122,4 +160,3 @@
     width: 100% !important;
   }
 }
-

@@ -164,6 +164,7 @@ class PagesController < ApplicationController
     @posts = @posts.reject{|r| r.doit? == false }
 
     @users = @organization.users
+    # TYPE REPLACED WITH DEPARTMENTS
     # @sorted_users_by_post_type = {
     #   Post::PROJECT => @users.sort_by{|x| -x.performance_by_post_type(Post::PROJECT)['performance']},
     #   Post::FUN => @users.sort_by{|x| -x.performance_by_post_type(Post::FUN)['performance']},

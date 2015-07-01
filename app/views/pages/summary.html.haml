@@ -1,86 +1,71 @@
 .summary
-  %ul.nav.nav-pills
-    %li
-      %a{href: "#organization-summary", data: {toggle: "tab"}}
-        .fa.fa-building
-        Organization Summary
-    %li.active
-      %a{href: "#personnel-summary", data: {toggle: "tab"}}
-        .fa.fa-users
-        Personnel Summary
+  #analytics-carousel.carousel.slide{"data-ride" => "carousel"}
+    %ul.carousel-indicators
+      %li.active{"data-slide-to" => "0", "data-target" => "#analytics-carousel"}
+        .headline Contributions
+        .subline by Department
+      %li{"data-slide-to" => "1", "data-target" => "#analytics-carousel"}
+        .headline Contributions
+        .subline by Employee
+      %li{"data-slide-to" => "2", "data-target" => "#analytics-carousel"}
+        .headline Trending Ideas
+        .subline in the Pipline
+      %li{"data-slide-to" => "3", "data-target" => "#analytics-carousel"}
+        .headline Approved Ideas
+        .subline launched Actionables
+      %li{"data-slide-to" => "4", "data-target" => "#analytics-carousel"}
+        .headline Detailed Trends
+        .subline on Idea Generation
+      %li.no-hover
+        %p
+          From:
+          %b July 02, 2015
+          %span.fa.fa-edit
+        %p
+          To:
+          %b July 08, 2015
+          %span.fa.fa-edit
+    / Wrapper for slides
+    .carousel-inner{:role => "listbox"}
+      .item.active
+        %h1 Slide 1
+      .item
+        %h1 Slide 2
+      .item
+        %h1 Slide 3
+      .item
+        %h1 Slide 4
+      .item
+        %h1 Slide 5
 
-  .tab-content
-    #organization-summary.tab-pane.fade
-      .col-xs-6
-        %h4
-          Number of Activities (<b>Week</b>/Month/Total):
-          <b>#{@organization.activity_count}</b>/-/-
-        %h4
-          Number of Posts (<b>W</b>/M/T):
-          <b>#{@organization.posts.count}</b>/-/-
-        %h4
-          Number of Comments (<b>W</b>/M/T):
-          <b>#{@organization.comments.count}</b>/-/-
-      .col-xs-6
-        %h4
-          Number of Doits (<b>Week</b>/Month/Total):
-          <b>#{@organization.doit_count}</b>/-/-
-        %h4
-          Doits Generated from Posts (<b>W</b>/M/T):
-          <b>#{@organization.doit_post_count}</b>/-/-
-        %h4
-          Doits Generated from Suggestions (<b>W</b>/M/T):
-          <b>#{@organization.doit_comment_count}</b>/-/-
 
-      .graph-wrapper
-        .graph-overlay
-          %h1 Not Enough Data Points
-        %canvas.org-graph-canvas{height: "400px", width: "1100px"}
 
-    #personnel-summary.tab-pane.fade.in.active
-      .col-xs-12
-        %h4
-          Number of Personnels:
-          %b= @sorted_users.length
-        %h4
-          Top Performers this week:
-          %b= @sorted_users[0..2].map{|x| x.full_name} * ', '
-        %h4
-          Bottom Performers this week:
-          %b= @sorted_users[-3..-1].reverse.map{|x| x.full_name} * ', '
-
-        / = link_to generate_code_organization_path(@organization), data: {:confirm => 'This will send you the invite email, invitation token will expire in 24 hours.'} do
-        /   .btn.btn-sm.btn-primary
-        /     Generate Invite Email
-
-        %hr
-
-        %table#personnel-table.table.table-striped.display{cellspacing: "0", width: "100%"}
-          %thead.text-center
-            %th Username
-            %th First Name
-            %th Last Name
-            %th Job Title
-            %th # Posts
-            %th # Comments
-            / %th # Doits
-            %th Opinions Given (<u>Total</u>/+/-)
-            %th Opinions Received (<u>+</u>/-/Total)
-          %tbody.text-center
-            - @users.each do |user|
-              %tr
-                %td= user.username
-                %td= user.first_name
-                %td= user.last_name
-                %td= user.job_title
-                %td
-                  #{user.posts.count}
-                %td
-                  #{user.comments.count}
-                / %td
-                /   #{user.posts.all_doits.count + user.comments.all_doits.count}
-                %td
-                  (<b>#{user.contribution['total']}</b>/#{user.contribution['positive']}/#{user.contribution['negative']})
-                %td
-                  (<b>#{user.impact['positive']}</b>/#{user.impact['negative']}/#{user.impact['total']})
+    -#   %table#personnel-table.table.table-striped.display{cellspacing: "0", width: "100%"}
+    -#     %thead.text-center
+    -#       %th Username
+    -#       %th First Name
+    -#       %th Last Name
+    -#       %th Job Title
+    -#       %th # Posts
+    -#       %th # Comments
+    -#       / %th # Doits
+    -#       %th Opinions Given (<u>Total</u>/+/-)
+    -#       %th Opinions Received (<u>+</u>/-/Total)
+    -#     %tbody.text-center
+    -#       - @users.each do |user|
+    -#         %tr
+    -#           %td= user.username
+    -#           %td= user.first_name
+    -#           %td= user.last_name
+    -#           %td= user.job_title
+    -#           %td
+    -#             #{user.posts.count}
+    -#           %td
+    -#             #{user.comments.count}
+    -#           / %td
+    -#            #{user.posts.all_doits.count + user.comments.all_doits.count}
+    -#           %td
+    -#             (<b>#{user.contribution['total']}</b>/#{user.contribution['positive']}/#{user.contribution['negative']})
+    -#           %td
+    -#             (<b>#{user.impact['positive']}</b>/#{user.impact['negative']}/#{user.impact['total']})
 
