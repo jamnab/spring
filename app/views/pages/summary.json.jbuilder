@@ -1,0 +1,5 @@
+json.contributions_by_department @contributions_by_department
+json.contributions_by_employee @contributions_by_employee
+json.approved_ideas @approved_ideas
+json.trending_ideas @trending_ideas
+json.detailed_trends @detailed_trends

@@ -46,6 +46,7 @@ gem 'jquery-datatables-rails', '~> 3.1.1'
 gem 'to_words'
 gem 'bootstrap-datepicker-rails'
 # gem 'redcarpet'
+gem "d3-rails"
 
 group :development do
   gem 'better_errors'

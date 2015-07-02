@@ -6,6 +6,8 @@ class PagesController < ApplicationController
   @@global_limit = 200
   @@page_limit = 200
 
+  require 'csv'
+
   def home
     if current_user
       redirect_to :dashboard and return
@@ -151,8 +153,29 @@ class PagesController < ApplicationController
     # if current_user.is_manager?
     #   redirect_to :back, notice: "No permission" and return
     # end
-    @users = @organization.users
-    @sorted_users = @users.sort_by{|x| -(x.contribution['total']+x.impact['positive'])}
+    # @users = @organization.users
+    # @sorted_users = @users.sort_by{|x| -(x.contributions['total']+x.impact['positive'])}
+
+    contributions_by_department_csv = File.read('public/dummy_data/contributions_by_department.csv')
+    @contributions_by_department = CSV.parse(contributions_by_department_csv, :headers => true)
+    @contributions_by_department = @contributions_by_department.sort_by{|x| -x['# Ideas Actionable'].to_i}
+
+    contributions_by_employee_csv = File.read('public/dummy_data/contributions_by_employee.csv')
+    @contributions_by_employee = CSV.parse(contributions_by_employee_csv, :headers => true)
+
+    approved_ideas_csv = File.read('public/dummy_data/approved_ideas.csv')
+    @approved_ideas = CSV.parse(approved_ideas_csv, :headers => true)
+
+    trending_ideas_csv = File.read('public/dummy_data/trending_ideas.csv')
+    @trending_ideas = CSV.parse(trending_ideas_csv, :headers => true)
+
+    detailed_trends_csv = File.read('public/dummy_data/detailed_trends.csv')
+    @detailed_trends = CSV.parse(detailed_trends_csv, :headers => true)
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def pending_approval

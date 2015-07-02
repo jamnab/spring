@@ -27,4 +27,5 @@
 //= require sync
 //= require lightbox
 //= require Chart
+//= require d3
 //= require_tree ./controllers
