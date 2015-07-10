@@ -52,22 +52,22 @@ $('.summary').ready ->
   render_bar_chart = (where_to_render, data_to_render) ->
     dataset = []
 
-    data_header = data_to_render.shift()  # shift out first element
+    # data_header = data_to_render.shift()  # shift out first element
 
-    if(data_header[0] == 'Label') # posts
+    if(data_to_render[0][0][0] == 'Label') # posts
       data_to_render.map (data_point) ->
         dp = {}
-        dp['letter'] = data_point[0].replace(/[a-z ]/g, '')
-        dp['score'] = data_point[2]
+        dp['letter'] = data_point[0][1].replace(/[a-z ]/g, '')
+        dp['score'] = data_point[2][1]
         dataset.push(dp)
-    else if (data_header[0] == 'Name')# employee contribution
+    else # employee contribution
       data_to_render.map (data_point) ->
         dp = {}
-        dp['letter'] = data_point[0].replace(/[a-z ]/g, '')
-        dp['score'] = 1 * data_point[1] +
-                      0.5 * data_point[3] +
-                      0.2 * (data_point[4] + data_point[5]) +
-                      0.1 * (data_point[6] + data_point[7])
+        dp['letter'] = data_point[0][1].replace(/[a-z ]/g, '')
+        dp['score'] = 0.5 * data_point[1][1] +
+                      1 * data_point[3][1] +
+                      0.2 * (data_point[4][1] + data_point[5][1]) +
+                      0.1 * (data_point[6][1] + data_point[7][1])
         dataset.push(dp)
 
     margin =

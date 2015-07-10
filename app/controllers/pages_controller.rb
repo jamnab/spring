@@ -162,12 +162,15 @@ class PagesController < ApplicationController
 
     contributions_by_employee_csv = File.read('public/dummy_data/contributions_by_employee.csv')
     @contributions_by_employee = CSV.parse(contributions_by_employee_csv, :headers => true)
+    @contributions_by_employee = @contributions_by_employee.sort_by{|x| -x['# Ideas Actionable'].to_i}
 
     approved_ideas_csv = File.read('public/dummy_data/approved_ideas.csv')
     @approved_ideas = CSV.parse(approved_ideas_csv, :headers => true)
+    @approved_ideas = @approved_ideas.sort_by{|x| -x['Support'].to_i}
 
     trending_ideas_csv = File.read('public/dummy_data/trending_ideas.csv')
     @trending_ideas = CSV.parse(trending_ideas_csv, :headers => true)
+    @trending_ideas = @trending_ideas.sort_by{|x| -x['Support'].to_i}
 
     detailed_trends_csv = File.read('public/dummy_data/detailed_trends.csv')
     @detailed_trends = CSV.parse(detailed_trends_csv, :headers => true)
