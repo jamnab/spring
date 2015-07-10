@@ -47,6 +47,6 @@ class DepartmentEntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def department_entry_params
-      params.require(:department_entry).permit(:context_id, :context_type, :department_id, :department_name)
+      params.require(:department_entry).permit(:context_id, :context_type, :department_id, :department_name, :abbrev_name)
     end
 end

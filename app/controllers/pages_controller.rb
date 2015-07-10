@@ -158,7 +158,7 @@ class PagesController < ApplicationController
 
     # test_posts_csv = File.read('app/assets/seeds/marketing_actionables.csv')
     # @test_posts = CSV.parse(test_posts_csv, {col_sep: ';'})
-    # raise
+    raise
 
     contributions_by_department_csv = File.read('public/dummy_data/contributions_by_department.csv')
     @contributions_by_department = CSV.parse(contributions_by_department_csv, :headers => true)

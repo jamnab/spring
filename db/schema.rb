@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20150430154752) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "department_name"
+    t.string   "abbrev_name"
   end
 
   create_table "department_entry_memberships", force: true do |t|
@@ -173,11 +174,10 @@ ActiveRecord::Schema.define(version: 20150430154752) do
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
-    t.boolean  "anonymous",         default: false
+    t.boolean  "anonymous",         default: true
     t.integer  "opinion",           default: 0
     t.integer  "user_id"
     t.integer  "organization_id"
-    t.integer  "post_type"
     t.boolean  "graveyard",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
