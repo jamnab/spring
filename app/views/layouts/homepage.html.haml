@@ -25,16 +25,18 @@
                   / %span Startup
               .navbar-collapse.collapse
                 %ul.nav
+                  %li
+                    %a{href: '#', data: {target: '#login', toggle: 'modal'}} Log In
+                  %li
+                    %a{href: "#", data: {target: '#register', toggle: 'modal'}} Sign Up
                   %li.active
                     %a{:href => "/"} Home
                   %li
                     %a{:href => "/price"} Price
                   %li
                     %a{:href => "/contact_us"} Contact Us
-                  %li
-                    %a{href: '#', data: {target: '#login', toggle: 'modal'}} Log In
-                  %li
-                    %a{href: "#", data: {target: '#register', toggle: 'modal'}} Sign Up
+
+
                 / %ul.subnav
                 /   %li
                 /     %a{:href => "#"} Privacy
