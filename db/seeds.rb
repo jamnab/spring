@@ -24,43 +24,99 @@
 # Department.create(name: 'Management')
 # Department.create(name: 'Engineering')
 
-# Demo Company Inc.
+m_first_names = %w[JAMES, JOHN, ROBERT, MICHAEL, WILLIAM, DAVID, RICHARD, CHARLES, JOSEPH, THOMAS, CHRISTOPHER, DANIEL, PAUL, MARK, DONALD, GEORGE, KENNETH, STEVEN, EDWARD, BRIAN, RONALD, ANTHONY, KEVIN, JASON, MATTHEW, GARY, TIMOTHY, JOSE, LARRY, JEFFREY]
+f_first_names = %w[MARY, PATRICIA, LINDA, BARBARA, ELIZABETH, JENNIFER, MARIA, SUSAN, MARGARET, DOROTHY, LISA, NANCY, KAREN, BETTY, HELEN, SANDRA, DONNA, CAROL, RUTH, SHARON, MICHELLE, LAURA, SARAH, KIMBERLY, DEBORAH, JESSICA, SHIRLEY, CYNTHIA, ANGELA, MELISSA]
+last_names = %w[SMITH, JOHNSON, WILLIAMS, JONES, BROWN, DAVIS, MILLER, WILSON, MOORE, TAYLOR, ANDERSON, THOMAS, JACKSON, WHITE, HARRIS, MARTIN, THOMPSON, GARCIA, MARTINEZ, ROBINSON, CLARK, RODRIGUEZ, LEWIS, LEE, WALKER, HALL, ALLEN, YOUNG, HERNANDEZ, KING]
 
 User.create(username: "launchboard", email: "info@launchboard.com",
             password: "launchboard", password_confirmation: "launchboard",
             admin: true, first_name: "LaunchBoard", last_name: "Admin",
             job_title: "System Admin")
 
-# demo
-Organization.create(name: "Demo Company Inc.", activated: true)
-User.create(username: "demoman", email: "man@demo.com",
-            password: "demoman", password_confirmation: "demoman",
-            first_name: "Manager", last_name: "Demoson",
-            job_title: "Manager", organization_id: 1, manager: true)
+# demo company
+demo_comp  =  Organization.create(name: "Demo Company Inc.", activated: true)
+demoman_comp  = User.create(username: "demoman_comp", email: "comp_man@demo.com",
+                  password: "demoman_comp", password_confirmation: "demoman_comp",
+                  first_name: "John", last_name: "Manager",
+                  job_title: "Manager", organization_id: 1, manager: true)
 
-# demo personnel
-40.times do |i|
-  name = i.to_words.delete(' ')
-  user = User.create(username: name, email: "#{name}@demo.com",
-              password: name, password_confirmation: name,
-              first_name: name.capitalize,
-              last_name: "Demoson",
-              job_title: "Employee", organization_id: 1)
+# demo association
+demo_assoc =  Organization.create(name: "Demo Association Inc.", activated: true)
+demoman_assoc = User.create(username: "demoman_assoc", email: "assoc_man@demo.com",
+                  password: "demoman_assoc", password_confirmation: "demoman_assoc",
+                  first_name: "Jeff", last_name: "Manager",
+                  job_title: "Manager", organization_id: 1, manager: true)
+
+# demo personnel for demo_comp
+16.times do |i|
+  sex = (i % 2 == 0) ? 'f' : 'm'
+  fist_name = (i % 2 == 0) ? f_first_names[i/2] : m_first_names[i/2]
+  last_name = (i % 2 == 0) ? f_last_names[i/2] : m_last_names[i/2]
+  user_name = first_name[0] + last_name + '_comp'
+  user = User.create(username: user_name, email: "#{user_name}@demo.com",
+              password: user_name, password_confirmation: user_name,
+              first_name: first_name.capitalize,
+              last_name: last_name.capitalize,
+              job_title: "Employee", organization_id: demo_comp.id)
   Picture.create({
     user_id: user.id,
-    image: File.new("#{Rails.root}/app/assets/images/seeds/demo_users/User #{i+1}.png"),
+    image: File.new("#{Rails.root}/app/assets/seeds/demo_users/User #{i/2}#{sex}.png"),
   })
 end
 
-demo_org = Organization.where(name: "Demo Company Inc.").first
-DepartmentEntry.create(department_name: 'Sub-Division 1', context: demo_org)
-DepartmentEntry.create(department_name: 'Sub-Division 2', context: demo_org)
-DepartmentEntry.create(department_name: 'Sub-Division 3', context: demo_org)
-User.where(organization_id: demo_org.id).each do |u|
-  count = demo_org.department_entries.count
-  index = u.id % count
-  DepartmentEntryMembership.create(department_entry: demo_org.department_entries[index], user: u)
+# demo personnel for demo_assoc
+16.times do |i|
+  sex = (i % 2 == 0) ? 'f' : 'm'
+  fist_name = (i % 2 == 0) ? f_first_names[i/2] : m_first_names[i/2]
+  last_name = (i % 2 == 0) ? f_last_names[i/2] : m_last_names[i/2]
+  user_name = first_name[0] + last_name + '_assoc'
+  user = User.create(username: user_name, email: "#{user_name}@demo.com",
+              password: user_name, password_confirmation: user_name,
+              first_name: first_name.capitalize,
+              last_name: last_name.capitalize,
+              job_title: "Employee", organization_id: demo_assoc.id)
+  Picture.create({
+    user_id: user.id,
+    image: File.new("#{Rails.root}/app/assets/seeds/demo_users/User #{i/2}#{sex}.png"),
+  })
 end
+
+# sample departments comp
+DepartmentEntry.create(department_name: 'Marketing', context: demo_comp)
+DepartmentEntry.create(department_name: 'Operations', context: demo_comp)
+DepartmentEntry.create(department_name: 'Sales', context: demo_comp)
+DepartmentEntry.create(department_name: 'Engineering', context: demo_comp)
+DepartmentEntry.create(department_name: 'Quality Assurance', context: demo_comp)
+DepartmentEntry.create(department_name: 'Human Resources', context: demo_comp)
+User.where(organization_id: demo_comp.id).each do |u|
+  # count = demo_comp.department_entries.count
+  # index = u.id % count
+  demo_comp.department_entries.each do |department_entry|
+    DepartmentEntryMembership.create(department_entry: department_entry, user: u)
+  end
+end
+
+# sample departments assoc
+DepartmentEntry.create(department_name: 'Football Club', context: demo_assoc)
+DepartmentEntry.create(department_name: 'Hockey Club', context: demo_assoc)
+DepartmentEntry.create(department_name: 'Lacrosse Club', context: demo_assoc)
+DepartmentEntry.create(department_name: 'Salsa Club', context: demo_assoc)
+DepartmentEntry.create(department_name: 'Yoga Club', context: demo_assoc)
+User.where(organization_id: demo_assoc.id).each do |u|
+  # count = demo_assoc.department_entries.count
+  # index = u.id % count
+  demo_assoc.department_entries.each do |department_entry|
+    DepartmentEntryMembership.create(department_entry: department_entry, user: u)
+  end
+end
+
+# ------------ BEGIN POSTS COMP ------------
+# ------------ END POSTS COMP --------------
+
+
+# ------------ BEGIN POSTS ASSOC -----------
+# ------------ END POSTS ASSOC -------------
+
 
 # # demo posts
 # 3.times do |type|

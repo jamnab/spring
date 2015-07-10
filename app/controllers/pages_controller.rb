@@ -156,6 +156,10 @@ class PagesController < ApplicationController
     # @users = @organization.users
     # @sorted_users = @users.sort_by{|x| -(x.contributions['total']+x.impact['positive'])}
 
+    # test_posts_csv = File.read('app/assets/seeds/marketing_actionables.csv')
+    # @test_posts = CSV.parse(test_posts_csv, {col_sep: ';'})
+    # raise
+
     contributions_by_department_csv = File.read('public/dummy_data/contributions_by_department.csv')
     @contributions_by_department = CSV.parse(contributions_by_department_csv, :headers => true)
     @contributions_by_department = @contributions_by_department.sort_by{|x| -x['# Ideas Actionable'].to_i}
