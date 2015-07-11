@@ -150,31 +150,81 @@ class PagesController < ApplicationController
   end
 
   def summary
-    # if current_user.is_manager?
-    #   redirect_to :back, notice: "No permission" and return
-    # end
-    # @users = @organization.users
-    # @sorted_users = @users.sort_by{|x| -(x.contributions['total']+x.impact['positive'])}
+    if !current_user.is_manager?
+      redirect_to :back, notice: "No permission" and return
+    end
 
-    # test_posts_csv = File.read('app/assets/seeds/marketing_actionables.csv')
-    # @test_posts = CSV.parse(test_posts_csv, {col_sep: ';'})
-    raise
-
-    contributions_by_department_csv = File.read('public/dummy_data/contributions_by_department.csv')
-    @contributions_by_department = CSV.parse(contributions_by_department_csv, :headers => true)
+    # contributions_by_department_csv = File.read('public/dummy_data/contributions_by_department.csv')
+    # @contributions_by_department = CSV.parse(contributions_by_department_csv, :headers => true)
+    @contributions_by_department = []
+    current_organization.department_entries.each do |de|
+      entry = {
+        'Department' => de.department_name,
+        '# Ideas Actionable' => de.posts.where(launch_approved: true).count,
+        '# Ideas Total' => de.posts.count,
+        '# Ideas Actionable' => de.posts.where(launch_approved: true).count,
+        '# Ideas Total' => de.posts.count,
+        '# Ideas Approved' => de.posts.where(approved: true).count,
+        '# of Comments' => de.comments.count,
+        '# of Votes' => de.opinions.count,
+        '# of Users' => de.users.count
+      }
+      @contributions_by_department.push(entry)
+    end
     @contributions_by_department = @contributions_by_department.sort_by{|x| -x['# Ideas Actionable'].to_i}
 
-    contributions_by_employee_csv = File.read('public/dummy_data/contributions_by_employee.csv')
-    @contributions_by_employee = CSV.parse(contributions_by_employee_csv, :headers => true)
+    # contributions_by_employee_csv = File.read('public/dummy_data/contributions_by_employee.csv')
+    # @contributions_by_employee = CSV.parse(contributions_by_employee_csv, :headers => true)
+    @contributions_by_employee = []
+    current_organization.users.uniq.each do |user|
+      entry = {
+        'Name' => user.full_name,
+        '# Ideas Actionable' => user.posts.where(launch_approved: true).count,
+        '# Ideas Total' => user.posts.count,
+        '# Ideas Approved' => user.posts.where(approved: true).count,
+        '# of Comments Received' => user.posts.sum(:comments_count),
+        '# of Comments Given' => user.comments.count,
+        '# of Votes Received' => user.posts.map{|x| x.opinions.count}.inject(0, :+),
+        '# of Votes Given' => user.opinions.count,
+        'user_id' => user.id
+      }
+      @contributions_by_employee.push(entry)
+    end
     @contributions_by_employee = @contributions_by_employee.sort_by{|x| -x['# Ideas Actionable'].to_i}
 
-    approved_ideas_csv = File.read('public/dummy_data/approved_ideas.csv')
-    @approved_ideas = CSV.parse(approved_ideas_csv, :headers => true)
-    @approved_ideas = @approved_ideas.sort_by{|x| -x['Support'].to_i}
-
-    trending_ideas_csv = File.read('public/dummy_data/trending_ideas.csv')
-    @trending_ideas = CSV.parse(trending_ideas_csv, :headers => true)
+    # trending_ideas_csv = File.read('public/dummy_data/trending_ideas.csv')
+    # @trending_ideas = CSV.parse(trending_ideas_csv, :headers => true)
+    @trending_ideas = []
+    current_organization.posts.where(approved: true, launch_approved: false).each do |post|
+      audience_size = post.department_entries.map{|x| x.users.count}.inject(0, :+)
+      entry = {
+        'Label' => post.user.full_name,
+        'Title' => post.title,
+        'Support' => post.opinions.where(positive: true).count * 100 / audience_size,
+        '# of Comments' => post.comments.count,
+        '# of Votes' => post.opinions.count,
+        'Poster' => post.user.full_name
+      }
+      @trending_ideas.push(entry)
+    end
     @trending_ideas = @trending_ideas.sort_by{|x| -x['Support'].to_i}
+
+    # approved_ideas_csv = File.read('public/dummy_data/approved_ideas.csv')
+    # @approved_ideas = CSV.parse(approved_ideas_csv, :headers => true)
+    @approved_ideas = []
+    current_organization.posts.where(launch_approved: true).each do |post|
+      audience_size = post.department_entries.map{|x| x.users.count}.inject(0, :+)
+      entry = {
+        'Label' => post.user.full_name,
+        'Title' => post.title,
+        'Support' => post.opinions.where(positive: true).count * 100 / audience_size,
+        '# of Comments' => post.comments.count,
+        '# of Votes' => post.opinions.count,
+        'Poster' => post.user.full_name
+      }
+      @approved_ideas.push(entry)
+    end
+    @approved_ideas = @approved_ideas.sort_by{|x| -x['Support'].to_i}
 
     detailed_trends_csv = File.read('public/dummy_data/detailed_trends.csv')
     @detailed_trends = CSV.parse(detailed_trends_csv, :headers => true)

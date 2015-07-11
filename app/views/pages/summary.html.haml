@@ -59,7 +59,11 @@
                 .col-xs-4
                   .summary-card
                     .main-content
-                      = image_tag("//placehold.it/150x100")
+                      - user = User.find(entry['user_id'])
+                      - if !user || user.picture.nil?
+                        = image_tag("profile_default.png")
+                      - else
+                        = image_tag user.picture.image.url(:user_image)
                     .notes
                       = entry['# Ideas Actionable']
                       ideas actionable
@@ -81,13 +85,12 @@
                 .col-xs-4
                   .summary-card
                     .main-content
-                      = image_tag("//placehold.it/150x100")
-                    .notes
+                    .notes.post
                       %b= entry['Title']
                       %br
-                      #{entry['Support']}% Support
+                      (#{entry['Support']}% Support)
                     .footer
-                      = entry['Poster']
+                      = entry['Name']
         .col-xs-12.col-sm-6
           .summary-box
             .header Chart
@@ -102,11 +105,10 @@
                 .col-xs-4
                   .summary-card
                     .main-content
-                      = image_tag("//placehold.it/150x100")
-                    .notes
+                    .notes.post
                       %b= entry['Title']
                       %br
-                      #{entry['Support']}% Support
+                      (#{entry['Support']}% Support)
                     .footer
                       = entry['Poster']
         .col-xs-12.col-sm-6

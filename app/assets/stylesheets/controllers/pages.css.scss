@@ -115,19 +115,26 @@
             font-weight: bold;
             padding-top: 16px;
             img {
-              border-radius: 10px 10px 0px 0px;
+              border-radius: 80px;
               vertical-align: top;
-              margin-top: -16px;
+              // margin-top: -20px;
+              height: 80px;
             }
           }
           .notes {
             height: 60px;
             padding-top: 16px;
+            &.post {
+              height: 140px;
+              margin-top: -80px;
+              padding: 16px;
+            }
           }
           .footer {
             height: 25px;
             background-color: $nav_hover;
-            font-size: 16px;
+            font-size: 14px;
+            line-height: 26px;
             font-weight: bold;
             color: #ddd;
             border-radius: 0px 0px 10px 10px;

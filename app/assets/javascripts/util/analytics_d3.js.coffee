@@ -5,8 +5,8 @@ $('.summary').ready ->
 
     data_to_render.map (data_point) ->
       dp = {}
-      dp['label'] = data_point[0][1]
-      dp['count'] = data_point[1][1]
+      dp['label'] = data_point['Department']
+      dp['count'] = data_point['# Ideas Actionable']
       dataset.push(dp)
 
     width = 460
@@ -51,23 +51,23 @@ $('.summary').ready ->
 
   render_bar_chart = (where_to_render, data_to_render) ->
     dataset = []
-
-    # data_header = data_to_render.shift()  # shift out first element
-
-    if(data_to_render[0][0][0] == 'Label') # posts
+    y_axis_label = ''
+    if(data_to_render[0]['Label'] != undefined) # posts
+      y_axis_label = 'Support'
       data_to_render.map (data_point) ->
         dp = {}
-        dp['letter'] = data_point[0][1].replace(/[a-z ]/g, '')
-        dp['score'] = data_point[2][1]
+        dp['letter'] = data_point['Label'].replace(/[a-z ]/g, '')
+        dp['score'] = data_point['Support']
         dataset.push(dp)
     else # employee contribution
+      y_axis_label = 'Score'
       data_to_render.map (data_point) ->
         dp = {}
-        dp['letter'] = data_point[0][1].replace(/[a-z ]/g, '')
-        dp['score'] = 0.5 * data_point[1][1] +
-                      1 * data_point[3][1] +
-                      0.2 * (data_point[4][1] + data_point[5][1]) +
-                      0.1 * (data_point[6][1] + data_point[7][1])
+        dp['letter'] = data_point['Name'].replace(/[a-z ]/g, '')
+        dp['score'] = 1.0 * data_point['# Ideas Actionable'] +
+                      0.5 * data_point['# Ideas Approved'] +
+                      0.2 * (data_point['# of Comments Received'] + data_point['# of Comments Given']) +
+                      0.1 * (data_point['# of Votes Received'] + data_point['# of Votes Given'])
         dataset.push(dp)
 
     margin =
@@ -108,8 +108,9 @@ $('.summary').ready ->
     svg.append('g')
       .attr('class', 'y axis')
         .call(yAxis).append('text')
-        .attr('y', 6).attr('dy', '-1.25em').style('text-anchor', 'end')
-        .text 'Score'
+        .attr('y', 6).attr('dy', '-1.25em')
+        .attr('dx', '2em').style('text-anchor', 'end')
+        .text y_axis_label
     svg.selectAll('.bar').data(dataset).enter().append('rect').attr('class', 'bar').attr('x', (d) ->
       x d.letter
     ).attr('width', x.rangeBand()).attr('y', (d) ->
@@ -121,7 +122,6 @@ $('.summary').ready ->
 
   render_multiline_chart = (where_to_render, data_to_render) ->
     data = []
-
     data_headers = data_to_render.shift()  # shift out first element
     data_to_render.map (data_point) ->
       dp = {}
@@ -130,32 +130,6 @@ $('.summary').ready ->
         dp[data_headers[i]] = parseInt(data_point[i])
       data.push(dp)
 
-    # data = [
-    #   {
-    #     "date": "10/01/2011",
-    #     "New York":63.4,
-    #     "San Francisco":62.7,
-    #     "Austin":72.2
-    #   },
-    #   {
-    #     "date": "10/02/2011",
-    #     "New York":58,
-    #     "San Francisco":59.9,
-    #     "Austin":67.7
-    #   },
-    #   {
-    #     "date": "10/03/2011",
-    #     "New York":57,
-    #     "San Francisco":48.9,
-    #     "Austin":90.7
-    #   },
-    #   {
-    #     "date": "10/04/2011",
-    #     "New York":59,
-    #     "San Francisco":72.9,
-    #     "Austin":68.7
-    #   }
-    # ]
     margin =
       top: 20
       right: 50

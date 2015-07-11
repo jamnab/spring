@@ -6,6 +6,9 @@ class DepartmentEntry < ActiveRecord::Base
   has_many :post_department_entries
   has_many :posts, through: :post_department_entries
 
+  has_many :comments, through: :posts
+  has_many :opinions, through: :posts
+
   has_many :department_entry_memberships, dependent: :destroy
   has_many :users, through: :department_entry_memberships
 end

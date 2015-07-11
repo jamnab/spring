@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
 
   has_many :posts
   has_many :comments
+  # has_many :received_comments, through: :posts, class_name: 'Comment'
   has_many :opinions
+  # has_many :received_opinions, through: :posts, class_name: 'Opinion'
+
   has_one :picture
   accepts_nested_attributes_for :picture
   has_many :favourites
