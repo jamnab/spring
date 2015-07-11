@@ -30,92 +30,178 @@
     / Wrapper for slides
     .carousel-inner{:role => "listbox"}
       .item.active
-        .col-xs-12.col-sm-6
-          .summary-box
-            .header Top Departments
-            .body
-              - @contributions_by_department[0..5].each do |entry|
-                .col-xs-4
-                  .summary-card
-                    .main-content
-                      = entry['# Ideas Actionable']
-                    .notes
-                      ideas actionable
-                      %br
-                      out of #{entry['# Ideas Total']} ideas
-                    .footer
-                      = entry['Department']
-        .col-xs-12.col-sm-6
-          .summary-box
-            .header Department Contributions
-            .body
-              #contributions_by_department_graph.d3_graph
+        .row
+          .col-xs-12.col-sm-6
+            .summary-box
+              .header Top Departments
+              .body
+                - @contributions_by_department[0..5].each do |entry|
+                  .col-xs-4
+                    .summary-card
+                      .main-content
+                        = entry['# Ideas Actionable']
+                      .notes
+                        ideas actionable
+                        %br
+                        out of #{entry['# Ideas Total']} ideas
+                      .footer
+                        = entry['Department']
+          .col-xs-12.col-sm-6
+            .summary-box
+              .header Department Contributions
+              .body
+                #contributions_by_department_graph.d3_graph
+        %hr
+        .row
+          .col-xs-12.analytics_data_table_wrapper
+            %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
+              %thead.text-center
+                %th Department
+                %th # Ideas Actionable
+                %th # Ideas Total
+                %th # Ideas Approved
+                %th # of Comments
+                %th # of Votes
+                %th # of Users
+              %tbody.text-center
+                - @contributions_by_department.each do |entry|
+                  %tr
+                    %td= entry['Department']
+                    %td= entry['# Ideas Actionable']
+                    %td= entry['# Ideas Total']
+                    %td= entry['# Ideas Approved']
+                    %td= entry['# of Comments']
+                    %td= entry['# of Votes']
+                    %td= entry['# of Users']
       .item
-        .col-xs-12.col-sm-6
-          .summary-box
-            .header Top Contributors
-            .body
-              - @contributions_by_employee[0..5].each do |entry|
-                .col-xs-4
-                  .summary-card
-                    .main-content
-                      - user = User.find(entry['user_id'])
-                      - if !user || user.picture.nil?
-                        = image_tag("profile_default.png")
-                      - else
-                        = image_tag user.picture.image.url(:user_image)
-                    .notes
-                      = entry['# Ideas Actionable']
-                      ideas actionable
-                      %br
-                      out of #{entry['# Ideas Total']} ideas
-                    .footer
-                      = entry['Name']
-        .col-xs-12.col-sm-6
-          .summary-box
-            .header Employee Contributions
-            .body
-              #contributions_by_employee_graph.d3_graph
+        .row
+          .col-xs-12.col-sm-6
+            .summary-box
+              .header Top Contributors
+              .body
+                - @contributions_by_employee[0..5].each do |entry|
+                  .col-xs-4
+                    .summary-card
+                      .main-content
+                        - user = User.find(entry['user_id'])
+                        - if !user || user.picture.nil?
+                          = image_tag("profile_default.png")
+                        - else
+                          = image_tag user.picture.image.url(:user_image)
+                      .notes
+                        = entry['# Ideas Actionable']
+                        ideas actionable
+                        %br
+                        out of #{entry['# Ideas Total']} ideas
+                      .footer
+                        = entry['Name']
+          .col-xs-12.col-sm-6
+            .summary-box
+              .header Employee Contributions
+              .body
+                #contributions_by_employee_graph.d3_graph
+        %hr
+        .row
+          .col-xs-12.analytics_data_table_wrapper
+            %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
+              %thead.text-center
+                %th Name
+                %th # Ideas Actionable
+                %th # Ideas Total
+                %th # Ideas Approved
+                %th # of Comments Received
+                %th # of Comments Given
+                %th # of Votes Received
+                %th # of Votes Given
+              %tbody.text-center
+                - @contributions_by_employee.each do |entry|
+                  %tr
+                    %td= entry['Name']
+                    %td= entry['# Ideas Actionable']
+                    %td= entry['# Ideas Total']
+                    %td= entry['# Ideas Approved']
+                    %td= entry['# of Comments Received']
+                    %td= entry['# of Comments Given']
+                    %td= entry['# of Votes Received']
+                    %td= entry['# of Votes Given']
       .item
-        .col-xs-12.col-sm-6
-          .summary-box
-            .header Trending Ideas
-            .body
-              - @trending_ideas[0..5].each do |entry|
-                .col-xs-4
-                  .summary-card
-                    .main-content
-                    .notes.post
-                      %b= entry['Title']
-                      %br
-                      (#{entry['Support']}% Support)
-                    .footer
-                      = entry['Name']
-        .col-xs-12.col-sm-6
-          .summary-box
-            .header Chart
-            .body
-              #trending_ideas_graph.d3_graph
+        .row
+          .col-xs-12.col-sm-6
+            .summary-box
+              .header Trending Ideas
+              .body
+                - @trending_ideas[0..5].each do |entry|
+                  .col-xs-4
+                    .summary-card
+                      .main-content
+                      .notes.post
+                        %b= entry['Title']
+                        %br
+                        (#{entry['Support']}% Support)
+                      .footer
+                        = entry['Name']
+          .col-xs-12.col-sm-6
+            .summary-box
+              .header Chart
+              .body
+                #trending_ideas_graph.d3_graph
+        %hr
+        .row
+          .col-xs-12.analytics_data_table_wrapper
+            %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
+              %thead.text-center
+                %th Poster
+                %th Title
+                %th Support
+                %th # of Comments
+                %th # of Votes
+              %tbody.text-center
+                - @trending_ideas.each do |entry|
+                  %tr
+                    %td= entry['Poster']
+                    %td= entry['Title']
+                    %td #{entry['Support']}%
+                    %td= entry['# of Comments']
+                    %td= entry['# of Votes']
       .item
-        .col-xs-12.col-sm-6
-          .summary-box
-            .header Approved Ideas
-            .body
-              - @approved_ideas[0..5].each do |entry|
-                .col-xs-4
-                  .summary-card
-                    .main-content
-                    .notes.post
-                      %b= entry['Title']
-                      %br
-                      (#{entry['Support']}% Support)
-                    .footer
-                      = entry['Poster']
-        .col-xs-12.col-sm-6
-          .summary-box
-            .header Chart
-            .body
-              #approved_ideas_graph.d3_graph
+        .row
+          .col-xs-12.col-sm-6
+            .summary-box
+              .header Approved Ideas
+              .body
+                - @approved_ideas[0..5].each do |entry|
+                  .col-xs-4
+                    .summary-card
+                      .main-content
+                      .notes.post
+                        %b= entry['Title']
+                        %br
+                        (#{entry['Support']}% Support)
+                      .footer
+                        = entry['Poster']
+          .col-xs-12.col-sm-6
+            .summary-box
+              .header Chart
+              .body
+                #approved_ideas_graph.d3_graph
+        %hr
+        .row
+          .col-xs-12.analytics_data_table_wrapper
+            %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
+              %thead.text-center
+                %th Poster
+                %th Title
+                %th Support
+                %th # of Comments
+                %th # of Votes
+              %tbody.text-center
+                - @approved_ideas.each do |entry|
+                  %tr
+                    %td= entry['Poster']
+                    %td= entry['Title']
+                    %td #{entry['Support']}%
+                    %td= entry['# of Comments']
+                    %td= entry['# of Votes']
       .item
         .col-xs-12.col-sm-6
           .summary-box

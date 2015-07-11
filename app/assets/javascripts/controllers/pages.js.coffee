@@ -61,7 +61,7 @@ $ ->
      $("#reportalert").text "Done."
 
   # init datatable for personnel
-  $('#personnel-table').dataTable({
+  $('.analytics_data_table').dataTable({
     # "processing": true,
     # "serverSide": true,
     # "ajax": "/summary"

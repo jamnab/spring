@@ -4,6 +4,18 @@
   padding: 20px 20px;
   color: $inverse-text-off;
 
+  .analytics_data_table_wrapper {
+    padding: 20px;
+
+    thead.text-center th {
+      text-align: center;
+    }
+
+    table {
+      border: 1px solid #fff;
+    }
+  }
+
   .no-hover {
     cursor: default;
   }
@@ -46,6 +58,7 @@
     text-align: center;
     margin: 0px !important;
     left: 0px;
+    height: 150px;
   }
   #analytics-carousel .carousel-indicators > li,
   #analytics-carousel .carousel-indicators > li.active{
