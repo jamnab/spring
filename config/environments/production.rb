@@ -45,6 +45,15 @@ Rails.application.configure do
   # Set to :debug to see everything in the log.
   config.log_level = :info
 
+  config.assets.precompile += %w( homepage.css )
+  config.assets.precompile += %w( homepage.js )
+
+  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+  config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
+
+  config.assets.precompile += %w( util/analytics_d3.js )
+
+
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
