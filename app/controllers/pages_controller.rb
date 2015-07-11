@@ -224,7 +224,7 @@ class PagesController < ApplicationController
     end
     @approved_ideas = @approved_ideas.sort_by{|x| -x['Support'].to_i}
 
-    detailed_trends_csv = File.read('#{Rails.root}/public/dummy_data/detailed_trends.csv')
+    detailed_trends_csv = File.read("#{Rails.root}/public/dummy_data/detailed_trends.csv")
     @detailed_trends = CSV.parse(detailed_trends_csv, :headers => true)
     @stat_overview = {
       num_actionables: current_organization.posts.where(launch_approved: true).count,
