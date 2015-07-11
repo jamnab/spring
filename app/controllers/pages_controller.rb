@@ -162,8 +162,6 @@ class PagesController < ApplicationController
         'Department' => de.department_name,
         '# Ideas Actionable' => de.posts.where(launch_approved: true).count,
         '# Ideas Total' => de.posts.count,
-        '# Ideas Actionable' => de.posts.where(launch_approved: true).count,
-        '# Ideas Total' => de.posts.count,
         '# Ideas Approved' => de.posts.where(approved: true).count,
         '# of Comments' => de.comments.count,
         '# of Votes' => de.opinions.count,
@@ -228,6 +226,25 @@ class PagesController < ApplicationController
 
     detailed_trends_csv = File.read('public/dummy_data/detailed_trends.csv')
     @detailed_trends = CSV.parse(detailed_trends_csv, :headers => true)
+    @stat_overview = {
+      num_actionables: current_organization.posts.where(launch_approved: true).count,
+      num_total_ideas: current_organization.posts.count,
+      num_approved: current_organization.posts.where(launch_approved: false, approved: true).count,
+      num_comments: current_organization.posts.sum(:comments_count),
+      num_votes: current_organization.posts.map{|x| x.opinions.count}.inject(0, :+),
+      num_users: current_organization.users.uniq.count
+    }
+    # @detailed_trends = [['Date', '# Ideas Actionable', '# Ideas Total', '# Ideas Approved']]
+    # 7.times do |i|
+    #   date = Date.today - i.days
+    #   posts = current_organization.posts.where(created_at: date .. date + 1.day)
+    #   entry = []
+    #   entry.push(date.strftime('%m/%d/%Y'))
+    #   entry.push(posts.where(launch_approved: true).count)
+    #   entry.push(posts.count)
+    #   entry.push(posts.where(launch_approved: false, approved: true).count)
+    #   @detailed_trends.push(entry)
+    # end
 
     respond_to do |format|
       format.html

@@ -124,7 +124,7 @@
               .col-xs-4
                 .summary-card
                   .main-content
-                    30
+                    = @stat_overview[:num_actionables]
                   .notes
                     Total Number of
                   .footer
@@ -132,7 +132,7 @@
               .col-xs-4
                 .summary-card
                   .main-content
-                    80
+                    = @stat_overview[:num_total_ideas]
                   .notes
                     Total Number of
                   .footer
@@ -140,7 +140,7 @@
               .col-xs-4
                 .summary-card
                   .main-content
-                    10
+                    = @stat_overview[:num_approved]
                   .notes
                     Total Number of
                   .footer
@@ -148,7 +148,7 @@
               .col-xs-4
                 .summary-card
                   .main-content
-                    286
+                    = @stat_overview[:num_comments]
                   .notes
                     Total Number of
                   .footer
@@ -156,7 +156,7 @@
               .col-xs-4
                 .summary-card
                   .main-content
-                    520
+                    = @stat_overview[:num_votes]
                   .notes
                     Total Number of
                   .footer
@@ -164,7 +164,7 @@
               .col-xs-4
                 .summary-card
                   .main-content
-                    25
+                    = @stat_overview[:num_users]
                   .notes
                     Total Number of
                   .footer
@@ -173,7 +173,11 @@
           .summary-box
             .header Chart
             .body
+              .graph_cover
+                Not Enough Data
               #detailed_trends_graph.d3_graph
+
+
 
     -#   %table#personnel-table.table.table-striped.display{cellspacing: "0", width: "100%"}
     -#     %thead.text-center
