@@ -106,6 +106,7 @@
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
               %thead.text-center
                 %th Name
+                %th Score
                 %th # Ideas Actionable
                 %th # Ideas Total
                 %th # Ideas Approved
@@ -117,6 +118,8 @@
                 - @contributions_by_employee.each do |entry|
                   %tr
                     %td= entry['Name']
+                    %td
+                      = (1.0 * entry['# Ideas Actionable'] + 0.5 * entry['# Ideas Approved'] + 0.2 * (entry['# of Comments Received'] + entry['# of Comments Given']) + 0.1 * (entry['# of Votes Received'] + entry['# of Votes Given'])).round(1)
                     %td= entry['# Ideas Actionable']
                     %td= entry['# Ideas Total']
                     %td= entry['# Ideas Approved']

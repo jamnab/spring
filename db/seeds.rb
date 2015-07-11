@@ -6,7 +6,7 @@ last_names = %w[SMITH JOHNSON WILLIAMS JONES BROWN DAVIS MILLER WILSON MOORE TAY
 
 User.create(username: "launchboard", email: "info@launchboard.com",
             password: "launchboard", password_confirmation: "launchboard",
-            admin: true, first_name: "LaunchBoard", last_name: "Admin",
+            admin: true, first_name: "Launchboard", last_name: "Admin",
             job_title: "System Admin")
 
 # demo company
@@ -14,14 +14,14 @@ demo_comp  =  Organization.create(name: "Demo Company Inc.", activated: true)
 demoman_comp  = User.create(username: "demoman_comp", email: "comp_man@demo.com",
                   password: "demoman_comp", password_confirmation: "demoman_comp",
                   first_name: "John", last_name: "Manager",
-                  job_title: "Manager", organization_id: 1, manager: true)
+                  job_title: "Manager", organization_id: demo_comp.id, manager: true)
 
 # demo association
 demo_assoc =  Organization.create(name: "Demo Association Inc.", activated: true)
 demoman_assoc = User.create(username: "demoman_assoc", email: "assoc_man@demo.com",
                   password: "demoman_assoc", password_confirmation: "demoman_assoc",
                   first_name: "Jeff", last_name: "Manager",
-                  job_title: "Manager", organization_id: 1, manager: true)
+                  job_title: "Manager", organization_id: demo_assoc.id, manager: true)
 
 # demo personnel for demo_comp
 16.times do |i|

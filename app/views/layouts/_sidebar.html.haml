@@ -13,7 +13,7 @@
       = link_to dashboard_path(:page => "following"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Following", placement: "right", trigger: "hover"} do
         .fa.fa-eye
       = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Launch", placement: "right", trigger: "hover"} do
-        = image_tag 'launch.png'
+        = image_tag 'launch_grey.png'
       / = link_to :summary, class: 'popover-trigger', data: {content: "Summary", placement: "right", trigger: "hover"} do
       /   %span.flaticon-business155
 
@@ -64,13 +64,13 @@
 
       .brand-link.org
         - if @organization == nil
-          = image_tag "logo.png"
+          = image_tag "logo_horz.png"
         - else
           - if @organization.picture == nil
-            = image_tag "logo.png"
+            = image_tag "logo_horz.png"
           - else
             = image_tag @organization.picture.image.url(:organization_image)
-        %h4 Powered by LaunchBoard
+        %h4 Powered by Launchboard
         %h5 A Verse Software Lab Inc. Solution.
 
       = link_to :logout, class: "logout-link" do
