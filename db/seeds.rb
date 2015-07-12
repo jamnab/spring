@@ -197,10 +197,12 @@ actionable_posts_by_department.each do |de_post_set|
                            launch_approved: true,
                            organization: demo_comp)
     # post[2] is image
-    Picture.create({
-      post_id: new_post.id,
-      image: File.new("#{Rails.root}/app/assets/seeds/images/#{post[2]}"),
-    })
+    if !post[2].nil?
+      Picture.create({
+        post_id: new_post.id,
+        image: File.new("#{Rails.root}/app/assets/seeds/images/#{post[2]}"),
+      })
+    end
     PostDepartmentEntry.create(post: new_post, department_entry: de)
     # random > 75% support
     num_votes = rand(10..15)
@@ -222,10 +224,12 @@ filler_posts_by_department.each do |de_post_set|
                            user: user,
                            approved: true, organization: demo_comp)
     # post[2] is image
-    Picture.create({
-      post_id: new_post.id,
-      image: File.new("#{Rails.root}/app/assets/seeds/images/#{post[2]}"),
-    })
+    if !post[2].nil?
+      Picture.create({
+        post_id: new_post.id,
+        image: File.new("#{Rails.root}/app/assets/seeds/images/#{post[2]}"),
+      })
+    end
     PostDepartmentEntry.create(post: new_post, department_entry: de)
     # random < 75% support
     num_votes = rand(10)
