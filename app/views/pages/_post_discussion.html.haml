@@ -1,59 +1,60 @@
 - post = @post
-#post-discussion.modal.fade
-  .modal-dialog
-    .modal-content{class: "#{post.id}"}
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-        %h4.modal-title
-          = post.title
-      .modal-body
-        .row
-          .col-xs-8
-            = post.content
-          #carousel-discussion.col-xs-4.carousel.slide.carousel-fade
-            %ol.carousel-indicators
-              - if post.pictures.empty?
-                %li.active{"data-target"=> "#carousel-discussion", "data-slide-to"=>"0"}
-              - else
-                - post.pictures.each_with_index do |pic,index|
-                  - if index == 0
-                    %li.active{"data-target"=> "#carousel-discussion", "data-slide-to"=> index}
-                  - else
-                    %li{"data-target"=> "#carousel-discussion", "data-slide-to"=> index}
-            .carousel-inner
-              - if post.pictures.empty?
-                .item.active
-                  = image_tag ("no_image.png")
-              - else
-                - post.pictures.each_with_index do |pic,index|
-                  .item{class: ("active" if index == 0)}
-                    %a{"href"=> pic.image.url, "data-lightbox" => "#{post.title}-discussion"}
-                      = image_tag pic.image.url(:post_image)
-        %hr
-        .row
-          = form_for Comment.new, remote: true do |f|
-            = f.hidden_field :commentable_id, :value => post.id
-            = f.hidden_field :commentable_type, :value => "Post"
-            .field.col-xs-12
-              = f.text_area :content, class: "form-control", placeholder: "Enter your comment here ...", rows: 3, maxlength: 200
+- if !@post.nil?
+  #post-discussion.modal.fade
+    .modal-dialog
+      .modal-content{class: "#{post.id}"}
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title
+            = post.title
+        .modal-body
+          .row
+            .col-xs-8
+              = post.content
+            #carousel-discussion.col-xs-4.carousel.slide.carousel-fade
+              %ol.carousel-indicators
+                - if post.pictures.empty?
+                  %li.active{"data-target"=> "#carousel-discussion", "data-slide-to"=>"0"}
+                - else
+                  - post.pictures.each_with_index do |pic,index|
+                    - if index == 0
+                      %li.active{"data-target"=> "#carousel-discussion", "data-slide-to"=> index}
+                    - else
+                      %li{"data-target"=> "#carousel-discussion", "data-slide-to"=> index}
+              .carousel-inner
+                - if post.pictures.empty?
+                  .item.active
+                    = image_tag ("no_image.png")
+                - else
+                  - post.pictures.each_with_index do |pic,index|
+                    .item{class: ("active" if index == 0)}
+                      %a{"href"=> pic.image.url, "data-lightbox" => "#{post.title}-discussion"}
+                        = image_tag pic.image.url(:post_image)
+          %hr
+          .row
+            = form_for Comment.new, remote: true do |f|
+              = f.hidden_field :commentable_id, :value => post.id
+              = f.hidden_field :commentable_type, :value => "Post"
+              .field.col-xs-12
+                = f.text_area :content, class: "form-control", placeholder: "Enter your comment here ...", rows: 3, maxlength: 200
 
-            / .field.col-xs-12.text-right
-            /   = check_box_tag("comment[anonymous]", "1", false, class: "checkbox")
-            /   = label_tag :checkbox, "Remain Anonymous"
-            .actions.col-xs-12.text-right
-              = f.submit 'Post Comment', class: "btn btn-main on loading-comment-submit", id: "comment_plain", :name =>"plain"
-              / = f.submit 'Post Alternative', class: " .comment-loading btn btn-main on loading-comment-submit", id: "comment_suggestion", :name =>"suggestion"
-      .modal-footer
-        .filter-sort-comments
-          - @post = post
-          = render 'comments_filter_sort', :collection => @post
-        #comments.comments
-          - if @sort != "upvoted"
-            = sync_new partial: "card", resource: Comment.new, scope:post
-          - if @post.alt_doit?
-            - comments = post.comments.order("opinion DESC")
-          - else
-            - comments = post.comments.order("created_at DESC")
-          - comments.limit(4).each do |comment|
-            = sync partial: "card", resource: comment
+              / .field.col-xs-12.text-right
+              /   = check_box_tag("comment[anonymous]", "1", false, class: "checkbox")
+              /   = label_tag :checkbox, "Remain Anonymous"
+              .actions.col-xs-12.text-right
+                = f.submit 'Post Comment', class: "btn btn-main on loading-comment-submit", id: "comment_plain", :name =>"plain"
+                = f.submit 'Post Alternative', class: " .comment-loading btn btn-main on loading-comment-submit", id: "comment_suggestion", :name =>"suggestion"
+        .modal-footer
+          .filter-sort-comments
+            - @post = post
+            = render 'comments_filter_sort', :collection => @post
+          #comments.comments
+            - if @sort != "upvoted"
+              = sync_new partial: "card", resource: Comment.new, scope:post
+            - if @post.alt_doit?
+              - comments = post.comments.order("opinion DESC")
+            - else
+              - comments = post.comments.order("created_at DESC")
+            - comments.limit(4).each do |comment|
+              = sync partial: "card", resource: comment

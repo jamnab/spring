@@ -143,6 +143,8 @@ class PagesController < ApplicationController
       @posts = @organization.posts.all
     end
 
+    @post = @posts.first
+
     respond_to do |format|
       format.html # index.html.erb
       format.js
