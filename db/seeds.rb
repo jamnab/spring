@@ -221,6 +221,11 @@ filler_posts_by_department.each do |de_post_set|
     new_post = Post.create(title: post[0], content: post[1],
                            user: user,
                            approved: true, organization: demo_comp)
+    # post[2] is image
+    Picture.create({
+      post_id: new_post.id,
+      image: File.new("#{Rails.root}/app/assets/seeds/images/#{post[2]}"),
+    })
     PostDepartmentEntry.create(post: new_post, department_entry: de)
     # random < 75% support
     num_votes = rand(10)
