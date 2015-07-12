@@ -12,8 +12,8 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  username: pindoit
-  password: 8twpBsPCKHq6nL6CxBaqnP4a
+  username: root
+  password: ''
 
 development:
   <<: *default
@@ -46,5 +46,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  adapter: mysql2
   database: pindoit_production
+  username: pindoit
+  password: 8twpBsPCKHq6nL6CxBaqnP4a
