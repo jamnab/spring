@@ -248,6 +248,8 @@ class PagesController < ApplicationController
     #   @detailed_trends.push(entry)
     # end
 
+    raise
+
     respond_to do |format|
       format.html
       format.json
