@@ -53,7 +53,7 @@
                 %li
                   = link_to manage_users_organization_path(current_organization), remote: true, class: "popover-trigger", data: {content: "Manage departments and members", placement: "right", trigger: "hover"} do
                     Manage Users
-          %li.dropdown.hidden
+          %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               .fa.fa-bell
               %span.caret
@@ -61,7 +61,7 @@
               .new
                 = sync_new partial: 'notification', resource: PublicActivity::Activity.new, scope:current_user
               - @notifications = current_user.notifications
-              - @notifications[0,10].each do |n|
+              - @notifications[0,15].each do |n|
                 - activity = n.activity
                 = sync partial: 'notification', resource: activity
           %li
