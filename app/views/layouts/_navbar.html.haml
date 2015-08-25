@@ -61,7 +61,7 @@
               .new
                 = sync_new partial: 'notification', resource: PublicActivity::Activity.new, scope:current_user
               - @notifications = current_user.notifications
-              - @notifications[0,15].each do |n|
+              - @notifications[0,10].each do |n|
                 - activity = n.activity
                 = sync partial: 'notification', resource: activity
           %li
