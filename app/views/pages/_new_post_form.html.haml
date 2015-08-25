@@ -23,7 +23,7 @@
               = f.label :content
               = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5, maxlength: 250
             .field.col-xs-12
-              %i Posts are by default anonymous, and the poster identity is always revealed when a post becomes a doit action item.
+              %i Posts are by default anonymous, and the poster identity is always revealed when a post becomes a launch action item.
               - if can? :update, current_organization
                 = f.label 'Post as Anonymous'
                 = f.check_box :anonymous

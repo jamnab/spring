@@ -44,7 +44,7 @@
               /   = label_tag :checkbox, "Remain Anonymous"
               .actions.col-xs-12.text-right
                 = f.submit 'Post Comment', class: "btn btn-main on loading-comment-submit", id: "comment_plain", :name =>"plain"
-                = f.submit 'Post Alternative', class: " .comment-loading btn btn-main on loading-comment-submit", id: "comment_suggestion", :name =>"suggestion"
+                / = f.submit 'Post Alternative', class: " .comment-loading btn btn-main on loading-comment-submit", id: "comment_suggestion", :name =>"suggestion"
         .modal-footer
           .filter-sort-comments
             - @post = post

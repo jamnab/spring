@@ -6,7 +6,7 @@
 	- else
 		- if activity.trackable_type == "Post"
 			= link_to dashboard_path(:populate_disucssion_id => activity.trackable.id), remote: true, class: "notification-link" do
-				.notification-card.col-xs-12{class: "read_#{activity.read}" }
+				.notification-card.col-xs-12.truncate{class: "read_#{activity.read}" }
 					= activity.owner.full_name
 					= activity.key.split(".")[1].gsub! "_", " "
 					= activity.trackable_type
