@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :current_organization
+  helper_method :current_organization_posts
   helper_method :current_departments
   helper_method :current_department_entries
 
@@ -30,6 +31,37 @@ class ApplicationController < ActionController::Base
     else
       current_user.organization
     end
+  end
+
+  def current_organization_posts
+    idea_posts = []
+    pending_posts = []
+    following_posts = []
+    launched_posts = []
+
+    if current_user.is_admin?
+      # user is super admin, use first org as sample
+      @organization = Organization.first
+    else
+      @organization = current_organization
+    end
+
+    if can? :update, @organization
+      @pending_posts = @organization.posts.where(approved: false, graveyard: false)
+    else
+      @pending_posts = @organization.posts.where(user: current_user, approved: false, graveyard: false)
+    end
+
+    # silo posts of this organization
+    @approved_posts = @organization.posts.where(approved: true, graveyard: false)
+    @following_posts = @organization.posts.joins(:opinions).where(opinions: {positive: true, user: current_user})
+    # AR -> Array drity filters
+    @launched_posts = @approved_posts.reject{|r| r.doit? == false }
+    @idea_posts = @approved_posts.reject{|r| (r.doit? == true) || (Opinion.where(opinionable: r, user: current_user).count > 0) }
+    # if ideas overall, filter out voted and launched items
+
+    return {approved_posts: @approved_posts, idea_posts: @idea_posts, pending_posts: @pending_posts,
+      following_posts: @following_posts, launched_posts: @launched_posts}
   end
 
   def current_user_session
