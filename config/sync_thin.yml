@@ -1,0 +1,6 @@
+port: 4443
+ssl: true
+ssl_key_file: /etc/ssl/server.key
+ssl_cert_file: /etc/ssl/ssl-bundle.crt
+environment: production
+rackup: sync.ru
