@@ -56,10 +56,10 @@ class PagesController < ApplicationController
     @approved_posts = @organization.posts.where(approved: true, graveyard: false)
     @following_posts = @organization.posts.joins(:opinions).where(opinions: {positive: true, user: current_user})
 
-    if can? :judge, @organization
+    if can? :update, @organization
       @pending_posts = @organization.posts.where(approved: false, graveyard: false)
     else
-      @pending_posts = current_user.posts.where(approved: false, graveyard: false)
+      @pending_posts = @organization.posts.where(user: current_user, approved: false, graveyard: false)
     end
 
     if @page == "following"
@@ -72,12 +72,12 @@ class PagesController < ApplicationController
       @posts = @approved_posts
     end
 
-    @posts = @posts.limit(@@global_limit)
+    # AR -> Array drity filters
+    @launched_posts = @approved_posts.reject{|r| r.doit? == false }
+    @idea_posts = @approved_posts.reject{|r| (r.doit? == true) || (Opinion.where(opinionable: r, user: current_user).count > 0) }
+    # if ideas overall, filter out voted and launched items
 
-    # only show unapproved to organization admins
-    if cannot? :update, @organization
-      @posts = @posts.where(approved: true)
-    end
+    @posts = @posts.limit(@@global_limit)
 
     if params[:sort] != nil
       if @sort == "newest"
@@ -92,11 +92,6 @@ class PagesController < ApplicationController
     else
       @posts = @posts.order(created_at: :desc)
     end
-
-    # AR -> Array drity filters
-    @launched_posts = @posts.reject{|r| r.doit? == false }
-    @idea_posts = @posts.reject{|r| (r.doit? == true) || (Opinion.where(opinionable: r, user: current_user).count > 0) }
-    # if ideas overall, filter out voted and launched items
 
     if params[:query].present?
       if @query == 'doit'

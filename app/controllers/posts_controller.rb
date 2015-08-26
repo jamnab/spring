@@ -121,7 +121,7 @@ class PostsController < ApplicationController
 
     # listing approval
     if !params[:approved].nil?
-      if params[:approved]
+      if params[:approved] == true
         @post.update(approved: true)
       else
         @post.update(graveyard: true)
@@ -167,6 +167,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :post_type, :endorsed, :anonymous, :threshold, :user_id, :comment_anonymity, :pictures, :graveyard)
+      params.require(:post).permit(:title, :content, :post_type, :endorsed, :anonymous, :threshold, :user_id, :comment_anonymity, :pictures, :graveyard, :organization_id)
     end
 end
