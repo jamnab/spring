@@ -18,6 +18,7 @@
               = f.label :images
               = file_field_tag "images[]",type: :file, multiple: true
             .field.col-xs-12
+              = f.label 'Departments (select at least 1)'
               = render 'layouts/department_selector', context: current_organization, department_entries: current_organization.department_entries
             .field.col-xs-12
               = f.label :content

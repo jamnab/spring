@@ -102,6 +102,12 @@ class PagesController < ApplicationController
       @posts = @posts.reject{|r| r.doit? == false }
     end
 
+    if @page == 'dashboard'
+      # if ideas overall, filter out voted and launched items
+      @posts = @posts.reject{|r| Opinion.where(opinionable: r, user: current_user).count > 0 }
+      @posts = @posts.reject{|r| r.doit? == true }
+    end
+
     if params[:populate_disucssion_id].present?
       @populate = true
       @id = params[:populate_disucssion_id].to_i
