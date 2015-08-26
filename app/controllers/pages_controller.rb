@@ -40,39 +40,42 @@ class PagesController < ApplicationController
     @query = params[:query]
     @viewmode = params[:viewmode]
 
+    @idea_posts = []
+    @pending_posts = []
+    @following_posts = []
+    @launched_posts = []
+
     if current_user.is_admin?
-      # user is super admin
-      if @page == "following"
-        # @posts = current_user.fav_posts
-        @posts = Post.joins(:opinions).where(opinions: {positive: true, user: current_user})
-      elsif @page == 'pending'
-        @posts = Post.where(approved: false, graveyard: false)
-      elsif @page == "archive"
-        @posts = Post.where(graveyard: true)
-      else
-        @posts = Post.where(approved: true, graveyard: false)
-      end
+      # user is super admin, use first org as sample
+      @organization = Organization.first
     else
-      # user is part of an org
-      if @page == "following"
-        @posts = Post.joins(:opinions).where(opinions: {positive: true, user: current_user})
-      elsif @page == 'pending'
-        if can? :judge, current_organization
-          @posts = current_organization.posts.where(approved: false, graveyard: false)
-        else
-          @posts = current_user.posts.where(approved: false, graveyard: false)
-        end
-      elsif @page == "archive"
-         @posts = current_organization.posts.where(graveyard: true)
-      else
-        @posts = current_organization.posts.where(approved: true, graveyard: false)
-      end
+      @organization = current_organization
+    end
+
+    # silo posts of this organization
+    @approved_posts = @organization.posts.where(approved: true, graveyard: false)
+    @following_posts = @organization.posts.joins(:opinions).where(opinions: {positive: true, user: current_user})
+
+    if can? :judge, @organization
+      @pending_posts = @organization.posts.where(approved: false, graveyard: false)
+    else
+      @pending_posts = current_user.posts.where(approved: false, graveyard: false)
+    end
+
+    if @page == "following"
+      @posts = @following_posts
+    elsif @page == 'pending'
+      @posts = @pending_posts
+    elsif @page == "archive"
+      @posts = @organization.posts.where(graveyard: true)
+    else
+      @posts = @approved_posts
     end
 
     @posts = @posts.limit(@@global_limit)
 
-    # only show approved unless you're admin
-    if cannot? :update, current_organization
+    # only show unapproved to organization admins
+    if cannot? :update, @organization
       @posts = @posts.where(approved: true)
     end
 
@@ -90,22 +93,25 @@ class PagesController < ApplicationController
       @posts = @posts.order(created_at: :desc)
     end
 
+    # AR -> Array drity filters
+    @launched_posts = @posts.reject{|r| r.doit? == false }
+    @idea_posts = @posts.reject{|r| (r.doit? == true) || (Opinion.where(opinionable: r, user: current_user).count > 0) }
+    # if ideas overall, filter out voted and launched items
+
     if params[:query].present?
       if @query == 'doit'
-        @posts = @posts.reject{|r| r.doit? == false }
+        @posts = @launched_posts
       else
         @posts = @posts.joins(:department_entries).where(department_entries: {id: @query})
       end
     end
 
     if @page == 'doit'
-      @posts = @posts.reject{|r| r.doit? == false }
+      @posts = @launched_posts
     end
 
     if @page == 'dashboard'
-      # if ideas overall, filter out voted and launched items
-      @posts = @posts.reject{|r| Opinion.where(opinionable: r, user: current_user).count > 0 }
-      @posts = @posts.reject{|r| r.doit? == true }
+      @posts = @idea_posts
     end
 
     if params[:populate_disucssion_id].present?

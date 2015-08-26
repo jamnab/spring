@@ -49,7 +49,7 @@ class PostsController < ApplicationController
         if @activity.id != nil
           sync_new @activity
         end
-        current_user.organization.users.uniq.each do |u|
+        current_user.organization.users.each do |u|
           Notification.create(user: u, activity: @activity)
           sync_new @activity, scope: u
         end
@@ -95,7 +95,7 @@ class PostsController < ApplicationController
         if @activity.id != nil
           sync_new @activity
         end
-        current_user.organization.users.uniq.each do |u|
+        current_user.organization.users.each do |u|
           Notification.create(user: u, activity: @activity)
           sync_new @activity, scope:u
         end
