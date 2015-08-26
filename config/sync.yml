@@ -27,8 +27,8 @@ test:
   async: false
 
 production:
-  server: "http://localhost:9292/faye/"
-  adapter_javascript_url: "http://localhost:9292/faye/faye.js"
+  server: "https://golaunchboard.com/faye"
+  adapter_javascript_url: "https://golaunchboard.com/faye.js"
   adapter: "Faye"
   auth_token: "f6adfdda9d41b7ad42860f4bc92d8134e0516b260ebfd8e087c822a56fb088e5"
   async: true
