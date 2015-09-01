@@ -26,7 +26,7 @@
       .logo.brand-link
         = image_tag "logo_vert.png"
 
-      = link_to '#', class: "logout-link popover-trigger", data: {content: "Logout", placement: "right", trigger: "hover"} do
+      = link_to :logout, class: "logout-link popover-trigger", data: {content: "Logout", placement: "right", trigger: "hover"} do
         %span.flaticon-door9
     - else
       = link_to '#', data: {target: "#login", toggle: "modal"} do

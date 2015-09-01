@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_organization
   helper_method :current_organization_posts
+  helper_method :current_organization_posts_counts
   helper_method :current_departments
   helper_method :current_department_entries
 
@@ -34,11 +35,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_organization_posts
-    idea_posts = []
-    pending_posts = []
-    following_posts = []
-    launched_posts = []
-
     if current_user.is_admin?
       # user is super admin, use first org as sample
       @organization = Organization.first

@@ -82,3 +82,17 @@ $ ->
     $(this).popover()
 
   $("#user_management").modal('show')
+
+$ ->
+  textarea_count = (entrance, exit, text, characters) ->
+    entranceObj = entrance[0]
+    exitObj = exit
+    length = characters - (entranceObj.value.length)
+    if length <= 0
+      length = 0
+      text = '<span class="disable"> ' + text + ' </span>'
+      entranceObj.value = entranceObj.value.substr(0, characters)
+    exitObj.innerHTML = text.replace('{CHAR}', length)
+
+  $('body').on 'keyup', 'textarea', ->
+    textarea_count($(this), $(this).siblings()[0], 'Content ({CHAR} characters remaining)', $(this).attr('maxlength'))
