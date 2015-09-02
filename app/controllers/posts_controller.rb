@@ -69,11 +69,7 @@ class PostsController < ApplicationController
         end
         sync_new @post, scope: current_organization
         sync_new @post
-        if current_user.is_admin?
-          @posts = Post.all
-        else
-          @posts = current_organization.posts
-        end
+        @posts = current_organization_posts[:idea_posts]
         format.js
       end
     end

@@ -16,7 +16,7 @@
         - if current_organization_posts[:pending_posts].count > 0
           #pending_counter.notification_counter
             = current_organization_posts[:pending_posts].count
-      = link_to dashboard_path(:page => "following"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Following", placement: "right", trigger: "hover"} do
+      = link_to dashboard_path(:page => "following"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "My Upvotes", placement: "right", trigger: "hover"} do
         .fa.fa-eye
       = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Launch", placement: "right", trigger: "hover"} do
         = image_tag 'launch_grey.png'
@@ -63,7 +63,7 @@
         Pending
 
       = link_to dashboard_path(:page => "following"), remote: request.path == "/dashboard", class: "body-loading" do
-        Following
+        My Upvotes
 
       = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading" do
         Launch Items

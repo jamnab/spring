@@ -41,18 +41,18 @@ class PagesController < ApplicationController
     @viewmode = params[:viewmode]
 
     if @page == "following"
-      @posts = current_organization_posts[:following_posts]
+      @posts = current_organization_posts(@query)[:following_posts]
     elsif @page == 'pending'
-      @posts = current_organization_posts[:pending_posts]
+      @posts = current_organization_posts(@query)[:pending_posts]
     elsif @page == "archive"
       @posts = @organization.posts.where(graveyard: true)
     else
-      @posts = current_organization_posts[:approved_posts]
+      @posts = current_organization_posts(@query)[:approved_posts]
     end
 
     # AR -> Array drity filters
-    current_organization_posts[:launched_posts] = current_organization_posts[:approved_posts].reject{|r| r.doit? == false }
-    current_organization_posts[:idea_posts] = current_organization_posts[:approved_posts].reject{|r| (r.doit? == true) || (Opinion.where(opinionable: r, user: current_user).count > 0) }
+    current_organization_posts(@query)[:launched_posts] = current_organization_posts(@query)[:approved_posts].reject{|r| r.doit? == false }
+    current_organization_posts(@query)[:idea_posts] = current_organization_posts(@query)[:approved_posts].reject{|r| (r.doit? == true) || (Opinion.where(opinionable: r, user: current_user).count > 0) }
     # if ideas overall, filter out voted and launched items
 
     @posts = @posts.limit(@@global_limit)
@@ -71,20 +71,12 @@ class PagesController < ApplicationController
       @posts = @posts.order(created_at: :desc)
     end
 
-    if params[:query].present?
-      if @query == 'doit'
-        @posts = current_organization_posts[:launched_posts]
-      else
-        @posts = @posts.joins(:department_entries).where(department_entries: {id: @query})
-      end
-    end
-
-    if @page == 'doit'
-      @posts = current_organization_posts[:launched_posts]
+    if (@page == 'doit') || @query == 'doit'
+      @posts = current_organization_posts(@query)[:launched_posts]
     end
 
     if @page == 'dashboard'
-      @posts = current_organization_posts[:idea_posts]
+      @posts = current_organization_posts(@query)[:idea_posts]
     end
 
     if params[:populate_disucssion_id].present?

@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_organization_posts
+  def current_organization_posts(query = nil)
     if current_user.is_admin?
       # user is super admin, use first org as sample
       @organization = Organization.first
@@ -51,6 +51,14 @@ class ApplicationController < ActionController::Base
     # silo posts of this organization
     @approved_posts = @organization.posts.where(approved: true, graveyard: false)
     @following_posts = @organization.posts.joins(:opinions).where(opinions: {positive: true, user: current_user})
+
+    # apply category filter
+    if !query.nil? && query != 'doit'
+      department_id = query
+      @approved_posts = @approved_posts.joins(:department_entries).where(department_entries: {id: department_id})
+      @following_posts = @following_posts.joins(:department_entries).where(department_entries: {id: department_id})
+    end
+
     # AR -> Array drity filters
     @launched_posts = @approved_posts.reject{|r| r.doit? == false }
     @idea_posts = @approved_posts.reject{|r| (r.doit? == true) || (Opinion.where(opinionable: r, user: current_user).count > 0) }
