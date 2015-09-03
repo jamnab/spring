@@ -118,7 +118,7 @@ class PostsController < ApplicationController
 
     # listing approval
     if !params[:approved].nil?
-      if params[:approved] == true
+      if params[:approved] == "true"
         @post.update(approved: true)
       else
         @post.update(graveyard: true)
@@ -137,7 +137,7 @@ class PostsController < ApplicationController
 
     # TODO: need to generate activity and notification
     respond_to do |format|
-      sync_update @post
+      sync_destroy @post
       format.html { redirect_to :dashboard, notice: 'Post was successfully updated.' }
       format.js { render action: "update" }
     end
