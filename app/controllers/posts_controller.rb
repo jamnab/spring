@@ -69,7 +69,8 @@ class PostsController < ApplicationController
         end
         sync_new @post, scope: current_organization
         sync_new @post
-        @posts = current_organization_posts[:idea_posts]
+        @page = 'pending'
+        @posts = current_organization_posts[:pending_posts]
         format.js
       end
     end

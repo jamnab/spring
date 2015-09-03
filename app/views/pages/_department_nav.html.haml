@@ -1,9 +1,9 @@
 %li.pull-left
-  = link_to "All", dashboard_path(:sort=>@sort, :page=>@page, :viewmode=>@viewmode), remote: (request.path =="/dashboard"), class: "body-loading #{'active' if @query.nil?}", :id =>"filter-post-all"
+  = link_to "All", dashboard_path(:sort=>@sort, :page=>@page, :viewmode=>@viewmode), remote: (request.path =="/dashboard"), class: "body-loading #{'active' if @filter.nil?}", :id =>"filter-post-all"
 
 - current_department_entries.each do |department_entry|
   %li.pull-left
-    = link_to dashboard_path(:query => department_entry.id, :sort=>@sort, :page=>@page, :viewmode=>@viewmode), remote: (request.path =="/dashboard"), class: "body-loading #{('active' if @query == department_entry.id)}", id: "filter-post-department#{department_entry.id}" do
+    = link_to dashboard_path(:filter => department_entry.id, :sort=>@sort, :page=>@page, :viewmode=>@viewmode), remote: (request.path =="/dashboard"), class: "body-loading #{('active' if @filter == department_entry.id)}", id: "filter-post-department#{department_entry.id}" do
       - if !department_entry.abbrev_name.nil?
         = department_entry.abbrev_name
       - else
@@ -14,9 +14,9 @@
       )
 
 %li.pull-right
-  = link_to dashboard_path(sort: @sort, query: @query, page: @page, viewmode: 'list'), remote: (request.path =="/dashboard"), class: "body-loading no-right-margin #{'active' if @viewmode == 'list'}" do
+  = link_to dashboard_path(sort: @sort, filter: @filter, page: @page, viewmode: 'list'), remote: (request.path =="/dashboard"), class: "body-loading no-right-margin #{'active' if @viewmode == 'list'}" do
     .fa.fa-list
 
 %li.pull-right
-  = link_to dashboard_path(sort: @sort, query: @query, page: @page, viewmode: 'grid'), remote: (request.path =="/dashboard"), class: "body-loading #{'active' if @viewmode != 'list'}" do
+  = link_to dashboard_path(sort: @sort, filter: @filter, page: @page, viewmode: 'grid'), remote: (request.path =="/dashboard"), class: "body-loading #{'active' if @viewmode != 'list'}" do
     .fa.fa-th

@@ -37,46 +37,43 @@ class PagesController < ApplicationController
     @page = params[:page]
     @page = "dashboard" if !params[:page]
     @sort = params[:sort]
+    @filter = params[:filter]
     @query = params[:query]
     @viewmode = params[:viewmode]
 
     if @page == "following"
-      @posts = current_organization_posts(@query)[:following_posts]
+      @posts = current_organization_posts(@filter)[:following_posts]
     elsif @page == 'pending'
-      @posts = current_organization_posts(@query)[:pending_posts]
+      @posts = current_organization_posts(@filter)[:pending_posts]
     elsif @page == "archive"
       @posts = @organization.posts.where(graveyard: true)
     else
-      @posts = current_organization_posts(@query)[:approved_posts]
+      @posts = current_organization_posts(@filter)[:approved_posts]
     end
 
     # AR -> Array drity filters
-    current_organization_posts(@query)[:launched_posts] = current_organization_posts(@query)[:approved_posts].reject{|r| r.doit? == false }
-    current_organization_posts(@query)[:idea_posts] = current_organization_posts(@query)[:approved_posts].reject{|r| (r.doit? == true) || (Opinion.where(opinionable: r, user: current_user).count > 0) }
+    current_organization_posts(@filter)[:launched_posts] = current_organization_posts(@filter)[:approved_posts].reject{|r| r.doit? == false }
+    current_organization_posts(@filter)[:idea_posts] = current_organization_posts(@filter)[:approved_posts].reject{|r| (r.doit? == true) || (Opinion.where(opinionable: r, user: current_user).count > 0) }
     # if ideas overall, filter out voted and launched items
 
-    @posts = @posts.limit(@@global_limit)
+    # if params[:sort] != nil
+    #   if @sort == "newest"
+    #     @posts = @posts.order("created_at DESC")
+    #   elsif @sort == "discussed"
+    #     @posts = @posts.order("comments_count DESC")
+    #   elsif @sort == "upvoted"
+    #     @posts = @posts.order("opinion DESC")
+    #   else
+    #     @posts = @posts.order("created_at DESC")
+    #   end
+    # else
+    #   @posts = @posts.order(created_at: :desc)
+    # end
 
-    if params[:sort] != nil
-      if @sort == "newest"
-        @posts = @posts.order("created_at DESC")
-      elsif @sort == "discussed"
-        @posts = @posts.order("comments_count DESC")
-      elsif @sort == "upvoted"
-        @posts = @posts.order("opinion DESC")
-      else
-        @posts = @posts.order("created_at DESC")
-      end
-    else
-      @posts = @posts.order(created_at: :desc)
-    end
-
-    if (@page == 'doit') || @query == 'doit'
-      @posts = current_organization_posts(@query)[:launched_posts]
-    end
-
-    if @page == 'dashboard'
-      @posts = current_organization_posts(@query)[:idea_posts]
+    if @page == 'doit'
+      @posts = current_organization_posts(@filter)[:launched_posts]
+    elsif @page == 'dashboard'
+      @posts = current_organization_posts(@filter)[:idea_posts]
     end
 
     if params[:populate_disucssion_id].present?
@@ -88,18 +85,18 @@ class PagesController < ApplicationController
       @post = @posts.first
     end
 
-    if params[:page_num] != nil
-      @total_pages =  ((@posts.count.to_f)/@@page_limit.to_f).ceil
-      offset = (params[:page_num].to_i - 1) * @@page_limit
-      @posts = @posts.slice(offset, @@page_limit)
-      # @posts = @posts.limit(@@page_limit).offset(((params[:page_num].to_i - 1) * @@page_limit))
-      @page_num = params[:page_num].to_i + 1
-      @next_page = true
-    else
-      @posts = @posts.slice(0, @@page_limit)
-      # @posts = @posts.limit(@@page_limit)
-      @page_num = 2
-    end
+    # if params[:page_num] != nil
+    #   @total_pages =  ((@posts.count.to_f)/@@page_limit.to_f).ceil
+    #   offset = (params[:page_num].to_i - 1) * @@page_limit
+    #   @posts = @posts.slice(offset, @@page_limit)
+    #   # @posts = @posts.limit(@@page_limit).offset(((params[:page_num].to_i - 1) * @@page_limit))
+    #   @page_num = params[:page_num].to_i + 1
+    #   @next_page = true
+    # else
+    #   @posts = @posts.slice(0, @@page_limit)
+    #   # @posts = @posts.limit(@@page_limit)
+    #   @page_num = 2
+    # end
 
     @page_title = 'Idea Board'
     @page_title = 'Launch Action Items' if @page == 'doit'
