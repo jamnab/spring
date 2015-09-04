@@ -43,7 +43,10 @@ class OpinionsController < ApplicationController
 
     respond_to do |format|
       if @opinion.save && @opinionable.save
-        sync_destroy @opinion.opinionable if @opinion.opinionable.class.to_s == 'Post'
+        if @opinion.opinionable.class.to_s == 'Post'
+          @opinion.opinionable.update_launched_status
+          sync_destroy @opinion.opinionable
+        end
         sync_update @opinion.opinionable.commentable if @opinion.opinionable.class.to_s == 'Comment'
         format.html { redirect_to @opinion.opinionable, notice: 'Opinion was successfully created.' }
         format.json { render action: 'show', status: :created, location: @opinion }

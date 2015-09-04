@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430154752) do
+ActiveRecord::Schema.define(version: 20150904015655) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -186,6 +186,7 @@ ActiveRecord::Schema.define(version: 20150430154752) do
     t.boolean  "approved",          default: false
     t.date     "action_date"
     t.boolean  "launch_approved",   default: false
+    t.boolean  "launched",          default: false
   end
 
   create_table "project_memberships", force: true do |t|

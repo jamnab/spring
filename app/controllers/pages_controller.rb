@@ -41,20 +41,17 @@ class PagesController < ApplicationController
     @query = params[:query]
     @viewmode = params[:viewmode]
 
-    if @page == "following"
-      @posts = current_organization_posts(@filter)[:following_posts]
+    if @page == 'dashboard'
+      @posts = current_organization_posts('idea_posts', @filter)
     elsif @page == 'pending'
-      @posts = current_organization_posts(@filter)[:pending_posts]
+      @posts = current_organization_posts('pending_posts', @filter)
+    elsif @page == "following"
+      @posts = current_organization_posts('following_posts', @filter)
+    elsif @page == 'doit'
+      @posts = current_organization_posts('launched_posts', @filter)
     elsif @page == "archive"
-      @posts = @organization.posts.where(graveyard: true)
-    else
-      @posts = current_organization_posts(@filter)[:approved_posts]
+      @posts = current_organization.posts.where(graveyard: true)
     end
-
-    # AR -> Array drity filters
-    current_organization_posts(@filter)[:launched_posts] = current_organization_posts(@filter)[:approved_posts].reject{|r| r.doit? == false }
-    current_organization_posts(@filter)[:idea_posts] = current_organization_posts(@filter)[:approved_posts].reject{|r| (r.doit? == true) || (Opinion.where(opinionable: r, user: current_user).count > 0) }
-    # if ideas overall, filter out voted and launched items
 
     # if params[:sort] != nil
     #   if @sort == "newest"
@@ -70,11 +67,6 @@ class PagesController < ApplicationController
     #   @posts = @posts.order(created_at: :desc)
     # end
 
-    if @page == 'doit'
-      @posts = current_organization_posts(@filter)[:launched_posts]
-    elsif @page == 'dashboard'
-      @posts = current_organization_posts(@filter)[:idea_posts]
-    end
 
     if params[:populate_disucssion_id].present?
       @populate = true

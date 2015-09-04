@@ -1,7 +1,9 @@
 class Post < ActiveRecord::Base
   include PublicActivity::Common
-
   searchkick
+
+  after_save :update_launched_status
+
   validates :content, length: { maximum: 256}
   belongs_to :user
   belongs_to :organization
@@ -44,17 +46,64 @@ class Post < ActiveRecord::Base
     (0.7 * org_departments.map{|x| x.users.count}.inject(0, :+)).to_i
   end
 
-  def self.all_doits
-    # no more threshold field... what to do...
-    # where("opinion >= ?", self.threshold)
-  end
-
-  def self.all_alt_doits
-    Post.find_by_sql("SELECT `posts`.* FROM `posts` INNER JOIN `comments` ON `comments`.`commentable_id` = `posts`.`id` AND `comments`.`commentable_type` = 'Post' AND `comments`.opinion >= ?", self.threshold)
-  end
-
   def doit?
-    return (self.opinion >= self.threshold) || self.alt_doit?
+    return (self.opinion >= self.threshold)
+  end
+
+  def update_launched_status
+    if !self.launched && self.doit?
+      self.update(launched: true)
+    end
+  end
+
+  def self.idea_posts(organization, user, department_id)
+    if !department_id.nil?
+      posts = organization.posts.joins(:department_entries).where(department_entries: {id: department_id})
+    else
+      posts = organization.posts
+    end
+
+    # query for ideas
+    return Post.where(id: nil)
+
+    # posts.includes(:opinions).where('opinions.id NOT IN (?)', user.opinion_ids)
+  end
+
+  def self.pending_posts(organization, user, department_id, option)
+    if !department_id.nil?
+      posts = organization.posts.joins(:department_entries).where(department_entries: {id: department_id})
+    else
+      posts = organization.posts
+    end
+
+    # query for pendings
+    if option
+      return posts.where(approved: false, graveyard: false).order(created_at: :desc)
+    else
+      return posts.where(user: user, approved: false, graveyard: false).order(created_at: :desc)
+    end
+  end
+
+  def self.following_posts(organization, user, department_id)
+    if !department_id.nil?
+      posts = organization.posts.joins(:department_entries).where(department_entries: {id: department_id})
+    else
+      posts = organization.posts
+    end
+
+    # query for upvoted
+    return posts.where(approved: true, graveyard: false).joins(:opinions).where(opinions: {positive: true, user: user}).order(created_at: :desc)
+  end
+
+  def self.launched_posts(organization, user, department_id)
+    if !department_id.nil?
+      posts = organization.posts.joins(:department_entries).where(department_entries: {id: department_id})
+    else
+      posts = organization.posts
+    end
+
+    # query for launched
+    return posts.where(launched: true, approved: true, graveyard: false).order(created_at: :desc)
   end
 
   def alt_doit?

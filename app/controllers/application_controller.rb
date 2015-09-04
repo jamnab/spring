@@ -34,38 +34,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_organization_posts(filter = nil)
-    if current_user.is_admin?
-      # user is super admin, use first org as sample
-      @organization = Organization.first
-    else
-      @organization = current_organization
+  def current_organization_posts(type, filter = nil)
+    if type == 'idea_posts'
+      return Post.idea_posts(current_organization, current_user, filter)
+    elsif type == 'pending_posts'
+      return Post.pending_posts(current_organization, current_user, filter, (can? :update, current_organization))
+    elsif type == 'following_posts'
+      return Post.following_posts(current_organization, current_user, filter)
+    elsif type == 'launched_posts'
+      return Post.launched_posts(current_organization, current_user, filter)
     end
-
-    if can? :update, @organization
-      @pending_posts = @organization.posts.where(approved: false, graveyard: false)
-    else
-      @pending_posts = @organization.posts.where(user: current_user, approved: false, graveyard: false)
-    end
-
-    # silo posts of this organization
-    @approved_posts = @organization.posts.where(approved: true, graveyard: false).order(created_at: :desc)
-    @following_posts = @organization.posts.joins(:opinions).where(opinions: {positive: true, user: current_user}).order(created_at: :desc)
-
-    # apply category filter
-    if !filter.nil?
-      @approved_posts = @approved_posts.joins(:department_entries).where(department_entries: {id: filter})
-      @following_posts = @following_posts.joins(:department_entries).where(department_entries: {id: filter})
-      @pending_posts = @pending_posts.joins(:department_entries).where(department_entries: {id: filter})
-    end
-
-    # AR -> Array drity filters
-    @launched_posts = @approved_posts.reject{|r| r.doit? == false }
-    @idea_posts = @approved_posts.reject{|r| (r.doit? == true) || (Opinion.where(opinionable: r, user: current_user).count > 0) }
-    # if ideas overall, filter out voted and launched items
-
-    return {approved_posts: @approved_posts, idea_posts: @idea_posts, pending_posts: @pending_posts,
-      following_posts: @following_posts, launched_posts: @launched_posts}
   end
 
   def current_user_session
