@@ -1,0 +1,3 @@
+$("#idea_counter.notification_counter").html(<%= current_organization_posts('idea_posts').count %>);
+$("#pending_counter.notification_counter").html(<%= current_organization_posts('pending_posts').count %>);
+$(".loading-wrapper").remove();
