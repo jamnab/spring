@@ -1,1 +1,1 @@
-rvm gemset use ruby-2.2-head@launchboard --create
+rvm gemset use ruby-2.1.2@launchboard --create
