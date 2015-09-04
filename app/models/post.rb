@@ -64,9 +64,8 @@ class Post < ActiveRecord::Base
     end
 
     # query for ideas
-    return Post.where(id: nil)
-
-    # posts.includes(:opinions).where('opinions.id NOT IN (?)', user.opinion_ids)
+    # return posts.where(launched: false, approved: true, graveyard: false).order(created_at: :desc)
+    posts.where(launched: false, approved: true, graveyard: false).where('posts.id NOT IN (?)', user.voted_post_ids).order(created_at: :desc)
   end
 
   def self.pending_posts(organization, user, department_id, option)

@@ -1,6 +1,8 @@
 $("#new-post").modal("hide")
-$(".loading-wrapper").remove();
 $(".body-wrapper").prepend("<%= j render(:partial => 'layouts/flash_msg') %>")
 $('.filter-sort').html("<%= j render(:partial => 'layouts/filter_sort') %>")
 $('.post-board').html("<%= j render(:partial => 'pages/post_board') %>");
+$("#idea_counter.notification_counter").html(<%= current_organization_posts('idea_posts').count %>);
+$("#pending_counter.notification_counter").html(<%= current_organization_posts('pending_posts').count %>);
 $("#new_post")[0].reset();
+$(".loading-wrapper").remove();

@@ -67,10 +67,10 @@ class PostsController < ApplicationController
             PostDepartmentEntry.create(post: @post, department_entry_id: de_id)
           end
         end
-        sync_new @post, scope: current_organization
-        sync_new @post
+        # sync_new @post, scope: current_organization
+        # sync_new @post
         @page = 'pending'
-        @posts = current_organization_posts[:pending_posts]
+        @posts = current_organization_posts('pending_posts')
         format.js
       end
     end
