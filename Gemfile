@@ -51,6 +51,14 @@ gem "d3-rails"
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+
+  # deployment automation
+  gem 'rvm1-capistrano3', require: false
+  gem 'capistrano', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma', require: false
+
 end
 
 group :production do
