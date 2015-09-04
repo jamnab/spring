@@ -105,8 +105,8 @@ namespace :faye do
     on roles(:faye) do
       within current_path do
         # faye must be run on production
-        # execute :bundle, :exec, "puma --config #{current_path}/config/puma_faye.rb -d "
-        execute :bundle, :exec, "rackup sync.ru -D -E production --pid #{fetch :faye_pid} -O Threads=1:5"
+        execute :bundle, :exec, "thin -C #{current_path}/config/sync_thin.yml --pid #{fetch :faye_pid} -d start"
+        # execute :bundle, :exec, "rackup sync.ru -D -E production --pid #{fetch :faye_pid} -O Threads=1:5"
       end
     end
   end
