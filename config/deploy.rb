@@ -30,6 +30,8 @@ set :puma_init_active_record, true  # Change to true if using ActiveRecord
 
 set :tmp_dir, "#{shared_path}/tmp/"
 
+set :rvm1_ruby_version, "ruby-2.2.1"
+
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
@@ -73,13 +75,6 @@ namespace :deploy do
     end
   end
 
-  desc 'Set config/puma.rb-symlink for upstart'
-  task :puma_config_ln do
-    on roles(:app) do
-      execute "ln -s #{shared_path}/puma.rb #{fetch(:deploy_to)}/current/config/puma.rb"
-    end
-  end
-
   desc 'Seed the database with seed.rb'
   task :seed_db do
     on roles(:app, :db) do
@@ -95,32 +90,34 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
-  after  :finishing,    :puma_config_ln
 
 end
 
-# faye config. uncomment this block if you need faye
 
-# set :faye_pid, "#{shared_path}/tmp/pids/faye.pid"
-# set :faye_config, "#{current_path}/faye.ru"
+# faye setup. uncomment this if u need
+set :faye_pid, "#{shared_path}/tmp/pids/faye.pid"
+set :faye_state, "#{shared_path}/tmp/pids/faye.state"
+# set :faye_config, "#{current_path}/sync.ru"
 
-# namespace :faye do
-#   desc 'Start Faye'
-#   task :start do
-#     on roles(:faye) do
-#       within current_path do
-#         execute :bundle, "exec rackup #{fetch :faye_config} -s puma -E production -D --pid #{fetch :faye_pid}"
-#       end
-#     end
-#   end
+namespace :faye do
+  desc 'Start Faye'
+  task :start do
+    on roles(:faye) do
+      within current_path do
+        # faye must be run on production
+        # execute :bundle, :exec, "puma --config #{current_path}/config/puma_faye.rb -d "
+        execute :bundle, :exec, "rackup sync.ru -D -E production --pid #{fetch :faye_pid} -O Threads=1:5"
+      end
+    end
+  end
 
-#   desc 'Stop Faye'
-#   task :stop do
-#     on roles(:faye) do
-#       execute :kill, "`cat #{fetch :faye_pid}` || true"
-#     end
-#   end
+  desc 'Stop Faye'
+  task :stop do
+    on roles(:faye) do
+      execute :kill, "`cat #{fetch :faye_pid}` || true"
+    end
+  end
 
-#   before 'deploy:updating', 'faye:stop'
-#   after 'deploy:published', 'faye:start'
-# end
+  before 'deploy:updating', 'faye:stop'
+  after 'deploy:published', 'faye:start'
+end
