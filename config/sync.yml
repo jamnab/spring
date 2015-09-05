@@ -27,6 +27,10 @@ test:
   async: false
 
 production:
+  port: 4443
+  ssl: true
+  ssl_key_file: /etc/ssl/server.key
+  ssl_cert_file: /etc/ssl/ssl-bundle.crt
   server: "https://golaunchboard.com:4443/faye"
   adapter_javascript_url: "https://golaunchboard.com:4443/faye/faye.js"
   adapter: "Faye"
