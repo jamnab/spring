@@ -5,6 +5,11 @@
     .nav.nav-pills
       = render 'pages/department_nav'
 .row
+  .col-xs-12
+    = will_paginate @posts, class: 'digg_pagination'
+  %br
+
+.row
   - if @posts.empty?
     %h3.text-center There are no posts matching this criterion.
 
@@ -14,6 +19,10 @@
   - @posts.each do |post|
     = sync partial: "card", resource: post
   .last-elm{style:"height:1px;width:1px;"}
+
+.row
+  .col-xs-12
+    = will_paginate @posts, class: 'digg_pagination'
 
 / -if @sort == "discussed" || @sort == "upvoted"
 /   = render 'pages/new_post_partial'

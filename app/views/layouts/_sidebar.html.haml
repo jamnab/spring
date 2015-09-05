@@ -4,19 +4,19 @@
     .icon.fa.fa-times-circle-o.hidden
   .navicons
     - if current_user
-      / = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Launch", placement: "right", trigger: "hover"} do
+      / = link_to dashboard_path(:dashboard_page => "doit"),  class: "body-loading popover-trigger", data: {content: "Launch", placement: "right", trigger: "hover"} do
       /   = image_tag 'launch.png'
-      = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "right", trigger: "hover"} do
+      = link_to dashboard_path, class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "right", trigger: "hover"} do
         .fa.fa-lightbulb-o
         #idea_counter.notification_counter
           = current_organization_posts('idea_posts').count
-      = link_to dashboard_path(:page => "pending"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Pending", placement: "right", trigger: "hover"} do
+      = link_to dashboard_path(:dashboard_page => "pending"),  class: "body-loading popover-trigger", data: {content: "Pending", placement: "right", trigger: "hover"} do
         .fa.fa-clock-o
         #pending_counter.notification_counter
           = current_organization_posts('pending_posts').count
-      = link_to dashboard_path(:page => "following"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "My Upvotes", placement: "right", trigger: "hover"} do
+      = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading popover-trigger", data: {content: "My Upvotes", placement: "right", trigger: "hover"} do
         .fa.fa-eye
-      = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Launch", placement: "right", trigger: "hover"} do
+      = link_to dashboard_path(:dashboard_page => "doit"),  class: "body-loading popover-trigger", data: {content: "Launch", placement: "right", trigger: "hover"} do
         = image_tag 'launch_grey.png'
       / = link_to :summary, class: 'popover-trigger', data: {content: "Summary", placement: "right", trigger: "hover"} do
       /   %span.flaticon-business155
@@ -54,16 +54,16 @@
   .sidenav
     - if current_user
 
-      = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading" do
+      = link_to dashboard_path, class: "body-loading" do
         Ideas
 
-      = link_to dashboard_path(:page => "pending"), remote: request.path == "/dashboard", class: "body-loading" do
+      = link_to dashboard_path(:dashboard_page => "pending"),  class: "body-loading" do
         Pending
 
-      = link_to dashboard_path(:page => "following"), remote: request.path == "/dashboard", class: "body-loading" do
+      = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading" do
         My Upvotes
 
-      = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading" do
+      = link_to dashboard_path(:dashboard_page => "doit"),  class: "body-loading" do
         Launch Items
 
       .brand-link.org

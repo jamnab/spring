@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   before_action :check_org_activation, only: [:dashboard, :summary, :search, :archive, :newsfeed]
 
   @@global_limit = 200
-  @@page_limit = 200
+  @page_limit = 200
 
   require 'csv'
 
@@ -34,22 +34,22 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @page = params[:page]
-    @page = "dashboard" if !params[:page]
+    @dashboard_page = params[:dashboard_page]
+    @dashboard_page = "dashboard" if !params[:dashboard_page]
     @sort = params[:sort]
     @filter = params[:filter]
     @query = params[:query]
     @viewmode = params[:viewmode]
 
-    if @page == 'dashboard'
+    if @dashboard_page == 'dashboard'
       @posts = current_organization_posts('idea_posts', @filter)
-    elsif @page == 'pending'
+    elsif @dashboard_page == 'pending'
       @posts = current_organization_posts('pending_posts', @filter)
-    elsif @page == "following"
+    elsif @dashboard_page == "following"
       @posts = current_organization_posts('following_posts', @filter)
-    elsif @page == 'doit'
+    elsif @dashboard_page == 'doit'
       @posts = current_organization_posts('launched_posts', @filter)
-    elsif @page == "archive"
+    elsif @dashboard_page == "archive"
       @posts = current_organization.posts.where(graveyard: true)
     end
 
@@ -67,7 +67,6 @@ class PagesController < ApplicationController
     #   @posts = @posts.order(created_at: :desc)
     # end
 
-
     if params[:populate_disucssion_id].present?
       @populate = true
       @id = params[:populate_disucssion_id].to_i
@@ -78,23 +77,25 @@ class PagesController < ApplicationController
     end
 
     # if params[:page_num] != nil
-    #   @total_pages =  ((@posts.count.to_f)/@@page_limit.to_f).ceil
-    #   offset = (params[:page_num].to_i - 1) * @@page_limit
-    #   @posts = @posts.slice(offset, @@page_limit)
-    #   # @posts = @posts.limit(@@page_limit).offset(((params[:page_num].to_i - 1) * @@page_limit))
-    #   @page_num = params[:page_num].to_i + 1
+    #   @total_pages =  ((@posts.count.to_f)/@@dashboard_page_limit.to_f).ceil
+    #   offset = (params[:page_num].to_i - 1) * @@dashboard_page_limit
+    #   @posts = @posts.slice(offset, @@dashboard_page_limit)
+    #   # @posts = @posts.limit(@@dashboard_page_limit).offset(((params[:page_num].to_i - 1) * @@dashboard_page_limit))
+    #   @dashboard_page_num = params[:page_num].to_i + 1
     #   @next_page = true
     # else
-    #   @posts = @posts.slice(0, @@page_limit)
-    #   # @posts = @posts.limit(@@page_limit)
-    #   @page_num = 2
+    #   @posts = @posts.slice(0, @@dashboard_page_limit)
+    #   # @posts = @posts.limit(@@dashboard_page_limit)
+    #   @dashboard_page_num = 2
     # end
 
-    @page_title = 'Idea Board'
-    @page_title = 'Launch Action Items' if @page == 'doit'
-    @page_title = 'Pending Posts' if @page == 'pending'
-    @page_title = 'Following Posts' if @page == 'following'
-    @page_title = 'Archived Posts' if @page == 'archive'
+    @posts = @posts.paginate(:page => params[:page], :per_page => 6)
+
+    @dashboard_page_title = 'Idea Board'
+    @dashboard_page_title = 'Launch Action Items' if @dashboard_page == 'doit'
+    @dashboard_page_title = 'Pending Posts' if @dashboard_page == 'pending'
+    @dashboard_page_title = 'Following Posts' if @dashboard_page == 'following'
+    @dashboard_page_title = 'Archived Posts' if @dashboard_page == 'archive'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -163,6 +164,7 @@ class PagesController < ApplicationController
     @trending_ideas = []
     current_organization.posts.where(approved: true, launch_approved: false).each do |post|
       audience_size = post.department_entries.map{|x| x.users.count}.inject(0, :+)
+      audience_size = post.organization.users.count if audience_size == 0
       entry = {
         'Label' => post.user.full_name,
         'Title' => post.title,
@@ -180,6 +182,7 @@ class PagesController < ApplicationController
     @approved_ideas = []
     current_organization.posts.where(launch_approved: true).each do |post|
       audience_size = post.department_entries.map{|x| x.users.count}.inject(0, :+)
+      audience_size = post.organization.users.count if audience_size == 0
       entry = {
         'Label' => post.user.full_name,
         'Title' => post.title,

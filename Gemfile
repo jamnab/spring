@@ -47,6 +47,7 @@ gem 'to_words'
 gem 'bootstrap-datepicker-rails'
 # gem 'redcarpet'
 gem "d3-rails"
+gem 'will_paginate'
 
 group :development do
   gem 'better_errors'
