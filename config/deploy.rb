@@ -114,8 +114,10 @@ namespace :faye do
   desc 'Stop Faye'
   task :stop do
     on roles(:faye) do
-      execute :kill, "`cat #{fetch :faye_pid}` || true"
-      execute :rm, fetch(:faye_pid)
+      execute :kill, "`cat #{fetch :faye_pid}`"
+      if test("[ -f #{fetch :faye_pid} ]")
+        execute :rm, fetch(:faye_pid)
+      end
     end
   end
 
