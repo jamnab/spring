@@ -45,8 +45,11 @@ Rails.application.configure do
   # Set to :debug to see everything in the log.
   config.log_level = :info
 
-  config.assets.precompile += %w( homepage.css )
-  config.assets.precompile += %w( homepage.js )
+  config.assets.precompile += %w( homepage.css homepage.js )
+
+  config.assets.paths << Rails.root.join("vendor", "assets", "stylesheets")
+  config.assets.paths << Rails.root.join("vendor", "assets", "fonts")
+  config.assets.paths << Rails.root.join("vendor", "assets", "javascripts")
 
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
