@@ -104,9 +104,11 @@ namespace :faye do
   task :start do
     on roles(:faye) do
       within current_path do
-        # faye must be run on production
-        execute :bundle, :exec, "thin -C #{current_path}/config/sync_thin.yml --pid #{fetch :faye_pid} -d start"
-        # execute :bundle, :exec, "rackup sync.ru -D -E production --pid #{fetch :faye_pid} -O Threads=1:5"
+        with rails_env: fetch(:stage) do
+          # faye must be run on production
+          execute :bundle, :exec, "thin -C #{current_path}/config/sync_thin.yml --pid #{fetch :faye_pid} -d start"
+          # execute :bundle, :exec, "rackup sync.ru -D -E production --pid #{fetch :faye_pid} -O Threads=1:5"
+        end
       end
     end
   end
@@ -114,7 +116,7 @@ namespace :faye do
   desc 'Stop Faye'
   task :stop do
     on roles(:faye) do
-      execute :kill, "`cat #{fetch :faye_pid}`"
+      execute :kill, "`cat #{fetch :faye_pid}` || true"
       if test("[ -f #{fetch :faye_pid} ]")
         execute :rm, fetch(:faye_pid)
       end
