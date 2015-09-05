@@ -16,7 +16,7 @@ set :use_sudo, false
 set :stage, :production
 set :deploy_via, :remote_cache
 
-set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/images')
 
 set :puma_bind, "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
@@ -115,6 +115,7 @@ namespace :faye do
   task :stop do
     on roles(:faye) do
       execute :kill, "`cat #{fetch :faye_pid}` || true"
+      execute :rm, fetch(:faye_pid)
     end
   end
 
