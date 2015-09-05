@@ -106,8 +106,8 @@ namespace :faye do
       within current_path do
         with rails_env: fetch(:stage) do
           # faye must be run on production
-          # execute :bundle, :exec, "thin -C #{current_path}/config/sync_thin.yml --pid #{fetch :faye_pid} -d start"
-          execute :bundle, :exec, "rackup sync.ru -D -E production --pid #{fetch :faye_pid} -O Threads=1:5 --host 0.0.0.0"
+          execute :bundle, :exec, "thin -C #{current_path}/config/sync_thin.yml --pid #{fetch :faye_pid} -d start"
+          # execute :bundle, :exec, "rackup sync.ru -D -E production --pid #{fetch :faye_pid} -O Threads=1:5 --host 0.0.0.0"
         end
       end
     end
