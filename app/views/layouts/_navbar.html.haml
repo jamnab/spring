@@ -48,7 +48,7 @@
                 /   = link_to :newsfeed, class: 'popover-trigger', data: {content: "Leaderboard", placement: "right", trigger: "hover"} do
                 /     Leaderboard
                 %li
-                  = link_to dashboard_path(:page => "archive"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Previously launched, completed, and failed items", placement: "right", trigger: "hover"} do
+                  = link_to dashboard_path(:dashboard_page => "archive"), class: "body-loading popover-trigger", data: {content: "Previously launched, completed, and failed items", placement: "right", trigger: "hover"} do
                     Archive
                 %li
                   = link_to manage_users_organization_path(current_organization), remote: true, class: "popover-trigger", data: {content: "Manage departments and members", placement: "right", trigger: "hover"} do
