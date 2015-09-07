@@ -71,6 +71,7 @@ class PostsController < ApplicationController
         # sync_new @post
         @page = 'pending'
         @posts = current_organization_posts('pending_posts')
+        @posts = @posts.paginate(:page => params[:page], :per_page => 6)
         format.js
       end
     end
