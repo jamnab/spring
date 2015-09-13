@@ -240,6 +240,10 @@ class PagesController < ApplicationController
     # }
   end
 
+  def email_us
+    PagesMailer.email_us(params[:name], params[:email], params[:message]).deliver_now
+  end
+
   private
     def check_login
       if current_user.nil?
