@@ -50,7 +50,7 @@ class OrganizationsController < ApplicationController
   #   @organization.update_attribute(:access_token, @new)
   #   @user = current_user
   #   @url = Rails.env.production? ? request.host : request.host_with_port
-  #   Notifier.register_form(@user, @organization,@url).deliver!
+  #   Notifier.register_form(@user, @organization,@url).deliver_now!
   #   @organization.delay(run_at: 1.day.from_now).update_attribute(:access_token, nil)
   #   @time = Time.now
   #   redirect_to :back, notice: 'New access code generated.'
@@ -88,13 +88,13 @@ class OrganizationsController < ApplicationController
           if !existing_invite
             UserInvite.create(email: target_email, department_entry: @department_entry)
           end
-          Notifier.user_invitation(target_email, @organization, @url, current_user).deliver!
+          Notifier.user_invitation(target_email, @organization, @url, current_user).deliver_now!
         else
           # add & send email about update
           existing_membership = DepartmentEntryMembership.where(department_entry: @department_entry, user: @user).first
           if !existing_membership
             DepartmentEntryMembership.create(department_entry: @department_entry, user: @user)
-            Notifier.new_department_assignment(@user, @organization, @url, @department).deliver!
+            Notifier.new_department_assignment(@user, @organization, @url, @department).deliver_now!
           end
         end
       end
@@ -108,13 +108,13 @@ class OrganizationsController < ApplicationController
           elsif !existing_invite.admin
             existing_invite.update(admin: true)
           end
-          Notifier.user_invitation(target_email, @organization, @url, current_user).deliver!
+          Notifier.user_invitation(target_email, @organization, @url, current_user).deliver_now!
         else
           # add & send email about update, decision maker
           existing_membership = DepartmentEntryMembership.where(department_entry: @department_entry, user: @user).first
           if !existing_membership
             DepartmentEntryMembership.create(department_entry: @department_entry, user: @user)
-            Notifier.new_department_assignment(@user, @organization, @url, @department).deliver!
+            Notifier.new_department_assignment(@user, @organization, @url, @department).deliver_now!
           elsif !existing_membership.admin
             existing_membership.update(admin: true)
           end
