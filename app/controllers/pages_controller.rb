@@ -242,12 +242,12 @@ class PagesController < ApplicationController
 
   def email_us
     if PagesMailer.email_us(params[:name], params[:email], params[:message]).deliver_now
-      flash[:notice] = "Your email is sent"
+      flash[:notice] = "Your email is sent."
     else
       flash[:error] = "There was an error delivering your email. Please try again later."
     end
 
-    redirect_to :contact_us
+    redirect_to :contact_us, notice:  "Your email is sent."
   end
 
   private
