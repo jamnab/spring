@@ -248,7 +248,7 @@ class PagesController < ApplicationController
     end
 
     flash.keep
-    redirect_to :contact_us, flash
+    redirect_to :contact_us
   end
 
   private
