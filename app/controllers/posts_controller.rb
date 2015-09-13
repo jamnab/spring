@@ -67,13 +67,10 @@ class PostsController < ApplicationController
             PostDepartmentEntry.create(post: @post, department_entry_id: de_id)
           end
         end
-        sync_new @post, scope: current_organization
-        sync_new @post
-        if current_user.is_admin?
-          @posts = Post.all
-        else
-          @posts = current_organization.posts
-        end
+        # sync_new @post, scope: current_organization
+        # sync_new @post
+        @page = 'pending'
+        @posts = current_organization_posts('pending_posts')
         format.js
       end
     end
@@ -121,12 +118,12 @@ class PostsController < ApplicationController
 
     # listing approval
     if !params[:approved].nil?
-      if params[:approved] == true
+      if params[:approved] == "true"
         @post.update(approved: true)
       else
         @post.update(graveyard: true)
       end
-      Notifier.post_update(@post, @url).deliver!
+      # Notifier.post_update(@post, @url).deliver!
     end
 
     # launch approval
@@ -135,12 +132,12 @@ class PostsController < ApplicationController
       if !params[:action_date].nil?
         @post.update(action_date: params[:action_date])
       end
-      Notifier.post_update(@post, @url).deliver!
+      # Notifier.post_update(@post, @url).deliver!
     end
 
     # TODO: need to generate activity and notification
     respond_to do |format|
-      sync_update @post
+      sync_destroy @post
       format.html { redirect_to :dashboard, notice: 'Post was successfully updated.' }
       format.js { render action: "update" }
     end

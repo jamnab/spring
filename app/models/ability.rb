@@ -30,13 +30,13 @@ class Ability
 
       # Posts
       can @crud, Post do |post|
-        post.user == user
+        !post.approved && post.user == user
       end
       can [:update, :judge], Post do |post|
-        user.manager && user.organization == post.organization
+        !post.approved && user.manager && user.organization == post.organization
       end
       can [:update, :judge], Post do |post|
-        !(post.departments & user.decision_departments).empty?
+        !post.approved && !(post.departments & user.decision_departments).empty?
       end
       can @cr, Post do |post|
         post.organization == user.organization

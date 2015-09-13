@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :comments
   # has_many :received_comments, through: :posts, class_name: 'Comment'
   has_many :opinions
+  has_many :voted_posts, through: :opinions, source_type: 'Post', source: :opinionable
   # has_many :received_opinions, through: :posts, class_name: 'Opinion'
 
   has_one :picture

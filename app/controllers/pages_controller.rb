@@ -37,77 +37,36 @@ class PagesController < ApplicationController
     @page = params[:page]
     @page = "dashboard" if !params[:page]
     @sort = params[:sort]
+    @filter = params[:filter]
     @query = params[:query]
     @viewmode = params[:viewmode]
 
-    @idea_posts = []
-    @pending_posts = []
-    @following_posts = []
-    @launched_posts = []
-
-    if current_user.is_admin?
-      # user is super admin, use first org as sample
-      @organization = Organization.first
-    else
-      @organization = current_organization
-    end
-
-    # silo posts of this organization
-    @approved_posts = @organization.posts.where(approved: true, graveyard: false)
-    @following_posts = @organization.posts.joins(:opinions).where(opinions: {positive: true, user: current_user})
-
-    if can? :update, @organization
-      @pending_posts = @organization.posts.where(approved: false, graveyard: false)
-    else
-      @pending_posts = @organization.posts.where(user: current_user, approved: false, graveyard: false)
-    end
-
-    if @page == "following"
-      @posts = @following_posts
-    elsif @page == 'pending'
-      @posts = @pending_posts
-    elsif @page == "archive"
-      @posts = @organization.posts.where(graveyard: true)
-    else
-      @posts = @approved_posts
-    end
-
-    # AR -> Array drity filters
-    @launched_posts = @approved_posts.reject{|r| r.doit? == false }
-    @idea_posts = @approved_posts.reject{|r| (r.doit? == true) || (Opinion.where(opinionable: r, user: current_user).count > 0) }
-    # if ideas overall, filter out voted and launched items
-
-    @posts = @posts.limit(@@global_limit)
-
-    if params[:sort] != nil
-      if @sort == "newest"
-        @posts = @posts.order("created_at DESC")
-      elsif @sort == "discussed"
-        @posts = @posts.order("comments_count DESC")
-      elsif @sort == "upvoted"
-        @posts = @posts.order("opinion DESC")
-      else
-        @posts = @posts.order("created_at DESC")
-      end
-    else
-      @posts = @posts.order(created_at: :desc)
-    end
-
-    if params[:query].present?
-      if @query == 'doit'
-        @posts = @launched_posts
-      else
-        @posts = @posts.joins(:department_entries).where(department_entries: {id: @query})
-      end
-    end
-
-    if @page == 'doit'
-      @posts = @launched_posts
-    end
-
     if @page == 'dashboard'
-      @posts = @idea_posts
+      @posts = current_organization_posts('idea_posts', @filter)
+    elsif @page == 'pending'
+      @posts = current_organization_posts('pending_posts', @filter)
+    elsif @page == "following"
+      @posts = current_organization_posts('following_posts', @filter)
+    elsif @page == 'doit'
+      @posts = current_organization_posts('launched_posts', @filter)
+    elsif @page == "archive"
+      @posts = current_organization.posts.where(graveyard: true)
     end
+
+    # if params[:sort] != nil
+    #   if @sort == "newest"
+    #     @posts = @posts.order("created_at DESC")
+    #   elsif @sort == "discussed"
+    #     @posts = @posts.order("comments_count DESC")
+    #   elsif @sort == "upvoted"
+    #     @posts = @posts.order("opinion DESC")
+    #   else
+    #     @posts = @posts.order("created_at DESC")
+    #   end
+    # else
+    #   @posts = @posts.order(created_at: :desc)
+    # end
+
 
     if params[:populate_disucssion_id].present?
       @populate = true
@@ -118,18 +77,18 @@ class PagesController < ApplicationController
       @post = @posts.first
     end
 
-    if params[:page_num] != nil
-      @total_pages =  ((@posts.count.to_f)/@@page_limit.to_f).ceil
-      offset = (params[:page_num].to_i - 1) * @@page_limit
-      @posts = @posts.slice(offset, @@page_limit)
-      # @posts = @posts.limit(@@page_limit).offset(((params[:page_num].to_i - 1) * @@page_limit))
-      @page_num = params[:page_num].to_i + 1
-      @next_page = true
-    else
-      @posts = @posts.slice(0, @@page_limit)
-      # @posts = @posts.limit(@@page_limit)
-      @page_num = 2
-    end
+    # if params[:page_num] != nil
+    #   @total_pages =  ((@posts.count.to_f)/@@page_limit.to_f).ceil
+    #   offset = (params[:page_num].to_i - 1) * @@page_limit
+    #   @posts = @posts.slice(offset, @@page_limit)
+    #   # @posts = @posts.limit(@@page_limit).offset(((params[:page_num].to_i - 1) * @@page_limit))
+    #   @page_num = params[:page_num].to_i + 1
+    #   @next_page = true
+    # else
+    #   @posts = @posts.slice(0, @@page_limit)
+    #   # @posts = @posts.limit(@@page_limit)
+    #   @page_num = 2
+    # end
 
     @page_title = 'Idea Board'
     @page_title = 'Launch Action Items' if @page == 'doit'

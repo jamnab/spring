@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :current_organization
+  helper_method :current_organization_posts
+  helper_method :current_organization_posts_counts
   helper_method :current_departments
   helper_method :current_department_entries
 
@@ -29,6 +31,18 @@ class ApplicationController < ActionController::Base
       @organization = Organization.first
     else
       current_user.organization
+    end
+  end
+
+  def current_organization_posts(type, filter = nil)
+    if type == 'idea_posts'
+      return Post.idea_posts(current_organization, current_user, filter)
+    elsif type == 'pending_posts'
+      return Post.pending_posts(current_organization, current_user, filter, (can? :update, current_organization))
+    elsif type == 'following_posts'
+      return Post.following_posts(current_organization, current_user, filter)
+    elsif type == 'launched_posts'
+      return Post.launched_posts(current_organization, current_user, filter)
     end
   end
 

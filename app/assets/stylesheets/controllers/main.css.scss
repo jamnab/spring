@@ -876,3 +876,8 @@ form .field {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.modal-header .close {
+  opacity: 1;
+  color: $inverse_text_main;
+}

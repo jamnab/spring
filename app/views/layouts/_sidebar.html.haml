@@ -8,15 +8,15 @@
       /   = image_tag 'launch.png'
       = link_to dashboard_path, remote: request.path == "/dashboard",class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "right", trigger: "hover"} do
         .fa.fa-lightbulb-o
-        - if @idea_posts.count > 0
+        - if current_organization_posts('idea_posts').count > 0
           #idea_counter.notification_counter
-            = @idea_posts.count
+            = current_organization_posts('idea_posts').count
       = link_to dashboard_path(:page => "pending"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Pending", placement: "right", trigger: "hover"} do
         .fa.fa-clock-o
-        - if @pending_posts.count > 0
+        - if current_organization_posts('pending_posts').count > 0
           #pending_counter.notification_counter
-            = @pending_posts.count
-      = link_to dashboard_path(:page => "following"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Following", placement: "right", trigger: "hover"} do
+            = current_organization_posts('pending_posts').count
+      = link_to dashboard_path(:page => "following"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "My Upvotes", placement: "right", trigger: "hover"} do
         .fa.fa-eye
       = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading popover-trigger", data: {content: "Launch", placement: "right", trigger: "hover"} do
         = image_tag 'launch_grey.png'
@@ -26,7 +26,7 @@
       .logo.brand-link
         = image_tag "logo_vert.png"
 
-      = link_to '#', class: "logout-link popover-trigger", data: {content: "Logout", placement: "right", trigger: "hover"} do
+      = link_to :logout, class: "logout-link popover-trigger", data: {content: "Logout", placement: "right", trigger: "hover"} do
         %span.flaticon-door9
     - else
       = link_to '#', data: {target: "#login", toggle: "modal"} do
@@ -63,7 +63,7 @@
         Pending
 
       = link_to dashboard_path(:page => "following"), remote: request.path == "/dashboard", class: "body-loading" do
-        Following
+        My Upvotes
 
       = link_to dashboard_path(:page => "doit"), remote: request.path == "/dashboard", class: "body-loading" do
         Launch Items
