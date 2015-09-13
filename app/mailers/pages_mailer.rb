@@ -1,6 +1,6 @@
 class PagesMailer < ActionMailer::Base
-  default from: "infosyncidlabs@gmail.com"
-  default to: 'clinton@versesoftwarelab.com'
+  default from: "contact_us@golaunchboard.com"
+  default to: 'edwardforcpu@gmail.com'
 
   def email_us(name, email, message)
     @name = name

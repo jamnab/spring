@@ -56,7 +56,6 @@ Rails.application.configure do
 
   config.assets.precompile += %w( util/analytics_d3.js )
 
-
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
@@ -92,5 +91,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method = :sendmail
 
 end
