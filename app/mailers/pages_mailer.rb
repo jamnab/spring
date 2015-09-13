@@ -1,4 +1,4 @@
-class PagesMailer < ActionMailer::Base
+class PagesMailer < ApplicationMailer
   default from: "contact_us@golaunchboard.com"
   default to: 'edwardforcpu@gmail.com'
 
