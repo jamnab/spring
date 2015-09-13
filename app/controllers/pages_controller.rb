@@ -241,7 +241,13 @@ class PagesController < ApplicationController
   end
 
   def email_us
-    PagesMailer.email_us(params[:name], params[:email], params[:message]).deliver_now
+    if PagesMailer.email_us(params[:name], params[:email], params[:message]).deliver_now
+      flash[:notice] = "Your email is sent"
+    else
+      flash[:error] = "There was an error delivering your email. Please try again later."
+    end
+
+    redirect_to :contact_us
   end
 
   private

@@ -9,6 +9,7 @@
     = csrf_meta_tags
     = favicon_link_tag 'favicon.png'
   %body
+    = render partial: 'shared/feedback'
     = render 'layouts/sidebar'
     .body-wrapper
       = render 'layouts/navbar'
