@@ -247,7 +247,6 @@ class PagesController < ApplicationController
       flash[:error] = "There was an error delivering your email. Please try again later."
     end
 
-    flash.keep
     redirect_to :contact_us
   end
 
