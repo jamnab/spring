@@ -241,7 +241,7 @@ class PagesController < ApplicationController
   end
 
   def email_us
-    PagesMailer.email_us(params[:name], params[:email], params[:message]).deliver_now
+    PagesMailer.email_us(params[:name], params[:email], params[:message]).deliver!
   end
 
   private
