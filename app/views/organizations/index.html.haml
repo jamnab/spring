@@ -1,24 +1,24 @@
-.admin-dashboard
+- if can? :manage, :all
+  .admin-dashboard
+    %h1 Listing organizations
 
-  %h1 Listing organizations
-
-  %table.table.table-striped
-    %tr
-      %th Name
-      %th Access Token
-      %th Activated?
-      %th
-      %th
-      %th
-
-    - @organizations.each do |organization|
+    %table.table.table-striped
       %tr
-        %td= organization.name
-        %td= organization.access_token
-        %td
-          = organization.activated ? 'Yes' : 'No'
-        %td
-          = link_to toggle_organization_path(organization) do
-            Toggle Activation
-        %td= link_to 'Show', organization
-        %td= link_to 'Destroy', organization, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th Name
+        %th Access Token
+        %th Activated?
+        %th
+        %th
+        %th
+
+      - @organizations.each do |organization|
+        %tr
+          %td= organization.name
+          %td= organization.access_token
+          %td
+            = organization.activated ? 'Yes' : 'No'
+          %td
+            = link_to toggle_organization_path(organization) do
+              Toggle Activation
+          %td= link_to 'Show', organization
+          %td= link_to 'Destroy', organization, :method => :delete, :data => { :confirm => 'Are you sure?' }
