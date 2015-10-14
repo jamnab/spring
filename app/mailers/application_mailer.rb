@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'no-reply@golaunchboard.com'
+  default from: 'do-not-reply@golaunchboard.com'
 
   layout 'mailer'
 end

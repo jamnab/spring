@@ -13,7 +13,7 @@ class TimedTask < ActiveRecord::Base
 				@activities = @activities.where(collected: false)
 				if !(@activities.empty?)
 
-					Notifier.notification_update(@user,@activities).deliver_now!
+					Notifier.notification_update(@user,@activities).deliver_now
 
 				end
 				@activities.each do |act|
