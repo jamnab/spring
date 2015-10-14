@@ -26,7 +26,17 @@ class User < ActiveRecord::Base
 
   has_many :department_entry_memberships, dependent: :destroy
   has_many :department_entries, through: :department_entry_memberships
+
+  after_create :sign_up_email
   # has_many :departments, through: :department_entries
+
+  def sign_up_email
+    UserMailer.sign_up_email(self).deliver_now
+  end
+
+  def invite_email(target_email)
+    UserMailer.invite_email(self, target_email).deliver_now
+  end
 
   def departments
     self.department_entries.map{|x| x.department_name}
