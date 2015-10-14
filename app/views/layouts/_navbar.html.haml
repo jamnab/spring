@@ -19,14 +19,14 @@
       %ul.nav.navbar-nav.navbar-right
         - if current_user
           / %li.divider-vertical
-          %li.profile
+          %li.profile.hidden-xs
             %span
               Welcome, #{current_user.first_name}
             - if !current_user || current_user.picture.nil?
               = image_tag("profile_default.png")
             - else
               = image_tag current_user.picture.image.url(:user_image)
-          %li.dropdown.hidden-xs
+          %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               %span.flaticon-three115
               / %span.flaticon-black56
@@ -53,7 +53,7 @@
                 %li
                   = link_to manage_users_organization_path(current_organization), remote: true, class: "popover-trigger", data: {content: "Manage departments and members", placement: "right", trigger: "hover"} do
                     Manage Users
-          %li.dropdown
+          %li.dropdown.hidden-xs
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               .fa.fa-bell
               %span.caret
@@ -63,8 +63,9 @@
               - @notifications[0,10].each do |n|
                 - activity = n.activity
                 = sync partial: 'notification', resource: activity
-          %li
-            = link_to "Logout", :logout
+          %li.hidden-xs
+            = link_to :logout do
+              Logout
         - else
           / %li.divider-vertical
           %li
@@ -74,7 +75,7 @@
           %li
             = link_to '#', data: {target: "#login", toggle: "modal"} do
               Log In
-    #navbar-dropdown.pull-left.nav-left
+    #navbar-dropdown.pull-left.nav-left.hidden-xs
       %ul.nav.navbar-nav.filter-sort
         = render 'layouts/filter_sort'
         %li
