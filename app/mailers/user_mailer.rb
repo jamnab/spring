@@ -6,8 +6,8 @@ class UserMailer < ApplicationMailer
     mail(subject: 'Welcome to Launchboard', to: @user.email)
   end
 
-  def invite_email(user, target_email)
-    @user = user
+  def invite_email(organization, target_email)
+    @organization = organization
     mail(subject: 'You have been invited to join Launchboard', to: target_email)
   end
 end

@@ -34,10 +34,6 @@ class User < ActiveRecord::Base
     UserMailer.sign_up_email(self).deliver_now
   end
 
-  def invite_email(target_email)
-    UserMailer.invite_email(self, target_email).deliver_now
-  end
-
   def departments
     self.department_entries.map{|x| x.department_name}
   end

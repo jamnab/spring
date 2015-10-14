@@ -16,6 +16,9 @@ class Organization < ActiveRecord::Base
 
   validates :name, uniqueness: true
 
+  has_many :managers, -> {where(manager: true)}, class_name: 'User'
+  has_many :admins, -> {where(admin: true)}, class_name: 'User'
+
   def departments
     self.department_entries.map{|x| x.department_name}
   end
