@@ -1,11 +1,11 @@
 class OrganizationsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_organization, only: [:show, :edit, :update, :destroy, :generate_code]
+  before_action :set_organization, only: [:show, :edit, :update, :destroy, :generate_code, :toggle]
 
   # GET /organizations
   # GET /organizations.json
   def index
-    @organizations = Organization.all
+    @organizations = Organization.order(:activated)
   end
 
   # GET /organizations/1
@@ -42,6 +42,12 @@ class OrganizationsController < ApplicationController
         format.json { render json: @organization.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def toggle
+    activation_status = @organization.activated
+    @organization.update(activated: !activation_status)
+    redirect_to :back, notice: 'Organization activation status toggled.'
   end
 
   # def generate_code
