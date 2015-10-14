@@ -83,9 +83,17 @@ html, body, h1, h2, h3, h4, h5, h6, p, input, li, a {
 html, body {
   // height: 100%;
   width: 100%;
-  min-width: 715px;
+  min-width: 480px;
   background-color: $body_background;
   overflow-x: hidden;
+}
+
+html, body, .body-wrapper {
+  height: 100%;
+}
+
+.admin-dashboard {
+  padding: 10px 20px;
 }
 
 .flash-msg{

@@ -59,6 +59,7 @@ Rails.application.routes.draw do
 
   resources :organizations do
     member do
+      get :toggle
       get :manage_users
       post :manage_users
       post :update_departments
