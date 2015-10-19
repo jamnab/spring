@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150904015655) do
+ActiveRecord::Schema.define(version: 20151019051152) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -244,19 +244,20 @@ ActiveRecord::Schema.define(version: 20150904015655) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",          limit: 255
-    t.string   "email",             limit: 255
-    t.string   "crypted_password",  limit: 255
-    t.string   "password_salt",     limit: 255
-    t.string   "persistence_token", limit: 255
-    t.string   "first_name",        limit: 255
-    t.string   "last_name",         limit: 255
-    t.string   "job_title",         limit: 255
-    t.integer  "organization_id",   limit: 4
-    t.boolean  "manager",                       default: false
-    t.boolean  "admin",                         default: false
+    t.string   "username",                limit: 255
+    t.string   "email",                   limit: 255
+    t.string   "crypted_password",        limit: 255
+    t.string   "password_salt",           limit: 255
+    t.string   "persistence_token",       limit: 255
+    t.string   "first_name",              limit: 255
+    t.string   "last_name",               limit: 255
+    t.string   "job_title",               limit: 255
+    t.integer  "organization_id",         limit: 4
+    t.boolean  "manager",                             default: false
+    t.boolean  "admin",                               default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "subscribe_to_newsletter",             default: false
   end
 
 end
