@@ -13,17 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20150904015655) do
 
-  create_table "activities", force: true do |t|
-    t.integer  "trackable_id"
-    t.string   "trackable_type"
-    t.integer  "owner_id"
-    t.string   "owner_type"
-    t.string   "key"
-    t.boolean  "read",           default: false
-    t.boolean  "collected",      default: false
-    t.text     "parameters"
-    t.integer  "recipient_id"
-    t.string   "recipient_type"
+  create_table "activities", force: :cascade do |t|
+    t.integer  "trackable_id",   limit: 4
+    t.string   "trackable_type", limit: 255
+    t.integer  "owner_id",       limit: 4
+    t.string   "owner_type",     limit: 255
+    t.string   "key",            limit: 255
+    t.boolean  "read",                         default: false
+    t.boolean  "collected",                    default: false
+    t.text     "parameters",     limit: 65535
+    t.integer  "recipient_id",   limit: 4
+    t.string   "recipient_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,229 +32,229 @@ ActiveRecord::Schema.define(version: 20150904015655) do
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
-  create_table "comments", force: true do |t|
-    t.text     "content"
-    t.boolean  "endorsed",         default: false
-    t.boolean  "anonymous",        default: false
-    t.boolean  "suggestion",       default: false
-    t.integer  "opinion",          default: 0
-    t.integer  "user_id"
-    t.integer  "commentable_id"
-    t.string   "commentable_type"
+  create_table "comments", force: :cascade do |t|
+    t.text     "content",          limit: 65535
+    t.boolean  "endorsed",                       default: false
+    t.boolean  "anonymous",                      default: false
+    t.boolean  "suggestion",                     default: false
+    t.integer  "opinion",          limit: 4,     default: 0
+    t.integer  "user_id",          limit: 4
+    t.integer  "commentable_id",   limit: 4
+    t.string   "commentable_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "delayed_jobs", force: true do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   limit: 4,     default: 0, null: false
+    t.integer  "attempts",   limit: 4,     default: 0, null: false
+    t.text     "handler",    limit: 65535,             null: false
+    t.text     "last_error", limit: 65535
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
+    t.string   "locked_by",  limit: 255
+    t.string   "queue",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "department_entries", force: true do |t|
-    t.integer  "context_id"
-    t.string   "context_type"
-    t.integer  "department_id"
+  create_table "department_entries", force: :cascade do |t|
+    t.integer  "context_id",      limit: 4
+    t.string   "context_type",    limit: 255
+    t.integer  "department_id",   limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "department_name"
-    t.string   "abbrev_name"
+    t.string   "department_name", limit: 255
+    t.string   "abbrev_name",     limit: 255
   end
 
-  create_table "department_entry_memberships", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "department_entry_id"
-    t.boolean  "admin",               default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "departments", force: true do |t|
-    t.string   "name"
+  create_table "department_entry_memberships", force: :cascade do |t|
+    t.integer  "user_id",             limit: 4
+    t.integer  "department_entry_id", limit: 4
+    t.boolean  "admin",                         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "email_notification_settings", force: true do |t|
-    t.string   "settings_for"
-    t.integer  "timed_task_id"
-    t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+  create_table "departments", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "email_notification_settings", force: :cascade do |t|
+    t.string   "settings_for",  limit: 255
+    t.integer  "timed_task_id", limit: 4
+    t.integer  "user_id",       limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "email_notification_settings", ["timed_task_id"], name: "index_email_notification_settings_on_timed_task_id", using: :btree
   add_index "email_notification_settings", ["user_id"], name: "index_email_notification_settings_on_user_id", using: :btree
 
-  create_table "favourites", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "fav_post_id"
+  create_table "favourites", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "fav_post_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "label_entries", force: true do |t|
-    t.integer  "tag_id"
-    t.integer  "labelable_id"
-    t.string   "labelable_type"
+  create_table "label_entries", force: :cascade do |t|
+    t.integer  "tag_id",         limit: 4
+    t.integer  "labelable_id",   limit: 4
+    t.string   "labelable_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "labels", force: true do |t|
-    t.string   "name"
+  create_table "labels", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "notifications", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "activity_id"
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "activity_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "opinions", force: true do |t|
-    t.boolean  "positive",         default: true
-    t.integer  "opinionable_id"
-    t.string   "opinionable_type"
-    t.integer  "user_id"
+  create_table "opinions", force: :cascade do |t|
+    t.boolean  "positive",                     default: true
+    t.integer  "opinionable_id",   limit: 4
+    t.string   "opinionable_type", limit: 255
+    t.integer  "user_id",          limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "organization_memberships", force: true do |t|
-    t.boolean  "admin",           default: false
-    t.integer  "organization_id"
-    t.integer  "user_id"
+  create_table "organization_memberships", force: :cascade do |t|
+    t.boolean  "admin",                     default: false
+    t.integer  "organization_id", limit: 4
+    t.integer  "user_id",         limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "organizations", force: true do |t|
-    t.string   "name"
-    t.string   "access_token"
-    t.boolean  "activated",            default: false
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name",                 limit: 255
+    t.string   "access_token",         limit: 255
+    t.boolean  "activated",                        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "twitter_handle"
-    t.string   "twitter_widget_id"
-    t.string   "facebook_page_handle"
+    t.string   "twitter_handle",       limit: 255
+    t.string   "twitter_widget_id",    limit: 255
+    t.string   "facebook_page_handle", limit: 255
   end
 
-  create_table "pictures", force: true do |t|
-    t.integer  "post_id"
-    t.integer  "user_id"
-    t.integer  "organization_id"
+  create_table "pictures", force: :cascade do |t|
+    t.integer  "post_id",            limit: 4
+    t.integer  "user_id",            limit: 4
+    t.integer  "organization_id",    limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
     t.datetime "image_updated_at"
   end
 
-  create_table "post_department_entries", force: true do |t|
-    t.string   "department_entry_id"
-    t.integer  "post_id"
+  create_table "post_department_entries", force: :cascade do |t|
+    t.string   "department_entry_id", limit: 255
+    t.integer  "post_id",             limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "posts", force: true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.boolean  "anonymous",         default: true
-    t.integer  "opinion",           default: 0
-    t.integer  "user_id"
-    t.integer  "organization_id"
-    t.boolean  "graveyard",         default: false
+  create_table "posts", force: :cascade do |t|
+    t.string   "title",             limit: 255
+    t.text     "content",           limit: 65535
+    t.boolean  "anonymous",                       default: true
+    t.integer  "opinion",           limit: 4,     default: 0
+    t.integer  "user_id",           limit: 4
+    t.integer  "organization_id",   limit: 4
+    t.boolean  "graveyard",                       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "comment_anonymity", default: false
-    t.integer  "comments_count",    default: 0
-    t.boolean  "approved",          default: false
+    t.boolean  "comment_anonymity",               default: false
+    t.integer  "comments_count",    limit: 4,     default: 0
+    t.boolean  "approved",                        default: false
     t.date     "action_date"
-    t.boolean  "launch_approved",   default: false
-    t.boolean  "launched",          default: false
+    t.boolean  "launch_approved",                 default: false
+    t.boolean  "launched",                        default: false
   end
 
-  create_table "project_memberships", force: true do |t|
-    t.boolean  "admin",      default: false
-    t.integer  "project_id"
-    t.integer  "user_id"
+  create_table "project_memberships", force: :cascade do |t|
+    t.boolean  "admin",                default: false
+    t.integer  "project_id", limit: 4
+    t.integer  "user_id",    limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "projects", force: true do |t|
-    t.string   "name"
-    t.string   "access_code"
-    t.integer  "threshold"
-    t.integer  "organization_id"
+  create_table "projects", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.string   "access_code",     limit: 255
+    t.integer  "threshold",       limit: 4
+    t.integer  "organization_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "subscriptions", force: true do |t|
-    t.string   "email"
-    t.text     "note"
+  create_table "subscriptions", force: :cascade do |t|
+    t.string   "email",      limit: 255
+    t.text     "note",       limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tag_entries", force: true do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.string   "taggable_type"
+  create_table "tag_entries", force: :cascade do |t|
+    t.integer  "tag_id",        limit: 4
+    t.integer  "taggable_id",   limit: 4
+    t.string   "taggable_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tags", force: true do |t|
-    t.string   "name"
-    t.integer  "organization_id"
+  create_table "tags", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.integer  "organization_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "timed_tasks", force: true do |t|
-    t.integer  "interval"
-    t.string   "measure_of_time"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+  create_table "timed_tasks", force: :cascade do |t|
+    t.integer  "interval",        limit: 4
+    t.string   "measure_of_time", limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
-  create_table "user_invites", force: true do |t|
-    t.string   "email"
-    t.integer  "department_entry_id"
-    t.boolean  "admin",               default: false
+  create_table "user_invites", force: :cascade do |t|
+    t.string   "email",               limit: 255
+    t.integer  "department_entry_id", limit: 4
+    t.boolean  "admin",                           default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "username"
-    t.string   "email"
-    t.string   "crypted_password"
-    t.string   "password_salt"
-    t.string   "persistence_token"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "job_title"
-    t.integer  "organization_id"
-    t.boolean  "manager",           default: false
-    t.boolean  "admin",             default: false
+  create_table "users", force: :cascade do |t|
+    t.string   "username",          limit: 255
+    t.string   "email",             limit: 255
+    t.string   "crypted_password",  limit: 255
+    t.string   "password_salt",     limit: 255
+    t.string   "persistence_token", limit: 255
+    t.string   "first_name",        limit: 255
+    t.string   "last_name",         limit: 255
+    t.string   "job_title",         limit: 255
+    t.integer  "organization_id",   limit: 4
+    t.boolean  "manager",                       default: false
+    t.boolean  "admin",                         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

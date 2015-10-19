@@ -27,7 +27,7 @@ class OrganizationsController < ApplicationController
   # POST /organizations.json
   def create
     @organization = Organization.new(organization_params)
-    @organization.access_code = ('a'..'z').to_a.shuffle[0,32].join
+    @organization.access_token = ('a'..'z').to_a.shuffle[0,32].join
 
     respond_to do |format|
       if @organization.save
@@ -180,6 +180,6 @@ class OrganizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
-      params.require(:organization).permit(:name, :access_code, :twitter_handle, :twitter_widget_id, :facebook_page_handle)
+      params.require(:organization).permit(:name, :access_token, :twitter_handle, :twitter_widget_id, :facebook_page_handle)
     end
 end

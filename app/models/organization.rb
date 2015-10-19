@@ -19,6 +19,12 @@ class Organization < ActiveRecord::Base
   has_many :managers, -> {where(manager: true)}, class_name: 'User'
   has_many :admins, -> {where(admin: true)}, class_name: 'User'
 
+  after_create :organization_signup_email
+
+  def organization_signup_email
+    OrganizationsMailer.notify_clinton(self).deliver_now
+  end
+
   def departments
     self.department_entries.map{|x| x.department_name}
   end

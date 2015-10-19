@@ -1,3 +1,7 @@
+= content_for :cta_button do
+  %a.mcnButton{:href => "https://golaunchboard.com/", :style => "font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #D55258;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;", :target => "_blank", :title => "Login now"} Register
+
 = "You have been invited to join organization #{@organization.name} on Launchboard"
 %br/
 = "The organization access token is: #{@organization.access_token}"
+
