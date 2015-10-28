@@ -33,6 +33,12 @@
               = f.text_field :job_title, class: "form-control"
           .row
             .field.col-xs-12
+              .checkbox
+                = f.label :subscribe_to_newsletter do
+                  = 'Subscribe to newsletter'
+                  = f.check_box :subscribe_to_newsletter, class: "checkbox inline"
+          .row
+            .field.col-xs-12
               = f.fields_for :pictures do |p|
                 = p.label :image
                 = p.file_field :image

@@ -1,7 +1,7 @@
 class PagesMailer < ApplicationMailer
   default from: "contact_us@golaunchboard.com"
   # default to: 'edwardforcpu@gmail.com'
-  default to: 'clinton@golaunchboard.com'
+  default to: 'clintonball@gmail.com'
 
   def email_us(name, email, message)
     @name = name
