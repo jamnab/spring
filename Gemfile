@@ -49,6 +49,8 @@ gem 'bootstrap-datepicker-rails'
 gem "d3-rails"
 gem 'will_paginate'
 
+gem 'workflow'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
