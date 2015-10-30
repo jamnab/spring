@@ -1,0 +1,2 @@
+class BetaSignUpMailer < ApplicationMailer
+end

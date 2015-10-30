@@ -21,6 +21,14 @@ Rails.application.routes.draw do
 
   resources :opinions
 
+  resources :beta_sign_ups, only: [:index] do
+    member do
+      get :approve
+      get :deny
+      get :register
+    end
+  end
+
   resources :comments do
     collection do
       get :filter_sort
