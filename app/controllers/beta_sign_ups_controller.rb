@@ -21,6 +21,24 @@ class BetaSignUpsController < ApplicationController
     end
   end
 
+  def create
+    @beta_sign_up = BetaSignUp.new beta_sign_up_params
+
+    @beta_sign_up.signup_code = SecureRandom.urlsafe_base64
+
+    respond_to do |format|
+      format.html do
+        if @beta_sign_up.save! && BetaSignUpMailer.beta_mailing_list_to_clint(bsu).deliver_now
+          flash[:notice] = "You have been put on our beta mailing list. We will notify you when you are approved to sign in."
+          redirect_to action: "home"
+        else
+          flash[:error] = "Sorry there was a problem adding you to the beta mailing list. Please try again later."
+          redirect_to action: "home"
+        end
+      end
+    end
+  end
+
   def register
     respond_to do |format|
       format.html do
@@ -34,6 +52,10 @@ class BetaSignUpsController < ApplicationController
   end
 
   private
+
+  def beta_sign_up_params
+    params.require(:beta_sign_up).permit(:first_name, :last_name, :email )
+  end
 
   def set_bsu_with_code
     @beta_sign_up = BetaSignUp.find_by_signup_code params[:id]
