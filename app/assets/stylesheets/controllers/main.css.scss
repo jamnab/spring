@@ -661,7 +661,8 @@ a:hover {
 
 .content-wrapper {
   margin-top: 90px;
-  height: 100%;
+  height: calc(100% - 70px);
+  overflow-y: scroll;
 }
 
 
