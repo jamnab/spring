@@ -28,12 +28,12 @@ class BetaSignUpsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        if @beta_sign_up.save! && BetaSignUpMailer.beta_mailing_list_to_clint(bsu).deliver_now
+        if @beta_sign_up.save! && BetaSignUpMailer.beta_mailing_list_to_clint(@beta_sign_up).deliver_now
           flash[:notice] = "You have been put on our beta mailing list. We will notify you when you are approved to sign in."
-          redirect_to action: "home"
+          redirect_to :root
         else
           flash[:error] = "Sorry there was a problem adding you to the beta mailing list. Please try again later."
-          redirect_to action: "home"
+          redirect_to :root
         end
       end
     end

@@ -1,0 +1,17 @@
+.container
+  %table.table
+    %thead
+      %tr
+        %th First Name
+        %th Last Name
+        %th Email
+        %th Action
+    %tbody
+      - @beta_sign_ups.each do |bsu|
+        %tr{class: "bsu-#{bsu.id}"}
+          %td #{bsu.first_name}
+          %td #{bsu.last_name}
+          %td #{bsu.email}
+          %td
+            = link_to 'Approve', approve_beta_sign_up_path(bsu), remote: true, prompt: "Are you sure?"
+            = link_to 'Deny', deny_beta_sign_up_path(bsu),  remote: true, prompt: "Are you sure?"

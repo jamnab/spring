@@ -9,6 +9,8 @@ class Ability
     can :create, User
     can :join_by_code, Organization
 
+    can :create, BetaSignUp
+
     user ||= User.new
 
     if user.is_admin?
