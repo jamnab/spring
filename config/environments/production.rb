@@ -99,5 +99,5 @@ Rails.application.configure do
   # set default url host so that the url helper doesn't output localhost as the base url
   Rails.application.default_url_options[:host] = 'golaunchboard.com'
 
-
+  config.action_mailer.default_url_options[:host] = 'golaunchboard.com'
 end
