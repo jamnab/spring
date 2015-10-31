@@ -1,6 +1,8 @@
 class BetaSignUpsController < ApplicationController
   load_and_authorize_resource except: [:register]
   before_action :set_bsu_with_code, only: [:register]
+  layout :action_layout
+
   def index
     @beta_sign_ups = BetaSignUp.where(workflow_state: 'pending')
   end
@@ -52,6 +54,14 @@ class BetaSignUpsController < ApplicationController
   end
 
   private
+
+  def action_layout
+    if params[:action] == 'register'
+      "application_no_nav"
+    else
+      "application"
+    end
+  end
 
   def beta_sign_up_params
     params.require(:beta_sign_up).permit(:first_name, :last_name, :email )
