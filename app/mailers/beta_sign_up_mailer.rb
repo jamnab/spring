@@ -4,7 +4,7 @@ class BetaSignUpMailer < ApplicationMailer
   def beta_mailing_list_to_clint(bsu)
     @email = bsu.email
     @name = "#{bsu.first_name} #{bsu.last_name}"
-    mail(subject: "#{@name} wish to be added to beta mailing list", to: "accounts@golaunchboard.com")
+    mail(subject: "#{@name} wish to be added to beta mailing list", to: "accounts@portfolio10.com")
   end
 
   def approved(bsu)
