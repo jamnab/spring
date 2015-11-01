@@ -4,12 +4,12 @@
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
-        %h4.modal-title Beta Mailing List Sign Up
+        %h4.modal-title Coming soon!
       .modal-body
         = form_for BetaSignUp.new do |f|
           .row.form-group
             .col-md-12
-              %h3 Sign up for our beta mailing list!
+              %h4 Sign up for our private beta mailing list!
           .row.form-group
             .col-md-6
               = f.text_field :first_name, placeholder: 'First Name', class: 'form-control'
