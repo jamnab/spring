@@ -19,11 +19,11 @@ class Organization < ActiveRecord::Base
   has_many :managers, -> {where(manager: true)}, class_name: 'User'
   has_many :admins, -> {where(admin: true)}, class_name: 'User'
 
-  after_create :organization_signup_email
+  has_many :subscriptions
+  has_one :active_subscription, -> { where(active: true) }, class_name: "Subscription"
 
   def organization_signup_email
     OrganizationsMailer.notify_clinton(self).deliver_now
-    OrganizationsMailer.notify_user_wait_for_approval(self).deliver_now
   end
 
   def departments

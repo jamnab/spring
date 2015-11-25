@@ -2,7 +2,9 @@
 %h4.text-center
   The organization
   %b= @organization.name
-  is pending approval by our admins.
+  's subscription has expired.
 
 %h5.text-center
-  Please wait for email updates, thank you.
+  Please contact your manager to
+  %b #{ link_to "purchase a new subscription", price_path }
+  in order to continue to use your account

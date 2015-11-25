@@ -35,40 +35,52 @@ class UsersController < ApplicationController
     @organization = Organization.where(name: @user.organization_name).first
     @invites = UserInvite.where(email: @user.email)
     new_org = false
+    @beta_sign_up = BetaSignUp.find_by_signup_code params[:signup_code]
 
     # allow if new organization or has embedded token
     if @user.is_manager? && @organization.nil?
       # create new organization
       new_org = true
     elsif @user.is_manager? && !@organization.nil?
-      redirect_to :back, notice: "Error: Cannot create an organization that already exists." and return
+      redirect_to :back, alert: "Error: Cannot create an organization that already exists." and return
     elsif !@user.is_manager? && @organization.nil?
-      redirect_to :back, notice: "Error: Cannot join, organization does not exist." and return
+      redirect_to :back, alert: "Error: Organization does not exist. Please notify your organization's manager to register first." and return
     else
       # check for invite
       if !@invites.empty?
         # joins existing organization
         @user.organization_id = @organization.id
       else
-        redirect_to :back, notice: "Error: Cannot join, there are no invites associated with this email address." and return
+        redirect_to :back, alert: "Error: Cannot join, there are no invites associated with this email address." and return
       end
     end
 
     respond_to do |format|
       if @user.save
         if new_org
-          @organization = Organization.create(name: @user.organization_name)
+          @organization = Organization.create!(name: @user.organization_name)
           @user.update(organization_id: @organization.id)
+
+          @organization.organization_signup_email
+
+          # attach trial sub
+          Subscription.create! subscription_type: 'trial', organization: @organization, active: true, end_at: DateTime.current + 14.day
         end
         @invites.each do |invite|
           # join department, remove invite
           DepartmentEntryMembership.create(user: @user, department_entry: invite.department_entry, admin: invite.admin)
           invite.destroy
         end
+
+        # invalidate the signup code by attaching the code to the user
+        @beta_sign_up.user = @user
+
+        @beta_sign_up.save!
+
         format.html { redirect_to :dashboard, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
-        format.html { redirect_to :back, notice: 'Failed to register, invalid information.' }
+        format.html { redirect_to :back, alert:  @user.errors.full_messages}
         # format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

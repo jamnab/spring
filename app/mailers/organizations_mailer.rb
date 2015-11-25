@@ -1,4 +1,4 @@
-class Organizations < ApplicationMailer
+class OrganizationsMailer < ApplicationMailer
 
   def notify_clinton(org)
     @user = org.managers.first

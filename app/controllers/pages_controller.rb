@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   before_action :check_login, only: [:pending_approval, :dashboard, :summary, :search, :archive, :newsfeed]
   before_action :set_organization, only: [:pending_approval, :dashboard, :summary, :search, :archive, :newsfeed]
-  before_action :check_org_activation, only: [:dashboard, :summary, :search, :archive, :newsfeed]
+  before_action :check_org_subscription, only: [:dashboard, :summary, :search, :archive, :newsfeed]
 
   @@global_limit = 200
   @page_limit = 200
@@ -262,8 +262,8 @@ class PagesController < ApplicationController
       @organization = Organization.first if current_user.is_admin?
     end
 
-    def check_org_activation
-      if !@organization.activated
+    def check_org_subscription
+      if @organization.active_subscription.blank?
         redirect_to :pending_approval and return
       end
     end

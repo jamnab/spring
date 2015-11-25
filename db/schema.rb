@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030014602) do
+ActiveRecord::Schema.define(version: 20151124043149) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -218,10 +218,12 @@ ActiveRecord::Schema.define(version: 20151030014602) do
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.string   "email",      limit: 255
-    t.text     "note",       limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "organization_id",   limit: 4
+    t.string   "subscription_type", limit: 255
+    t.datetime "end_at"
+    t.boolean  "active"
   end
 
   create_table "tag_entries", force: :cascade do |t|

@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_action :check_account_status
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
@@ -13,6 +15,17 @@ class ApplicationController < ActionController::Base
   helper_method :current_department_entries
 
   private
+
+  def check_account_status
+    if current_user && !current_user.is_admin?
+      sub = current_user.organization.active_subscription
+
+      if sub && sub.end_at < DateTime.current
+        sub.active = false
+        sub.save!
+      end
+    end
+  end
 
   def current_departments
     current_department_entries.map{|x| x.name}
@@ -73,4 +86,5 @@ class ApplicationController < ActionController::Base
   #   end
   #   sentimentable.save
   # end
+
 end

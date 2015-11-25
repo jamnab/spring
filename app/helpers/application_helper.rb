@@ -1,4 +1,13 @@
 module ApplicationHelper
+  def join_error_messages(a_messages)
+    result = ""
+
+    a_messages.each do |m|
+      result = (result + content_tag(:li, m)).html_safe
+    end
+
+    content_tag(:ul, result).html_safe
+  end
 
   def bootstrap_class_for flash_type
     case flash_type

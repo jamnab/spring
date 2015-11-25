@@ -2,7 +2,10 @@
   = form_for User.new do |f|
 
     - if !params[:organization_token].nil?
-      = hidden_field :organization_token, value: params[:organization_token]
+      = f.hidden_field :organization_token, value: params[:organization_token]
+
+    - if !params[:id].nil?
+      = hidden_field_tag :signup_code, params[:id]
     .row
       .field.col-xs-6
         = f.label :username
