@@ -51,6 +51,8 @@ gem 'will_paginate'
 
 gem 'workflow'
 
+gem 'yaml_db'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
