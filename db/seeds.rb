@@ -4,21 +4,21 @@ m_first_names = %w[JAMES JOHN ROBERT MICHAEL WILLIAM DAVID RICHARD CHARLES JOSEP
 f_first_names = %w[MARY PATRICIA LINDA BARBARA ELIZABETH JENNIFER MARIA SUSAN MARGARET DOROTHY LISA NANCY KAREN BETTY HELEN SANDRA DONNA CAROL RUTH SHARON MICHELLE LAURA SARAH KIMBERLY DEBORAH JESSICA SHIRLEY CYNTHIA ANGELA MELISSA]
 last_names = %w[SMITH JOHNSON WILLIAMS JONES BROWN DAVIS MILLER WILSON MOORE TAYLOR ANDERSON THOMAS JACKSON WHITE HARRIS MARTIN THOMPSON GARCIA MARTINEZ ROBINSON CLARK RODRIGUEZ LEWIS LEE WALKER HALL ALLEN YOUNG HERNANDEZ KING]
 
-User.create(username: "launchboard", email: "info@launchboard.com",
+User.create!(username: "launchboard", email: "info@launchboard.com",
             password: "launchboard", password_confirmation: "launchboard",
             admin: true, first_name: "Launchboard", last_name: "Admin",
             job_title: "System Admin")
 
 # demo company
-demo_comp  =  Organization.create(name: "Demo Company Inc.", activated: true)
-demoman_comp  = User.create(username: "demoman_comp", email: "comp_man@demo.com",
+demo_comp  =  Organization.create!(name: "Demo Company Inc.", activated: true)
+demoman_comp  = User.create!(username: "demoman_comp", email: "comp_man@demo.com",
                   password: "demoman_comp", password_confirmation: "demoman_comp",
                   first_name: "John", last_name: "Manager",
                   job_title: "Manager", organization_id: demo_comp.id, manager: true)
 
 # demo association
-demo_assoc =  Organization.create(name: "Demo Association Inc.", activated: true)
-demoman_assoc = User.create(username: "demoman_assoc", email: "assoc_man@demo.com",
+demo_assoc =  Organization.create!(name: "Demo Association Inc.", activated: true)
+demoman_assoc = User.create!(username: "demoman_assoc", email: "assoc_man@demo.com",
                   password: "demoman_assoc", password_confirmation: "demoman_assoc",
                   first_name: "Jeff", last_name: "Manager",
                   job_title: "Manager", organization_id: demo_assoc.id, manager: true)
@@ -29,12 +29,12 @@ demoman_assoc = User.create(username: "demoman_assoc", email: "assoc_man@demo.co
   first_name = (i % 2 == 0) ? f_first_names[i/2].camelize : m_first_names[i/2].camelize
   last_name = last_names[i/2].camelize
   user_name = first_name[0].downcase + last_name.downcase + '_comp'
-  user = User.create(username: user_name, email: "#{user_name}@demo.com",
+  user = User.create!(username: user_name, email: "#{user_name}@demo.com",
               password: user_name, password_confirmation: user_name,
               first_name: first_name.capitalize,
               last_name: last_name.capitalize,
               job_title: "Employee", organization_id: demo_comp.id)
-  Picture.create({
+  Picture.create!({
     user_id: user.id,
     image: File.new("#{Rails.root}/app/assets/seeds/demo_users/User #{i/2+1}#{sex}.png"),
   })
@@ -46,44 +46,44 @@ end
   first_name = (i % 2 == 0) ? f_first_names[i/2].camelize : m_first_names[i/2].camelize
   last_name = last_names[i/2].camelize
   user_name = first_name[0].downcase + last_name.downcase + '_assoc'
-  user = User.create(username: user_name, email: "#{user_name}@demo.com",
+  user = User.create!(username: user_name, email: "#{user_name}@demo.com",
               password: user_name, password_confirmation: user_name,
               first_name: first_name.capitalize,
               last_name: last_name.capitalize,
               job_title: "Employee", organization_id: demo_assoc.id)
-  Picture.create({
+  Picture.create!({
     user_id: user.id,
     image: File.new("#{Rails.root}/app/assets/seeds/demo_users/User #{i/2+1}#{sex}.png"),
   })
 end
 
 # sample departments comp
-marketing_de    = DepartmentEntry.create(department_name: 'Marketing', context: demo_comp)
-operations_de   = DepartmentEntry.create(department_name: 'Operations', context: demo_comp)
-sales_de        = DepartmentEntry.create(department_name: 'Sales', context: demo_comp)
-engineering_de  = DepartmentEntry.create(department_name: 'Engineering', context: demo_comp)
-qa_de           = DepartmentEntry.create(department_name: 'Quality Assurance', abbrev_name: 'QA', context: demo_comp)
-hr_de           = DepartmentEntry.create(department_name: 'Human Resources', abbrev_name: 'HR', context: demo_comp)
-rnd_de          = DepartmentEntry.create(department_name: 'Research & Development', abbrev_name: 'R&D', context: demo_comp)
+marketing_de    = DepartmentEntry.create!(department_name: 'Marketing', context: demo_comp)
+operations_de   = DepartmentEntry.create!(department_name: 'Operations', context: demo_comp)
+sales_de        = DepartmentEntry.create!(department_name: 'Sales', context: demo_comp)
+engineering_de  = DepartmentEntry.create!(department_name: 'Engineering', context: demo_comp)
+qa_de           = DepartmentEntry.create!(department_name: 'Quality Assurance', abbrev_name: 'QA', context: demo_comp)
+hr_de           = DepartmentEntry.create!(department_name: 'Human Resources', abbrev_name: 'HR', context: demo_comp)
+rnd_de          = DepartmentEntry.create!(department_name: 'Research & Development', abbrev_name: 'R&D', context: demo_comp)
 User.where(organization_id: demo_comp.id).each do |u|
   # count = demo_comp.department_entries.count
   # index = u.id % count
   demo_comp.department_entries.each do |department_entry|
-    DepartmentEntryMembership.create(department_entry: department_entry, user: u)
+    DepartmentEntryMembership.create!(department_entry: department_entry, user: u)
   end
 end
 
 # sample departments assoc
-DepartmentEntry.create(department_name: 'Football Club', context: demo_assoc)
-DepartmentEntry.create(department_name: 'Hockey Club', context: demo_assoc)
-DepartmentEntry.create(department_name: 'Lacrosse Club', context: demo_assoc)
-DepartmentEntry.create(department_name: 'Salsa Club', context: demo_assoc)
-DepartmentEntry.create(department_name: 'Yoga Club', context: demo_assoc)
+DepartmentEntry.create!(department_name: 'Football Club', context: demo_assoc)
+DepartmentEntry.create!(department_name: 'Hockey Club', context: demo_assoc)
+DepartmentEntry.create!(department_name: 'Lacrosse Club', context: demo_assoc)
+DepartmentEntry.create!(department_name: 'Salsa Club', context: demo_assoc)
+DepartmentEntry.create!(department_name: 'Yoga Club', context: demo_assoc)
 User.where(organization_id: demo_assoc.id).each do |u|
   # count = demo_assoc.department_entries.count
   # index = u.id % count
   demo_assoc.department_entries.each do |department_entry|
-    DepartmentEntryMembership.create(department_entry: department_entry, user: u)
+    DepartmentEntryMembership.create!(department_entry: department_entry, user: u)
   end
 end
 
@@ -191,23 +191,23 @@ actionable_posts_by_department.each do |de_post_set|
   posts.each do |post|
     rand_uid = rand(16)
     user = de.users[rand_uid]
-    new_post = Post.create(title: post[0], content: post[1],
+    new_post = Post.create!(title: post[0], content: post[1],
                            user: user,
                            approved: true,
                            launch_approved: true,
                            organization: demo_comp)
     # post[2] is image
     if !post[2].nil?
-      Picture.create({
+      Picture.create!({
         post_id: new_post.id,
         image: File.new("#{Rails.root}/app/assets/seeds/images/#{post[2]}"),
       })
     end
-    PostDepartmentEntry.create(post: new_post, department_entry: de)
+    PostDepartmentEntry.create!(post: new_post, department_entry: de)
     # random > 75% support
     num_votes = rand(10..15)
     num_votes.times do |uid|
-      Opinion.create(opinionable: new_post,
+      Opinion.create!(opinionable: new_post,
                      positive: true, user: de.users[uid])
     end
     new_post.update(opinion: num_votes)
@@ -220,21 +220,21 @@ filler_posts_by_department.each do |de_post_set|
   posts.each do |post|
     rand_uid = rand(16)
     user = de.users[rand_uid]
-    new_post = Post.create(title: post[0], content: post[1],
+    new_post = Post.create!(title: post[0], content: post[1],
                            user: user,
                            approved: true, organization: demo_comp)
     # post[2] is image
     if !post[2].nil?
-      Picture.create({
+      Picture.create!({
         post_id: new_post.id,
         image: File.new("#{Rails.root}/app/assets/seeds/images/#{post[2]}"),
       })
     end
-    PostDepartmentEntry.create(post: new_post, department_entry: de)
+    PostDepartmentEntry.create!(post: new_post, department_entry: de)
     # random < 75% support
     num_votes = rand(10)
     num_votes.times do |uid|
-      Opinion.create(opinionable: new_post,
+      Opinion.create!(opinionable: new_post,
                      positive: true, user: de.users[uid])
     end
     new_post.update(opinion: num_votes)
