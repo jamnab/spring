@@ -1,6 +1,10 @@
 %nav.navbar.navbar-default
   .container
-    .navbar-header
+    .navbar-brand
+      %a.logo.hidden-xs{:href => "/"}
+        = image_tag "lb-logo.png"
+      %a.logo.hidden-sm.hidden-md{:href => "/"}
+        = image_tag "launchplane.png"
       / %button.navbar-toggle{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
       /   %span.sr-only Toggle navigation
       /   %span.icon-bar
@@ -19,19 +23,43 @@
       %ul.nav.navbar-nav.navbar-right
         - if current_user
           / %li.divider-vertical
-          %li.profile.hidden-xs
-            %span
-              Welcome, #{current_user.first_name}
-            - if !current_user || current_user.picture.nil?
-              = image_tag("profile_default.png")
-            - else
-              = image_tag current_user.picture.image.url(:user_image)
+          %li.navicon
+            = link_to dashboard_path, class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "right", trigger: "hover"} do
+              %i.fa.fa-lightbulb-o
+              #idea_counter.notification_counter
+                = current_organization_posts('idea_posts').count
+          %li.navicon
+            = link_to dashboard_path(:dashboard_page => "pending"),  class: "body-loading popover-trigger", data: {content: "Pending", placement: "right", trigger: "hover"} do
+              %i.fa.fa-clock-o
+              #pending_counter.notification_counter
+                = current_organization_posts('pending_posts').count
+          %li.navicon
+            = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading popover-trigger", data: {content: "My Upvotes", placement: "right", trigger: "hover"} do
+              %i.fa.fa-eye
+          -#%li.profile.hidden-xs
+          -#  %span
+          -#    Welcome, #{current_user.first_name}
+          -#  - if !current_user || current_user.picture.nil?
+          -#    = image_tag("profile_default.png")
+          -#  - else
+          -#    = image_tag current_user.picture.image.url(:user_image)
+
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-              %span.flaticon-three115
+              .profile
+                - if !current_user || current_user.picture.nil?
+                  = image_tag("profile_default.png")
+                - else
+                  = image_tag current_user.picture.image.url(:user_image)
+                %span
+                  #{current_user.first_name}
+                %i.fa.fa-angle-down
+              -#%span.caret
+              -#.fa.fa-gear
+              -#%span.flaticon-three115
               / %span.flaticon-black56
-              .fa.fa-gear
-              %span.caret
+              / %span
+              /  Welcome, #{current_user.first_name}
             %ul.dropdown-menu{:role => "menu"}
               - if can? :update, current_user
                 %li
@@ -53,9 +81,12 @@
                 %li
                   = link_to manage_users_organization_path(current_organization), remote: true, class: "popover-trigger", data: {content: "Manage departments and members", placement: "right", trigger: "hover"} do
                     Manage Users
-          %li.dropdown.hidden-xs
-            %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-              .fa.fa-bell
+                %li
+                  = link_to :logout do
+                    Logout
+          -#%li.dropdown.hidden-xs
+          -#  %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+          -#    .fa.fa-bell
               %span.caret
             %ul.dropdown-menu.notification{:role => "menu"}
               = sync_new partial: 'notification', resource: PublicActivity::Activity.new, scope:current_user
@@ -63,9 +94,9 @@
               - @notifications[0,10].each do |n|
                 - activity = n.activity
                 = sync partial: 'notification', resource: activity
-          %li.hidden-xs
-            = link_to :logout do
-              Logout
+          /%li.hidden-xs
+          /  = link_to :logout do
+          /    Logout
         - else
           / %li.divider-vertical
           %li
@@ -75,18 +106,18 @@
           %li
             = link_to '#', data: {target: "#login", toggle: "modal"} do
               Log In
-    #navbar-dropdown.pull-left.nav-left.hidden-xs
+    #navbar-dropdown.pull-left.nav-right.hidden-xs
       %ul.nav.navbar-nav.filter-sort
         = render 'layouts/filter_sort'
         %li
           = form_tag search_path, class: "form-inline", remote: (request.path == '/search'), :method => :get do
             .form-group
-              .col-xs-10
+              .col-xs-12
                 .input-group
                   = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "search ..."
                   / %input#search.form-control{:placeholder => "search ...", :type => "text"}
-              .col-xs-2.no-padding
-                %button.btn.btn-main{:type => "submit"}
-                  .fa.fa-search
+              / .col-xs-2.no-padding
+              /   %button.btn.btn-main{:type => "submit"}
+              /    .fa.fa-search
         / %li.page_title.hidden-xs
         /   %h3= @page_title
