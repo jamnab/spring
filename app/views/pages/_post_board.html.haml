@@ -11,7 +11,7 @@
 
 .row
   - if @posts.empty?
-    %h3.text-center There are no posts matching this criterion.
+    %h3.text-center Sorry, looks like there's nothing here.
 
   - if @sort != "discussed" && @sort != "upvoted"
     = render 'pages/new_post_partial'

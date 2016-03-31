@@ -120,7 +120,7 @@ html, body {
   border: none;
   @include border_radius(0);
   color:$white;
-  box-shadow: $shadow;
+  box-shadow: $shadow-2;
 
   .navbar-brand {
     display: inline-block;

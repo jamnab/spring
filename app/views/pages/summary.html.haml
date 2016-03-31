@@ -18,11 +18,13 @@
       %li{"data-slide-to" => "4", "data-target" => "#analytics-carousel"}
         .headline Detailed Trends
         .subline on Idea Generation
-      %li.no-hover
+    %ul.alt-indicators
+      %li
         %p
           From:
           %b July 02, 2015
           %span.fa.fa-edit
+      %li
         %p
           To:
           %b July 08, 2015
@@ -51,7 +53,6 @@
               .header Department Contributions
               .body
                 #contributions_by_department_graph.d3_graph
-        %hr
         .row
           .col-xs-12.analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
@@ -100,7 +101,6 @@
               .header Employee Contributions
               .body
                 #contributions_by_employee_graph.d3_graph
-        %hr
         .row
           .col-xs-12.analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
@@ -148,7 +148,6 @@
               .header Chart
               .body
                 #trending_ideas_graph.d3_graph
-        %hr
         .row
           .col-xs-12.analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
@@ -187,7 +186,6 @@
               .header Chart
               .body
                 #approved_ideas_graph.d3_graph
-        %hr
         .row
           .col-xs-12.analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
@@ -296,4 +294,3 @@
     -#             (<b>#{user.contributions['total']}</b>/#{user.contributions['positive']}/#{user.contributions['negative']})
     -#           %td
     -#             (<b>#{user.impact['positive']}</b>/#{user.impact['negative']}/#{user.impact['total']})
-

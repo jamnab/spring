@@ -110,6 +110,30 @@
               %li
                 = link_to :logout do
                   Logout
+          %ul.dropdown-menu{:role => "menu"}
+            - if can? :update, current_user
+              %li
+                = link_to '#' do
+                  Edit User Profile
+            - if can? :update, current_organization
+              %li
+                = link_to '#' do
+                  Edit Organization
+              %li
+                = link_to :summary do
+                  Analytics
+              / %li
+              /   = link_to :newsfeed do
+              /     Leaderboard
+              %li
+                = link_to dashboard_path(:dashboard_page => "archive") do
+                  Archive
+              %li
+                = link_to manage_users_organization_path(current_organization) do
+                  Manage Users
+              %li
+                = link_to :logout do
+                  Logout
         -#%li.dropdown.hidden-xs
         -#  %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
         -#    .fa.fa-bell

@@ -144,6 +144,10 @@ h3.page_title {
   padding: 0px 20px 40px;
   text-align: center;
   min-height: 400px;
+
+  .row h3 {
+    color:$white;
+  }
 }
 
 .post-wrapper {
@@ -172,7 +176,7 @@ h3.page_title {
     min-width: 300px;
     margin: auto;
     background-color: $white !important;
-    box-shadow: $shadow;
+    box-shadow: $shadow-2;
 
     .header {
       height: 50px;
@@ -378,6 +382,7 @@ h3.page_title {
 
 .post {
   .header {
+    display: none;
     .post-badge {
       background-color: inherit;
       text-align: center;
