@@ -46,32 +46,29 @@
           - else
             / pending listing approval
             Pending Listing Approval
-        .post-badge{class: ("doit" if post.doit?)}
-          - if post.doit?
-            / launch item, pre-approve and post approve
-            = image_tag 'launch.png'
-          - elsif post.graveyard
-            / archived post
-            .fa.fa-archive
-          - elsif !opinion.nil? && opinion.positive
-            / following, voted positive
-            .fa.fa-eye
-          - elsif post.approved
-            / in ideas
-            .fa.fa-lightbulb-o
-          - else
-            / pending listing approval
-            .fa.fa-clock-o
-      .progress
-        - if !opinion.nil?
-          .progress-bar{style: "width: #{pos_progress}%;", class: "progress-positive"}
-          .progress-bar{style: "width: #{neg_progress}%;", class: "progress-negative"}
-      .departments
-        - post.departments.each do |department|
-          .badge
-            = department
+        /.post-badge{class: ("doit" if post.doit?)}
+        /  - if post.doit?
+        /    / launch item, pre-approve and post approve
+        /    = image_tag 'launch.png'
+        /  - elsif post.graveyard
+        /    / archived post
+        /    .fa.fa-archive
+        /  - elsif !opinion.nil? && opinion.positive
+        /    / following, voted positive
+        /    .fa.fa-eye
+        /  - elsif post.approved
+        /    / in ideas
+        /    .fa.fa-lightbulb-o
+        /  - else
+        /    / pending listing approval
+        /    .fa.fa-clock-o
+      /.progress
+      /  - if !opinion.nil?
+      /    .progress-bar{style: "width: #{pos_progress}%;", class: "progress-positive"}
+      /    .progress-bar{style: "width: #{neg_progress}%;", class: "progress-negative"}
       .content
-        .carousel.slide.carousel-fade{id: "carousel-post-#{post.id}", class: (@viewmode == 'list' ? 'col-xs-2' : 'col-xs-12')}
+        /.carousel.slide.carousel-fade{id: "carousel-post-#{post.id}", class: (@viewmode == 'list' ? 'col-xs-2' : 'col-xs-12')}
+        .carousel.slide.carousel-fade{id: "carousel-post-#{post.id}"}
           %ol.carousel-indicators
             - if post.pictures.empty?
               %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=>"0"}
@@ -128,7 +125,10 @@
           /   = link_to fav, class: "popover-trigger", data: {content: "Unfavourite", placement: "top", trigger: "hover"}, method: :delete, remote: true do
           /     .btn.btn-sm.btn-on.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
           /       %span.flaticon-favourites7
-
+        .departments
+          - post.departments.each do |department|
+            .badge
+              = department
       .signature
         .user
           - if !post.anonymous || post.doit?
@@ -138,7 +138,7 @@
               %br
               (#{user.job_title})
           - else
-            = image_tag("profile_default.png")
+            = image_tag("profile-icon.png")
             .name
               Anonymous User
               %br
@@ -165,10 +165,12 @@
                 = f.hidden_field :user_id, value: current_user.id
                 = f.hidden_field :opinionable_id, value: post.id
                 = f.hidden_field :opinionable_type, value: 'Post'
-                .btn.btn-sm.post-loading.btn-like{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'} #{'btn-like'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
-                  %span.fa.fa-thumbs-up
                 .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
-                  %span.fa.fa-thumbs-down
+                  / %span.fa.fa-thumbs-down
+                  = image_tag "trash-icon.png"
+                .btn.btn-sm.post-loading.btn-like{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'} #{'btn-like'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
+                  / %span.fa.fa-thumbs-up
+                  = image_tag "launch-icon.png"
           - else
             = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "popover-trigger post-discussion-toggler", data: {content: "Discussion", placement: "top", trigger: "hover"} do
               .btn.btn-sm.post-loading.btn-counter{id: "#{post.id}",class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}

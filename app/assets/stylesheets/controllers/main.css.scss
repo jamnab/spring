@@ -3,9 +3,12 @@
 *, html, body, h1, h2, h3, h4, h5, h6, p, input, li, a {
   font-family: 'Open Sans', sans-serif;
 }
-.yellow { background:$yellow; }
-.orange { background:$orange; }
-.red { background: $red; }
+.nav > li {
+  display: inline-block;
+}
+.yellow { background-color:$yellow; }
+.orange { background-color:$orange; }
+.red { background-color: $red; }
 
 .notification-card{
   color: rgb(124, 139, 155);
@@ -140,13 +143,11 @@ html, body {
   .navicon {
 
     a {
-      display: block;
+      display: inline-block !important;
 
       text-align: center;
-      position: relative;
+      /* position: relative; */
       z-index: 20;
-      font-size: 36px;
-      /* line-height: 50px; */
 
       img {
         height:30px;
@@ -211,13 +212,13 @@ html, body {
     input {
       @include border_radius_exl(7px);
       background-color:rgba(255,255,255,0.4);
-      background:rgba(255,255,255,0.4) image-url("search-icon.png") 5% center no-repeat;
+      background:rgba(255,255,255,0.4) image-url("search-icon.png") 1rem center no-repeat;
       background-size:13px;
       color:$white !important;
       box-shadow: none;
       border:1px solid $trans;
       height:36px;
-      text-indent: 2rem;
+      text-indent: 1.5rem;
       font-size: 16px;
       font-weight: 500;
 
@@ -268,7 +269,6 @@ html, body {
   }
 
   .dropdown {
-    display: inline-block;
 
     &.open {
       background: transparent !important;
@@ -279,8 +279,8 @@ html, body {
     }
     #filter-post-all::before{
       content:"•";
-      margin-left:-15px;
-      padding-right: 15px;
+      margin-left:-5px;
+      margin-right: 5px;
     }
     #filter-post-project, #filter-post-work{
       background-color: rgba($main_project, 0.75) !important;
@@ -327,12 +327,13 @@ html, body {
     .dropdown-menu {
       padding: 0px;
       border: none;
+      margin-left: -45px;
 
       li a {
         text-align: left;
-        /* padding: 10px 15px; */
+        padding: 10px 15px;
         font-size: 14px;
-        font-weight: normal;
+        font-weight: 600;
         background-color: $trans;
         color: $grey;
 
@@ -346,6 +347,23 @@ html, body {
           background: $trans !important;
           color:$green !important;
         }
+      }
+    }
+  }
+
+  @media all and (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu {
+      position: absolute;
+      background-color: $white;
+      box-shadow: $shadow;
+    }
+  }
+
+  .filter-sort {
+    .dropdown {
+      .dropdown-toggle {
+        padding:10px 0;
+        margin-left: -15px;
       }
     }
   }
@@ -732,13 +750,13 @@ a:hover {
 
   .btn-off {
     background-color: transparent;
-    color: $inverse_text_highlight;
-    border: 1px solid $inverse_text_highlight;
+    img {
+      max-height: 25px;
+    }
 
     &:hover.btn-project {
-      background-color: $main_project;
-      color: $default_background !important;
-      border: 1px solid $default_background;
+
+
     }
 
     &:hover.btn-fun {
@@ -755,14 +773,12 @@ a:hover {
   }
 
   .btn-on {
-    border: 1px solid $default_background;
+    /* border: 1px solid $default_background; */
   }
 
   .signature .btn-off {
     background-color: transparent;
-    color: $inverse_text_off !important;
-    border: 1px solid $inverse_text_off;
-    opacity: 0.75;
+
   }
 
   .controls .btn-off {

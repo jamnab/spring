@@ -1,8 +1,8 @@
-%li.col-sm-12
+%li
   = link_to "All", dashboard_path(:sort=>@sort, dashboard_page: @dashboard_page, :viewmode=>@viewmode), class: "body-loading #{'active' if @filter.nil?}", :id =>"filter-post-all"
 
 - current_department_entries.each do |department_entry|
-  %li.col-sm-12
+  %li
     = link_to dashboard_path(:filter => department_entry.id, :sort=>@sort, dashboard_page: @dashboard_page, :viewmode=>@viewmode), class: "body-loading #{('active' if @filter == department_entry.id)}", id: "filter-post-department#{department_entry.id}" do
       - if !department_entry.abbrev_name.nil?
         = department_entry.abbrev_name

@@ -30,8 +30,8 @@
   margin-bottom: -25px;
   padding-bottom: 4px;
   li{
-    border:2px solid #e2e2e2;
-    background-color:#e2e2e2;
+    /* border:2px solid #e2e2e2; */
+    background-color:$l-grey;
   }
  }
 .float-left{
@@ -147,7 +147,7 @@ h3.page_title {
 }
 
 .post-wrapper {
-  height: 500px;
+  height: 450px;
   margin-bottom: 20px;
   padding: 0px 20px;
   vertical-align: top;
@@ -168,11 +168,11 @@ h3.page_title {
   .post {
     position: relative;
     height: 100%;
-    width: 340px;
-    // min-width: 500px;
+    max-width: 340px;
+    min-width: 300px;
     margin: auto;
-    border: 1px solid $default_text_main !important;
-    background-color: $default_background !important;
+    background-color: $white !important;
+    box-shadow: $shadow;
 
     .header {
       height: 50px;
@@ -223,16 +223,19 @@ h3.page_title {
     }
 
     .content {
-      color: #555;
+      color: $m-grey;
       font-size: 14px;
       line-height: 22px;
+      h4 {
+        font-weight: 600;
+      }
       .carousel {
-        margin-top: 8px;
-        margin-bottom: 28px;
-        background-color: #eee;
+        /* margin-top: 8px; */
+        margin-bottom: 20px;
       }
       .image-wrapper {
-        max-height: 120px;
+        max-height: 175px;
+        @include border_radius_top(10px);
         img { margin: auto; }
       }
       .options {
@@ -251,7 +254,7 @@ h3.page_title {
     }
 
     .signature {
-      border-top: 1px solid $default_text_main;
+      /* border-top: 1px solid $default_text_main; */
     }
   }
 
@@ -478,16 +481,16 @@ h3.page_title {
 
       img {
         margin-top: -15px;
-        border: 1px solid #ddd;
-        border-radius: 20px;
         width: 35px;
         height: 35px;
+
+        @include border_radius(50%);
       }
       .name {
         display: inline-block;
         padding: 0px 5px;
-        line-height: 14px;
-        color: #555;
+        line-height: 18px;
+        color: $m-grey;
       }
     }
   }
@@ -495,9 +498,9 @@ h3.page_title {
   .header, .signature, .traction, .controls, .content {
 
     .btn-sm {
-      margin-left: 5px;
+      /* margin-left: 5px; */
       min-width: 32px;
-      padding: 4px 0px;
+      /* padding: 4px 0px; */
 
       span:before {
         display: block;
@@ -509,7 +512,6 @@ h3.page_title {
   }
 
   .signature {
-    height: 50px;
     bottom: 0;
 
     .options {

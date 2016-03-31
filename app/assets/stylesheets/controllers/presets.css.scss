@@ -24,6 +24,7 @@ $yellow:#FFC837;
 $orange:#FF8008;
 $red:#FC354C;
 $green:#50E3C2;
+$m-grey:#515D62;
 $grey:#6c7a89;
 $l-grey:#f4f4f4;
 $white:#fff;
@@ -44,6 +45,13 @@ $shadow:0 1px 3px rgba(26, 53, 71, 0.08), 0 0 0 1px rgba(26, 53, 71, 0.04), 0 1p
   -ms-border-radius:$radius !important;
   -o-border-radius:$radius !important;
   border-radius:$radius !important;
+}
+@mixin border_radius_top($radius) {
+  -webkit-border-radius:$radius $radius 0 0 !important;
+  -moz-border-radius:$radius $radius 0 0 !important;
+  -ms-border-radius:$radius $radius 0 0 !important;
+  -o-border-radius:$radius $radius 0 0 !important;
+  border-radius:$radius $radius 0 0 !important;
 }
 @mixin content {
   color:#fff;
