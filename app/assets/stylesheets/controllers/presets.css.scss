@@ -18,6 +18,11 @@ $nav_background: #50E3C2;
 $nav_hover: #3f6075;
 $body_background: #c1c6ca;
 
+$trans:transparent;
+$green-grad:linear-gradient(#50E3C2,#11FFBD);
+$yellow:#FFC837;
+$orange:#FF8008;
+$red:#FC354C;
 $green:#50E3C2;
 $grey:#6c7a89;
 $l-grey:#f4f4f4;
@@ -51,6 +56,12 @@ $shadow:0 1px 3px rgba(26, 53, 71, 0.08), 0 0 0 1px rgba(26, 53, 71, 0.04), 0 1p
   &::-moz-placeholder { @include content; }
   &::-webkit-input-placeholder { @include content; }
   &:-ms-input-placeholder { @include content; }
+}
+@mixin placeholder-active() {
+  &::-o-placeholder { color:$trans; }
+  &::-moz-placeholder { color:$trans; }
+  &::-webkit-input-placeholder { color:$trans; }
+  &:-ms-input-placeholder { color:$trans; }
 }
 @mixin transition($speed) {
   transition:all $speed ease-in-out;

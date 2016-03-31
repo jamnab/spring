@@ -3,6 +3,9 @@
 *, html, body, h1, h2, h3, h4, h5, h6, p, input, li, a {
   font-family: 'Open Sans', sans-serif;
 }
+.yellow { background:$yellow; }
+.orange { background:$orange; }
+.red { background: $red; }
 
 .notification-card{
   color: rgb(124, 139, 155);
@@ -80,12 +83,17 @@ html, body {
   // height: 100%;
   width: 100%;
   min-width: 480px;
-  background-color: $l-grey;
+  background-color: $white;
   /* overflow-x: hidden; */
 }
 
-html, body, .body-wrapper {
+html, body {
   height: 100%;
+}
+.body-wrapper {
+  background: $green-grad;
+  background-size: cover;
+  min-height: 100%;
 }
 .admin-dashboard {
   padding: 10px 20px;
@@ -140,6 +148,13 @@ html, body, .body-wrapper {
       font-size: 36px;
       /* line-height: 50px; */
 
+      img {
+        height:30px;
+      }
+      .bulb {
+        height: 34px;
+      }
+
       .notification_counter {
         position: absolute;
         top: 8px;
@@ -149,7 +164,7 @@ html, body, .body-wrapper {
         /* line-height: 25px; */
         /* width: 15%; */
         /* height: 20px; */
-        background: $nav_hover;
+        /* background: $nav_hover; */
         color: $white;
         @include border_radius(40%);
       }
@@ -160,23 +175,20 @@ html, body, .body-wrapper {
         line-height: 50px;
         margin: 0px;
       }
-
-      img {
-        width: 40px;
-      }
     }
   }
 
   .profile {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 600;
     color: $white;
     span {
       padding: 10px 0 10px 5px;
-      line-height: 40px;
+      line-height: 30px;
     }
-    img {
-      width: 32px;
-      height: 32px;
+    .profile-img {
+      width: 34px;
+      height: 34px;
 
       @include border_radius(50%);
     }
@@ -194,15 +206,20 @@ html, body, .body-wrapper {
   }
 
   li form {
-    padding: 15px 20px;
-    font-size: 18px;
+    padding: 10px 20px;
 
     input {
       @include border_radius_exl(7px);
-      background:rgba(255,255,255,0.4);
+      background-color:rgba(255,255,255,0.4);
+      background:rgba(255,255,255,0.4) image-url("search-icon.png") 5% center no-repeat;
+      background-size:13px;
       color:$white !important;
       box-shadow: none;
-      border:1px solid transparent;
+      border:1px solid $trans;
+      height:36px;
+      text-indent: 2rem;
+      font-size: 16px;
+      font-weight: 500;
 
       @include transition(0.5s);
 
@@ -214,6 +231,7 @@ html, body, .body-wrapper {
         -ms-box-shadow: none;
         -o-box-shadow: none;
         box-shadow: none;
+        @include placeholder-active;
       }
 
       @include placeholder;
@@ -257,7 +275,12 @@ html, body, .body-wrapper {
     }
 
     #filter-post-all{
-      background-color: rgba($inverse_text_off, 0.75) !important;
+      color: $green !important;
+    }
+    #filter-post-all::before{
+      content:"•";
+      margin-left:-15px;
+      padding-right: 15px;
     }
     #filter-post-project, #filter-post-work{
       background-color: rgba($main_project, 0.75) !important;
@@ -277,13 +300,17 @@ html, body, .body-wrapper {
     }
 
     a.dropdown-toggle{
+      .drop-icon {
+        height:9px;
+      }
       .option {
         padding: 0px 15px;
         color: $inverse_text_main;
         border-radius: 5px;
         font-size: 16px;
         font-weight: bold;
-        background-color: rgba($inverse_text_off, 0.75);
+        /* background-color: rgba($inverse_text_off, 0.75); */
+        background: $trans;
 
         .caret {
           border-top-color: $inverse_text_main;
@@ -303,15 +330,21 @@ html, body, .body-wrapper {
 
       li a {
         text-align: left;
-        padding: 10px 15px;
+        /* padding: 10px 15px; */
         font-size: 14px;
         font-weight: normal;
-        background-color: $white;
+        background-color: $trans;
         color: $grey;
 
+        @include transition(0.5s);
+
+        &:active {
+          background: $trans !important;
+          color: $green !important;
+        }
         &:hover {
-          background-color: $inverse_text_highlight;
-          color:$white;
+          background: $trans !important;
+          color:$green !important;
         }
       }
     }

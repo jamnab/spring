@@ -1,9 +1,9 @@
 %nav.navbar.navbar-default
   .container
     .navbar-brand
-      %a.logo.hidden-xs{:href => "/"}
+      %a.logo.hidden-xs.hidden-sm{:href => "/"}
         = image_tag "lb-logo.png"
-      %a.logo.hidden-sm.hidden-md{:href => "/"}
+      %a.logo.hidden-md.hidden-lg.hidden-xl{:href => "/"}
         = image_tag "launchplane.png"
       / %button.navbar-toggle{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
       /   %span.sr-only Toggle navigation
@@ -25,17 +25,22 @@
           / %li.divider-vertical
           %li.navicon
             = link_to dashboard_path, class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "right", trigger: "hover"} do
-              %i.fa.fa-lightbulb-o
-              #idea_counter.notification_counter
+              -#%i.fa.fa-lightbulb-o
+              = image_tag "bulb-icon.png", class: "bulb"
+              #idea_counter.notification_counter.yellow
                 = current_organization_posts('idea_posts').count
           %li.navicon
             = link_to dashboard_path(:dashboard_page => "pending"),  class: "body-loading popover-trigger", data: {content: "Pending", placement: "right", trigger: "hover"} do
-              %i.fa.fa-clock-o
-              #pending_counter.notification_counter
+              -#%i.fa.fa-clock-o
+              = image_tag "list-icon.png"
+              #pending_counter.notification_counter.orange
                 = current_organization_posts('pending_posts').count
           %li.navicon
             = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading popover-trigger", data: {content: "My Upvotes", placement: "right", trigger: "hover"} do
-              %i.fa.fa-eye
+              -#%i.fa.fa-eye
+              = image_tag "check-icon.png"
+              #pending_counter.notification_counter.red
+                = current_organization_posts('pending_posts').count
           -#%li.profile.hidden-xs
           -#  %span
           -#    Welcome, #{current_user.first_name}
@@ -48,12 +53,12 @@
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               .profile
                 - if !current_user || current_user.picture.nil?
-                  = image_tag("profile_default.png")
+                  = image_tag ("profile-icon.png"), class: "profile-img"
                 - else
                   = image_tag current_user.picture.image.url(:user_image)
                 %span
                   #{current_user.first_name}
-                %i.fa.fa-angle-down
+                = image_tag "dropdown-icon.png", class: "drop-icon"
               -#%span.caret
               -#.fa.fa-gear
               -#%span.flaticon-three115
@@ -112,12 +117,19 @@
         %li
           = form_tag search_path, class: "form-inline", remote: (request.path == '/search'), :method => :get do
             .form-group
-              .col-xs-12
-                .input-group
-                  = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "search ..."
-                  / %input#search.form-control{:placeholder => "search ...", :type => "text"}
+              .input-group
+                = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "Search by title, user, or department..."
+                / %input#search.form-control{:placeholder => "search ...", :type => "text"}
               / .col-xs-2.no-padding
               /   %button.btn.btn-main{:type => "submit"}
               /    .fa.fa-search
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+            .profile
+              %span
+              = image_tag "dropdown-icon.png", class: "drop-icon"
+          %ul.dropdown-menu{:role => "menu"}
+            %li
+              = render 'pages/department_nav'
         / %li.page_title.hidden-xs
         /   %h3= @page_title
