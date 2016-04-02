@@ -5,10 +5,10 @@
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
         %h4.modal-title
-          Create New Post
+          Create Post
       .slide-1
         = form_for Post.new, :html => { multipart: true },remote: true do |f|
-          .modal-body.row
+          .modal-body
             = f.hidden_field :user_id, value: current_user.try(:id)
             = f.hidden_field :organization_id, value: current_user.try(:organization).try(:id)
             .field.col-xs-12
@@ -22,7 +22,7 @@
               = render 'layouts/department_selector', context: current_organization, department_entries: current_organization.department_entries
             .field.col-xs-12
               = f.label :content
-              = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5, maxlength: 250
+              = f.text_area :content, class: "form-control", placeholder: "Enter description...", rows: 4, maxlength: 250
             .field.col-xs-12
               %i Posts are by default anonymous, and the poster identity is always revealed when a post becomes a launch action item.
               - if can? :update, current_organization

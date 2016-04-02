@@ -9,6 +9,7 @@
 .yellow { background-color:$yellow; }
 .orange { background-color:$orange; }
 .red { background-color: $red; }
+.blue { background-color: $blue; }
 
 .notification-card{
   color: rgb(124, 139, 155);
@@ -128,13 +129,19 @@ html, body {
     padding: 10px;
 
     img {
-      margin: 5px;
-      height: 30px;
+      /* margin: 5px; */
+      height: 35px;
     }
   }
 
   .nav {
     margin: 0px;
+  }
+
+  .navbar-nav {
+    .dropdown {
+      margin-left: 5px;
+    }
   }
 
   .navicon {
@@ -155,8 +162,8 @@ html, body {
 
       .notification_counter {
         position: absolute;
-        top: 8px;
-        right: 8px;
+        top: 4px;
+        right: 2px;
         font-size: 10px;
         padding:0 7px;
         /* line-height: 25px; */
@@ -164,7 +171,10 @@ html, body {
         /* height: 20px; */
         /* background: $nav_hover; */
         color: $white;
-        @include border_radius(40%);
+        @include border_radius(0.8rem);
+        &.red {
+          right:-5px;
+        }
       }
 
       span:before {
@@ -180,9 +190,11 @@ html, body {
     font-size: 16px;
     font-weight: 600;
     color: $white;
+
     span {
       padding: 10px 0 10px 5px;
       line-height: 30px;
+
     }
     .profile-img {
       width: 34px;
@@ -194,8 +206,9 @@ html, body {
 
   li a {
     color:$white !important;
-    padding-top:10px;
-    padding-bottom:10px;
+    /* padding-top:11px;
+    padding-bottom:11px; */
+    padding:10px;
 
     &:hover, &:focus, &:active {
       color: $white !important;
@@ -328,7 +341,7 @@ html, body {
 
       li a {
         text-align: left;
-        padding: 10px 15px;
+        /* padding: 10px 15px; */
         font-size: 14px;
         font-weight: 600;
         background-color: $trans;
@@ -488,6 +501,11 @@ a:hover {
 
 .img-responsive {
   margin: auto;
+}
+.badge {
+  background:$green;
+  padding:5px 7px;
+  @include border_radius(8px);
 }
 
 // ------------------

@@ -26,12 +26,25 @@
 // }
 .carousel-indicators{
   position:absolute;
-  bottom:0px;
-  margin-bottom: -25px;
-  padding-bottom: 4px;
+  /* bottom:0px; */
+  margin: 0;
+  margin-bottom: -20px;
+  /* padding-bottom: 16px; */
+  padding:3px;
+  width: auto;
+  display: none;
+
+  @include border_radius(5px);
+  .active {
+    background:$white;
+    border:1px solid $trans;
+    width:8px;
+    height:8px;
+  }
   li{
     /* border:2px solid #e2e2e2; */
-    background-color:$l-grey;
+    border:1px solid $green;
+    box-shadow: $shadow-2;
   }
  }
 .float-left{
@@ -151,9 +164,9 @@ h3.page_title {
 }
 
 .post-wrapper {
-  height: 450px;
+  height: 275px;
   margin-bottom: 20px;
-  padding: 0px 20px;
+  padding: 0px 1%;
   vertical-align: top;
   display: inline-block;
   text-align: left;
@@ -174,7 +187,7 @@ h3.page_title {
     height: 100%;
     max-width: 340px;
     min-width: 300px;
-    margin: auto;
+    /* margin: auto; */
     background-color: $white !important;
     box-shadow: $shadow-2;
 
@@ -227,20 +240,27 @@ h3.page_title {
     }
 
     .content {
-      color: $m-grey;
+      color: $grey;
       font-size: 14px;
-      line-height: 22px;
       h4 {
         font-weight: 600;
+        color: $d-grey;
+        /* font-size:16px; */
       }
       .carousel {
         /* margin-top: 8px; */
-        margin-bottom: 20px;
+        /* margin-bottom: 20px; */
+        /* display: none; */
       }
       .image-wrapper {
-        max-height: 175px;
+        height: 175px;
         @include border_radius_top(10px);
+
         img { margin: auto; }
+        display:none;
+      }
+      .col-xs-12 {
+        padding-top:10px;
       }
       .options {
         float: right;
@@ -460,7 +480,9 @@ h3.page_title {
     }
   }
 }
-
+.modal {
+  overflow-y: auto;
+}
 .modal h4.modal-title {
   overflow:hidden;
   white-space:nowrap;
@@ -495,7 +517,7 @@ h3.page_title {
         display: inline-block;
         padding: 0px 5px;
         line-height: 18px;
-        color: $m-grey;
+        color: $grey;
       }
     }
   }
@@ -564,16 +586,20 @@ h3.page_title {
 
 #new-post-toggler {
   position: fixed;
-  bottom: 100px;
-  right: 100px;
-  height: 50px;
-  width: 50px;
+  bottom: 30px;
+  right: 30px;
   /* border-radius: 50px; */
   /* background-color: $inverse_text_off; */
   /* opacity: 0.75; */
   /* color: $inverse_text_main; */
 
-  &:hover {
+  img {
+    height: 100px;
+    width: 100px;
+  }
+
+  &:hover, &:active {
+    box-shadow: none;
     /* background-color: $inverse_text_off !important; */
     /* opacity: 1.0; */
   }

@@ -45,6 +45,11 @@
       - if current_user
         / %li.divider-vertical
         %li.navicon
+          = link_to dashboard_path, class: "body-loading popover-trigger" , data: {content: "Alerts", placement: "bottom", trigger: "hover"} do
+            = image_tag "check-icon.png"
+            #idea_counter.notification_counter.blue
+              = current_user.notifications.count
+        %li.navicon
           = link_to dashboard_path, class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "bottom", trigger: "hover"} do
             -#%i.fa.fa-lightbulb-o
             = image_tag "bulb-icon.png", class: "bulb"
@@ -59,9 +64,9 @@
         %li.navicon
           = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading popover-trigger", data: {content: "My Upvotes", placement: "bottom", trigger: "hover"} do
             -#%i.fa.fa-eye
-            = image_tag "check-icon.png"
+            = image_tag "launched-icon.png"
             #pending_counter.notification_counter.red
-              = current_organization_posts('pending_posts').count
+              = current_organization_posts('following_posts').count
         -#%li.profile.hidden-xs
         -#  %span
         -#    Welcome, #{current_user.first_name}
@@ -86,38 +91,38 @@
             / %span.flaticon-black56
             / %span
             /  Welcome, #{current_user.first_name}
+          -# %ul.dropdown-menu{:role => "menu"}
+          -#   - if can? :update, current_user
+          -#     %li
+          -#       = link_to '#', class: 'popover-trigger', data: {target: "#edit-user", toggle: "modal", content: "Edit personal account details", placement: "right", trigger: "hover"} do
+          -#         Edit User Profile
+          -#   - if can? :update, current_organization
+          -#     %li
+          -#       = link_to '#', class: 'popover-trigger', data: {target: "#edit-org", toggle: "modal", content: "Edit organzation details and departments", placement: "right", trigger: "hover"} do
+          -#         Edit Organization
+          -#     %li
+          -#       = link_to :summary, class: 'popover-trigger', data: {content: "Performance indices and metrics", placement: "right", trigger: "hover"} do
+          -#         Analytics
+          -#     / %li
+          -#     /   = link_to :newsfeed, class: 'popover-trigger', data: {content: "Leaderboard", placement: "right", trigger: "hover"} do
+          -#     /     Leaderboard
+          -#     %li
+          -#       = link_to dashboard_path(:dashboard_page => "archive"), class: "body-loading popover-trigger", data: {content: "Previously launched, completed, and failed items", placement: "right", trigger: "hover"} do
+          -#         Archive
+          -#     %li
+          -#       = link_to manage_users_organization_path(current_organization), remote: true, class: "popover-trigger", data: {content: "Manage departments and members", placement: "right", trigger: "hover"} do
+          -#         Manage Users
+          -#     %li
+          -#       = link_to :logout do
+          -#         Logout
           %ul.dropdown-menu{:role => "menu"}
             - if can? :update, current_user
               %li
-                = link_to '#', class: 'popover-trigger', data: {target: "#edit-user", toggle: "modal", content: "Edit personal account details", placement: "right", trigger: "hover"} do
+                = link_to '#', data: {target: "#edit-user", toggle: "modal"} do
                   Edit User Profile
             - if can? :update, current_organization
               %li
-                = link_to '#', class: 'popover-trigger', data: {target: "#edit-org", toggle: "modal", content: "Edit organzation details and departments", placement: "right", trigger: "hover"} do
-                  Edit Organization
-              %li
-                = link_to :summary, class: 'popover-trigger', data: {content: "Performance indices and metrics", placement: "right", trigger: "hover"} do
-                  Analytics
-              / %li
-              /   = link_to :newsfeed, class: 'popover-trigger', data: {content: "Leaderboard", placement: "right", trigger: "hover"} do
-              /     Leaderboard
-              %li
-                = link_to dashboard_path(:dashboard_page => "archive"), class: "body-loading popover-trigger", data: {content: "Previously launched, completed, and failed items", placement: "right", trigger: "hover"} do
-                  Archive
-              %li
-                = link_to manage_users_organization_path(current_organization), remote: true, class: "popover-trigger", data: {content: "Manage departments and members", placement: "right", trigger: "hover"} do
-                  Manage Users
-              %li
-                = link_to :logout do
-                  Logout
-          %ul.dropdown-menu{:role => "menu"}
-            - if can? :update, current_user
-              %li
-                = link_to '#' do
-                  Edit User Profile
-            - if can? :update, current_organization
-              %li
-                = link_to '#' do
+                = link_to '#', data: {target: "#edit-org", toggle: "modal"} do
                   Edit Organization
               %li
                 = link_to :summary do
@@ -126,18 +131,18 @@
               /   = link_to :newsfeed do
               /     Leaderboard
               %li
-                = link_to dashboard_path(:dashboard_page => "archive") do
+                = link_to dashboard_path(:dashboard_page => "archive"), class: "body-loading" do
                   Archive
               %li
-                = link_to manage_users_organization_path(current_organization) do
+                = link_to manage_users_organization_path(current_organization), remote: true do
                   Manage Users
               %li
                 = link_to :logout do
                   Logout
         -#%li.dropdown.hidden-xs
-        -#  %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-        -#    .fa.fa-bell
-            %span.caret
+          -#%a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+            -#.fa.fa-bell
+            -#%span.caret
           %ul.dropdown-menu.notification{:role => "menu"}
             = sync_new partial: 'notification', resource: PublicActivity::Activity.new, scope:current_user
             - @notifications = current_user.notifications.order(created_at: :desc)
