@@ -24,7 +24,7 @@
         = form_tag search_path, class: "form-inline", remote: (request.path == '/search'), :method => :get do
           .form-group
             .input-group
-              = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "Search by title, user, or department..."
+              = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "Search by title..."
               / %input#search.form-control{:placeholder => "search ...", :type => "text"}
             / .col-xs-2.no-padding
             /   %button.btn.btn-main{:type => "submit"}
@@ -62,7 +62,7 @@
             #pending_counter.notification_counter.orange
               = current_organization_posts('pending_posts').count
         %li.navicon
-          = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading popover-trigger", data: {content: "My Upvotes", placement: "bottom", trigger: "hover"} do
+          = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading popover-trigger", data: {content: "Upvotes", placement: "bottom", trigger: "hover"} do
             -#%i.fa.fa-eye
             = image_tag "launched-icon.png"
             #pending_counter.notification_counter.red

@@ -11,7 +11,8 @@
 
 .row
   - if @posts.empty?
-    %h3.text-center Sorry, looks like there's nothing here.
+    = image_tag "huh-icon.png"
+    %h3.text-center Huh, looks like there's nothing here.
 
   - if @sort != "discussed" && @sort != "upvoted"
     = render 'pages/new_post_partial'
@@ -21,7 +22,7 @@
   .last-elm{style:"height:1px;width:1px;"}
 
 .row
-  .col-xs-12
+  .col-xs-10.col-xs-offset-1
     = will_paginate @posts, class: 'digg_pagination'
 
 / -if @sort == "discussed" || @sort == "upvoted"

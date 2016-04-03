@@ -140,7 +140,7 @@ html, body {
 
   .navbar-nav {
     .dropdown {
-      margin-left: 5px;
+      margin-left: 15px;
     }
   }
 
@@ -173,7 +173,7 @@ html, body {
         color: $white;
         @include border_radius(0.8rem);
         &.red {
-          right:-5px;
+          right:-10px;
         }
       }
 
@@ -203,6 +203,13 @@ html, body {
       @include border_radius(50%);
     }
   }
+  @media screen and (max-width:416px) {
+    .profile {
+      span {
+        display:none;
+      }
+    }
+  }
 
   li a {
     color:$white !important;
@@ -217,7 +224,7 @@ html, body {
   }
 
   li form {
-    padding: 10px 20px;
+    padding: 10px 5px 10px 20px;
 
     input {
       @include border_radius_exl(7px);
@@ -836,10 +843,18 @@ a:hover {
 // }
 
 .btn-project, .btn-fun, .btn-facility, .btn-approval-true, .btn-approval-false {
-  background-color: $default_text_main;
-  color: $default_background;
+  background-color: $white;
+  color: $white;
+  font-weight: 600;
+
+  img { height:32px; }
+
+  .count { margin-left:-25px;}
   &:hover {
     opacity: 0.75;
+  }
+  &:focus, &:active {
+    box-shadow: none;
   }
 }
 

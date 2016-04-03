@@ -1,4 +1,4 @@
 - if @posts.empty?
-    %h3.text-center Sorry, looks like there's nothing here.
+    %h3.text-center Hmmm, looks like there's nothing here.
 - @posts.each do |post|
   = sync partial: "card", resource: post
