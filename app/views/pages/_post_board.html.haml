@@ -9,7 +9,7 @@
 -#    = will_paginate @posts, class: 'digg_pagination'
 -#  %br
 
-.row
+.col-sm-12
   - if @posts.empty?
     = image_tag "huh-icon.png"
     %h3.text-center Huh, looks like there's nothing here.
@@ -21,7 +21,7 @@
     = sync partial: "card", resource: post
   .last-elm{style:"height:1px;width:1px;"}
 
-.row
+.col-sm-12
   .col-xs-10.col-xs-offset-1
     = will_paginate @posts, class: 'digg_pagination'
 

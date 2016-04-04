@@ -2,6 +2,17 @@
 
 .summary
   #analytics-carousel.carousel.slide{"data-ride" => "carousel"}
+    %ul.alt-indicators
+      %li
+        %p
+          From:
+          %b July 02, 2015
+          %span.fa.fa-edit
+      %li
+        %p
+          To:
+          %b July 08, 2015
+          %span.fa.fa-edit
     %ul.carousel-indicators
       %li.active{"data-slide-to" => "0", "data-target" => "#analytics-carousel"}
         .headline Contributions
@@ -18,17 +29,6 @@
       %li{"data-slide-to" => "4", "data-target" => "#analytics-carousel"}
         .headline Detailed Trends
         .subline on Idea Generation
-    %ul.alt-indicators
-      %li
-        %p
-          From:
-          %b July 02, 2015
-          %span.fa.fa-edit
-      %li
-        %p
-          To:
-          %b July 08, 2015
-          %span.fa.fa-edit
     / Wrapper for slides
     .carousel-inner{:role => "listbox"}
       .item.active

@@ -6,6 +6,9 @@
 
   .analytics_data_table_wrapper {
     padding: 20px;
+    /* background: $white; */
+    /* box-shadow: $shadow-2; */
+    /* @include border_radius(10px); */
 
     thead.text-center th {
       text-align: center;
@@ -15,7 +18,38 @@
       /* border: 1px solid #fff; */
       background:$white;
       box-shadow: $shadow-2;
-      @include border_radius(10px);
+      @include border_radius_exl(10px);
+    }
+  }
+
+  .dataTables_filter {
+    input {
+      @include border_radius_exl(7px);
+      background-color:rgba(255,255,255,0.4);
+      background:rgba(255,255,255,0.4) image-url("search-icon.png") 1rem center no-repeat;
+      background-size:13px;
+      color:$white !important;
+      box-shadow: none;
+      border:1px solid $trans;
+      height:36px;
+      text-indent: 1.5rem;
+      font-size: 16px;
+      font-weight: 500;
+
+      @include transition(0.5s);
+
+      &:focus {
+        border:1px solid $ghost;
+        outline: 0;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        -ms-box-shadow: none;
+        -o-box-shadow: none;
+        box-shadow: none;
+        @include placeholder-active;
+      }
+
+      @include placeholder;
     }
   }
 
@@ -52,13 +86,13 @@
   }
 
   #analytics-carousel .carousel-inner {
-    margin-top: 80px;
+    /* margin-top: 80px; */
+
   }
 
   #analytics-carousel {
 
     .carousel-indicators {
-      top: 30px;
       width: 100%;
       text-align: center;
       color: $white;
@@ -70,6 +104,7 @@
       width: 100%;
       text-align: center;
       color: $white;
+      margin-bottom:20px;
       li {
         display: inline-block;
         list-style: none;
@@ -335,12 +370,14 @@
   border:1px solid $white; }
 .digg_pagination a {
   text-decoration: none;
-  color: $grey;
-  border: 1px solid $grey;
-  border:none; }
+  color: $grey !important;
+  border: 1px solid $trans; }
   .digg_pagination a:hover, .digg_pagination a:focus {
-    color: $white;
-    border-color: $white; }
+    color: $white !important;
+    border:1px solid $white; }
+.digg_pagination span {
+  color: $grey;
+}
 .digg_pagination .page_info {
   background: $grey;
   color: white;

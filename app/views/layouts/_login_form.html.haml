@@ -1,5 +1,6 @@
-#login.modal.fade
+#login.modal.fade.green-grad
   .modal-dialog
+    = image_tag "launchboard-square.png", class: "login-brand"
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -9,12 +10,12 @@
       = form_for UserSession.new do |f|
         .modal-body
           .field
-            = f.label :username
-            = f.text_field :username, class: "form-control", id: "login_username"
+            /= f.label :username
+            = f.text_field :username, class: "form-control user", id: "login_username", placeholder: "username"
           .field
-            = f.label :password
-            = f.password_field :password, class: "form-control"
+            /= f.label :password
+            = f.password_field :password, class: "form-control lock", placeholder: "password"
         .modal-footer
           .actions
-            = f.submit 'Log In', class: "btn btn-main"
+            = f.submit 'Submit', class: "btn btn-main"
             / %button.btn.btn-main.off{"data-dismiss" => "modal", :type => "button"} Cancel

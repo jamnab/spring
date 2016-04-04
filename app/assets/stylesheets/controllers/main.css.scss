@@ -85,10 +85,11 @@
 
 html, body {
   height: 100%;
-  width: 100%;
-  min-width: 480px;
+  /* width: 100%; */
+  /* min-width: 480px; */
   /* background-color: $white; */
   background:$green-grad-flip;
+  color: $grey;
   /* overflow-x: hidden; */
 }
 .body-wrapper {
@@ -384,7 +385,6 @@ html, body {
       }
     }
   }
-
   // .search {
   //   position: absolute;
   //   width: 350px;
@@ -484,6 +484,13 @@ html, body {
   // }
 }
 
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+  background-color: $trans $imp;
+}
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+  background-color: $trans $imp;
+}
+
 @media (max-width: 767px) {
 .navbar-collapse .nav > .divider-vertical {
     display: none;
@@ -491,7 +498,7 @@ html, body {
 }
 
 .container {
-  width: 100%;
+  /* width: 100%; */
 }
 
 .btn {
@@ -515,7 +522,7 @@ a:hover {
   @include border_radius(8px);
 }
 
-// ------------------
+/** ------------------ **/
 
 .sidebar {
   position: absolute;
@@ -593,7 +600,7 @@ a:hover {
   color: #fff;
 
   .profile {
-    // border-bottom: 1px solid $default_text_main;
+    /* border-bottom: 1px solid $default_text_main; */
 
     img {
       padding: 10px;
@@ -603,7 +610,7 @@ a:hover {
   }
 
   .navicons {
-    // margin-top: -4px;
+    /* margin-top: -4px; */
     margin-top: 66px;
     border-top: 1px solid $default_text_off;
 
@@ -718,13 +725,13 @@ a:hover {
 
 .body-wrapper {
   /* overflow: hidden; */
-  width: 100%;
+  /* width: 100%; */
 }
 
 .body-wrapper.isOpen { transform: translate3d(351px, 0, 0); }
 .sidebar.isOpen { transform: translate3d(350px, 0, 0); }
 
-// -------------------
+/** ------------------- **/
 
 .pinned-toggler {
   margin-top: 15px;
@@ -766,7 +773,7 @@ a:hover {
 }
 
 
-// button styles
+/** button styles **/
 
 .post, .comment {
 
@@ -870,7 +877,7 @@ a:hover {
   background-color: $main_facility;
 }
 
-// popup forms
+/** popup forms **/
 
 #comment_anonymous, #comment_suggestion, #user_manager {
   display: inline-block;
@@ -975,9 +982,9 @@ body .modal-dialog {
   }
 }
 
-// #comment_plain, #comment_content, #comment_suggestion {
-//   margin-top: 10px;
-// }
+/* #comment_plain, #comment_content, #comment_suggestion {
+   margin-top: 10px;
+} */
 
 form .field {
   margin-top: 10px;
