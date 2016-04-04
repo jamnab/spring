@@ -373,8 +373,11 @@
   color: $grey !important;
   border: 1px solid $trans; }
   .digg_pagination a:hover, .digg_pagination a:focus {
-    color: $white !important;
-    border:1px solid $white; }
+    color: $green !important;
+    background: $white $imp;
+    /* border:1px solid $white; */
+    @include transition(0.5s);
+  }
 .digg_pagination span {
   color: $grey;
 }

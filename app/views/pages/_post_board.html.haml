@@ -22,8 +22,7 @@
   .last-elm{style:"height:1px;width:1px;"}
 
 .col-sm-12
-  .col-xs-10.col-xs-offset-1
-    = will_paginate @posts, class: 'digg_pagination'
+  = will_paginate @posts, class: 'digg_pagination'
 
 / -if @sort == "discussed" || @sort == "upvoted"
 /   = render 'pages/new_post_partial'
