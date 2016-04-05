@@ -44,13 +44,24 @@
     %ul.nav.navbar-nav
       - if current_user
         / %li.divider-vertical
-        %li.navicon
-          = link_to dashboard_path, class: "body-loading popover-trigger" , data: {content: "Alerts", placement: "bottom", trigger: "hover"} do
+        /%li.navicon
+        /  = link_to dashboard_path, class: "body-loading popover-trigger" , data: {content: "Alerts", placement: "bottom", trigger: "hover"} do
+        /    = image_tag "check-icon.png"
+        /    #idea_counter.notification_counter.blue
+        /      = current_user.notifications.count
+        %li.navicon.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
             = image_tag "check-icon.png"
             #idea_counter.notification_counter.blue
               = current_user.notifications.count
+          %ul.dropdown-menu.notification{:role => "menu"}
+            = sync_new partial: 'notification', resource: PublicActivity::Activity.new, scope:current_user
+            - @notifications = current_user.notifications.order(created_at: :desc)
+            - @notifications[0,10].each do |n|
+              - activity = n.activity
+              = sync partial: 'notification', resource: activity
         %li.navicon
-          = link_to dashboard_path, class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "bottom", trigger: "hover"} do
+          = link_to dashboard_path(:dashboard_page => "dashboard"), class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "bottom", trigger: "hover"} do
             -#%i.fa.fa-lightbulb-o
             = image_tag "bulb-icon.png", class: "bulb"
             #idea_counter.notification_counter.yellow

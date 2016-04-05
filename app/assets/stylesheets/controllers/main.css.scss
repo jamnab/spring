@@ -186,6 +186,13 @@ html, body {
       }
     }
   }
+  .popover {
+    box-shadow: $shadow;
+    border: none;
+    .arrow {
+      border: none;
+    }
+  }
 
   .profile {
     font-size: 16px;
@@ -891,11 +898,11 @@ a:hover {
 .modal-dialog {
   .modal-content {
     .modal-header {
-      background-color: $nav_background;
-      color: $inverse_text_main;
+      background-color: $green;
+      color: $white;
     }
     .btn.btn-main {
-      background-color: $nav_background;
+      /* background-color: $nav_background; */
     }
   }
 }

@@ -172,7 +172,7 @@
                   / %span.fa.fa-thumbs-up
                   = image_tag "launch-icon.png"
           - else
-            = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "popover-trigger post-discussion-toggler", data: {content: "Discussion", placement: "top", trigger: "hover"} do
+            = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "popover-trigger post-discussion-toggler", data: {content: "Comment", placement: "top", trigger: "hover"} do
               .btn.btn-sm.post-loading.btn-counter{id: "#{post.id}",class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}
                 /%span.flaticon-comments8
                 = image_tag "comment-icon.png"

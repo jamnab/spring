@@ -88,6 +88,14 @@
   }
 }
 
+.popover {
+  box-shadow: $shadow;
+  border: none;
+  /* .arrow {
+    border: none;
+  } */
+}
+
 .comment-filters {
   text-align: left;
   height: 50px;
@@ -135,14 +143,17 @@
 }
 
 .btn-main {
-  background-color: $inverse_text_off;
-  opacity: 0.9;
+  background: $green-grad;
 
   &.on  { opacity: 0.9; }
   &.off { opacity: 0.6; }
 
-  &:hover {
-    opacity: 1.0;
+  &:hover, &:active, &:focus {
+    background-color: $green;
+    color:$white;
+    box-shadow: none;
+
+    @include transition(0.5s);
   }
 }
 
@@ -158,13 +169,13 @@ h3.page_title {
   text-align: center;
   min-height: 400px;
 
-  .row h3 {
+  .row h3, h3 {
     color:$white;
   }
 }
 
 .post-wrapper {
-  height: 300px;
+  height: 30rem;
   margin-bottom: 20px;
   /* padding: 0px 1%; */
   vertical-align: top;
