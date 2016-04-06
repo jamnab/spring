@@ -30,6 +30,71 @@ class User < ActiveRecord::Base
   after_create :sign_up_email
   # has_many :departments, through: :department_entries
 
+
+  ## => Email Notification Settings field (string of digits)
+  ## 0 -> Never, 1 -> Instant, 2 -> Compile to EoD
+  ##  setting_id => setting
+  ## NEVER change the order, ALAWAYS ADD TO END
+  NOTIFICATION_TYPES = []
+  NOTIFICATION_TYPES[0]  = "new idea in your department for view"
+  NOTIFICATION_TYPES[1]  = "new idea pending approval (for managers)"
+  NOTIFICATION_TYPES[2]  = "new comment on your idea post"
+  NOTIFICATION_TYPES[3]  = "new comment on an idea you upvoted"
+  NOTIFICATION_TYPES[4]  = "your idea was approved for listing"
+  NOTIFICATION_TYPES[5]  = "your idea was denied for listing"
+  NOTIFICATION_TYPES[6]  = "an action date was set for your launched idea"
+  NOTIFICATION_TYPES[7]  = "your idea was launched"
+  NOTIFICATION_TYPES[8]  = "new launched idea in your department"
+  NOTIFICATION_DEFAULT = "211211211"
+
+  def get_notification_setting(notification_type)
+    if self.notification_settings.nil?
+      self.update(notification_settings: User::NOTIFICATION_DEFAULT)
+    end
+
+    if self.notification_settings.length < notification_type
+      # default end of day
+      return '2'
+    else
+      return self.notification_settings[notification_type - 1]
+    end
+  end
+
+  def process_email_notification(notification_type, n)
+    # send right away, add to_compile, or muck
+    ns = self.get_notification_setting(notification_type)
+    if ns == '0'
+      # muck, do nothing
+    elsif ns == '1'
+      # send now
+      case notification_type
+        when 0
+          # ProjectMailer.new_notification('new_proposal', n.trackable, n.recipient.email)
+        when 1
+          # ProjectMailer.new_notification('update_proposal', n.trackable, n.recipient.email)
+        when 2
+          # ProjectMailer.new_notification('new_message', n.trackable, n.recipient.email)
+        when 3
+          # todo: no activity generator & notification view template
+        when 4
+          # UserMailer.new_notification('new_connection_req', n.trackable.user_from, n.recipient.email)
+        when 5
+          # UserMailer.new_notification('accept_connection_req', n.trackable.user_to, n.recipient.email)
+        when 6
+          # UserMailer.new_notification('new_follower', n.trackable.follower, n.recipient.email)
+        when 7
+          # UserMailer.new_notification('new_fr_request', n.trackable, n.recipient.email)
+        when 8
+          # UserMailer.new_notification('new_fr_message', n.trackable, n.recipient.email)
+      end
+    elsif ns == '2'
+      # add to_compile
+      n.update(to_compile: true)
+    else
+      # unknown, do nothing
+    end
+  end
+
   def sign_up_email
     UserMailer.sign_up_email(self).deliver_now
   end

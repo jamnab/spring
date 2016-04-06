@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406173834) do
+ActiveRecord::Schema.define(version: 20160406194830) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20160406173834) do
     t.integer  "activity_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "to_compile",            default: false
   end
 
   create_table "opinions", force: :cascade do |t|
@@ -273,6 +274,7 @@ ActiveRecord::Schema.define(version: 20160406173834) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "subscribe_to_newsletter",             default: false
+    t.string   "notification_settings",   limit: 255, default: "211211211"
   end
 
 end
