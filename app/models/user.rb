@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   NOTIFICATION_TYPES[2]  = "new comment on your idea post"
   NOTIFICATION_TYPES[3]  = "new comment on an idea you upvoted"
   NOTIFICATION_TYPES[4]  = "your idea was approved for listing"
-  NOTIFICATION_TYPES[5]  = "your idea was denied for listing"
+  NOTIFICATION_TYPES[5]  = "your idea was rejected for listing"
   NOTIFICATION_TYPES[6]  = "an action date was set for your launched idea"
   NOTIFICATION_TYPES[7]  = "your idea was launched"
   NOTIFICATION_TYPES[8]  = "new launched idea in your department"
