@@ -64,7 +64,8 @@ class PostsController < ApplicationController
         end
         if !params[:departments].nil?
           params[:departments].each do |de_id|
-            PostDepartmentEntry.create(post: @post, department_entry_id: de_id)
+            de = DepartmentEntry.find(de_id)
+            PostDepartmentEntry.create(post: @post, department_entry_id: de_id, approved: !de.approval_required)
           end
         end
         # sync_new @post, scope: current_organization
@@ -100,7 +101,8 @@ class PostsController < ApplicationController
         if !params[:departments].nil?
           @post.post_department_entries.each{|x| x.destroy}
           params[:departments].each do |de_id|
-            PostDepartmentEntry.create(post: @post, department_entry_id: de_id)
+            de = DepartmentEntry.find(de_id)
+            PostDepartmentEntry.create(post: @post, department_entry_id: de_id, approved: !de.approval_required)
           end
         end
         sync_update @post
@@ -117,10 +119,22 @@ class PostsController < ApplicationController
     @url = Rails.env.production? ? request.host : request.host_with_port
     @viewmode = params[:viewmode]
 
-    # listing approval
+    # visibility approval
     if !params[:approved].nil?
-      if params[:approved] == "true"
-        @post.update(approved: true)
+      if params[:approved] == "true"    # giving approval
+        # department manager approve all managed departments
+        @post.approval_pending_department_entries do |dde|
+          if current_user.decision_departments.include?(dde.department_name)
+            dde.update(approved: true)
+          end
+        end
+
+        # update overall approval based on result
+        if @post.post_department_entries.where(approved: false).empty?
+          @post.update(approved: true)
+        else
+          @post.update(approved: false)
+        end
       else
         @post.update(graveyard: true)
       end

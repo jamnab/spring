@@ -39,7 +39,19 @@ class User < ActiveRecord::Base
   end
 
   def decision_departments
-    self.department_entry_memberships.where(admin: true).map{|x| x.department_name}
+    if self.manager
+      self.organization.departments
+    else
+      self.department_entry_memberships.where(admin: true).map{|x| x.department_name}
+    end
+  end
+
+  def decision_department_entries
+    if self.manager
+      self.organization.department_entries
+    else
+      self.department_entry_memberships.where(admin: true).map{|x| x.department_entry}
+    end
   end
 
   # has_one :organization_membership, dependent: :destroy

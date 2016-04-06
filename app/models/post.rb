@@ -15,6 +15,10 @@ class Post < ActiveRecord::Base
     self.department_entries.map{|x| x.department_name}
   end
 
+  def approval_pending_department_entries
+    self.post_department_entries.where(approved: false).map{|x| x.department_entry}
+  end
+
   has_many :favourites
 
   has_many :pictures, dependent: :destroy
