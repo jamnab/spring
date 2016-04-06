@@ -11,4 +11,8 @@ class DepartmentEntry < ActiveRecord::Base
 
   has_many :department_entry_memberships, dependent: :destroy
   has_many :users, through: :department_entry_memberships
+
+  def managers
+    self.department_entry_memberships.where(admin: true).map{|x| x.user}
+  end
 end

@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   NOTIFICATION_TYPES[6]  = "an action date was set for your launched idea"
   NOTIFICATION_TYPES[7]  = "your idea was launched"
   NOTIFICATION_TYPES[8]  = "new launched idea in your department"
-  NOTIFICATION_DEFAULT = "211211211"
+  NOTIFICATION_DEFAULT = "210011211"
 
   def get_notification_setting(notification_type)
     if self.notification_settings.nil?
@@ -69,23 +69,20 @@ class User < ActiveRecord::Base
       # send now
       case notification_type
         when 0
-          # ProjectMailer.new_notification('new_proposal', n.trackable, n.recipient.email)
+          UserMailer.new_notification('new_post_view', n.activity.trackable)
         when 1
-          # ProjectMailer.new_notification('update_proposal', n.trackable, n.recipient.email)
-        when 2
-          # ProjectMailer.new_notification('new_message', n.trackable, n.recipient.email)
+          UserMailer.new_notification('new_post_pending', n.activity.trackable)
+        when 2    # same as 3
         when 3
-          # todo: no activity generator & notification view template
-        when 4
-          # UserMailer.new_notification('new_connection_req', n.trackable.user_from, n.recipient.email)
+          # TODO, default never
+        when 4    # same as 5
         when 5
-          # UserMailer.new_notification('accept_connection_req', n.trackable.user_to, n.recipient.email)
+          UserMailer.new_notification('post_verdict', n.activity.trackable)
         when 6
-          # UserMailer.new_notification('new_follower', n.trackable.follower, n.recipient.email)
-        when 7
-          # UserMailer.new_notification('new_fr_request', n.trackable, n.recipient.email)
+          UserMailer.new_notification('action_date', n.activity.trackable)
+        when 7    # same as 8
         when 8
-          # UserMailer.new_notification('new_fr_message', n.trackable, n.recipient.email)
+          UserMailer.new_notification('new_launched_post', n.activity.trackable)
       end
     elsif ns == '2'
       # add to_compile

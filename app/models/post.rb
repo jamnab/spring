@@ -19,6 +19,11 @@ class Post < ActiveRecord::Base
     self.post_department_entries.where(approved: false).map{|x| x.department_entry}
   end
 
+  def judge_list
+    judges = self.post_department_entries.where(approved: false).map{|x| x.department_entry.managers}.flatten.uniq
+    return (judges + self.organization.managers)
+  end
+
   has_many :favourites
 
   has_many :pictures, dependent: :destroy
