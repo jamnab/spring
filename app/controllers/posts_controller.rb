@@ -50,8 +50,14 @@ class PostsController < ApplicationController
           sync_new @activity
         end
         current_user.organization.users.uniq.each do |u|
-          Notification.create(user: u, activity: @activity)
+          n = Notification.create(user: u, activity: @activity)
           sync_new @activity, scope: u
+
+          if @post.judge_list.include?(u)
+            n.user.process_email_notification(1, n)
+          else
+            n.user.process_email_notification(0, n)
+          end
         end
         # @msg = "Your post was created successfully"
         # @class = "success"
@@ -64,7 +70,8 @@ class PostsController < ApplicationController
         end
         if !params[:departments].nil?
           params[:departments].each do |de_id|
-            PostDepartmentEntry.create(post: @post, department_entry_id: de_id)
+            de = DepartmentEntry.find(de_id)
+            PostDepartmentEntry.create(post: @post, department_entry_id: de_id, approved: !de.approval_required)
           end
         end
         # sync_new @post, scope: current_organization
@@ -86,6 +93,9 @@ class PostsController < ApplicationController
       }
     end
     @viewmode = params[:viewmode]
+
+    pre_update_action_date = @post.action_date
+
     respond_to do |format|
       if @post.update(post_params)
         @activity = PublicActivity::Activity.create(owner: current_user,
@@ -97,10 +107,23 @@ class PostsController < ApplicationController
           Notification.create(user: u, activity: @activity)
           sync_new @activity, scope:u
         end
+
+        # handle new action date
+        if pre_update_action_date.nil? && !@post.action_date.nil?
+          @activity = PublicActivity::Activity.create(owner: current_user,
+            key: 'Post.added_action_date', trackable: @post)
+          if @activity.id != nil
+            sync_new @activity
+          end
+          n = Notification.create(user: @post.user, activity: @activity)
+          n.user.process_email_notification(6, n)
+        end
+
         if !params[:departments].nil?
           @post.post_department_entries.each{|x| x.destroy}
           params[:departments].each do |de_id|
-            PostDepartmentEntry.create(post: @post, department_entry_id: de_id)
+            de = DepartmentEntry.find(de_id)
+            PostDepartmentEntry.create(post: @post, department_entry_id: de_id, approved: !de.approval_required)
           end
         end
         sync_update @post
@@ -117,14 +140,33 @@ class PostsController < ApplicationController
     @url = Rails.env.production? ? request.host : request.host_with_port
     @viewmode = params[:viewmode]
 
-    # listing approval
+    # visibility approval
     if !params[:approved].nil?
-      if params[:approved] == "true"
-        @post.update(approved: true)
+      if params[:approved] == "true"    # giving approval
+        # department manager approve all managed departments
+        @post.approval_pending_department_entries do |dde|
+          if current_user.decision_departments.include?(dde.department_name)
+            dde.update(approved: true)
+          end
+        end
+
+        # update overall approval based on result
+        if @post.post_department_entries.where(approved: false).empty?
+          @post.update(approved: true)
+        else
+          @post.update(approved: false)
+        end
       else
         @post.update(graveyard: true)
       end
-      # Notifier.post_update(@post, @url).deliver!
+
+      @activity = PublicActivity::Activity.create(owner: current_user,
+          key: 'Post.judged', trackable: @post)
+      if @activity.id != nil
+        sync_new @activity
+      end
+      n = Notification.create(user: @post.user, activity: @activity)
+      n.user.process_email_notification(5, n)
     end
 
     # launch approval
@@ -133,10 +175,23 @@ class PostsController < ApplicationController
       if !params[:action_date].nil?
         @post.update(action_date: params[:action_date])
       end
-      # Notifier.post_update(@post, @url).deliver!
+
+      @activity = PublicActivity::Activity.create(owner: current_user,
+          key: 'Post.launched', trackable: @post)
+      if @activity.id != nil
+        sync_new @activity
+      end
+      current_user.organization.users.uniq.each do |u|
+        n = Notification.create(user: u, activity: @activity)
+        sync_new @activity, scope: u
+        if @post.user == u
+          n.user.process_email_notification(7, n)
+        else
+          n.user.process_email_notification(8, n)
+        end
+      end
     end
 
-    # TODO: need to generate activity and notification
     respond_to do |format|
       sync_destroy @post
       format.html { redirect_to :dashboard, notice: 'Post was successfully updated.' }
