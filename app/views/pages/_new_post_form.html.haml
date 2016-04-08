@@ -1,5 +1,5 @@
 #new-post.modal.fade
-  .modal-dialog
+  .modal-dialog.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -13,21 +13,22 @@
             = f.hidden_field :organization_id, value: current_user.try(:organization).try(:id)
             .field.col-xs-12
               = f.label :title
-              = f.text_field :title, class: "form-control"
+              = f.text_field :title, class: "form-control", placeholder: "Add a title"
             .field.col-xs-12.nested_pics_form
               = f.label :images
               = file_field_tag "images[]",type: :file, multiple: true
             .field.col-xs-12
-              = f.label 'Departments (select at least 1)'
+              = f.label 'Departments (select at least 1)', class: "col-xs-12 row"
               = render 'layouts/department_selector', context: current_organization, department_entries: current_organization.department_entries
             .field.col-xs-12
-              = f.label :content
-              = f.text_area :content, class: "form-control", placeholder: "Enter description...", rows: 4, maxlength: 250
+              /= f.label :content
+              = f.label 'Description'
+              = f.text_area :content, class: "form-control", placeholder: "Add a description...", rows: 3, maxlength: 250
             .field.col-xs-12
-              %i Posts are by default anonymous, and the poster identity is always revealed when a post becomes a launch action item.
+              %p Posts are by default anonymous, and the poster identity is always revealed when a post becomes a launch action item.
               - if can? :update, current_organization
-                = f.label 'Post as Anonymous'
+                = f.label 'Post anonymously'
                 = f.check_box :anonymous
           .modal-footer
             .actions
-              = f.submit 'Create Post', class: "btn btn-main"
+              = f.submit 'Create', class: "btn btn-main"

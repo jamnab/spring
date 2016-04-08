@@ -18,7 +18,7 @@
     - neg_progress = 0
 
   / - if @viewmode == 'list'
-  .post-wrapper{class: "#{('listview' if @viewmode == 'list')} #{('doithidden' if post.doit?)} col-xl-2 col-md-3 col-sm-4"}
+  .post-wrapper{class: "#{('listview' if @viewmode == 'list')} #{('doithidden' if post.doit?)} col-xl-2 col-md-3 col-sm-6"}
     .post{class: "#{class_type} #{post.id}", id: class_type}
       .header
         %span.title
@@ -69,15 +69,6 @@
       .content
         /.carousel.slide.carousel-fade{id: "carousel-post-#{post.id}", class: (@viewmode == 'list' ? 'col-xs-2' : 'col-xs-12')}
         .carousel.slide.carousel-fade{id: "carousel-post-#{post.id}"}
-          %ol.carousel-indicators
-            - if post.pictures.empty?
-              %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=>"0"}
-            - else
-              -post.pictures.each_with_index do |pic,index|
-                - if index == 0
-                  %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
-                - else
-                  %li{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
           .carousel-inner.image-wrapper
             - if post.pictures.empty?
               .item.active
@@ -87,6 +78,15 @@
                 .item{class: ("active" if index == 0)}
                   %a{"href"=> pic.image.url(:post_image), "data-lightbox" => post.title}
                     = image_tag pic.image.url(:post_image)
+          %ol.carousel-indicators
+            - if post.pictures.empty?
+              %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=>"0"}
+            - else
+              - post.pictures.each_with_index do |pic,index|
+                - if index == 0
+                  %li.active{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
+                - else
+                  %li{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
         %div{ class: (@viewmode == 'list' ? 'col-xs-10' : 'col-xs-12') }
           %h4.bolded= post.title
           = post.content

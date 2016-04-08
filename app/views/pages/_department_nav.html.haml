@@ -8,8 +8,10 @@
         = department_entry.abbrev_name
       - else
         = department_entry.department_name
+      &nbsp;
+      %i.fa.fa-user
       = department_entry.users.count
-      -#%span.fa.fa-users
+
 
 -#%li.pull-right
 -#  = link_to dashboard_path(sort: @sort, filter: @filter, dashboard_page: @dashboard_page, viewmode: 'list'), remote: (request.path =="/dashboard"), class: "body-loading no-right-margin #{'active' if @viewmode == 'list'}" do

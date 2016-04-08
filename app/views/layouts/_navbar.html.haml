@@ -1,8 +1,8 @@
 %nav.navbar.navbar-default
   .navbar-brand
-    %a.logo.hidden-xs{:href => "/"}
+    %a.logo.xs{:href => "/"}
       = image_tag "lb-logo.png"
-    %a.logo.hidden-sm.hidden-md.hidden-lg.hidden-xl{:href => "/"}
+    %a.logo.sm{:href => "/"}
       = image_tag "launchplane.png"
     / %button.navbar-toggle{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
     /   %span.sr-only Toggle navigation
@@ -17,10 +17,10 @@
     /     = image_tag "logo.png"
     /   - else
     /     = image_tag @organization.picture.image.url(:organization_image)
-  .pull-left.nav-left.hidden-xs
+  .pull-left.nav-left
     %ul.nav.navbar-nav.filter-sort
       = render 'layouts/filter_sort'
-      %li
+      %li.hidden-xs
         = form_tag search_path, class: "form-inline", remote: (request.path == '/search'), :method => :get do
           .form-group
             .input-group
@@ -34,7 +34,7 @@
           .profile
             %span
             = image_tag "dropdown-icon.png", class: "drop-icon"
-        %ul.dropdown-menu{:role => "menu"}
+        %ul.dropdown-menu.filter-menu{:role => "menu"}
           %li
             = render 'pages/department_nav'
       / %li.page_title.hidden-xs
@@ -130,25 +130,37 @@
             - if can? :update, current_user
               %li
                 = link_to '#', data: {target: "#edit-user", toggle: "modal"} do
-                  Edit User Profile
+                  %i.fa.fa-user
+                  &nbsp;
+                  Edit Profile
             - if can? :update, current_organization
               %li
                 = link_to '#', data: {target: "#edit-org", toggle: "modal"} do
+                  %i.fa.fa-sitemap
+                  &nbsp;
                   Edit Organization
               %li
                 = link_to :summary do
+                  %i.fa.fa-dashboard
+                  &nbsp;
                   Analytics
               / %li
               /   = link_to :newsfeed do
               /     Leaderboard
               %li
                 = link_to dashboard_path(:dashboard_page => "archive"), class: "body-loading" do
+                  %i.fa.fa-archive
+                  &nbsp;
                   Archive
               %li
                 = link_to manage_users_organization_path(current_organization), remote: true do
+                  %i.fa.fa-users
+                  &nbsp;
                   Manage Users
               %li
                 = link_to :logout do
+                  %i.fa.fa-sign-out
+                  &nbsp;
                   Logout
         -#%li.dropdown.hidden-xs
           -#%a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}

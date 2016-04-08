@@ -35,7 +35,7 @@
         .row.first-q
           .col-xs-12.col-sm-6
             .summary-box
-              .header Top Departments
+              .header Top Departments (Viable/Total)
               .body
                 - @contributions_by_department[0..5].each do |entry|
                   .col-sm-4
@@ -45,8 +45,8 @@
                         :escaped
                           /
                         #{entry['# Ideas Total']}
-                      .notes
-                        Viable Ideas - Total
+                      /.notes
+                      /  Viable Ideas - Total
                       .footer
                         = entry['Department']
           .col-xs-12.col-sm-6
@@ -79,7 +79,7 @@
         .row.first-q
           .col-sm-6
             .summary-box
-              .header Top Contributors
+              .header Top Idea Contributors (Viable/Total)
               .body
                 - @contributions_by_employee[0..5].each do |entry|
                   .col-sm-4
@@ -89,8 +89,8 @@
                         :escaped
                           /
                         #{entry['# Ideas Total']}
-                      .notes
-                        Viable Ideas - Total
+                      /.notes
+                      /  Viable Ideas - Total
                       .footer
                         - user = User.find(entry['user_id'])
                         - if !user || user.picture.nil?
@@ -133,18 +133,16 @@
         .row.first-q
           .col-xs-12.col-sm-6
             .summary-box
-              .header Trending Ideas
+              .header Trending Ideas (By Support)
               .body
                 - @trending_ideas[0..5].each do |entry|
                   .col-sm-4
                     .summary-card
                       .main-content
+                        #{entry['Support']}%
                       .notes.post
-                        %b= entry['Title']
-                        %br
-                        (#{entry['Support']}% Support)
                       .footer
-                        = entry['Name']
+                        = entry['Title']
           .col-xs-12.col-sm-6
             .summary-box
               .header Chart
