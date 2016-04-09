@@ -191,8 +191,7 @@
       .row.first-q {
         background: $white;
         @include border_radius_exl(10px);
-        /* width: auto; */
-        /* height: auto; */
+        box-shadow: $shadow-2;
         margin:auto 0px;
       }
     }
@@ -242,29 +241,28 @@
           font-size: 46px;
         }
 
-        // card
+        /** card **/
         .summary-card {
-          height: 190px;
-          /* margin-top: 20px; */
-          /* border: 2px solid $grey; */
-          /* border-radius: 10px; */
+          border:1px solid $mid-grey;
+          border-top: 5px solid $green;
           text-align: center;
-          padding:5px;
+          padding:20px 10px;
+          margin-bottom:20px;
 
           .main-content {
             width: 100%;
-            /* height: 90px; */
-            /* line-height: 90px; */
-            font-size: 48px;
-            font-weight: 600;
-            padding-top: 16px;
-            word-spacing: -13px;
+            font-size: 7.5rem;
+            font-weight: 700;
+            word-spacing: -12px;
             color: $green;
 
+            @media screen and (max-width: 767px) {
+              /* font-weight: 700; */
+              /* font-size: 72px; */
+              /* word-spacing: -20px; */
+            }
           }
           .notes {
-            /* height: 60px; */
-            padding-top: 16px;
             color:$li-grey;
             &.post {
               /* height: 140px; */
@@ -273,12 +271,9 @@
             }
           }
           .footer {
-            /* height: 25px; */
-            /* background-color: $l-grey; */
             font-size: 16px;
-            /* line-height: 26px; */
             font-weight: 600;
-            /* color: #ddd; */
+            text-shadow: $t-shadow;
             margin-top:10px;
             color:$grey;
             border-radius: 0px 0px 10px 10px;
@@ -370,8 +365,6 @@
 
   #leaderboards {
     .leaderboard {
-      // height: 160px;
-      // width: 100%;
 
       .leader-badge {
         height: 100%;

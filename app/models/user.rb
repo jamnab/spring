@@ -133,7 +133,7 @@ class User < ActiveRecord::Base
 
   def profile_image_url
     if self.picture.nil?
-      "profile_default.png"
+      "profile-icon.png"
     else
       self.picture.image.url(:user_image)
     end

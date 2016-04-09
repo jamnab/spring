@@ -40,15 +40,16 @@
                 - @contributions_by_department[0..5].each do |entry|
                   .col-sm-4
                     .summary-card
-                      .main-content
-                        = entry['# Ideas Actionable']
-                        :escaped
-                          /
-                        #{entry['# Ideas Total']}
-                      .notes
-                        (Viable Ideas/Total)
                       .footer
                         = entry['Department']
+                      .main-content
+                        = entry['# Ideas Actionable']
+                        /:escaped
+                        /  /
+                        /#{entry['# Ideas Total']}
+                      .notes
+                        Viable Ideas
+
           .col-sm-6
             .summary-box
               .header Department Contributions

@@ -263,7 +263,7 @@ h3.page_title {
       }
       .image-wrapper {
         height: 100px;
-        @include border_radius_top(10px);
+        @include border_radius_top(5px);
 
         img { margin: auto; }
         /* display:none; */
@@ -368,6 +368,7 @@ h3.page_title {
   border-bottom:1px solid $demon;
   padding: 5px 0px 0px 0px;
   background: $ghoul;
+  background:$lig-grey;
 
   .comment {
     position: relative;
@@ -535,7 +536,7 @@ h3.page_title {
 
     .btn-sm {
       /* margin-left: 5px; */
-      min-width: 32px;
+      /* min-width: 32px; */
       /* padding: 4px 0px; */
 
       span:before {
@@ -581,7 +582,7 @@ h3.page_title {
       padding:10px 20px;
       margin-left:10px;
       margin-right:10px;
-      @include border_radius(15px);
+      @include border_radius(10px);
       display: inline;
     }
   }
@@ -608,14 +609,14 @@ h3.page_title {
 // roundedness
 
 .post-wrapper, .post {
-  @include border_radius(10px);
+  @include border_radius(5px);
 
   .header {
-    @include border_radius_top(10px);
+    @include border_radius_top(5px);
   }
 
   .signature {
-    @include border_radius_bottom(10px);
+    @include border_radius_bottom(5px);
     border-top:1px dashed $demon;
   }
 }

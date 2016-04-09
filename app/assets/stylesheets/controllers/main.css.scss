@@ -21,7 +21,8 @@ label {
 
 .form-control {
   box-shadow:inset $demon;
-  border:1px solid $li-grey;
+  box-shadow: none;
+  border:1px solid $demon;
   height:36px;
   /* font-size: 16px; */
   font-weight: 500;
@@ -115,11 +116,14 @@ label {
     .modal-body {
       padding-top:0;
     }
+    .modal-footer {
+      border-top:1px dashed $l-grey;
+    }
   }
 }
 
 textarea {
-  @include border_radius_exl(4px);
+  @include border_radius_exl(5px);
   color:$grey;
   box-shadow: $shadow;
   border:1px solid $li-grey;
@@ -141,7 +145,7 @@ textarea {
 }
 .btn-default {
   background: $grey-grad;
-  background: #e9eef1;
+  background:$mid-grey;
   text-shadow: $t-shadow;
   color:$grey !important;
   padding:6px 12px;
@@ -153,7 +157,7 @@ textarea {
   &:hover {
     box-shadow: none;
     background:$grey-grad-flip;
-    background:#f8fafb;
+    background:$lig-grey;
     border:1px solid $demon;
   }
 }
@@ -270,14 +274,13 @@ body {
         right: 2px;
         font-size: 10px;
         padding:0 7px;
-        /* line-height: 25px; */
-        /* width: 15%; */
-        /* height: 20px; */
-        /* background: $nav_hover; */
         color: $white;
         @include border_radius(35%);
         &.red {
-          right:-10px;
+          right:-8px;
+        }
+        &.yellow {
+          right:-4px;
         }
       }
 
@@ -357,7 +360,7 @@ body {
 
     &:hover, &:focus, &:active {
       color: $white !important;
-      background-color: $green !important;
+      background-color: $trans !important;
     }
   }
 
@@ -365,7 +368,7 @@ body {
     padding: 8px 5px 0px 20px;
 
     input {
-      @include border_radius_exl(7px);
+      @include border_radius_exl(5px);
       background-color:rgba(255,255,255,0.4);
       background:rgba(255,255,255,0.4) image-url("search-icon.png") 1rem center no-repeat;
       background-size:13px;
@@ -482,10 +485,11 @@ body {
     .dropdown-menu {
       padding: 0px;
       border: none;
-      margin-left: -95px;
+      margin-left: -85px;
       margin-top:5px;
+      box-shadow: $shadow;
 
-      @include border_radius(6px);
+      @include border_radius(5px);
 
       &.filter-menu {
         margin-left: -55px;
@@ -717,39 +721,6 @@ a:hover {
   }
 }
 
-// .comment {
-//   .btn-off {
-//     background-color: transparent;
-//     color: $inverse_text_off !important;
-//     border: 1px solid $inverse_text_off;
-//     opacity: 0.6;
-
-//     &:hover {
-//       background-color: $inverse_text_off;
-//       color: $inverse_text_main !important;
-//       border: 1px solid $inverse_text_main;
-//       opacity: 0.75;
-//     }
-//   }
-
-//   .btn-on {
-//     background-color: $inverse_text_off;
-//     color: $inverse_text_main !important;
-//     border: 1px solid $inverse_text_main;
-//     opacity: 0.75;
-//   }
-
-//   .btn-default {
-//     background-color: $inverse_text_off;
-//     color: $inverse_text_main !important;
-//     border: 1px solid $inverse_text_main;
-
-//     &:hover {
-//       opacity: 0.75;
-//     }
-//   }
-// }
-
 .btn-project, .btn-fun, .btn-facility, .btn-approval-true, .btn-approval-false {
   background-color: $white;
   color: $white;
@@ -792,14 +763,14 @@ a:hover {
 .modal-dialog {
   .modal-content {
     border:none;
-    @include border_radius(15px);
+    @include border_radius(5px);
     box-shadow: $shadow-2;
     .modal-header {
       background-color: $green;
       color: $white;
       border-bottom: none;
       text-shadow: $btn-shadow;
-      @include border_radius_top(10px);
+      @include border_radius_top(5px);
     }
     p {
       font-size: 12px;

@@ -16,7 +16,7 @@ $('.summary').ready ->
     legendRectSize = 18;
     legendSpacing = 4;
 
-    color = d3.scale.category20b()
+    color = d3.scale.ordinal().range(["#F012BE","#FFC837","#11FFBD","#FF8008","#FC354C","#19B5FE","#9013FE","#00FFFF","#6c7a89","#A46F3F"])
     svg = d3.select('#contributions_by_department_graph').append('svg')
       .attr('width', width)
       .attr('height', height)
@@ -240,4 +240,3 @@ $('.summary').ready ->
       render_multiline_chart('#detailed_trends_graph', received_data.detailed_trends)
       return
     error: (result) ->
-

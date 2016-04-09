@@ -23,23 +23,32 @@ $green-grad:linear-gradient(#50E3C2,#11FFBD);
 $green-grad-flip:linear-gradient(360deg,#50E3C2,#11FFBD);
 $grey-grad:linear-gradient(#f8fafb,#e9eef1);
 $grey-grad-flip:linear-gradient(360deg,#f8fafb,#e9eef1);
-$yellow:#FFC837;
-$orange:#FF8008;
-$red:#FC354C;
 $l-green:#11FFBD;
-$green:#50E3C2;
 $d-grey:#444D56;
 $m-grey:#515D62;
-$grey:#6c7a89;
-$blue:#19B5FE;
+$mid-grey:#e9eef1;
+
 $a-grey:#9a9a9a;
 $li-grey:#d4d4d4;
+$lig-grey:#f8fafb;
 $l-grey:#f4f4f4;
 $white:#fff;
 $imp:!important;
 $ghost:rgba(255,255,255,0.5);
 $demon:rgba(0,0,0,0.06);
 $ghoul:rgba(0,0,0,0.03);
+
+/** Base Colors **/
+$yellow:#FFC837;
+$orange:#FF8008;
+$red:#FC354C;
+$green:#50E3C2;
+$blue:#19B5FE;
+$purple:#9013FE;
+$aqua:#00FFFF;
+$pink:#F012BE;
+$grey:#6c7a89;
+$brown:#A46F3F;
 
 $shadow:0 1px 3px rgba(26, 53, 71, 0.08), 0 0 0 1px rgba(26, 53, 71, 0.04), 0 1px 1px rgba(26, 53, 71, 0.06);
 $shadow-2:0 2px 4px rgba(26, 53, 71, 0.08);
