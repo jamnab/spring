@@ -63,13 +63,13 @@
         %li.navicon
           = link_to dashboard_path(:dashboard_page => "dashboard"), class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "bottom", trigger: "hover"} do
             -#%i.fa.fa-lightbulb-o
-            = image_tag "launched-icon.png"
+            = image_tag "bulb-icon.png", class: "bulb"
             #idea_counter.notification_counter.yellow
               = current_organization_posts('idea_posts').count
         %li.navicon
           = link_to dashboard_path(:dashboard_page => "pending"),  class: "body-loading popover-trigger", data: {content: "Pending", placement: "bottom", trigger: "hover"} do
             -#%i.fa.fa-clock-o
-            = image_tag "bulb-icon.png", class: "bulb"
+            = image_tag "launched-icon.png"
             #pending_counter.notification_counter.orange
               = current_organization_posts('pending_posts').count
         %li.navicon
