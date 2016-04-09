@@ -173,7 +173,7 @@ html, body {
   /* overflow-x: hidden; */
 }
 html {
-  background:$green-grad;
+  background:$green-grad-flip;
 }
 body {
   background:$green-grad;
@@ -290,7 +290,7 @@ body {
     }
   }
   .popover {
-    box-shadow: $shadow;
+    box-shadow: $btn-shadow;
     border: none;
     .arrow {
       border: none;
@@ -482,7 +482,7 @@ body {
     .dropdown-menu {
       padding: 0px;
       border: none;
-      margin-left: -85px;
+      margin-left: -95px;
       margin-top:5px;
 
       @include border_radius(6px);

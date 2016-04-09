@@ -106,6 +106,8 @@
             - if can? :update, current_user
               %li
                 = link_to '#', data: {target: "#notification-settings", toggle: "modal"} do
+                  %i.fa.fa-rss
+                  &nbsp;
                   Notification Settings
               %li
                 = link_to :summary do

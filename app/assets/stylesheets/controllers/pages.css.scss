@@ -2,7 +2,7 @@
 
 .summary {
   padding: 0 20px 20px 20px;
-  color: $inverse-text-off;
+  /* color: $inverse-text-off; */
 
   .analytics_data_table_wrapper {
     padding: 20px;
@@ -10,10 +10,20 @@
     /* box-shadow: $shadow-2; */
     /* @include border_radius(10px); */
 
-    thead.text-center th {
-      text-align: center;
+    label {
+      text-shadow: none;
     }
 
+    thead {
+      th {
+        font-weight: 600;
+        font-size: 15px;
+        text-shadow:$t-shadow;
+      }
+      .text-center th {
+        text-align: center;
+      }
+    }
     table {
       /* border: 1px solid #fff; */
       background:$white;
@@ -26,6 +36,7 @@
     border-bottom:1px dashed rgba(0,0,0,0.04);
     }
     &>tbody>tr {
+      border-top:1px solid $l-grey;
       td {
         border: none;
       }
@@ -50,7 +61,7 @@
     }
   }
   .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
-    background:$demon;
+    background:$ghoul;
   }
   .dataTables_info {
     color:$white;
@@ -180,24 +191,25 @@
       .row.first-q {
         background: $white;
         @include border_radius_exl(10px);
-        width: auto;
-        height: auto;
+        /* width: auto; */
+        /* height: auto; */
         margin:auto 0px;
       }
     }
     .summary-box {
-      @include border_radius(10px);
+      /* @include border_radius_exl(10px); */
       /* box-shadow: $shadow-2; */
       /* border: 1px solid $default_text_main !important; */
-      /* height: 460px; */
-      background-color: $white;
+      /* height: 100%; */
+      /* background-color: $white; */
       margin-bottom: 2rem;
 
       .header {
-        height: 50px;
+        /* height: 50px; */
         width: 100%;
         /* background-color: $white; */
-        color: $m-grey;
+        @include border_radius_top(10px);
+        color: $grey;
         padding: 15px;
         font-size: 20px;
         text-shadow: $t-shadow;
@@ -253,7 +265,7 @@
           .notes {
             /* height: 60px; */
             padding-top: 16px;
-            color:$grey;
+            color:$li-grey;
             &.post {
               /* height: 140px; */
               /* margin-top: -80px; */
@@ -263,7 +275,7 @@
           .footer {
             /* height: 25px; */
             /* background-color: $l-grey; */
-            font-size: 14px;
+            font-size: 16px;
             /* line-height: 26px; */
             font-weight: 600;
             /* color: #ddd; */

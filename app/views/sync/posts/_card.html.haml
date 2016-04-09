@@ -72,7 +72,7 @@
           .carousel-inner.image-wrapper
             - if post.pictures.empty?
               .item.active
-                = image_tag ("no_image.png")
+                = image_tag ("ph-icon.png")
             - else
               - post.pictures.each_with_index do |pic,index|
                 .item{class: ("active" if index == 0)}
@@ -149,14 +149,16 @@
               - if can? :update, current_organization
                 = form_tag judge_post_path(post), remote: true do
                   = hidden_field_tag 'viewmode', @viewmode
-                  = hidden_field_tag 'approved', 'true'
-                  .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Approve", placement: "bottom", trigger: "hover"}}
-                    %span.fa.fa-check
-                = form_tag judge_post_path(post), remote: true do
-                  = hidden_field_tag 'viewmode', @viewmode
                   = hidden_field_tag 'approved', 'false'
                   .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Disapprove", placement: "bottom", trigger: "hover"}}
-                    %span.fa.fa-times
+                    /%span.fa.fa-times
+                    = image_tag "trash-icon.png"
+                = form_tag judge_post_path(post), remote: true do
+                  = hidden_field_tag 'viewmode', @viewmode
+                  = hidden_field_tag 'approved', 'true'
+                  .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Approve", placement: "bottom", trigger: "hover"}}
+                    /%span.fa.fa-check
+                    = image_tag "launch-icon.png"
             - else
               - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
               = form_for Opinion.new, remote: true do |f|
@@ -167,10 +169,10 @@
                 = f.hidden_field :opinionable_type, value: 'Post'
                 .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
                   / %span.fa.fa-thumbs-down
-                  = image_tag "trash-icon.png"
+                  = image_tag "downvote-icon.png"
                 .btn.btn-sm.post-loading.btn-like{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'} #{'btn-like'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
                   / %span.fa.fa-thumbs-up
-                  = image_tag "launch-icon.png"
+                  = image_tag "upvote-icon.png"
           - else
             = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "popover-trigger post-discussion-toggler", data: {content: "Comment", placement: "top", trigger: "hover"} do
               .btn.btn-sm.post-loading.btn-counter{id: "#{post.id}",class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}

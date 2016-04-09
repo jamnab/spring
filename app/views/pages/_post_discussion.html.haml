@@ -14,7 +14,7 @@
               .carousel-inner
                 - if post.pictures.empty?
                   .item.active
-                    = image_tag ("no_image.png")
+                    = image_tag ("ph-icon.png")
                 - else
                   - post.pictures.each_with_index do |pic,index|
                     .item{class: ("active" if index == 0)}

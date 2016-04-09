@@ -67,6 +67,14 @@ $btn-shadow:0 2px 4px rgba(0,0,0,0.15);
   -o-border-radius:$radius $radius 0 0 !important;
   border-radius:$radius $radius 0 0 !important;
 }
+@mixin border_radius_bottom($radius) {
+  -webkit-border-radius:0 0 $radius $radius !important;
+  -moz-border-radius:0 0 $radius $radius !important;
+  -ms-border-radius:0 0 $radius $radius !important;
+  -o-border-radius:0 0 $radius $radius !important;
+  border-radius:0 0 $radius $radius !important;
+}
+
 @mixin content {
   color:#fff;
   font-family: 'Open Sans', sans-serif;

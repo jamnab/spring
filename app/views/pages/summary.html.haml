@@ -33,9 +33,9 @@
     .carousel-inner{:role => "listbox"}
       .item.active
         .row.first-q
-          .col-xs-12.col-sm-6
+          .col-sm-6
             .summary-box
-              .header Top Departments (Viable/Total)
+              .header Top Departments
               .body
                 - @contributions_by_department[0..5].each do |entry|
                   .col-sm-4
@@ -45,11 +45,11 @@
                         :escaped
                           /
                         #{entry['# Ideas Total']}
-                      /.notes
-                      /  Viable Ideas - Total
+                      .notes
+                        (Viable Ideas/Total)
                       .footer
                         = entry['Department']
-          .col-xs-12.col-sm-6
+          .col-sm-6
             .summary-box
               .header Department Contributions
               .body

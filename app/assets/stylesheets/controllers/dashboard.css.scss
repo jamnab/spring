@@ -291,7 +291,7 @@ h3.page_title {
     }
   }
 
-  .approval-true {
+  /* .approval-true {
     background-color: rgba($main-project, 0.00);
     .header {
       background-color: rgba($main-project, 0.00);
@@ -303,9 +303,9 @@ h3.page_title {
     .signature {
       background-color: rgba($main-project, 0.00);
     }
-  }
+  } */
 
-  .approval-false {
+  /* .approval-false {
     background-color: rgba($main-facility, 0.00);
     .header {
       background-color: rgba($main-facility, 0.00);
@@ -317,9 +317,9 @@ h3.page_title {
     .signature {
       background-color: rgba($main-facility, 0.00);
     }
-  }
+  } */
 
-  .project {
+  /* .project {
     background-color: rgba($main-project, 0.00);
     .header {
       background-color: rgba($main-project, 0.00);
@@ -331,9 +331,9 @@ h3.page_title {
     .signature {
       background-color: rgba($main-project, 0.00);
     }
-  }
+  } */
 
-  .fun {
+  /* .fun {
     background-color: rgba($main-fun, 0.00);
     .header {
       background-color: rgba($main-fun, 0.00);
@@ -345,9 +345,9 @@ h3.page_title {
     .signature {
       background-color: rgba($main-fun, 0.00);
     }
-  }
+  } */
 
-  .facility {
+  /* .facility {
     background-color: rgba($main-facility, 0.00);
     .header {
       background-color: rgba($main-facility, 0.00);
@@ -359,7 +359,7 @@ h3.page_title {
     .signature {
       background-color: rgba($main-facility, 0.00);
     }
-  }
+  } */
 }
 
 .comment-wrapper {
@@ -425,10 +425,10 @@ h3.page_title {
       padding: 5px 0px;
       float: left;
       line-height: 10px;
-      color: $default_text_main;
+      /* color: $default_text_main; */
       font-size: 26px;
 
-      border: 1px solid $default_text_main;
+      /* border: 1px solid $default_text_main; */
       img {
         width: 28px;
       }
@@ -608,14 +608,15 @@ h3.page_title {
 // roundedness
 
 .post-wrapper, .post {
-  border-radius: 10px;
+  @include border_radius(10px);
 
   .header {
-    border-radius: 10px 10px 0px 0px;
+    @include border_radius_top(10px);
   }
 
   .signature {
-    border-radius: 0px 0px 10px 10px;
+    @include border_radius_bottom(10px);
+    border-top:1px dashed $demon;
   }
 }
 
