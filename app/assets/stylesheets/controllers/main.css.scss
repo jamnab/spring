@@ -274,7 +274,7 @@ body {
       }
       .vote {
         height: 34px;
-        margin-top:-4px;
+        margin-top:-3px;
       }
 
       .notification_counter {
@@ -335,7 +335,7 @@ body {
       }
     }
     .dropdown {
-      margin-left: 5px $imp;
+      margin-left: 10px $imp;
     }
     .post-wrapper {
       height: 40rem;
@@ -494,7 +494,7 @@ body {
     .dropdown-menu {
       padding: 0px;
       border: none;
-      margin-left: -85px;
+      margin-left: -95px;
       margin-top:5px;
       box-shadow: $shadow;
 
@@ -731,13 +731,13 @@ a:hover {
 }
 
 .btn-project, .btn-fun, .btn-facility, .btn-approval-true, .btn-approval-false {
-  background-color: $white;
+  /* background-color: $white; */
   color: $white;
   font-weight: 600;
 
   img { height:32px; }
 
-  .count { margin-left:-25px;color:$grey;}
+  .count { margin-left:-25px;}
   &:hover {
     opacity: 0.75;
   }

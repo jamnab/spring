@@ -598,7 +598,6 @@ h3.page_title {
     }
   }
 }
-
 .btn-counter {
   padding: 4px 6px $imp;
 
@@ -606,7 +605,7 @@ h3.page_title {
     display: inline-block;
     font-size: 14px;
     line-height: 18px;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   span {
@@ -616,6 +615,11 @@ h3.page_title {
   &.btn-doit {
     background-color: $main_highlight;
   }
+}
+.com-btn {
+  width: auto;
+  height: 18px $imp;
+  @include border_radius(0);
 }
 
 // roundedness

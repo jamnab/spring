@@ -96,13 +96,13 @@
           /  = f.hidden_field :graveyard, value: 'false'
           - if (can? :update, post) && !post.launch_approved
             = link_to edit_post_path(post), remote:true do
-              .btn.btn-sm.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {content: "Edit", placement: "top", trigger: "hover"}}
+              .btn.btn-main.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {content: "Edit", placement: "top", trigger: "hover"}}
                 -#%span.flaticon-edit45
                 = image_tag "edit-icon.png", class: "com-btn"
 
           - if can? :destroy, post
             = link_to post, method: :delete, class: "popover-trigger", data: {confirm: "Are you sure about this?", content: "Delete", placement: "top", trigger: "hover"}, remote: true do
-              .btn.btn-sm.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
+              .btn.btn-main.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
                 -#%span.flaticon-delete48
                 = image_tag "del-icon.png", class: "com-btn"
 
