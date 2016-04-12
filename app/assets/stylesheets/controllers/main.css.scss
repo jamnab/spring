@@ -261,11 +261,20 @@ body {
       z-index: 20;
       padding-top:14px;
 
+      &.wide {
+        padding-left: 3px $imp;
+        padding-right: 5px $imp;
+      }
+
       img {
         height:27px;
       }
       .bulb {
         height: 31px;
+      }
+      .vote {
+        height: 34px;
+        margin-top:-4px;
       }
 
       .notification_counter {
@@ -277,7 +286,7 @@ body {
         color: $white;
         @include border_radius(35%);
         &.red {
-          right:-8px;
+          right:-6px;
         }
         &.orange {
           right:-4px;
@@ -326,7 +335,7 @@ body {
       }
     }
     .dropdown {
-      margin-left: 3px $imp;
+      margin-left: 5px $imp;
     }
     .post-wrapper {
       height: 40rem;
@@ -728,7 +737,7 @@ a:hover {
 
   img { height:32px; }
 
-  .count { margin-left:-25px;}
+  .count { margin-left:-25px;color:$grey;}
   &:hover {
     opacity: 0.75;
   }

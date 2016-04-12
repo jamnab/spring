@@ -528,6 +528,11 @@ h3.page_title {
         padding: 0px 5px;
         line-height: 18px;
         color: $grey;
+
+        span {
+          font-weight:600;
+          text-shadow:$t-shadow;
+        }
       }
     }
   }
@@ -582,8 +587,14 @@ h3.page_title {
       padding:10px 20px;
       margin-left:10px;
       margin-right:10px;
+      border:1px solid $ghoul;
       @include border_radius(10px);
       display: inline;
+    }
+    .com-btn {
+      width: auto;
+      height: 18px;
+      @include border_radius(0);
     }
   }
 }
@@ -595,6 +606,7 @@ h3.page_title {
     display: inline-block;
     font-size: 14px;
     line-height: 18px;
+    font-weight: 500;
   }
 
   span {

@@ -49,17 +49,17 @@
         /    = image_tag "check-icon.png"
         /    #idea_counter.notification_counter.blue
         /      = current_user.notifications.count
-        %li.navicon.dropdown
-          %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-            = image_tag "check-icon.png"
-            #idea_counter.notification_counter.blue
-              = current_user.notifications.count
-          %ul.dropdown-menu.notification{:role => "menu"}
-            = sync_new partial: 'notification', resource: PublicActivity::Activity.new, scope:current_user
-            - @notifications = current_user.notifications.order(created_at: :desc)
-            - @notifications[0,10].each do |n|
-              - activity = n.activity
-              = sync partial: 'notification', resource: activity
+        /%li.navicon.dropdown
+        /  %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+        /    = image_tag "check-icon.png"
+        /    #idea_counter.notification_counter.blue
+        /      = current_user.notifications.count
+        /  %ul.dropdown-menu.notification{:role => "menu"}
+        /    = sync_new partial: 'notification', resource: PublicActivity::Activity.new, scope:current_user
+        /    - @notifications = current_user.notifications.order(created_at: :desc)
+        /    - @notifications[0,10].each do |n|
+        /      - activity = n.activity
+        /      = sync partial: 'notification', resource: activity
         %li.navicon
           = link_to dashboard_path(:dashboard_page => "dashboard"), class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "bottom", trigger: "hover"} do
             -#%i.fa.fa-lightbulb-o
@@ -67,15 +67,15 @@
             #idea_counter.notification_counter.yellow
               = current_organization_posts('idea_posts').count
         %li.navicon
-          = link_to dashboard_path(:dashboard_page => "pending"),  class: "body-loading popover-trigger", data: {content: "Pending", placement: "bottom", trigger: "hover"} do
+          = link_to dashboard_path(:dashboard_page => "pending"),  class: "body-loading popover-trigger wide", data: {content: "Pending", placement: "bottom", trigger: "hover"} do
             -#%i.fa.fa-clock-o
             = image_tag "launched-icon.png"
             #pending_counter.notification_counter.orange
               = current_organization_posts('pending_posts').count
         %li.navicon
-          = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading popover-trigger", data: {content: "Upvotes", placement: "bottom", trigger: "hover"} do
+          = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading popover-trigger", data: {content: "Votes", placement: "bottom", trigger: "hover"} do
             -#%i.fa.fa-eye
-            = image_tag "list-icon.png"
+            = image_tag "vote-icon.png", class: "vote"
             #pending_counter.notification_counter.red
               = current_organization_posts('following_posts').count
 

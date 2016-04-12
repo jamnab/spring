@@ -97,12 +97,14 @@
           - if (can? :update, post) && !post.launch_approved
             = link_to edit_post_path(post), remote:true do
               .btn.btn-sm.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {content: "Edit", placement: "top", trigger: "hover"}}
-                %span.flaticon-edit45
+                -#%span.flaticon-edit45
+                = image_tag "edit-icon.png", class: "com-btn"
 
           - if can? :destroy, post
             = link_to post, method: :delete, class: "popover-trigger", data: {confirm: "Are you sure about this?", content: "Delete", placement: "top", trigger: "hover"}, remote: true do
               .btn.btn-sm.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
-                %span.flaticon-delete48
+                -#%span.flaticon-delete48
+                = image_tag "del-icon.png", class: "com-btn"
 
           - if post.doit? && !post.launch_approved
             = form_tag judge_post_path(post), remote: true, class: 'form-inline' do
@@ -134,13 +136,13 @@
           - if !post.anonymous || post.doit?
             = image_tag(user.profile_image_url)
             .name
-              %b= user.full_name
+              %span= user.full_name
               %br
               (#{user.job_title})
           - else
             = image_tag("profile-icon.png")
             .name
-              Anonymous User
+              %span Anonymous User
               %br
               (Contributor)
         .options

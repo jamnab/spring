@@ -1,5 +1,5 @@
 #user_management.modal.fade
-  .modal-dialog
+  .modal-dialog.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -10,7 +10,7 @@
           .col-sm-6.col-xs-12
             .row
               .col-xs-12
-                %h4.bolded Add Members to Department
+                %h4.bolded Add Members
                 = form_tag manage_users_organization_path(current_organization) do
                   .field
                     = label_tag 'Department'
