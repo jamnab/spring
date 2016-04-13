@@ -96,15 +96,14 @@
           /  = f.hidden_field :graveyard, value: 'false'
           - if (can? :update, post) && !post.launch_approved
             = link_to edit_post_path(post), remote:true do
-              .btn.btn-main.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {content: "Edit", placement: "top", trigger: "hover"}}
-                -#%span.flaticon-edit45
-                = image_tag "edit-icon.png", class: "com-btn"
+              .btn.post-loading{id: "#{post.id}",class: "popover-trigger btn-#{class_type}", data: {content: "Date", placement: "top", trigger: "hover"}}
+                /= image_tag "edit-icon.png", class: "com-btn"
+                = image_tag "date-icon.png"
 
           - if can? :destroy, post
-            = link_to post, method: :delete, class: "popover-trigger", data: {confirm: "Are you sure about this?", content: "Delete", placement: "top", trigger: "hover"}, remote: true do
-              .btn.btn-main.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
-                -#%span.flaticon-delete48
-                = image_tag "del-icon.png", class: "com-btn"
+            /= link_to post, method: :delete, class: "popover-trigger", data: {confirm: "Are you sure about this?", content: "Delete", placement: "top", trigger: "hover"}, remote: true do
+            /  .btn.btn-main.post-loading{id: "#{post.id}",class: "btn-#{class_type}"}
+            /    = image_tag "del-icon.png", class: "com-btn"
 
           - if post.doit? && !post.launch_approved
             = form_tag judge_post_path(post), remote: true, class: 'form-inline' do
@@ -153,13 +152,11 @@
                   = hidden_field_tag 'viewmode', @viewmode
                   = hidden_field_tag 'approved', 'false'
                   .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Disapprove", placement: "bottom", trigger: "hover"}}
-                    /%span.fa.fa-times
                     = image_tag "trash-icon.png"
                 = form_tag judge_post_path(post), remote: true do
                   = hidden_field_tag 'viewmode', @viewmode
                   = hidden_field_tag 'approved', 'true'
                   .btn.btn-sm.post-loading.btn-approve{id: "#{post.id}", class: "popover-trigger btn-#{class_type} btn-off", data: {content: "Approve", placement: "bottom", trigger: "hover"}}
-                    /%span.fa.fa-check
                     = image_tag "launch-icon.png"
             - else
               - opinion = Opinion.where(opinionable_type: "Post", opinionable_id: post.id, user_id: current_user.id).first
@@ -170,15 +167,12 @@
                 = f.hidden_field :opinionable_id, value: post.id
                 = f.hidden_field :opinionable_type, value: 'Post'
                 .btn.btn-sm.post-loading.btn-dislike{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}", data: {content: "Downvote", placement: "bottom", trigger: "hover"}}
-                  / %span.fa.fa-thumbs-down
                   = image_tag "downvote-icon.png"
                 .btn.btn-sm.post-loading.btn-like{id: "#{post.id}", disabled: ("disabled" if !opinion.nil?), class: "popover-trigger btn-#{class_type} #{(opinion && opinion.positive) ? 'btn-on' : 'btn-off'} #{'btn-like'}", data: {content: "Upvote", placement: "bottom", trigger: "hover"}}
-                  / %span.fa.fa-thumbs-up
                   = image_tag "upvote-icon.png"
           - else
             = link_to dashboard_path(:populate_disucssion_id => post.id), remote: true, class: "popover-trigger post-discussion-toggler", data: {content: "Comment", placement: "top", trigger: "hover"} do
               .btn.btn-sm.post-loading.btn-counter{id: "#{post.id}",class: "btn-#{class_type} #{'btn-doit' if post.alt_doit?}"}
-                /%span.flaticon-comments8
                 = image_tag "comment-icon.png"
                 .count
                   = post.comments.count

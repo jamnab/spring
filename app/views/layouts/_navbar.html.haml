@@ -62,19 +62,16 @@
         /      = sync partial: 'notification', resource: activity
         %li.navicon
           = link_to dashboard_path(:dashboard_page => "dashboard"), class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "bottom", trigger: "hover"} do
-            -#%i.fa.fa-lightbulb-o
             = image_tag "bulb-icon.png", class: "bulb"
             #idea_counter.notification_counter.yellow
               = current_organization_posts('idea_posts').count
         %li.navicon
           = link_to dashboard_path(:dashboard_page => "pending"),  class: "body-loading popover-trigger wide", data: {content: "Pending", placement: "bottom", trigger: "hover"} do
-            -#%i.fa.fa-clock-o
             = image_tag "launched-icon.png"
             #pending_counter.notification_counter.orange
               = current_organization_posts('pending_posts').count
         %li.navicon
           = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading popover-trigger", data: {content: "Votes", placement: "bottom", trigger: "hover"} do
-            -#%i.fa.fa-eye
             = image_tag "vote-icon.png", class: "vote"
             #pending_counter.notification_counter.red
               = current_organization_posts('following_posts').count
@@ -114,6 +111,11 @@
                   %i.fa.fa-dashboard
                   &nbsp;
                   Analytics
+              %li
+                = link_to '#' do
+                  %i.fa.fa-hourglass-2
+                  &nbsp;
+                  History
               / %li
               /   = link_to :newsfeed do
               /     Leaderboard

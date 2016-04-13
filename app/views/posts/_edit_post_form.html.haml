@@ -1,5 +1,5 @@
 #edit-post.modal.fade
-  .modal-dialog.col-sm-10.col-offset-1.col-md-8.col-offset-2
+  .modal-dialog.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -33,7 +33,7 @@
               = f.label :content
               = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5, maxlength: 250
             .field.col-xs-12
-              %i Posts are by default anonymous, and the poster identity is always revealed when a post becomes a doit action item.
+              %p Posts are by default anonymous, and the poster identity is always revealed when a post becomes a doit action item.
               - if can? :update, current_organization
                 = f.label 'Post as Anonymous'
                 = f.check_box :anonymous

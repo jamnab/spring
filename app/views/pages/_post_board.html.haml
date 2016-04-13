@@ -11,7 +11,7 @@
 
 .posts-wrapper.row
   - if @posts.empty?
-    = image_tag "huh-icon.png"
+    = image_tag "empty-icon.png"
     %h3.text-center Looks like there's nothing here.
 
   - if @sort != "discussed" && @sort != "upvoted"
