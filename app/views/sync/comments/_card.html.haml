@@ -4,10 +4,36 @@
 - if can? :read, comment
   .comment-wrapper
     .comment{class: "inline_comment_#{comment.id} suggestion_#{comment.suggestion}"}
-      .col-xs-8
+      .col-xs-12
         .content{class: ("doit" if comment.doit?)}
-          = comment.content
-      .col-xs-4
+          .commenter
+            .user
+              - if comment.doit?
+                = image_tag("profile-icon.png")
+                /.name
+                /  %b= user.full_name
+                /  %br
+                /  (#{user.job_title})
+                .speech
+                  = comment.content
+              - else
+                = image_tag("profile-icon.png")
+                /.name
+                /  Anonymous
+                /  %br
+                /  (Contributor)
+                .speech
+                  = comment.content
+              - if can? :update, comment
+                = link_to edit_comment_path(comment), remote: true do
+                  .btn.btn-sm{class: "btn-#{class_type}"}
+                    %span.flaticon-edit45
+              - if can? :destroy, comment
+                = link_to comment, method: :delete, data: { confirm: "Are you sure about this?"}, remote: true do
+                  .btn.btn-sm{class: "btn-#{class_type}"}
+                    %span.flaticon-delete48
+
+      .col-xs-12
         - if comment.is_suggestion?
           .traction
             %h4
@@ -26,26 +52,26 @@
                 %span.fa.fa-angle-up
               .btn.btn-sm.btn-dislike{class: "btn-#{class_type} #{(opinion && !opinion.positive) ? 'btn-on' : 'btn-off'}"}
                 %span.fa.fa-angle-down
-      .signature
-        .user
-          - if comment.doit?
-            = image_tag("profile_default.png")
-            .name
-              %b= user.full_name
-              %br
-              (#{user.job_title})
-          - else
-            = image_tag("profile_default.png")
-            .name
-              Anonymous User
-              %br
-              (Contributor)
-        .options
-          - if can? :update, comment
-            = link_to edit_comment_path(comment), remote: true do
-              .btn.btn-sm{class: "btn-#{class_type}"}
-                %span.flaticon-edit45
-          - if can? :destroy, comment
-            = link_to comment, method: :delete, data: { confirm: "Are you sure about this?"}, remote: true do
-              .btn.btn-sm{class: "btn-#{class_type}"}
-                %span.flaticon-delete48
+      -#.commenter
+      -#  .user
+      -#    - if comment.doit?
+      -#      = image_tag("profile-icon.png")
+      -#      .name
+      -#        %b= user.full_name
+      -#        %br
+      -#        (#{user.job_title})
+      -#    - else
+      -#      = image_tag("profile-icon.png")
+      -#      .name
+      -#        Anonymous
+      -#        %br
+      -#        (Contributor)
+      -#  .options
+      -#    - if can? :update, comment
+      -#      = link_to edit_comment_path(comment), remote: true do
+      -#        .btn.btn-sm{class: "btn-#{class_type}"}
+      -#          %span.flaticon-edit45
+      -#    - if can? :destroy, comment
+      -#      = link_to comment, method: :delete, data: { confirm: "Are you sure about this?"}, remote: true do
+      -#        .btn.btn-sm{class: "btn-#{class_type}"}
+      -#          %span.flaticon-delete48

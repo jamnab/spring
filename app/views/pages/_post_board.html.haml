@@ -1,17 +1,18 @@
 - if @page_num == 2
   / show title if only first page on infinite scroll
-.row.hidden-xs
-  %ul.view-controls.col-xs-12
-    .nav.nav-pills
-      = render 'pages/department_nav'
-.row
-  .col-xs-12
-    = will_paginate @posts, class: 'digg_pagination'
-  %br
+-#.row.hidden-xs
+-#  %ul.view-controls.col-xs-12
+-#    .nav.nav-pills
+-#      = render 'pages/department_nav'
+-#.row
+-#  .col-xs-12
+-#    = will_paginate @posts, class: 'digg_pagination'
+-#  %br
 
-.row
+.posts-wrapper.row
   - if @posts.empty?
-    %h3.text-center There are no posts matching this criterion.
+    = image_tag "huh-icon.png"
+    %h3.text-center Looks like there's nothing here.
 
   - if @sort != "discussed" && @sort != "upvoted"
     = render 'pages/new_post_partial'
@@ -21,8 +22,7 @@
   .last-elm{style:"height:1px;width:1px;"}
 
 .row
-  .col-xs-12
-    = will_paginate @posts, class: 'digg_pagination'
+  = will_paginate @posts, class: 'digg_pagination'
 
 / -if @sort == "discussed" || @sort == "upvoted"
 /   = render 'pages/new_post_partial'

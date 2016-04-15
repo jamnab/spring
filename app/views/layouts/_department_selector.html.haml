@@ -1,15 +1,30 @@
 / assume context is passed
 
-%table.table.table-bordered.text-center
+/%table.table.table-bordered.text-center
+/  - department_entries.each_slice(2) do |department_pair|
+/    %tr
+/      - department_pair.each do |department_entry|
+/        .department.col-sm-4.col-md-3
+/          = check_box_tag 'departments[]', department_entry.id,department_entry.posts.include?(context)
+/          = department_entry.department_name
+/          - if !department_entry.nil?
+/            %i.fa.fa-user
+/            #{department_entry.users.count}
+/      /- if department_pair.count < 2
+/      /  %td
+/      /  %td
+
+.departments.row
   - department_entries.each_slice(2) do |department_pair|
-    %tr
-      - department_pair.each do |department_entry|
-        %td
-          = department_entry.department_name
+    - department_pair.each do |department_entry|
+      /.department.col-xs-5.col-sm-4.col-md-3
+      .badge
+        = check_box_tag 'departments[]', department_entry.id,department_entry.posts.include?(context)
+        = department_entry.department_name
+        .members
           - if !department_entry.nil?
-            (#{department_entry.users.count} members)
-        %td
-          = check_box_tag 'departments[]', department_entry.id,department_entry.posts.include?(context)
-      - if department_pair.count < 2
-        %td
-        %td
+            %i.fa.fa-user
+            #{department_entry.users.count}
+          - else
+            %i.fa.fa-users
+            '0'

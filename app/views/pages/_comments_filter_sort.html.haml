@@ -1,28 +1,38 @@
 .comment-sorts
-  = link_to filter_sort_comments_path(:post_id => @post.id, :sort => "newest", :filter => @filter, :comments_page_num => 0), remote: true do
-    .btn.btn-sm.btn-main.btn-comments-sorts.comments-newest{class: (!@post.alt_doit? ? "on" : "off")}
-      NEWEST
-    .circle.new-comment-number
-      - if @sort == "upvoted"
-        = sync_new partial: "notification", resource: Comment.new, scope: @post
-      %p.number
+  .inner
+    = link_to filter_sort_comments_path(:post_id => @post.id, :sort => "newest", :filter => @filter, :comments_page_num => 0), remote: true do
+      .btn.btn-sm.btn-default.btn-comments-sorts.comments-newest{class: (!@post.alt_doit? ? "on" : "off")}
+        Latest
+      .circle.new-comment-number
+        - if @sort == "upvoted"
+          = sync_new partial: "notification", resource: Comment.new, scope: @post
+        %p.number
 
-  = link_to filter_sort_comments_path(:post_id => @post.id, :sort => "upvoted", :filter => @filter, :comments_page_num => 0), remote: true do
-    .btn.btn-sm.btn-main.btn-comments-sorts.comments-upvoted{class: (@post.alt_doit? ? "on" : "off")}
-      MOST UPVOTED
+    = link_to filter_sort_comments_path(:post_id => @post.id, :sort => "upvoted", :filter => @filter, :comments_page_num => 0), remote: true do
+      .btn.btn-sm.btn-default.btn-comments-sorts.comments-upvoted{class: (@post.alt_doit? ? "on" : "off")}
+        Most Upvoted
+    = link_to filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => "all", :comments_page_num => 0), remote: true do
+      .btn.btn-sm.btn-default.on.comments-all.btn-comments-filters
+        All
+    = link_to filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => "plain", :comments_page_num => 0), remote: true do
+      .btn.btn-sm.btn-default.off.comments-plain.btn-comments-filters
+        Comments
 
-.comment-filters
-  = link_to filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => "all", :comments_page_num => 0), remote: true do
-    .btn.btn-sm.btn-main.on.comments-all.btn-comments-filters
-      ALL
-  = link_to filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => "plain", :comments_page_num => 0), remote: true do
-    .btn.btn-sm.btn-main.off.comments-plain.btn-comments-filters
-      COMMENTS
+-#.comment-filters
+-#  = link_to filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => "all", :comments_page_num => 0), remote: true do
+-#    .btn.btn-sm.btn-default.on.comments-all.btn-comments-filters
+-#      All
+-#  = link_to filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => "plain", :comments_page_num => 0), remote: true do
+-#    .btn.btn-sm.btn-default.off.comments-plain.btn-comments-filters
+-#      Comments
   / = link_to filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => "suggestion", :comments_page_num => 0), remote: true do
   /   .btn.btn-sm.btn-main.off.comments-suggestion.btn-comments-filters
   /     ALTERNATIVES
-.comments-infinte-scroll{style: "visibility:hidden"}
+.comments-infinte-scroll{style: "display:none"}
   - if @comments_page_num != nil
     = link_to "next_page",filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => @filter, :comments_page_num => @comments_page_num.to_i + 1), remote: true, id: "next-comment-page"
   - else
+    /.temp
+    /  = image_tag 'comment-icon.png', class: "empty-comment"
+    /  %p Post a comment to start a discussion.
     = link_to "next_page",filter_sort_comments_path(:post_id => @post.id, :sort => @sort, :filter => @filter, :comments_page_num => 1), remote: true, id: "next-comment-page"

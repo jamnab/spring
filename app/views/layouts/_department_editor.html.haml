@@ -7,6 +7,9 @@
         .col-xs-8
           = f.text_field :department_name, class: 'form-control'
           (#{department_entry.users.count} members)
+          \|
+          Approval Required
+          = f.check_box :approval_required
         .col-xs-4
           = f.submit 'Update', class: 'btn btn-main'
           = link_to department_entry, method: :delete, data: { confirm: 'Are you sure? This is remove all posts under this department and is not reversible.' } do

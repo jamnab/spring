@@ -7,8 +7,9 @@
   #new_post_form_wrapper
     = render 'new_post_form'
   .edit-modal
-  = link_to '#', data: {target: "#new-post", toggle: "modal", content: "Create a new post", placement: "left", trigger: "hover"}, class: "btn popover-trigger", id: "new-post-toggler" do
-    %span.fa.fa-plus
+  = link_to '#', data: {target: "#new-post", toggle: "modal", content: "Create post", placement: "top", trigger: "hover"}, class: "btn popover-trigger", id: "new-post-toggler" do
+    -#%span.fa.fa-plus
+    = image_tag "create-icon.png"
 
 / .page-num{style: "visibility:hidden"}
 /   = render 'next_post_page'

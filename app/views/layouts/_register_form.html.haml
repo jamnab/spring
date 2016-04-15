@@ -1,26 +1,22 @@
-#register.modal.fade
-  .modal-dialog.modal-lg
+#register.modal.fade.green-grad
+  .modal-dialog
+    = image_tag "launchboard-square.png", class: "login-brand"
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
-        %h4.modal-title Coming soon!
-      .modal-body
-        = form_for BetaSignUp.new do |f|
-          .row.form-group
-            .col-md-12
-              %h4 Sign up for our private beta mailing list!
-          .row.form-group
-            .col-md-6
-              = f.text_field :first_name, placeholder: 'First Name', class: 'form-control'
-            .col-md-6
-              = f.text_field :last_name, placeholder: 'Last Name', class: 'form-control'
-          .row.form-group
-            .col-md-12
-              = f.text_field :email, placeholder: 'Your Email', class: 'form-control'
-          .row.form-group
-            .col-md-4.col-md-offset-8
-              = f.submit "Sign Up", class: 'form-control'
+        %h4.modal-title Sign Up
+      = form_for BetaSignUp.new do |f|
+        .modal-body
+          .field
+            = f.text_field :first_name, placeholder: 'first name', class: 'form-control user'
+          .field
+            = f.text_field :last_name, placeholder: 'last name', class: 'form-control user'
+          .field
+            = f.text_field :email, placeholder: 'your email', class: 'form-control email'
+        .modal-footer
+          .actions
+            = f.submit 'Submit', class: "btn btn-main"
 
 
 

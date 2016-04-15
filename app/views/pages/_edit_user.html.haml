@@ -1,6 +1,6 @@
 - @user = current_user
 #edit-user.modal.fade
-  .modal-dialog
+  .modal-dialog.col-sm-10.col-sm-offset-1.col-md-8.col-offset-2
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -9,22 +9,28 @@
       = form_for @user do |f|
         .modal-body
           .row
-            .field.col-xs-6
+            .field.col-xs-12
+              = f.fields_for :pictures do |p|
+                /= p.label :image
+                = p.label 'Avatar'
+                = p.file_field :image
+          .row
+            .field.col-sm-6
               = f.label :username
               = f.text_field :username, class: "form-control", id: "register_username"
-            .field.col-xs-6
+            .field.col-sm-6
               = f.label :email
               = f.text_field :email, class: "form-control"
-            .field.col-xs-6
+            .field.col-sm-6
               = f.label :first_name
               = f.text_field :first_name, class: "form-control"
-            .field.col-xs-6
+            .field.col-sm-6
               = f.label :last_name
               = f.text_field :last_name, class: "form-control"
-            .field.col-xs-6
+            .field.col-sm-6
               = f.label :password
               = f.password_field :password, class: "form-control"
-            .field.col-xs-6
+            .field.col-sm-6
               = f.label :password_confirmation
               = f.password_field :password_confirmation, class: "form-control"
           .row
@@ -37,11 +43,6 @@
                 = f.label :subscribe_to_newsletter do
                   = 'Subscribe to newsletter'
                   = f.check_box :subscribe_to_newsletter, class: "checkbox inline"
-          .row
-            .field.col-xs-12
-              = f.fields_for :pictures do |p|
-                = p.label :image
-                = p.file_field :image
         .modal-footer
           .actions
             = f.submit 'Update', class: "btn btn-main"

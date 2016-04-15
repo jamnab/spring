@@ -89,7 +89,17 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    params[:user][:manager] = @user.manager
+    if params[:user]
+      params[:user][:manager] = @user.manager
+    end
+
+    if params[:notification_settings]
+      params[:user] = {} if params[:user] == nil
+      ns_hash = {:notification_settings => params[:notification_settings].map{|k,v| v}.join}
+      params[:user].merge! ns_hash
+    end
+
+
     if params[:user][:pictures] != nil
       @pic = Picture.new
       @pic.image = params[:user][:pictures][:image]
@@ -127,6 +137,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :password, :password_confirmation, :first_name, :last_name, :organization_name, :organization_token, :job_title, :manager, :organization_id, :subscribe_to_newsletter)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :first_name, :last_name, :organization_name, :organization_token, :job_title, :manager, :organization_id, :subscribe_to_newsletter, :notification_settings)
     end
 end

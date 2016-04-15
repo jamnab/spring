@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:500,200,400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
 
 $main_fun: #FF7647;
 $main_facility: #FFAE47;
@@ -14,6 +14,81 @@ $inverse_text_main: #FFFFFF;
 $inverse_text_off: #707A85;
 $inverse_text_highlight: #E1E7ED;
 
-$nav_background: #243743;
+$nav_background: #50E3C2;
 $nav_hover: #3f6075;
 $body_background: #c1c6ca;
+
+$trans:transparent;
+$green-grad:linear-gradient(#50E3C2,#11FFBD);
+$green-grad-flip:linear-gradient(360deg,#50E3C2,#11FFBD);
+$grey-grad:linear-gradient(#f8fafb,#e9eef1);
+$grey-grad-flip:linear-gradient(360deg,#f8fafb,#e9eef1);
+$yellow:#FFC837;
+$orange:#FF8008;
+$red:#FC354C;
+$l-green:#11FFBD;
+$green:#50E3C2;
+$d-grey:#444D56;
+$m-grey:#515D62;
+$grey:#6c7a89;
+$blue:#19B5FE;
+$a-grey:#9a9a9a;
+$li-grey:#d4d4d4;
+$l-grey:#f4f4f4;
+$white:#fff;
+$imp:!important;
+$ghost:rgba(255,255,255,0.5);
+$demon:rgba(0,0,0,0.06);
+$ghoul:rgba(0,0,0,0.03);
+
+$shadow:0 1px 3px rgba(26, 53, 71, 0.08), 0 0 0 1px rgba(26, 53, 71, 0.04), 0 1px 1px rgba(26, 53, 71, 0.06);
+$shadow-2:0 2px 4px rgba(26, 53, 71, 0.08);
+$t-shadow:0 1px 0 $white;
+$btn-shadow:0 2px 4px rgba(0,0,0,0.15);
+
+@mixin border_radius($radius) {
+  -webkit-border-radius:$radius;
+  -moz-border-radius:$radius;
+  -ms-border-radius:$radius;
+  -o-border-radius:$radius;
+  border-radius:$radius;
+}
+@mixin border_radius_exl($radius) {
+  -webkit-border-radius:$radius !important;
+  -moz-border-radius:$radius !important;
+  -ms-border-radius:$radius !important;
+  -o-border-radius:$radius !important;
+  border-radius:$radius !important;
+}
+@mixin border_radius_top($radius) {
+  -webkit-border-radius:$radius $radius 0 0 !important;
+  -moz-border-radius:$radius $radius 0 0 !important;
+  -ms-border-radius:$radius $radius 0 0 !important;
+  -o-border-radius:$radius $radius 0 0 !important;
+  border-radius:$radius $radius 0 0 !important;
+}
+@mixin content {
+  color:#fff;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: normal;
+  padding-left: 3px;
+}
+@mixin placeholder() {
+  &::-o-placeholder { @include content; }
+  &::-moz-placeholder { @include content; }
+  &::-webkit-input-placeholder { @include content; }
+  &:-ms-input-placeholder { @include content; }
+}
+@mixin placeholder-active() {
+  &::-o-placeholder { color:$trans; }
+  &::-moz-placeholder { color:$trans; }
+  &::-webkit-input-placeholder { color:$trans; }
+  &:-ms-input-placeholder { color:$trans; }
+}
+@mixin transition($speed) {
+  transition:all $speed ease-in-out;
+  -o-transition:all $speed ease-in-out;
+  -ms-transition:all $speed ease-in-out;
+  -moz-transition:all $speed ease-in-out;
+  -webkit-transition:all $speed ease-in-out;
+}

@@ -1,92 +1,154 @@
 %nav.navbar.navbar-default
-  .container
-    .navbar-header
-      / %button.navbar-toggle{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
-      /   %span.sr-only Toggle navigation
-      /   %span.icon-bar
-      /   %span.icon-bar
-      /   %span.icon-bar
+  .navbar-brand
+    %a.logo.xs{:href => "/"}
+      = image_tag "lb-logo.png"
+    %a.logo.sm{:href => "/"}
+      = image_tag "launchplane.png"
+    / %button.navbar-toggle{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
+    /   %span.sr-only Toggle navigation
+    /   %span.icon-bar
+    /   %span.icon-bar
+    /   %span.icon-bar
 
-      / .navbar-brand.hidden-xs.hidden-sm
-      /   / = image_tag "pindoit_logo.png"
-      /   / = image_tag "pindoit_logo.png"
-      /   - if @organization.nil? || @organization.picture.nil?
-      /     = image_tag "logo.png"
-      /   - else
-      /     = image_tag @organization.picture.image.url(:organization_image)
-
-    #navbar-right.pull-right.nav-right
-      %ul.nav.navbar-nav.navbar-right
-        - if current_user
-          / %li.divider-vertical
-          %li.profile.hidden-xs
+    / .navbar-brand.hidden-xs.hidden-sm
+    /   / = image_tag "pindoit_logo.png"
+    /   / = image_tag "pindoit_logo.png"
+    /   - if @organization.nil? || @organization.picture.nil?
+    /     = image_tag "logo.png"
+    /   - else
+    /     = image_tag @organization.picture.image.url(:organization_image)
+  .pull-left.nav-left
+    %ul.nav.navbar-nav.filter-sort
+      = render 'layouts/filter_sort'
+      %li.hidden-xs
+        = form_tag search_path, class: "form-inline", remote: (request.path == '/search'), :method => :get do
+          .form-group
+            .input-group
+              = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "Search by title..."
+              / %input#search.form-control{:placeholder => "search ...", :type => "text"}
+            / .col-xs-2.no-padding
+            /   %button.btn.btn-main{:type => "submit"}
+            /    .fa.fa-search
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+          .profile
             %span
-              Welcome, #{current_user.first_name}
-            - if !current_user || current_user.picture.nil?
-              = image_tag("profile_default.png")
-            - else
-              = image_tag current_user.picture.image.url(:user_image)
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-              %span.flaticon-three115
-              / %span.flaticon-black56
-              .fa.fa-gear
-              %span.caret
-            %ul.dropdown-menu{:role => "menu"}
-              - if can? :update, current_user
-                %li
-                  = link_to '#', class: 'popover-trigger', data: {target: "#edit-user", toggle: "modal", content: "Edit personal account details", placement: "right", trigger: "hover"} do
-                    Edit User Profile
-              - if can? :update, current_organization
-                %li
-                  = link_to '#', class: 'popover-trigger', data: {target: "#edit-org", toggle: "modal", content: "Edit organzation details and departments", placement: "right", trigger: "hover"} do
-                    Edit Organization
-                %li
-                  = link_to :summary, class: 'popover-trigger', data: {content: "Performance indices and metrics", placement: "right", trigger: "hover"} do
-                    Analytics
-                / %li
-                /   = link_to :newsfeed, class: 'popover-trigger', data: {content: "Leaderboard", placement: "right", trigger: "hover"} do
-                /     Leaderboard
-                %li
-                  = link_to dashboard_path(:dashboard_page => "archive"), class: "body-loading popover-trigger", data: {content: "Previously launched, completed, and failed items", placement: "right", trigger: "hover"} do
-                    Archive
-                %li
-                  = link_to manage_users_organization_path(current_organization), remote: true, class: "popover-trigger", data: {content: "Manage departments and members", placement: "right", trigger: "hover"} do
-                    Manage Users
-          %li.dropdown.hidden-xs
-            %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-              .fa.fa-bell
-              %span.caret
-            %ul.dropdown-menu.notification{:role => "menu"}
-              = sync_new partial: 'notification', resource: PublicActivity::Activity.new, scope:current_user
-              - @notifications = current_user.notifications.order(created_at: :desc)
-              - @notifications[0,10].each do |n|
-                - activity = n.activity
-                = sync partial: 'notification', resource: activity
-          %li.hidden-xs
-            = link_to :logout do
-              Logout
-        - else
-          / %li.divider-vertical
+            = image_tag "dropdown-icon.png", class: "drop-icon"
+        %ul.dropdown-menu.filter-menu{:role => "menu"}
           %li
-            = link_to '#', data: {target: "#register", toggle: "modal"} do
-              Register
-          / %li.divider-vertical
-          %li
-            = link_to '#', data: {target: "#login", toggle: "modal"} do
-              Log In
-    #navbar-dropdown.pull-left.nav-left.hidden-xs
-      %ul.nav.navbar-nav.filter-sort
-        = render 'layouts/filter_sort'
+            = render 'pages/department_nav'
+      / %li.page_title.hidden-xs
+      /   %h3= @page_title
+
+  #navbar-right.pull-right.nav-right
+    %ul.nav.navbar-nav
+      - if current_user
+        / %li.divider-vertical
+        /%li.navicon
+        /  = link_to dashboard_path, class: "body-loading popover-trigger" , data: {content: "Alerts", placement: "bottom", trigger: "hover"} do
+        /    = image_tag "check-icon.png"
+        /    #idea_counter.notification_counter.blue
+        /      = current_user.notifications.count
+        %li.navicon.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+            = image_tag "check-icon.png"
+            #idea_counter.notification_counter.blue
+              = current_user.notifications.count
+          %ul.dropdown-menu.notification{:role => "menu"}
+            = sync_new partial: 'notification', resource: PublicActivity::Activity.new, scope:current_user
+            - @notifications = current_user.notifications.order(created_at: :desc)
+            - @notifications[0,10].each do |n|
+              - activity = n.activity
+              = sync partial: 'notification', resource: activity
+        %li.navicon
+          = link_to dashboard_path(:dashboard_page => "dashboard"), class: "body-loading popover-trigger" , data: {content: "Ideas", placement: "bottom", trigger: "hover"} do
+            -#%i.fa.fa-lightbulb-o
+            = image_tag "bulb-icon.png", class: "bulb"
+            #idea_counter.notification_counter.yellow
+              = current_organization_posts('idea_posts').count
+        %li.navicon
+          = link_to dashboard_path(:dashboard_page => "pending"),  class: "body-loading popover-trigger", data: {content: "Pending", placement: "bottom", trigger: "hover"} do
+            -#%i.fa.fa-clock-o
+            = image_tag "list-icon.png"
+            #pending_counter.notification_counter.orange
+              = current_organization_posts('pending_posts').count
+        %li.navicon
+          = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading popover-trigger", data: {content: "Upvotes", placement: "bottom", trigger: "hover"} do
+            -#%i.fa.fa-eye
+            = image_tag "launched-icon.png"
+            #pending_counter.notification_counter.red
+              = current_organization_posts('following_posts').count
+
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+            .profile
+              - if !current_user || current_user.picture.nil?
+                = image_tag ("profile-icon.png"), class: "profile-img"
+              - else
+                = image_tag current_user.picture.image.url(:user_image)
+              %span
+                #{current_user.first_name}
+              = image_tag "dropdown-icon.png", class: "drop-icon"
+
+          %ul.dropdown-menu{:role => "menu"}
+            - if can? :update, current_user
+              %li
+                = link_to '#', data: {target: "#edit-user", toggle: "modal"} do
+                  %i.fa.fa-user
+                  &nbsp;
+                  Edit Profile
+            - if can? :update, current_organization
+              %li
+                = link_to '#', data: {target: "#edit-org", toggle: "modal"} do
+                  %i.fa.fa-sitemap
+                  &nbsp;
+                  Edit Organization
+            - if can? :update, current_user
+              %li
+                = link_to '#', data: {target: "#notification-settings", toggle: "modal"} do
+                  Notification Settings
+              %li
+                = link_to :summary do
+                  %i.fa.fa-dashboard
+                  &nbsp;
+                  Analytics
+              / %li
+              /   = link_to :newsfeed do
+              /     Leaderboard
+              %li
+                = link_to dashboard_path(:dashboard_page => "archive"), class: "body-loading" do
+                  %i.fa.fa-archive
+                  &nbsp;
+                  Archive
+              %li
+                = link_to manage_users_organization_path(current_organization), remote: true do
+                  %i.fa.fa-users
+                  &nbsp;
+                  Manage Users
+              %li
+                = link_to :logout do
+                  %i.fa.fa-sign-out
+                  &nbsp;
+                  Logout
+        -#%li.dropdown.hidden-xs
+          -#%a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+            -#.fa.fa-bell
+            -#%span.caret
+          %ul.dropdown-menu.notification{:role => "menu"}
+            = sync_new partial: 'notification', resource: PublicActivity::Activity.new, scope:current_user
+            - @notifications = current_user.notifications.order(created_at: :desc)
+            - @notifications[0,10].each do |n|
+              - activity = n.activity
+              = sync partial: 'notification', resource: activity
+        /%li.hidden-xs
+        /  = link_to :logout do
+        /    Logout
+      - else
+        / %li.divider-vertical
         %li
-          = form_tag search_path, class: "form-inline", remote: (request.path == '/search'), :method => :get do
-            .form-group
-              .col-xs-10
-                .input-group
-                  = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "search ..."
-                  / %input#search.form-control{:placeholder => "search ...", :type => "text"}
-              .col-xs-2.no-padding
-                %button.btn.btn-main{:type => "submit"}
-                  .fa.fa-search
-        / %li.page_title.hidden-xs
-        /   %h3= @page_title
+          = link_to '#', data: {target: "#register", toggle: "modal"} do
+            Register
+        / %li.divider-vertical
+        %li
+          = link_to '#', data: {target: "#login", toggle: "modal"} do
+            Log In

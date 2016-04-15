@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124043149) do
+ActiveRecord::Schema.define(version: 20160406194830) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -73,13 +73,14 @@ ActiveRecord::Schema.define(version: 20151124043149) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "department_entries", force: :cascade do |t|
-    t.integer  "context_id",      limit: 4
-    t.string   "context_type",    limit: 255
-    t.integer  "department_id",   limit: 4
+    t.integer  "context_id",        limit: 4
+    t.string   "context_type",      limit: 255
+    t.integer  "department_id",     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "department_name", limit: 255
-    t.string   "abbrev_name",     limit: 255
+    t.string   "department_name",   limit: 255
+    t.string   "abbrev_name",       limit: 255
+    t.boolean  "approval_required",             default: false
   end
 
   create_table "department_entry_memberships", force: :cascade do |t|
@@ -133,6 +134,7 @@ ActiveRecord::Schema.define(version: 20151124043149) do
     t.integer  "activity_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "to_compile",            default: false
   end
 
   create_table "opinions", force: :cascade do |t|
@@ -180,6 +182,7 @@ ActiveRecord::Schema.define(version: 20151124043149) do
     t.integer  "post_id",             limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "approved",                        default: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -271,6 +274,7 @@ ActiveRecord::Schema.define(version: 20151124043149) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "subscribe_to_newsletter",             default: false
+    t.string   "notification_settings",   limit: 255, default: "211211211"
   end
 
 end

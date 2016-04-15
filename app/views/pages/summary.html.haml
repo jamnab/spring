@@ -1,49 +1,52 @@
 = javascript_include_tag 'util/analytics_d3'
 
 .summary
-  #analytics-carousel.carousel.slide{"data-ride" => "carousel"}
-    %ul.carousel-indicators
-      %li.active{"data-slide-to" => "0", "data-target" => "#analytics-carousel"}
-        .headline Contributions
-        .subline by Department
-      %li{"data-slide-to" => "1", "data-target" => "#analytics-carousel"}
-        .headline Contributions
-        .subline by Employee
-      %li{"data-slide-to" => "2", "data-target" => "#analytics-carousel"}
-        .headline Trending Ideas
-        .subline in the Pipline
-      %li{"data-slide-to" => "3", "data-target" => "#analytics-carousel"}
-        .headline Approved Ideas
-        .subline launched Actionables
-      %li{"data-slide-to" => "4", "data-target" => "#analytics-carousel"}
-        .headline Detailed Trends
-        .subline on Idea Generation
-      %li.no-hover
+  #analytics-carousel.carousel.slide{"data-ride" => "carousel", "data-interval" => "false"}
+    %ul.alt-indicators
+      %li
         %p
           From:
           %b July 02, 2015
           %span.fa.fa-edit
+      %li
         %p
           To:
           %b July 08, 2015
           %span.fa.fa-edit
+    %ul.carousel-indicators
+      %li.active{"data-slide-to" => "0", "data-target" => "#analytics-carousel"}
+        .headline Departments
+        /.subline by Department
+      %li{"data-slide-to" => "1", "data-target" => "#analytics-carousel"}
+        .headline Employees
+        /.subline by Employee
+      %li{"data-slide-to" => "2", "data-target" => "#analytics-carousel"}
+        .headline Trending
+        /.subline in the Pipline
+      %li{"data-slide-to" => "3", "data-target" => "#analytics-carousel"}
+        .headline Approved
+        /.subline launched Actionables
+      %li{"data-slide-to" => "4", "data-target" => "#analytics-carousel"}
+        .headline Insights
+        /.subline on Idea Generation
     / Wrapper for slides
     .carousel-inner{:role => "listbox"}
       .item.active
-        .row
+        .row.first-q
           .col-xs-12.col-sm-6
             .summary-box
-              .header Top Departments
+              .header Top Departments (Viable/Total)
               .body
                 - @contributions_by_department[0..5].each do |entry|
-                  .col-xs-4
+                  .col-sm-4
                     .summary-card
                       .main-content
                         = entry['# Ideas Actionable']
-                      .notes
-                        ideas actionable
-                        %br
-                        out of #{entry['# Ideas Total']} ideas
+                        :escaped
+                          /
+                        #{entry['# Ideas Total']}
+                      /.notes
+                      /  Viable Ideas - Total
                       .footer
                         = entry['Department']
           .col-xs-12.col-sm-6
@@ -51,18 +54,17 @@
               .header Department Contributions
               .body
                 #contributions_by_department_graph.d3_graph
-        %hr
         .row
-          .col-xs-12.analytics_data_table_wrapper
+          .analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
               %thead.text-center
                 %th Department
-                %th # Ideas Actionable
-                %th # Ideas Total
-                %th # Ideas Approved
-                %th # of Comments
-                %th # of Votes
-                %th # of Users
+                %th Viable Ideas
+                %th Total Ideas
+                %th Approved Ideas
+                %th Total Comments
+                %th Total Votes
+                %th Total Users
               %tbody.text-center
                 - @contributions_by_department.each do |entry|
                   %tr
@@ -74,46 +76,46 @@
                     %td= entry['# of Votes']
                     %td= entry['# of Users']
       .item
-        .row
-          .col-xs-12.col-sm-6
+        .row.first-q
+          .col-sm-6
             .summary-box
-              .header Top Contributors
+              .header Top Idea Contributors (Viable/Total)
               .body
                 - @contributions_by_employee[0..5].each do |entry|
-                  .col-xs-4
+                  .col-sm-4
                     .summary-card
                       .main-content
+                        = entry['# Ideas Actionable']
+                        :escaped
+                          /
+                        #{entry['# Ideas Total']}
+                      /.notes
+                      /  Viable Ideas - Total
+                      .footer
                         - user = User.find(entry['user_id'])
                         - if !user || user.picture.nil?
                           = image_tag("profile_default.png")
                         - else
                           = image_tag user.picture.image.url(:user_image)
-                      .notes
-                        = entry['# Ideas Actionable']
-                        ideas actionable
-                        %br
-                        out of #{entry['# Ideas Total']} ideas
-                      .footer
                         = entry['Name']
-          .col-xs-12.col-sm-6
+          .col-sm-6
             .summary-box
               .header Employee Contributions
               .body
                 #contributions_by_employee_graph.d3_graph
-        %hr
         .row
           .col-xs-12.analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
               %thead.text-center
                 %th Name
                 %th Score
-                %th # Ideas Actionable
-                %th # Ideas Total
-                %th # Ideas Approved
-                %th # of Comments Received
-                %th # of Comments Given
-                %th # of Votes Received
-                %th # of Votes Given
+                %th Viable Ideas
+                %th Total Ideas
+                %th Approved Ideas
+                %th Comments Received
+                %th Comments Given
+                %th Votes Received
+                %th Votes Given
               %tbody.text-center
                 - @contributions_by_employee.each do |entry|
                   %tr
@@ -128,27 +130,24 @@
                     %td= entry['# of Votes Received']
                     %td= entry['# of Votes Given']
       .item
-        .row
+        .row.first-q
           .col-xs-12.col-sm-6
             .summary-box
-              .header Trending Ideas
+              .header Trending Ideas (By Support)
               .body
                 - @trending_ideas[0..5].each do |entry|
-                  .col-xs-4
+                  .col-sm-4
                     .summary-card
                       .main-content
+                        #{entry['Support']}%
                       .notes.post
-                        %b= entry['Title']
-                        %br
-                        (#{entry['Support']}% Support)
                       .footer
-                        = entry['Name']
+                        = entry['Title']
           .col-xs-12.col-sm-6
             .summary-box
               .header Chart
               .body
                 #trending_ideas_graph.d3_graph
-        %hr
         .row
           .col-xs-12.analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
@@ -156,8 +155,8 @@
                 %th Poster
                 %th Title
                 %th Support
-                %th # of Comments
-                %th # of Votes
+                %th Total Comments
+                %th Total Votes
               %tbody.text-center
                 - @trending_ideas.each do |entry|
                   %tr
@@ -167,13 +166,13 @@
                     %td= entry['# of Comments']
                     %td= entry['# of Votes']
       .item
-        .row
-          .col-xs-12.col-sm-6
+        .row.first-q
+          .col-sm-6
             .summary-box
               .header Approved Ideas
               .body
                 - @approved_ideas[0..5].each do |entry|
-                  .col-xs-4
+                  .col-sm-4
                     .summary-card
                       .main-content
                       .notes.post
@@ -182,12 +181,11 @@
                         (#{entry['Support']}% Support)
                       .footer
                         = entry['Poster']
-          .col-xs-12.col-sm-6
+          .col-sm-6
             .summary-box
               .header Chart
               .body
                 #approved_ideas_graph.d3_graph
-        %hr
         .row
           .col-xs-12.analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
@@ -195,8 +193,8 @@
                 %th Poster
                 %th Title
                 %th Support
-                %th # of Comments
-                %th # of Votes
+                %th Total Comments
+                %th Total Votes
               %tbody.text-center
                 - @approved_ideas.each do |entry|
                   %tr
@@ -206,65 +204,66 @@
                     %td= entry['# of Comments']
                     %td= entry['# of Votes']
       .item
-        .col-xs-12.col-sm-6
-          .summary-box
-            .header Overview
-            .body
-              .col-xs-4
-                .summary-card
-                  .main-content
-                    = @stat_overview[:num_actionables]
-                  .notes
-                    Total Number of
-                  .footer
-                    Ideas Actionable
-              .col-xs-4
-                .summary-card
-                  .main-content
-                    = @stat_overview[:num_total_ideas]
-                  .notes
-                    Total Number of
-                  .footer
-                    Ideas Total
-              .col-xs-4
-                .summary-card
-                  .main-content
-                    = @stat_overview[:num_approved]
-                  .notes
-                    Total Number of
-                  .footer
-                    Ideas Approved
-              .col-xs-4
-                .summary-card
-                  .main-content
-                    = @stat_overview[:num_comments]
-                  .notes
-                    Total Number of
-                  .footer
-                    Comments
-              .col-xs-4
-                .summary-card
-                  .main-content
-                    = @stat_overview[:num_votes]
-                  .notes
-                    Total Number of
-                  .footer
-                    Votes
-              .col-xs-4
-                .summary-card
-                  .main-content
-                    = @stat_overview[:num_users]
-                  .notes
-                    Total Number of
-                  .footer
-                    Users
-        .col-xs-12.col-sm-6
-          .summary-box
-            .header Chart
-            .body
-              .graph_cover
-                Not Enough Data
-              #detailed_trends_graph.d3_graph
+        .row.first-q
+          .col-sm-6
+            .summary-box
+              .header Overview
+              .body
+                .col-sm-4
+                  .summary-card
+                    .main-content
+                      = @stat_overview[:num_actionables]
+                    /.notes
+                    /  Total Number of
+                    .footer
+                      Viable Ideas
+                .col-sm-4
+                  .summary-card
+                    .main-content
+                      = @stat_overview[:num_total_ideas]
+                    /.notes
+                    /  Total Number of
+                    .footer
+                      Total Ideas
+                .col-sm-4
+                  .summary-card
+                    .main-content
+                      = @stat_overview[:num_approved]
+                    /.notes
+                    /  Total Number of
+                    .footer
+                      Approved Ideas
+                .col-sm-4
+                  .summary-card
+                    .main-content
+                      = @stat_overview[:num_comments]
+                    /.notes
+                    /  Total Number of
+                    .footer
+                      Total Comments
+                .col-sm-4
+                  .summary-card
+                    .main-content
+                      = @stat_overview[:num_votes]
+                    /.notes
+                    /  Total Number of
+                    .footer
+                      Total Votes
+                .col-sm-4
+                  .summary-card
+                    .main-content
+                      = @stat_overview[:num_users]
+                    /.notes
+                    /  Total Number of
+                    .footer
+                      Total Users
+          .col-sm-6
+            .summary-box
+              .header Chart
+              .body
+                .graph_cover
+                  Not Enough Data
+                #detailed_trends_graph.d3_graph
 
 
 
@@ -296,4 +295,3 @@
     -#             (<b>#{user.contributions['total']}</b>/#{user.contributions['positive']}/#{user.contributions['negative']})
     -#           %td
     -#             (<b>#{user.impact['positive']}</b>/#{user.impact['negative']}/#{user.impact['total']})
-

@@ -30,6 +30,13 @@ set :puma_init_active_record, true  # Change to true if using ActiveRecord
 
 set :tmp_dir, "#{shared_path}/tmp/"
 
+set :slack_msg_starting,     -> { "#{ENV['USER'] || ENV['USERNAME']} has started deploying branch #{fetch :branch} of #{fetch :application} to #{fetch :slack_stage, 'an unknown stage'}" }
+set :slack_msg_finished,     -> { "#{ENV['USER'] || ENV['USERNAME']} has finished deploying branch #{fetch :branch} of #{fetch :application} to #{fetch :slack_stage, 'an unknown stage'}" }
+set :slack_msg_failed,       -> { "#{ENV['USER'] || ENV['USERNAME']} failed to deploy branch #{fetch :branch} of #{fetch :application} to #{fetch :slack_stage, 'an unknown stage'}" }
+
+# slack integration
+set :slack_webhook, "https://hooks.slack.com/services/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"
+
 set :rvm1_ruby_version, "ruby-2.2.1"
 
 namespace :puma do

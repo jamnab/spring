@@ -1,5 +1,5 @@
 #edit-org.modal.fade
-  .modal-dialog
+  .modal-dialog.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -10,13 +10,13 @@
         - if current_organization
           = form_for current_organization, :html => { multipart: true }  do |f|
             .modal-body.row
-              .field.col-xs-12
-                = f.label :name
-                = f.text_field :name, class: "form-control"
               .field.col-xs-12.nested_pics_form
                 = f.fields_for :pictures do |p|
                   = p.label :image
                   = p.file_field :image
+              .field.col-xs-12
+                = f.label :name
+                = f.text_field :name, class: "form-control"
               .field.col-xs-12
                 = f.label :twitter_handle
                 = f.text_field :twitter_handle, class: "form-control"
