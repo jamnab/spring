@@ -17,7 +17,7 @@
           %label.h6 Message
           %textarea.form-control{:rows => "7", name: 'message'}
           %button.btn.btn-primary{:type => "submit"}
-            %span.fa.fa-envelope-o
+            %span Send
       .col-sm-5.col-sm-offset-1
         %h6 Where to find us
         %p We are located in the Communitech Hub
@@ -34,3 +34,40 @@
           %a{:href => "mailto:clinton@golaunchboard.com"}
             %span.fa.fa-envelope-o
             clinton@golaunchboard.com
+%footer.footer-1
+  .background
+  .container
+    .row
+      .col-sm-5
+        %p.lead Helping companies foster innovation.
+        © Launchboard Inc. 2016. All rights reserved.
+        .social-btns
+          %a.social-btn-angellist{:href => "https://twitter.com/launchboard", :target => "_blank"}
+            .fa.fa-twitter
+            .fa.fa-twitter
+      %nav
+        .col-sm-2.col-sm-offset-1
+          %h6
+            %b About
+          %ul
+            %li
+              %a{:href => "/"} Home
+            %li
+              %a{:href => "/contact_us"} Contact
+        .col-sm-2
+          %h6
+            %b Product
+          %ul
+            %li
+              %a{:href => "#feature-panel"} Features
+            %li
+              %a{:href => "#price"} Price
+      .col-sm-2.buy-btn
+        %a.btn.btn-success.btn-block{:href => "#", data: {toggle: 'modal', target: '#register'}} Sign Up
+        or
+        %a{:href => "#", data: {toggle: 'modal', target: '#login'}}
+          %span Log In
+    .row
+      .col-sm-5.additional-links
+        %a{:href => "privacy"} Privacy Policy
+        %a{:href => "terms"} Terms of Service

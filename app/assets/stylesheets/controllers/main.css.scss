@@ -180,10 +180,10 @@ html {
   background:$green-grad-flip;
 }
 body {
-  background:$green-grad;
+  background-image:image-url("noisy_grid.png");
 }
 .body-wrapper {
-  background: $green-grad;
+  background:$green-trans;
   background-size: cover;
   min-height: 100%;
 }
@@ -206,17 +206,21 @@ body {
   color: $white;
   border:none;
   font-weight: 600;
+  margin-bottom: 0px $imp;
+  .close {
+    color: #fff;
+  }
   &.alert-info {
-    background:$blue;
+    background:$blue $imp;
   }
   &.alert-danger {
-    background: $red;
+    background: $red $imp;
   }
   &.alert-warning {
-    background:$orange;
+    background:$orange $imp;
   }
   &.alert-success {
-    background:$l-green;
+    background:$l-green $imp;
   }
 }
 .no-padding {
@@ -224,11 +228,11 @@ body {
 }
 
 .navbar{
-  background: $green;
+  background: $trans;
   border: none;
   @include border_radius(0);
   color:$white;
-  box-shadow: $shadow-2;
+  /* box-shadow: $shadow-2; */
 
   .navbar-brand {
     display: inline-block;
@@ -494,11 +498,15 @@ body {
     .dropdown-menu {
       padding: 0px;
       border: none;
-      margin-left: -95px;
+      margin-left: -35px;
       margin-top:5px;
       box-shadow: $shadow;
 
       @include border_radius(5px);
+
+      @media screen and (max-width:768px) {
+        margin-left: -130px;
+      }
 
       &.filter-menu {
         margin-left: -55px;

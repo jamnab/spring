@@ -1,136 +1,144 @@
 %section.header-19-sub
   .background  
-  = image_tag 'ipad@2x.png', class: 'hidden-xs'
+  = image_tag 'launchplane-lg.png', class: 'hidden-xs'
   / %img.hidden-xs{:alt => "", :src => "../../common-files/img/header/ipad@2x.png"}/
   .container
     .row
-      .col-sm-7
+      .col-sm-5
         %h1
-          = "your digital"
-          %br
-          = "suggestion box."
+          = "Reward Ideas"
+          /%br
         %p A private platform for questions, thoughts, and concerns that help focus on what matters. Tap into great ideas, identify key contributors who create real value, and foster a culture of innovation.
+        /%p A private platform for questions, thoughts, and concerns that help focus on what matters.
+        %br
         .btns
           %a.btn.btn-primary{href: '#feature-panel'}
             %span Learn more
+%section.content-24#feature-panel
+  .container
+    .row
+      .col-sm-5.col-sm-offset-1
+        .features.features-clear
+          .features-bodies
+            .features-body.active
+              %h3 It starts with a spark
+              %p
+                Members create a post around whatever is on their mind, and pending approval it is viewable to an audience for voting.
+                %br/
+                The poster remains anonymous until the votes are in, which helps eliminate any decision bias.
+              /%a.btn.btn-clear{:href => "features"} Learn More
+%section.content-24.alt
+  .container
+    .row
+      .col-sm-4.col-sm-offset-7
+        .features.features-clear
+          .features-bodies
+            .features-body.active
+              %h3 Initiatives take flight
+              %p
+                Majority audience support advances important posts, with contributor ideas sent to a decision maker for approval & timeline setting.
+%section.content-24
+  .container
+    .row
+      .col-sm-5.col-sm-offset-1
+        .features.features-clear
+          .features-bodies
+            .features-body.active
+              %h3 Ideas spring into Action
+              %p
+                Efficiently monitor ideas from inception to reality. You can easily see what initiatives are in launch stage, keep track of everyone via a leaderboard & analytics, and feel comfort knowing that your information is kept secure.
+%section.price-1#price
+  .container
+    %h3.row-title Convenient & Flexible Pricing
+    .row.plans
+      .col-sm-4.col-sm-offset-2
+        .plan
+          .header
+            .title SMEs
+            .price
+              Starting at
+              %span $5/month
+          .description
+            %b Unlimited
+            access
+            %br/
+            %b Unlimited
+            postings
+            %br/
+            %b Unlimited
+            tool access
+            %br/
+            %br/
+            %b $20/month add-on
+            %br/
+            Unlimited flat-rate service posts
+            %br/
+          %a.btn.btn-primary{:href => "#", data: {toggle: 'modal', target: '#register'}} Sign Up
+      .col-sm-4
+        .plan
+          .header
+            .title Large Enterprise
+            .price Custom Quote
+          .description
+            %b Unlimited
+            access
+            %br/
+            %b Unlimited
+            postings
+            %br/
+            Value-add project tools
+            %br/
+            Value-add client tools
+            %br/
+            %b OR
+            %br/
+            = succeed "/year" do
+              %b $400
 
-%section.content-31
-  .container
-    .row#feature-panel
-      .number 1
-      .col-sm-8.col-sm-offset-2
-        %h3 It starts with a spark
-        %p Members create a post around whatever is on their mind, and pending approval it is viewable to an audience for voting. The poster remains anonymous until the votes are in, which helps eliminate any decision bias.
-        .box
-          .img
-            = image_tag 'card_greyscale.png', height: 187
-            = image_tag 'card.png', height: 187
-            / %img{:alt => "", :height => "187", :src => "../../common-files/img/content/ticket-navy-bw@2x.png", :width => "380"}/
-            / %img{:alt => "", :height => "187", :src => "../../common-files/img/content/ticket-navy@2x.png", :width => "380"}/
-    .row
-      .number 2
-      .col-sm-8.col-sm-offset-2
-        #pt-1.page-transitions.pt-perspective
-          .pt-page.pt-page-current
-            %h3 Initiatives take flight
-            %p Majority audience support advances important posts, with contributor ideas sent to a decision maker for approval & timeline setting
-            .box
-              .img
-                = image_tag 'rocket_greyscale.png'
-                = image_tag 'rocket.png'
-                / %img{:alt => "", :height => "179", :src => "../../common-files/img/content/map-bw@2x.png", :width => "380"}/
-                / %img{:alt => "", :height => "179", :src => "../../common-files/img/content/map@2x.png", :width => "380"}/
-          .pt-controls
-            %a.pt-control-prev{:href => "#"}
-            %a.pt-control-next{:href => "#"}
-    .row
-      .number 3
-      .col-sm-8.col-sm-offset-2
-        #pt-2.page-transitions.pt-perspective
-          .pt-page.pt-page-current
-            %h3 Ideas spring into Action
-            %p Efficiently monitor ideas from inception to reality. You can easily see what initiatives are in launch stage, keep track of everyone via a leaderboard & analytics, and feel comfort knowing that your information is kept secure.
-            .box
-              .img
-                = image_tag 'idea_doit_greyscale.png'
-                = image_tag 'idea_doit.png'
-                / %img{:alt => "", :height => "193", :src => "../../common-files/img/content/ps-wire-imac-bw@2x.png", :width => "397"}/
-                / %img{:alt => "", :height => "193", :src => "../../common-files/img/content/ps-wire-imac@2x.png", :width => "397"}/
-          .pt-controls
-            %a.pt-control-prev{:href => "#"}
-            %a.pt-control-next{:href => "#"}
-
-%section.content-18
-  .container
-    %h1 Sometimes it's best to let others do the talking
-    #c-18_myCarousel.carousel.slide{"data-interval" => "600000"}
-      .controls
-        %a.carousel-control.left.disabled{"data-slide" => "prev", :href => "#"}
-        %a.carousel-control.right{"data-slide" => "next", :href => "#c-18_myCarousel"}
-      .carousel-inner
-        .item.active
-          .quote-text
-            The technology behind this looks great, and from what we've seen we are excited for its release. Launchboard can help me better engage my employees, and be agile in addressing important ideas and key contributors... In short, it's a killer tool.
-          .quote-author @SyncI&D, syncidlabs.com
-        / .item
-        /   .quote-text
-        /     Colored, stylish icons can easily be modified and used in a wide variety of projects
-        /   .quote-author @stSilent, DesignModo.com
-        / .item
-        /   .quote-text
-        /     Colored, stylish icons can easily be modified and used in a wide variety of projects
-        /   .quote-author @stSilent, DesignModo.com
-    / .row.quotes
-    /   .col-sm-3
-    /     %h6 @mc
-    /     Easy to change and easy to create new elements with color.
-    /   .col-sm-4.col-sm-offset-1
-    /     %h6 @madbyte
-    /     Awesome Kit. It’s more easiest way to make my startup. Thanks!
-    /   .col-sm-3.col-sm-offset-1
-    /     %h6 @stSilent
-    /     Create new elements with color swatches. Wow!
-%section.content-18.custom
+            %br/
+            %b Unlimited
+            access
+            %br/
+            %br/
+            %b Add-ons
+            %br/
+            %b $250
+            feature interview
+          %a.btn.btn-primary{:href => "mailto:clinton@golaunchboard.com"} Contact Us
+%footer.footer-1
+  .background
   .container
     .row
-      .col-sm-6.col-sm-offset-1
-        %h4
-          %b For:
-        %h5
-          %i
-            Associations & clubs
-        %h5
-          %i
-            Business
-        %h5
-          %i
-            Not-for-profits & social ventures
-        %h5
-          %i
-            Think-tanks
-        %h5
-          %i
-            Incubators
-        %h5
-          %i
-            Government & political
       .col-sm-5
-        %a.btn.btn-large.btn-danger{:href => "#", data: {target: '#register', toggle: 'modal'}} SIGN UP FOR PRIVATE BETA
-%footer.footer-2
-  .container
-    %nav.pull-left
-      %ul
-        %li.active
-          %a{:href => "/"} Home
-        %li
-          %a{:href => "#feature-panel"} Features
-        / %li
-        /   %a{:href => "/price"} Price
-        %li
-          %a{:href => "/contact_us"} Contact Us
-    .social-btns.pull-right
-      / %a{:href => "#"}
-      /   .fui-facebook
-      /   .fui-facebook
-      %a{:href => "https://twitter.com/launchboard", target: '_blank'}
-        .fa.fa-twitter
+        %p.lead Helping companies foster innovation.
+        © Launchboard Inc. 2016. All rights reserved.
+        .social-btns
+          %a.social-btn-angellist{:href => "https://twitter.com/launchboard", :target => "_blank"}
+            .fa.fa-twitter
+            .fa.fa-twitter
+      %nav
+        .col-sm-2.col-sm-offset-1
+          %h6
+            %b About
+          %ul
+            %li
+              %a{:href => "/"} Home
+            %li
+              %a{:href => "mailto:clinton@golaunchboard.com"} Contact
+        .col-sm-2
+          %h6
+            %b Product
+          %ul
+            %li
+              %a{:href => "#feature-panel"} Features
+            %li
+              %a{:href => "#price"} Price
+      .col-sm-2.buy-btn
+        %a.btn.btn-success.btn-block{:href => "#", data: {toggle: 'modal', target: '#register'}} Sign Up
+        or
+        %a{:href => "#", data: {toggle: 'modal', target: '#login'}}
+          %span Log In
+    .row
+      .col-sm-5.additional-links
+        %a{:href => "privacy"} Privacy Policy
+        %a{:href => "terms"} Terms of Service

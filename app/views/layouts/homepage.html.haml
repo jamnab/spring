@@ -14,28 +14,25 @@
     = render 'layouts/register_form'
     = render 'layouts/feedback_box'
     .page-wrapper
-      %header.header-19
+      %header.header-10
         .container
           .row
             .navbar.col-sm-12{:role => "navigation"}
               .navbar-header
                 %button.navbar-toggle{:type => "button"}
                 %a.brand{:href => "/"}
-                  = image_tag 'logo.png'
-                  / %img{:alt => "", :height => "50", :src => "/pindoit_logo.png", :width => "50"}/
-                  / %span Startup
-              .navbar-collapse.collapse
-                %ul.nav
+                  = image_tag 'lb-wordmark.png'
+              .navbar-collapse.collapse.pull-right
+                %ul.nav.pull-left
+                  /%li
+                  /  %a{:href => "#price"} Price
+                  /%li
+                  /  %a{:href => "/contact_us"} Contact Us
                   %li
                     %a{href: '#', data: {target: '#login', toggle: 'modal'}} Log In
                   %li
                     %a{href: "#", data: {target: '#register', toggle: 'modal'}} Sign Up
-                  %li.active
-                    %a{:href => "/"} Home
-                  %li
-                    %a{:href => "/price"} Price
-                  %li
-                    %a{:href => "/contact_us"} Contact Us
+
 
 
                 / %ul.subnav
