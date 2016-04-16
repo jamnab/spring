@@ -7,7 +7,10 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
+server 'lb-test.syncidlabs.com', user: 'deploy', roles: %w{app db web faye}
 
+set :slack_stage, 'staging'
+set :branch, "development"
 
 # role-based syntax
 # ==================

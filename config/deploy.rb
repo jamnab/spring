@@ -133,3 +133,16 @@ namespace :faye do
   before 'deploy:updating', 'faye:stop'
   after 'deploy:published', 'faye:start'
 end
+
+namespace :azure do
+  desc 'Azure sql server config'
+  task :sql_config do
+    on roles(:app) do
+      if fetch(:slack_stage) == "production"
+        execute :curl, "-o #{current_path}/config/database.yml -L #{fetch :database_yml_url}"
+      end
+    end
+  end
+
+  after 'deploy:published', 'azure:sql_config'
+end
