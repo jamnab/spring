@@ -37,7 +37,7 @@ set :slack_msg_failed,       -> { "#{ENV['USER'] || ENV['USERNAME']} failed to d
 # slack integration
 set :slack_webhook, "https://hooks.slack.com/services/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"
 
-set :rvm1_ruby_version, "ruby-2.2.1"
+set :rvm1_ruby_version, "ruby-2.2.4"
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
