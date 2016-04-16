@@ -10,6 +10,7 @@ require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'capistrano/puma'
 require 'capistrano/puma/nginx'
+require 'capistrano/puma/monit'
 
 require 'whenever/capistrano'
 
