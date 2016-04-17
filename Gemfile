@@ -36,7 +36,10 @@ gem 'forgery', '0.6.0'
 gem 'jquery-fileupload-rails'
 gem 'rmagick'
 gem 'remotipart', '~> 1.2'
+
 gem "paperclip", :git => "http://github.com/thoughtbot/paperclip.git"
+gem 'paperclip-azure'
+
 gem "font-awesome-rails"
 # gem "sentimentalizer", git: "https://github.com/findcongwang/emsentimentalizer.git"
 gem 'skrollr-rails'
