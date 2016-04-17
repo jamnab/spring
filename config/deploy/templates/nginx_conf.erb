@@ -4,7 +4,7 @@ upstream puma {
 
 server {
   listen 80;
-  <% if fetch(:slack_stage) = 'production' %>
+  <% if fetch(:slack_stage) == 'production' %>
     # ---- SSL BLOCK START ----
     # disable this block if deploying on non-https servers
     listen 443 default ssl;
