@@ -35,7 +35,7 @@ server {
   <% if fetch(:slack_stage) == 'production' %>
     server_name golaunchboard.com www.golaunchboard.com;
   <% elsif fetch(:slack_stage) == 'staging' %>
-    server_name lb-test.syncidlabs.com
+    server_name lb-test.syncidlabs.com;
   <% end %>
 
   root /home/deploy/<%= fetch(:application) %>/current/public;
