@@ -22,7 +22,8 @@ class UserSessionsController < ApplicationController
         format.html { redirect_to(:dashboard) }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       else
-        format.html { render :action => "new" }
+        flash[:error] = "Your email or password was not correct"
+        format.html { redirect_to :back }
         format.xml  { render :xml => @user_session.errors, :status => :unprocessable_entity }
       end
     end
