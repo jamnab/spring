@@ -633,7 +633,7 @@ h3.page_title {
 
   .signature {
     @include border_radius_bottom(5px);
-    border-top:1px dashed $demon;
+    /* border-top:1px dashed $demon; */
   }
 }
 
