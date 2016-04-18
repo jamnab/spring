@@ -613,8 +613,8 @@ a:hover {
 }
 .badge {
   background:$green;
-  padding:5px 10px;
-  @include border_radius(10px);
+  padding:5px 12px;
+  @include border_radius(15px);
 }
 
 /** Departments **/
@@ -623,7 +623,7 @@ a:hover {
   padding:10px;
 
   .badge {
-    margin:3px;
+    margin:1px;
 
     font-weight: 600;
     text-shadow: $btn-shadow;
@@ -783,10 +783,10 @@ a:hover {
     @include border_radius(5px);
     box-shadow: $shadow-2;
     .modal-header {
-      background-color: $green;
-      color: $white;
+      /* background-color: $green; */
+      color: $grey;
       border-bottom: none;
-      text-shadow: $btn-shadow;
+      /* text-shadow: $btn-shadow; */
       @include border_radius_top(5px);
     }
     p {
@@ -894,5 +894,5 @@ form .field {
 
 .modal-header .close {
   opacity: 1;
-  color: $inverse_text_main;
+  color: $grey;
 }
