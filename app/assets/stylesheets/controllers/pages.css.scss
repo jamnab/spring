@@ -255,6 +255,10 @@
             font-weight: 700;
             word-spacing: -12px;
             color: $green;
+            &.sm {
+              font-size:5rem $imp;
+              word-spacing: -14px;
+            }
 
             @media screen and (max-width: 767px) {
               /* font-weight: 700; */
@@ -271,8 +275,8 @@
             }
           }
           .footer {
-            font-size: 16px;
-            font-weight: 600;
+            /* font-size: 16px; */
+            font-weight: 500;
             text-shadow: $t-shadow;
             margin-top:10px;
             color:$grey;
