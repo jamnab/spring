@@ -1,5 +1,5 @@
 #edit-post.modal.fade
-  .modal-dialog.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+  .modal-dialog.col-sm-8.col-sm-offset-2.col-md-8.col-md-offset-2
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -9,29 +9,50 @@
       .slide-1
         = form_for @post, :html => { multipart: true },remote: true do |f|
           = hidden_field_tag 'viewmode', @viewmode
-          .modal-body.row
+          .modal-body
             .field.col-xs-12
               = f.label :title
               = f.text_field :title, class: "form-control"
+            .field.col-xs-12
+              = f.label 'Description'
+              = f.text_area :content, class: "form-control", placeholder: "Enter description here ...", rows: 3, maxlength: 250
+            .field.col-xs-12
+              .input-group.date
+                %input.form-control{:type => "text"}
+                %span.input-group-addon
+                  %i.fa.fa-calendar
+              :javascript
+                $('#sandbox-container .input-group.date').datepicker({
+                    todayHighlight: true
+                });
             .field.col-xs-12.nested_pics_form
-              .col-xs-12
-                = f.label "Remove Images"
-              - @post.pictures.each do |pic|
-                .col-xs-12{class: "pic_#{pic.id}"}
-                  - @filename = pic.image(:url)
-                  - @filename = @filename.split("?").first
-                  - @filename = @filename.split("/").last
-                  = @filename
-                  = "  "
-                  = link_to "x", "/pictures/#{pic.id}", method: :delete,remote: true, class: "delete_pic"
-            .field.col-xs-12.nested_pics_form
-              = f.label "Add Images"
-              = file_field_tag "images[]",type: :file, multiple: true
+              .col-sm-6
+                = f.label "Edit Images"
+                .dropzone
+                  - @post.pictures.each do |pic|
+                    .col-xs-12{class: "pic_#{pic.id}"}
+                      - @filename = pic.image(:url)
+                      - @filename = @filename.split("?").first
+                      - @filename = @filename.split("/").last
+                      = @filename
+                      = "  "
+                      = link_to "x", "/pictures/#{pic.id}", method: :delete,remote: true, class: "delete_pic"
+              .col-sm-6
+                = f.label "Edit Proposals"
+                .dropzone
+                  - @post.pictures.each do |pic|
+                    .col-xs-12{class: "pic_#{pic.id}"}
+                      - @filename = pic.image(:url)
+                      - @filename = @filename.split("?").first
+                      - @filename = @filename.split("/").last
+                      = @filename
+                      = "  "
+                      = link_to "x", "/pictures/#{pic.id}", method: :delete,remote: true, class: "delete_pic"
+            /.field.col-xs-12.nested_pics_form
+            /  = f.label "Add Images"
+            /  = file_field_tag "images[]",type: :file, multiple: true
             .field.col-xs-12
               = render 'layouts/department_selector', context: @post, department_entries: current_organization.department_entries
-            .field.col-xs-12
-              = f.label :content
-              = f.text_area :content, class: "form-control", placeholder: "Enter post content here ...", rows: 5, maxlength: 250
             .field.col-xs-12
               %p Posts are by default anonymous, and the poster identity is always revealed when a post becomes a doit action item.
               - if can? :update, current_organization

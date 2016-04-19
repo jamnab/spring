@@ -14,19 +14,20 @@
                 = form_tag manage_users_organization_path(current_organization) do
                   .field
                     = label_tag 'Department'
-                    = select_tag "department_entry_id", options_from_collection_for_select(current_organization.department_entries, "id", "department_name"), class: 'form-control'
+                    .select-style
+                      = select_tag "department_entry_id", options_from_collection_for_select(current_organization.department_entries, "id", "department_name"), class: 'form-control'
                   .field
-                    = label_tag 'Member Mailing List'
+                    = label_tag 'Members'
                     = text_area_tag 'invitee_list', nil, class: 'form-control', rows: 6, placeholder: 'ex. jsmith@example.org, separate emails with commas or semi-colons'
                   .field
-                    = label_tag 'Decision Maker Mailing List'
+                    = label_tag 'Decision Makers'
                     = text_area_tag 'admin_list', nil, class: 'form-control', rows: 2, placeholder: 'ex. jsmith@example.org, separate emails with commas or semi-colons'
                   .field
-                    = submit_tag 'Update Member List', class: "btn btn-main pull-right"
+                    = submit_tag 'Update Members', class: "btn btn-main pull-right"
           .col-sm-6.col-xs-12
             .row
               .col-xs-12
                 %h4.bolded Update Integrated Departments
-                %h5 You current membership allows up to #{Organization::DEP_LIMIT} departments.
+                %p Your current plan allows up to #{Organization::DEP_LIMIT} departments.
                 .organization_departments
                   = render 'layouts/department_editor', context: current_organization

@@ -9,6 +9,7 @@
     /* background: $white; */
     /* box-shadow: $shadow-2; */
     /* @include border_radius(10px); */
+    color:$grey;
 
     label {
       text-shadow: none;
@@ -28,7 +29,7 @@
       /* border: 1px solid #fff; */
       background:$white;
       box-shadow: $shadow-2;
-      @include border_radius_exl(10px);
+      @include border_radius_exl(5px);
     }
   }
   .table {
@@ -144,10 +145,10 @@
       width: 100%;
       text-align: center;
       color: $white;
-      margin: 0px !important;
+      margin: 5px !important;
       left: 0px;
-      bottom:-1px;
       padding-bottom:0;
+      font-weight: 500;
       /* height: 40px; */
     }
     .alt-indicators {
@@ -167,13 +168,13 @@
     padding: 5px 20px;
     border: none;
 
-    @include border_radius_top(10px);
+    /* @include border_radius_top(10px); */
     text-align: right;
     text-indent: 0;
 
     .headline {
       font-size: 16px;
-      /* font-weight: 600; */
+      font-weight: 600;
     }
     .subline {
       font-size: 12px;
@@ -181,17 +182,18 @@
     }
   }
   #analytics-carousel .carousel-indicators > li.active {
-    /* border-bottom: 3px solid $white; */
-    color: $grey;
-    background: $white;
+    border-bottom: 3px solid $white;
+    /* color: $green; */
+    background: $trans;
+    @include border_radius_exl(0px);
   }
 
   #analytics-carousel .carousel-inner {
     .item {
       .row.first-q {
-        background: $white;
+        /* background: $white; */
         @include border_radius_exl(10px);
-        box-shadow: $shadow-2;
+        /* box-shadow: $shadow-2; */
         margin:auto 0px;
       }
     }
@@ -206,12 +208,9 @@
       .header {
         /* height: 50px; */
         width: 100%;
-        /* background-color: $white; */
-        @include border_radius_top(10px);
-        color: $grey;
-        padding: 15px;
+        color: $white;
+        padding: 0 15px 15px;
         font-size: 20px;
-        text-shadow: $t-shadow;
         font-weight: 600;
       }
       .body {
@@ -221,6 +220,8 @@
           z-index: 10;
           text-align: center;
           padding: 25px 0px;
+          background:$white;
+          @include border_radius_exl(3px);
 
           .legend {
             font-size: 12px;
@@ -243,11 +244,19 @@
 
         /** card **/
         .summary-card {
-          border:1px solid $mid-grey;
-          border-top: 5px solid $green;
+          /* border:1px solid $mid-grey; */
+          /* border-top: 5px solid $green; */
           text-align: center;
           padding:20px 10px;
           margin-bottom:20px;
+          background: $white;
+          @include border_radius(3px);
+
+          @include transition(275ms);
+
+          &:hover {
+            box-shadow: $focus;
+          }
 
           .main-content {
             width: 100%;
@@ -259,6 +268,11 @@
               font-size:5rem $imp;
               word-spacing: -14px;
             }
+            &.xs {
+              font-size:1.5rem $imp;
+              font-weight: 500;
+              word-spacing: normal;
+            }
 
             @media screen and (max-width: 767px) {
               /* font-weight: 700; */
@@ -267,20 +281,26 @@
             }
           }
           .notes {
-            color:$li-grey;
+            color:$a-grey;
+            font-size: 13px;
             &.post {
               /* height: 140px; */
               /* margin-top: -80px; */
-              padding: 16px;
+              /* padding: 16px; */
             }
           }
-          .footer {
-            /* font-size: 16px; */
-            font-weight: 500;
+          .title {
+            font-size: 18px;
+            font-weight: 600;
             text-shadow: $t-shadow;
+            color:$grey;
+          }
+          .footer {
+            font-weight: 600;
+            /* text-shadow: $t-shadow; */
+            font-size: 13px;
             margin-top:10px;
             color:$grey;
-            border-radius: 0px 0px 10px 10px;
             img {
               @include border_radius(50%);
               /* vertical-align: top; */

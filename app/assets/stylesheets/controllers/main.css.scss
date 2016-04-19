@@ -121,6 +121,31 @@ label {
     }
   }
 }
+.modal {
+  overflow:auto;
+}
+.modal h4.modal-title {
+  font-weight: 600;
+}
+.dropzone {
+  padding:20px 10px;
+  margin:5px;
+  border: 1px dashed $li-grey;
+  @include border_radius(5px);
+  input {
+    margin:0 auto;
+  }
+}
+.input-group.date {
+  .input-group-addon {
+    border: none;
+    background:$blue;
+    color:$white;
+  }
+}
+.nested_pics_form {
+  width:100%;
+}
 
 textarea {
   @include border_radius_exl(5px);
@@ -167,25 +192,73 @@ textarea {
   border:none;
   color: #fff;
 }
+.select-style {
+  border: 1px solid $l-grey;
+  /* width: 120px; */
+  border-radius: 5px;
+  overflow: hidden;
+  background: #fff image-url("downvote-icon.png") no-repeat 95% 50%;
+  background-size:18px;
 
-html, body {
-  height: 100%;
-  /* width: 100%; */
-  /* min-width: 480px; */
-  /* background-color: $white; */
+  select {
+    padding: 5px 8px;
+    /* width: 100%; */
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+.dataTables_length {
+
+  select {
+    overflow: hidden;
+    background: #fff image-url("downvote-icon.png") no-repeat 90% center;
+    background-size:13px;
+    /* padding: 5px 8px; */
+    /* width: 100%; */
+    color: $grey;
+    border: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+html,body {
+
   color: $grey;
-  /* overflow-x: hidden; */
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 html {
   background:$green-grad-flip;
+  height: 100%;
 }
 body {
   background-image:image-url("noisy_grid.png");
+  height:100%;
 }
 .body-wrapper {
   background:$green-trans;
-  background-size: cover;
-  min-height: 100%;
+  background-size:100%;
+
+  @media screen and (min-width: 767px) {
+    height:100%;
+  }
 }
 .admin-dashboard {
   padding: 10px 20px;
@@ -286,6 +359,7 @@ body {
         top: 4px;
         right: 2px;
         font-size: 10px;
+        font-weight:600;
         padding:0 7px;
         color: $white;
         @include border_radius(35%);
@@ -306,7 +380,7 @@ body {
     }
   }
   .popover {
-    box-shadow: $btn-shadow;
+    box-shadow: $menu-shadow;
     border: none;
     .arrow {
       border: none;
@@ -500,7 +574,7 @@ body {
       border: none;
       margin-left: -85px;
       margin-top:5px;
-      box-shadow: $shadow;
+      box-shadow: $menu-shadow;
 
       @include border_radius(5px);
 
@@ -554,7 +628,7 @@ body {
     .navbar-nav .open .dropdown-menu {
       position: absolute;
       background-color: $white;
-      box-shadow: $shadow;
+      box-shadow: $menu-shadow;
     }
   }
 
@@ -689,9 +763,9 @@ a:hover {
 // }
 
 .content-wrapper {
-  /* margin-top: 90px;
-  height: calc(100% - 70px);
-  overflow-y: scroll; */
+  /* margin-top: 90px; */
+  /* height: calc(100% - 70px); */
+  /* overflow-y: scroll; */
 }
 
 
@@ -781,16 +855,27 @@ a:hover {
   .modal-content {
     border:none;
     @include border_radius(5px);
-    box-shadow: $shadow-2;
+    box-shadow: $menu-shadow;
     .modal-header {
       /* background-color: $green; */
       color: $grey;
-      border-bottom: none;
-      /* text-shadow: $btn-shadow; */
+      border-bottom: 1px dashed $l-grey;
+
       @include border_radius_top(5px);
+
+      .modal-title {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      .close {
+        opacity: 1;
+        color: $grey;
+      }
     }
     p {
       font-size: 12px;
+      margin:5px auto;
     }
     .btn.btn-main {
       /* background-color: $nav_background; */
@@ -803,7 +888,7 @@ a:hover {
   .modal-content {
 
     .modal-body {
-      padding:0;
+      /* padding:0; */
       .area {
         width:100%;
         &.post {
@@ -890,9 +975,4 @@ form .field {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.modal-header .close {
-  opacity: 1;
-  color: $grey;
 }

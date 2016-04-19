@@ -40,7 +40,7 @@
                 - @contributions_by_department[0..5].each do |entry|
                   .col-sm-4
                     .summary-card
-                      .footer
+                      .title
                         = entry['Department']
                       .main-content
                         = entry['# Ideas Actionable']
@@ -141,7 +141,7 @@
                     .summary-card
                       .main-content.sm
                         #{entry['Support']}%
-                      .notes.post
+                      -#.notes.post
                       .footer
                         = entry['Title']
           .col-xs-12.col-sm-6
@@ -170,16 +170,16 @@
         .row.first-q
           .col-sm-6
             .summary-box
-              .header Approved Ideas
+              .header Approved Ideas (By Support)
               .body
                 - @approved_ideas[0..5].each do |entry|
                   .col-sm-4
                     .summary-card
                       .main-content.sm
+                        #{entry['Support']}%
                       .notes.post
-                        %b= entry['Title']
-                        %br
-                        (#{entry['Support']}% Support)
+                        -#%br
+                        %span= entry['Title']
                       .footer
                         = entry['Poster']
           .col-sm-6

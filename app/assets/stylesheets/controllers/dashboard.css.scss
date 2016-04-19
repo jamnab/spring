@@ -91,10 +91,10 @@
 }
 
 .popover {
-  box-shadow: $shadow;
+  box-shadow: $menu-shadow;
   border: none;
   /* .arrow {
-    border: none;
+    border: $l-grey;
   } */
 }
 
@@ -133,6 +133,7 @@
 .btn-main {
   background: $green-grad;
   background: $green;
+  background:$blue;
   font-weight: 600;
   text-shadow: $btn-shadow;
 
@@ -141,7 +142,7 @@
   &.off { opacity: 0.6; }
 
   &:hover, &:active, &:focus {
-    background-color: $l-green;
+    background-color: $l-blue;
     color:$white;
     box-shadow: none;
 
@@ -159,7 +160,7 @@ h3.page_title {
 .post-board {
   padding: 0px 20px 40px;
   text-align: center;
-  min-height: 400px;
+  height: 100%;
 
   .row h3, h3 {
     color:$white;
@@ -197,7 +198,15 @@ h3.page_title {
     /* min-width: 320px; */
     /* margin: auto; */
     background-color: $white $imp;
-    box-shadow: $shadow-2;
+    /* box-shadow: $shadow-2; */
+
+    /* border: 2px solid $trans; */
+
+    @include transition(275ms);
+    &:hover {
+      box-shadow: $focus;
+      /* border: 2px solid $white; */
+    }
 
     .header {
       height: 50px;
@@ -260,6 +269,9 @@ h3.page_title {
         /* margin-top: 8px; */
         /* margin-bottom: 20px; */
         /* display: none; */
+        .carousel-indicators {
+          display: none;
+        }
       }
       .image-wrapper {
         height: 100px;
@@ -492,12 +504,6 @@ h3.page_title {
     }
   }
 }
-.modal {
-
-}
-.modal h4.modal-title {
-  font-weight: 600;
-}
 
 .post, .comment {
 
@@ -532,6 +538,9 @@ h3.page_title {
         span {
           font-weight:600;
           text-shadow:$t-shadow;
+        }
+        .job {
+          color:$li-grey;
         }
       }
     }
@@ -625,6 +634,8 @@ h3.page_title {
 // roundedness
 
 .post-wrapper, .post {
+
+
   @include border_radius(5px);
 
   .header {

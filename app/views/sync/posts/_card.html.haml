@@ -137,13 +137,15 @@
             .name
               %span= user.full_name
               %br
-              (#{user.job_title})
+              .job
+                #{user.job_title}
           - else
             = image_tag("profile-icon.png")
             .name
               %span Anonymous User
               %br
-              (Contributor)
+              .job
+                Contributor
         .options
           - if opinion.nil?
             - if !post.approved
