@@ -96,3 +96,21 @@ $ ->
 
   $('body').on 'keyup', 'textarea', ->
     textarea_count($(this), $(this).siblings()[0], 'Content ({CHAR} characters remaining)', $(this).attr('maxlength'))
+
+$ ->
+  winHeight = undefined
+  winWidth = undefined
+  winWidth = $(window).width()
+  winHeight = $(window).height()
+  $('.body-wrapper').css
+    #width: winWidth
+    height: winHeight
+  # $(window).resize ->
+  #   $('.body-wrapper').css
+  #     #width: $(window).width()
+  #     height: $(window).height()
+  #   # if $('.content-wrapper').height() < winHeight
+  #   #   height: $('.content-wrapper').height()
+  #   # else
+  #   #   height: $(window).height()
+  return
