@@ -28,7 +28,7 @@
                 .dropzone
                   = file_field_tag "files[]",type: :file, multiple: true
             .field.col-xs-12
-              = f.label 'Teams', class: "col-xs-12 row"
+              = f.label 'Teams', class: ""
               %i (select at least 1)
               = render 'layouts/department_selector', context: current_organization, department_entries: current_organization.department_entries
             .field.col-xs-12

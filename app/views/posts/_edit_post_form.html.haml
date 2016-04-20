@@ -54,7 +54,7 @@
             /  = f.label "Add Images"
             /  = file_field_tag "images[]",type: :file, multiple: true
             .field.col-xs-12
-              = f.label 'Teams', class: "col-xs-12 row"
+              = f.label 'Teams', class: "col-xs-12"
               = render 'layouts/department_selector', context: @post, department_entries: current_organization.department_entries
             .field.col-xs-12
               %p Posts are anonymous by default. Identity is revealed when a post is approved.
