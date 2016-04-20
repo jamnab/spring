@@ -93,13 +93,23 @@
                 = link_to '#', data: {target: "#edit-user", toggle: "modal"} do
                   %i.fa.fa-user
                   &nbsp;
-                  Edit Profile
+                  Account
             - if can? :update, current_organization
               %li
                 = link_to '#', data: {target: "#edit-org", toggle: "modal"} do
                   %i.fa.fa-sitemap
                   &nbsp;
-                  Edit Organization
+                  Organization
+              %li
+                = link_to '#', data: {target: "#dept_management", toggle: "modal"} do
+                  %i.fa.fa-cubes
+                  &nbsp;
+                  Teams
+              %li
+                = link_to manage_users_organization_path(current_organization), remote: true do
+                  %i.fa.fa-users
+                  &nbsp;
+                  Employees
             - if can? :update, current_user
               %li
                 = link_to '#', data: {target: "#notification-settings", toggle: "modal"} do
@@ -108,7 +118,7 @@
                   Alert Settings
               %li
                 = link_to :summary do
-                  %i.fa.fa-dashboard
+                  %i.fa.fa-pie-chart
                   &nbsp;
                   Analytics
               %li
@@ -124,11 +134,6 @@
                   %i.fa.fa-archive
                   &nbsp;
                   Archive
-              %li
-                = link_to manage_users_organization_path(current_organization), remote: true do
-                  %i.fa.fa-users
-                  &nbsp;
-                  Manage Users
               %li
                 = link_to :logout do
                   %i.fa.fa-sign-out

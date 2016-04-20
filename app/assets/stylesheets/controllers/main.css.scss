@@ -114,7 +114,7 @@ label {
   padding-top: 5%;
   .modal-content {
     .modal-body {
-      padding-top:0;
+      padding:0 10px 10px;
     }
     .modal-footer {
       border-top:1px dashed $l-grey;
@@ -197,7 +197,7 @@ textarea {
   /* width: 120px; */
   border-radius: 5px;
   overflow: hidden;
-  background: #fff image-url("downvote-icon.png") no-repeat 95% 50%;
+  background: #fff image-url("downvote-icon.png") no-repeat 98% 50%;
   background-size:18px;
 
   select {
@@ -255,10 +255,7 @@ body {
 .body-wrapper {
   background:$green-trans;
   background-size:100%;
-
-  @media screen and (min-width: 767px) {
-    height:100%;
-  }
+  height:100%;
 }
 .admin-dashboard {
   padding: 10px 20px;
@@ -572,14 +569,14 @@ body {
     .dropdown-menu {
       padding: 0px;
       border: none;
-      margin-left: -85px;
+      margin-left: -75px;
       margin-top:5px;
       box-shadow: $menu-shadow;
 
       @include border_radius(5px);
 
       @media screen and (max-width:768px) {
-        margin-left: -130px;
+        margin-left: -115px;
       }
 
       &.filter-menu {
@@ -602,7 +599,7 @@ body {
         }
         a {
           text-align: left;
-          padding:10px 15px 10px 20px;
+          padding:10px 20px;
           font-size: 14px;
           /* font-weight: 600; */
           background-color: $trans;
@@ -697,7 +694,7 @@ a:hover {
   padding:10px;
 
   .badge {
-    margin:1px;
+    margin:2px 1px;
 
     font-weight: 600;
     text-shadow: $btn-shadow;
@@ -818,6 +815,11 @@ a:hover {
   font-weight: 600;
 
   img { height:32px; }
+  &.vote-icon {
+    img{
+      height:23px;
+    }
+  }
 
   .count { margin-left:-25px;}
   &:hover {
@@ -880,6 +882,18 @@ a:hover {
     .btn.btn-main {
       /* background-color: $nav_background; */
     }
+  }
+}
+
+.dept_save {
+  @media screen and (max-width:767px) {
+    padding:10px 0;
+  }
+  span {
+    margin-left: 10px;
+  }
+  i {
+    margin-left:3px;
   }
 }
 

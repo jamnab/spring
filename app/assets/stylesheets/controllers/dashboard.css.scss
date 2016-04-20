@@ -171,7 +171,7 @@ h3.page_title {
 }
 
 .post-wrapper {
-  height: 35rem;
+  height: 37rem;
   margin-bottom: 20px;
   /* padding: 0px 1%; */
   /* vertical-align: top; */
@@ -275,7 +275,7 @@ h3.page_title {
       }
       .image-wrapper {
         height: 100px;
-        @include border_radius_top(5px);
+        @include border_radius_top(4px);
 
         img { margin: auto; }
         /* display:none; */
@@ -597,7 +597,7 @@ h3.page_title {
       margin-left:10px;
       margin-right:10px;
       border:1px solid $ghoul;
-      @include border_radius(10px);
+      @include border_radius(4px);
       display: inline;
     }
     .com-btn {
@@ -636,14 +636,14 @@ h3.page_title {
 .post-wrapper, .post {
 
 
-  @include border_radius(5px);
+  @include border_radius(4px);
 
   .header {
-    @include border_radius_top(5px);
+    @include border_radius_top(4px);
   }
 
   .signature {
-    @include border_radius_bottom(5px);
+    @include border_radius_bottom(4px);
     /* border-top:1px dashed $demon; */
   }
 }

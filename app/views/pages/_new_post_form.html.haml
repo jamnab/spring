@@ -18,7 +18,7 @@
               /= f.label :content
               = f.label 'Description'
               = f.text_area :content, class: "form-control", placeholder: "Add a description...", rows: 3, maxlength: 250
-            .field.col-xs-12.nested_pics_form
+            .field.col-xs-12.nested_pics_form.row
               .col-sm-6
                 = f.label :images
                 .dropzone
@@ -28,10 +28,11 @@
                 .dropzone
                   = file_field_tag "files[]",type: :file, multiple: true
             .field.col-xs-12
-              = f.label 'Departments (select at least 1)', class: "col-xs-12 row"
+              = f.label 'Teams', class: "col-xs-12 row"
+              %i (select at least 1)
               = render 'layouts/department_selector', context: current_organization, department_entries: current_organization.department_entries
             .field.col-xs-12
-              %p Posts are by default anonymous, and the poster identity is always revealed when a post becomes a launch action item.
+              %p Posts are anonymous by default. Identity is revealed when a post is approved.
               - if can? :update, current_organization
                 = f.label 'Post anonymously'
                 = f.check_box :anonymous

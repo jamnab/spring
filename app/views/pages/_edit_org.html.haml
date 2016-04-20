@@ -9,11 +9,12 @@
       .slide-1
         - if current_organization
           = form_for current_organization, :html => { multipart: true }  do |f|
-            .modal-body.row
+            .modal-body
               .field.col-xs-12.nested_pics_form
                 = f.fields_for :pictures do |p|
                   = p.label :image
-                  = p.file_field :image
+                  .dropzone
+                    = p.file_field :image
               .field.col-xs-12
                 = f.label :name
                 = f.text_field :name, class: "form-control"

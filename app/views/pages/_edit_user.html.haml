@@ -5,16 +5,16 @@
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
-        %h4.modal-title Edit Profile
+        %h4.modal-title Edit Account
       = form_for @user do |f|
         .modal-body
-          .row
+          .col-xs-12.row
             .field.col-xs-12
               = f.fields_for :pictures do |p|
                 /= p.label :image
                 = p.label 'Avatar'
                 = p.file_field :image
-          .row
+          .col-xs-12.row
             .field.col-sm-6
               = f.label :username
               = f.text_field :username, class: "form-control", id: "register_username"
@@ -33,11 +33,11 @@
             .field.col-sm-6
               = f.label :password_confirmation
               = f.password_field :password_confirmation, class: "form-control"
-          .row
+          .col-xs-12.row
             .field.col-xs-12
               = f.label :job_title
               = f.text_field :job_title, class: "form-control"
-          .row
+          .col-xs-12.row
             .field.col-xs-12
               .checkbox
                 = f.label :subscribe_to_newsletter do

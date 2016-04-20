@@ -29,7 +29,7 @@
       /* border: 1px solid #fff; */
       background:$white;
       box-shadow: $shadow-2;
-      @include border_radius_exl(5px);
+      @include border_radius_exl(4px);
     }
   }
   .table {
@@ -73,7 +73,7 @@
       color:$white;
     }
     input {
-      @include border_radius_exl(7px);
+      @include border_radius_exl(4px);
       background-color:rgba(255,255,255,0.4);
       background:rgba(255,255,255,0.4) image-url("search-icon.png") 1rem center no-repeat;
       background-size:13px;
@@ -145,16 +145,17 @@
       width: 100%;
       text-align: center;
       color: $white;
-      margin: 5px !important;
       left: 0px;
-      padding-bottom:0;
+      padding:0;
       font-weight: 500;
-      /* height: 40px; */
+      margin-top:0;
     }
     .alt-indicators {
       width: 100%;
       text-align: center;
       color: $white;
+      padding-bottom:30px;
+      margin-bottom:0;
       li {
         display: inline-block;
         list-style: none;
@@ -221,7 +222,7 @@
           text-align: center;
           padding: 25px 0px;
           background:$white;
-          @include border_radius_exl(3px);
+          @include border_radius_exl(4px);
 
           .legend {
             font-size: 12px;
@@ -236,7 +237,7 @@
           z-index: 100;
           height: 85%;
           width: calc(100% - 31px);
-          background-color: rgba(#fff, 0.5);
+          background-color: rgba(#fff, 0.8);
           text-align: center;
           padding: 140px 40px;
           font-size: 46px;
@@ -250,7 +251,7 @@
           padding:20px 10px;
           margin-bottom:20px;
           background: $white;
-          @include border_radius(3px);
+          @include border_radius(4px);
 
           @include transition(275ms);
 
