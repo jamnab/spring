@@ -28,7 +28,7 @@
                 = link_to edit_comment_path(comment), remote: true do
                   .btn.btn-sm{class: "btn-#{class_type}"}
                     -#%span.flaticon-edit45
-                    = image_tag "edit-icon.png", class: "com-btn"
+                    = image_tag "edit-icon-alt.png", class: "com-btn"
               - if can? :destroy, comment
                 = link_to comment, method: :delete, data: { confirm: "Are you sure about this?"}, remote: true do
                   .btn.btn-sm{class: "btn-#{class_type}"}
