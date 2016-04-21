@@ -96,3 +96,10 @@ $ ->
 
   $('body').on 'keyup', 'textarea', ->
     textarea_count($(this), $(this).siblings()[0], 'Content ({CHAR} characters remaining)', $(this).attr('maxlength'))
+
+$ ->
+  $('.action-date').on "changeDate", () ->
+    # submit form, AJAX-y
+    $(this).parent().submit()
+    console.log $(this)
+
