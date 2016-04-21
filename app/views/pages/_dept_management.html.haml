@@ -1,0 +1,15 @@
+#dept_management.modal.fade
+  .modal-dialog.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Manage Teams
+      .modal-body
+        .col-xs-12
+          /%h4.bolded Update Integrated Departments
+          %h4
+          %p Your current plan allows up to #{Organization::DEP_LIMIT} core teams.
+          %h4
+          .organization_departments
+            = render 'layouts/department_editor', context: current_organization

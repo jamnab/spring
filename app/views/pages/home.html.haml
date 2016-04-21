@@ -1,10 +1,14 @@
 %section.header-19-sub
-  .background  
-  = image_tag 'launchplane-lg.png', class: 'hidden-xs'
+  .plane-1.loading
+  .plane-2.loading-2
+  .background
+  /= image_tag 'launchplane-lg.png', class: 'hidden-xs'
   / %img.hidden-xs{:alt => "", :src => "../../common-files/img/header/ipad@2x.png"}/
+  /= image_tag 'launchplane-lg.png', class: 'plane-static hidden-sm hidden-md hidden-lg hidden-xl'
   .container
     .row
       .col-sm-5
+
         %h1
           = "Reward Ideas"
           /%br
@@ -15,38 +19,48 @@
           %a.btn.btn-primary{href: '#feature-panel'}
             %span Learn more
 %section.content-24#feature-panel
+
   .container
-    .row
+    .row.v-center
       .col-sm-5.col-sm-offset-1
         .features.features-clear
           .features-bodies
             .features-body.active
+              %h6 Step 1
               %h3 It starts with a spark
               %p
                 Members create a post around whatever is on their mind, and pending approval it is viewable to an audience for voting.
                 %br/
                 The poster remains anonymous until the votes are in, which helps eliminate any decision bias.
               /%a.btn.btn-clear{:href => "features"} Learn More
+      .col-sm-5
+        = image_tag 'graphic-card.png', :class => 'image'
 %section.content-24.alt
   .container
-    .row
-      .col-sm-4.col-sm-offset-7
-        .features.features-clear
-          .features-bodies
-            .features-body.active
-              %h3 Initiatives take flight
-              %p
-                Majority audience support advances important posts, with contributor ideas sent to a decision maker for approval & timeline setting.
-%section.content-24
-  .container
-    .row
+    .row.v-center
       .col-sm-5.col-sm-offset-1
         .features.features-clear
           .features-bodies
             .features-body.active
+              %h6 Step 2
+              %h3 Initiatives take flight
+              %p
+                Majority audience support advances important posts, with contributor ideas sent to a decision maker for approval & timeline setting.
+      .col-sm-5
+        = image_tag 'graphic-comments.png', :class => 'image'
+%section.content-24
+  .container
+    .row.v-center
+      .col-sm-5.col-sm-offset-1
+        .features.features-clear
+          .features-bodies
+            .features-body.active
+              %h6 Step 3
               %h3 Ideas spring into Action
               %p
                 Efficiently monitor ideas from inception to reality. You can easily see what initiatives are in launch stage, keep track of everyone via a leaderboard & analytics, and feel comfort knowing that your information is kept secure.
+      .col-sm-5
+        = image_tag 'graphic-analytics.png', :class => 'image'
 %section.price-1#price
   .container
     %h3.row-title Convenient & Flexible Pricing
@@ -59,20 +73,16 @@
               Starting at
               %span $5/month
           .description
-            %b Unlimited
-            access
+            %b 500
+            accounts
             %br/
-            %b Unlimited
-            postings
+            %b 5
+            Core Teams
             %br/
-            %b Unlimited
-            tool access
+            %b 1 year
+            special offer
             %br/
-            %br/
-            %b $20/month add-on
-            %br/
-            Unlimited flat-rate service posts
-            %br/
+
           %a.btn.btn-primary{:href => "#", data: {toggle: 'modal', target: '#register'}} Sign Up
       .col-sm-4
         .plan
@@ -81,29 +91,16 @@
             .price Custom Quote
           .description
             %b Unlimited
-            access
+            accounts
             %br/
             %b Unlimited
-            postings
-            %br/
-            Value-add project tools
-            %br/
-            Value-add client tools
-            %br/
-            %b OR
-            %br/
-            = succeed "/year" do
-              %b $400
-
-            %br/
-            %b Unlimited
-            access
+            Core Teams
+            %b 1 year
+            special offer
             %br/
             %br/
-            %b Add-ons
-            %br/
-            %b $250
-            feature interview
+            %b Premium
+            customer support
           %a.btn.btn-primary{:href => "mailto:clinton@golaunchboard.com"} Contact Us
 %footer.footer-1
   .background
@@ -142,3 +139,11 @@
       .col-sm-5.additional-links
         %a{:href => "privacy"} Privacy Policy
         %a{:href => "terms"} Terms of Service
+= javascript_include_tag 'scrollreveal.min.js'
+:javascript
+  window.sr = ScrollReveal({reset: true});
+  sr.reveal('.header-10');
+  sr.reveal('.header-19-sub .container');
+  sr.reveal('.content-24');
+  sr.reveal('.price-1');
+  sr.reveal('.footer-1');

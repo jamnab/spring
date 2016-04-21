@@ -50,11 +50,15 @@ $aqua:#00FFFF;
 $pink:#F012BE;
 $grey:#6c7a89;
 $brown:#A46F3F;
+$l-blue:#00D2FF;
+$d-blue:#258cd1;
 
 $shadow:0 1px 3px rgba(26, 53, 71, 0.08), 0 0 0 1px rgba(26, 53, 71, 0.04), 0 1px 1px rgba(26, 53, 71, 0.06);
 $shadow-2:0 2px 4px rgba(26, 53, 71, 0.08);
 $t-shadow:0 1px 0 $white;
-$btn-shadow:0 2px 4px rgba(0,0,0,0.15);
+$menu-shadow:0 2px 4px rgba(0,0,0,0.15);
+$btn-shadow:0 1px 1px rgba(26, 53, 71, 0.15);
+$focus: 0 1px 1px rgba(26, 53, 71, 0.1), 0 10px 22px rgba(26, 53, 71, 0.25);
 
 @mixin border_radius($radius) {
   -webkit-border-radius:$radius;

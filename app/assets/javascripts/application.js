@@ -20,6 +20,7 @@
 //= require bootstrap.min
 //= require bootstrap-switch.min
 //= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
 //= require prefixfree.min
 //= require skrollr
 //= require skrollr.ie

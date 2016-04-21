@@ -96,3 +96,26 @@ $ ->
 
   $('body').on 'keyup', 'textarea', ->
     textarea_count($(this), $(this).siblings()[0], 'Content ({CHAR} characters remaining)', $(this).attr('maxlength'))
+
+$ ->
+  $('.action-date').on "changeDate", () ->
+    # submit form, AJAX-y
+    $(this).parent().submit()
+    console.log $(this)
+
+  winHeight = undefined
+  winWidth = undefined
+  winWidth = $(window).width()
+  winHeight = $(window).height()
+  $('.body-wrapper').css
+    #width: winWidth
+    height: winHeight
+  $(window).resize ->
+    $('.body-wrapper').css
+      #width: $(window).width()
+      height: $(window).height()
+    # if $('.content-wrapper').height() < winHeight
+    #   height: $('.content-wrapper').height()
+    # else
+    #   height: $(window).height()
+  return

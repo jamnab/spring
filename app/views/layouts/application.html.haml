@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Launchboard
+    %title Launchboard - Reward Ideas
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     / = javascript_include_tag :defaults
@@ -31,13 +31,14 @@
 
       .content-wrapper
         = yield
-  
+
     - if current_user.nil?
       = render 'layouts/login_form'
       = render 'layouts/register_form'
     - if current_user && current_organization
       = render 'pages/edit_org'
       = render 'pages/edit_user'
+      = render 'pages/dept_management'
       = render 'pages/notification_settings'
       .user_managment_wrapper
 
