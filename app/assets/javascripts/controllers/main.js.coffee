@@ -103,7 +103,7 @@ $ ->
     $(this).parent().submit()
 
   $('.date-filter').datepicker
-    'setDate': Date.today
+    'endDate': new Date()
     'autoclose': true
 
   # winHeight = undefined
