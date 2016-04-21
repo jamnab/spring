@@ -42,15 +42,12 @@
               .col-sm-6
                 = f.label "Edit Proposals"
                 .dropzone
-<<<<<<< HEAD
                   - @post.pictures.each do |pic|
                     .col-sm-12{class: "pic_#{pic.id}"}
                       - @filename = pic.image(:url)
-=======
                   - @post.assets.each do |asset|
                     .row{class: "asset_#{asset.id}"}
                       - @filename = asset.image(:url)
->>>>>>> 74a90ffd43d30f04e2a4154d411bb086fc2db93b
                       - @filename = @filename.split("?").first
                       - @filename = @filename.split("/").last
                       = @filename

@@ -87,6 +87,12 @@ label {
     .item {
       opacity: 0;
       transition-property: opacity;
+      a {
+        img {
+          width: 100%;
+          object-fit: cover;
+        }
+      }
     }
 
     .active {
@@ -108,6 +114,16 @@ label {
 
   .carousel-control {
     z-index: 2;
+  }
+}
+.carousel-inner {
+  >.item {
+    opacity: 0;
+    transition-property: opacity;
+      >img {
+        width: 100%;
+        object-fit: cover;
+      }
   }
 }
 .modal-dialog {
