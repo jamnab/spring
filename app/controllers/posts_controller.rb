@@ -12,6 +12,9 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+
+    redirect_to controller: 'pages', action: 'dashboard', post_id: @post.id and return
+
     if params[:comment_order] == 'newest'
       @comments = @post.comments.order(created_at: :desc)
     elsif params[:comment_order] == 'upvote'
