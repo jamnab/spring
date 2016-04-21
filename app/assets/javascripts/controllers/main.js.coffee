@@ -101,7 +101,10 @@ $ ->
   $('.action-date').on "changeDate", () ->
     # submit form, AJAX-y
     $(this).parent().submit()
-    console.log $(this)
+
+  $('.date-filter').datepicker
+    'setDate': Date.today
+    'autoclose': true
 
   # winHeight = undefined
   # winWidth = undefined
