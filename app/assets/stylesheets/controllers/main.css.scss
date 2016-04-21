@@ -118,8 +118,6 @@ label {
 }
 .carousel-inner {
   >.item {
-    opacity: 0;
-    transition-property: opacity;
       >img {
         width: 100%;
         object-fit: cover;
