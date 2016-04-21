@@ -171,7 +171,7 @@ h3.page_title {
 }
 
 .post-wrapper {
-  height: 37rem;
+  height: 38rem;
   margin-bottom: 20px;
   /* padding: 0px 1%; */
   /* vertical-align: top; */
@@ -274,10 +274,14 @@ h3.page_title {
         }
       }
       .image-wrapper {
-        height: 100px;
+        height: 10rem;
         @include border_radius_top(4px);
 
-        img { margin: auto; }
+        img {
+          /* margin: auto; */
+          width: 100%;
+          object-fit: cover;
+        }
         /* display:none; */
       }
       .col-xs-12 {
