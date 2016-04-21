@@ -27,7 +27,7 @@ label {
   /* font-size: 16px; */
   font-weight: 500;
 
-  @include transition(0.5s);
+  @include transition(500ms);
 
   &:focus {
     border:1px solid $green;
@@ -146,6 +146,11 @@ label {
 .nested_pics_form {
   width:100%;
 }
+.member-list {
+  img {
+    height:20px;
+  }
+}
 
 textarea {
   @include border_radius_exl(5px);
@@ -153,7 +158,7 @@ textarea {
   box-shadow: $shadow;
   border:1px solid $li-grey;
 
-  @include transition(0.5s);
+  @include transition(500ms);
 
   &:focus {
     border:1px solid $ghost;
@@ -176,7 +181,7 @@ textarea {
   padding:6px 12px;
   border:1px solid $ghoul;
 
-  @include transition(0.5s);
+  @include transition(500ms);
 
   @include border_radius(5px);
   &:hover {
@@ -470,7 +475,7 @@ body {
       font-size: 14px;
       font-weight: 500;
 
-      @include transition(0.5s);
+      @include transition(500ms);
 
       &:focus {
         border:1px solid $ghost;
@@ -612,7 +617,7 @@ body {
           color: $grey;
           text-shadow: $t-shadow;
 
-          @include transition(0.5s);
+          @include transition(500ms);
 
           &:active {
             /* background: $trans !important; */

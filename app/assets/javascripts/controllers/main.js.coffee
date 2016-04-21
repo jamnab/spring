@@ -105,12 +105,12 @@ $ ->
   $('.body-wrapper').css
     #width: winWidth
     height: winHeight
-  # $(window).resize ->
-  #   $('.body-wrapper').css
-  #     #width: $(window).width()
-  #     height: $(window).height()
-  #   # if $('.content-wrapper').height() < winHeight
-  #   #   height: $('.content-wrapper').height()
-  #   # else
-  #   #   height: $(window).height()
+  $(window).resize ->
+    $('.body-wrapper').css
+      #width: $(window).width()
+      height: $(window).height()
+    # if $('.content-wrapper').height() < winHeight
+    #   height: $('.content-wrapper').height()
+    # else
+    #   height: $(window).height()
   return

@@ -137,7 +137,7 @@
   font-weight: 600;
   text-shadow: $btn-shadow;
 
-  @include transition(0.5s);
+  @include transition(500ms);
   &.on  { opacity: 0.9; }
   &.off { opacity: 0.6; }
 

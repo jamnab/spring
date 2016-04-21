@@ -109,7 +109,7 @@
                 = link_to manage_users_organization_path(current_organization), remote: true do
                   %i.fa.fa-users
                   &nbsp;
-                  Employees
+                  Members
             - if can? :update, current_user
               %li
                 = link_to '#', data: {target: "#notification-settings", toggle: "modal"} do
