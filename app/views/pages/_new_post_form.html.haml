@@ -1,5 +1,5 @@
 #new-post.modal.fade
-  .modal-dialog.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+  .modal-dialog.col-sm-8.col-sm-offset-2.col-md-8.col-md-offset-2
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -13,19 +13,26 @@
             = f.hidden_field :organization_id, value: current_user.try(:organization).try(:id)
             .field.col-xs-12
               = f.label :title
-              = f.text_field :title, class: "form-control", placeholder: "Add a title"
-            .field.col-xs-12.nested_pics_form
-              = f.label :images
-              = file_field_tag "images[]",type: :file, multiple: true
-            .field.col-xs-12
-              = f.label 'Departments (select at least 1)', class: "col-xs-12 row"
-              = render 'layouts/department_selector', context: current_organization, department_entries: current_organization.department_entries
+              = f.text_field :title, class: "form-control", placeholder: "Choose a title"
             .field.col-xs-12
               /= f.label :content
               = f.label 'Description'
               = f.text_area :content, class: "form-control", placeholder: "Add a description...", rows: 3, maxlength: 250
+            .field.col-xs-12.nested_pics_form.row
+              .col-sm-6
+                = f.label :images
+                .dropzone
+                  = file_field_tag "images[]",type: :file, multiple: true
+              .col-sm-6
+                = f.label 'Proposals'
+                .dropzone
+                  = file_field_tag "files[]",type: :file, multiple: true
             .field.col-xs-12
-              %p Posts are by default anonymous, and the poster identity is always revealed when a post becomes a launch action item.
+              = f.label 'Teams', class: ""
+              %i (select at least 1)
+              = render 'layouts/department_selector', context: current_organization, department_entries: current_organization.department_entries
+            .field.col-xs-12
+              %p Posts are anonymous by default. Identity is revealed when a post is approved.
               - if can? :update, current_organization
                 = f.label 'Post anonymously'
                 = f.check_box :anonymous

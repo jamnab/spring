@@ -6,33 +6,33 @@
           %span{"aria-hidden" => "true"} ×
         %h4.modal-title Email Notification Settings
       .modal-body
-        .row
-          .col-xs-12
-            = form_for current_user do |f|
-              %table.table
-                %thead
-                  %th Notification Type
-                  %th.text-center Never
-                  %th.text-center Instant
-                  %th.text-center End of Day
-                %tbody
-                  - User::NOTIFICATION_TYPES.each_with_index do |type, i|
-                    %tr
-                      %td
-                        = type.capitalize
-                      %td.text-center
-                        - if current_user.get_notification_setting(i) == '0'
-                          = radio_button_tag "notification_settings[#{i}]", '0', checked: true
-                        - else
-                          = radio_button_tag "notification_settings[#{i}]", '0'
-                      %td.text-center
-                        - if current_user.get_notification_setting(i) == '1'
-                          = radio_button_tag "notification_settings[#{i}]", '1', checked: true
-                        - else
-                          = radio_button_tag "notification_settings[#{i}]", '1'
-                      %td.text-center
-                        - if current_user.get_notification_setting(i) == '2'
-                          = radio_button_tag "notification_settings[#{i}]", '2', checked: true
-                        - else
-                          = radio_button_tag "notification_settings[#{i}]", '2'
+        .col-xs-12
+          = form_for current_user do |f|
+            %table.table
+              %thead
+                %th Notification Type
+                %th.text-center Never
+                %th.text-center Instant
+                %th.text-center End of Day
+              %tbody
+                - User::NOTIFICATION_TYPES.each_with_index do |type, i|
+                  %tr
+                    %td
+                      = type.capitalize
+                    %td.text-center
+                      - if current_user.get_notification_setting(i) == '0'
+                        = radio_button_tag "notification_settings[#{i}]", '0', checked: true
+                      - else
+                        = radio_button_tag "notification_settings[#{i}]", '0'
+                    %td.text-center
+                      - if current_user.get_notification_setting(i) == '1'
+                        = radio_button_tag "notification_settings[#{i}]", '1', checked: true
+                      - else
+                        = radio_button_tag "notification_settings[#{i}]", '1'
+                    %td.text-center
+                      - if current_user.get_notification_setting(i) == '2'
+                        = radio_button_tag "notification_settings[#{i}]", '2', checked: true
+                      - else
+                        = radio_button_tag "notification_settings[#{i}]", '2'
+            .modal-footer
               = f.submit 'Save Settings', class: 'btn btn-main pull-right'

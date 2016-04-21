@@ -4,24 +4,28 @@
   - context.department_entries.each do |department_entry|
     = form_for department_entry do |f|
       .row.department_form
-        .col-xs-8
+        .col-sm-6
           = f.text_field :department_name, class: 'form-control'
-          (#{department_entry.users.count} members)
-          \|
-          Approval Required
-          = f.check_box :approval_required
-        .col-xs-4
-          = f.submit 'save', class: 'btn btn-main'
-          = link_to department_entry, method: :delete, data: { confirm: 'Are you sure? This is remove all posts under this department and is not reversible.' } do
-            .btn.btn-main
-              -#.fa.fa-trash
-              = image_tag "del-icon.png", class: "com-btn"
+        .col-sm-6
+          .dept_save
+            #{department_entry.users.count}
+            %i.fa.fa-users
+            %span
+              Require Approval
+              = f.check_box :approval_required
+            %span
+              = f.submit 'save', class: 'btn btn-main'
+              = link_to department_entry, method: :delete, data: { confirm: 'Are you sure? This is remove all posts under this department and is not reversible.' } do
+                .btn.btn-main
+                  -#.fa.fa-trash
+                  = image_tag "del-icon.png", class: "com-btn"
   - if context.department_entries.count < Organization::DEP_LIMIT
     = form_for DepartmentEntry.new do |f|
       .row.department_form
-        .col-xs-8
-          = f.hidden_field :context_type, value: context.class.to_s
-          = f.hidden_field :context_id, value: context.id
-          = f.text_field :department_name, class: 'form-control', placeholder: 'enter new department name ...'
-        .col-xs-4
-          = f.submit 'Add', class: 'btn btn-main'
+        .col-sm-6
+        .col-sm-6
+          .dept_save
+            = f.hidden_field :context_type, value: context.class.to_s
+            = f.hidden_field :context_id, value: context.id
+            = f.text_field :department_name, class: 'form-control', placeholder: 'enter new department name ...'
+            = f.submit 'Add', class: 'btn btn-main'
