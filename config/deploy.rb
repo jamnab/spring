@@ -16,7 +16,8 @@ set :use_sudo, false
 set :stage, :production
 set :deploy_via, :remote_cache
 
-set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/images')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/images', 'public/uploads', 'vendor/bundle')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secret.yml')
 
 set :puma_bind, "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
@@ -139,10 +140,12 @@ namespace :azure do
   task :sql_config do
     on roles(:app) do
       if fetch(:slack_stage) == "production"
-        execute :curl, "-o #{current_path}/config/database.yml -L #{fetch :database_yml_url}"
+        execute :curl, "-o #{shared_path}/config/database.yml -L #{fetch :database_yml_url}"
+      elsif fetch(:slack_stage) == "staging"
+        execute :cp, "#{current_path}/config/database.yml #{shared_path}/config/database.yml"
       end
     end
   end
 
-  after 'deploy:published', 'azure:sql_config'
+  after 'deploy:started', 'azure:sql_config'
 end
