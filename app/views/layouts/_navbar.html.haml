@@ -66,14 +66,19 @@
             #idea_counter.notification_counter.yellow
               = current_organization_posts('idea_posts').count
         %li.navicon
-          = link_to dashboard_path(:dashboard_page => "pending"),  class: "body-loading popover-trigger wide", data: {content: "Pending", placement: "bottom", trigger: "hover"} do
-            = image_tag "launched-icon.png"
+          = link_to dashboard_path(:dashboard_page => "pending"),  class: "body-loading popover-trigger", data: {content: "Pending", placement: "bottom", trigger: "hover"} do
+            = image_tag "list-icon.png"
             #pending_counter.notification_counter.orange
               = current_organization_posts('pending_posts').count
         %li.navicon
+          = link_to dashboard_path(:dashboard_page => "doit"),  class: "body-loading popover-trigger wide", data: {content: "Launched", placement: "bottom", trigger: "hover"} do
+            = image_tag "launched-icon.png"
+            #pending_counter.notification_counter.red
+              = current_organization_posts('launched_posts').count
+        %li.navicon
           = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading popover-trigger", data: {content: "Votes", placement: "bottom", trigger: "hover"} do
             = image_tag "vote-icon.png", class: "vote"
-            #pending_counter.notification_counter.red
+            #pending_counter.notification_counter.blue
               = current_organization_posts('following_posts').count
 
         %li.dropdown
