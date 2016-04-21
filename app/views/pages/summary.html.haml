@@ -85,7 +85,7 @@
                 - @contributions_by_employee[0..5].each do |entry|
                   .col-sm-4
                     .summary-card
-                      .main-content
+                      .main-content.sm
                         = entry['# Ideas Actionable']
                         :escaped
                           /
@@ -139,7 +139,7 @@
                 - @trending_ideas[0..5].each do |entry|
                   .col-sm-4
                     .summary-card
-                      .main-content
+                      .main-content.sm
                         #{entry['Support']}%
                       .notes.post
                       .footer
@@ -175,7 +175,7 @@
                 - @approved_ideas[0..5].each do |entry|
                   .col-sm-4
                     .summary-card
-                      .main-content
+                      .main-content.sm
                       .notes.post
                         %b= entry['Title']
                         %br
