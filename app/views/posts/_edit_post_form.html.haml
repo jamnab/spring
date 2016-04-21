@@ -16,23 +16,23 @@
             .field.col-xs-12
               = f.label 'Description'
               = f.text_area :content, class: "form-control", placeholder: "Enter description here ...", rows: 3, maxlength: 250
-            .field.col-xs-12
-              = f.label 'Deadline'
-              .input-group.date
-                %input.form-control{:type => "text"}
-                %span.input-group-addon
-                  %i.fa.fa-calendar
-              :javascript
-                $('.input-group.date').datepicker({
-                    clearBtn: true,
-                    todayHighlight: true
-                });
+            /.field.col-xs-12
+            /  = f.label 'Deadline'
+            /  .input-group.date
+            /    %input.form-control{:type => "text"}
+            /    %span.input-group-addon
+            /      %i.fa.fa-calendar
+            /  :javascript
+            /    $('.input-group.date').datepicker({
+            /        clearBtn: true,
+            /        todayHighlight: true
+            /    });
             .field.col-xs-12.nested_pics_form.row
               .col-sm-6
                 = f.label "Edit Images"
                 .dropzone
                   - @post.pictures.each do |pic|
-                    .row{class: "pic_#{pic.id}"}
+                    .col-sm-12{class: "pic_#{pic.id}"}
                       - @filename = pic.image(:url)
                       - @filename = @filename.split("?").first
                       - @filename = @filename.split("/").last
@@ -43,7 +43,7 @@
                 = f.label "Edit Proposals"
                 .dropzone
                   - @post.pictures.each do |pic|
-                    .row{class: "pic_#{pic.id}"}
+                    .col-sm-12{class: "pic_#{pic.id}"}
                       - @filename = pic.image(:url)
                       - @filename = @filename.split("?").first
                       - @filename = @filename.split("/").last
