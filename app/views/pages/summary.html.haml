@@ -2,17 +2,22 @@
 
 .summary
   #analytics-carousel.carousel.slide{"data-ride" => "carousel", "data-interval" => "false"}
-    %ul.alt-indicators
-      %li
-        %p
-          From:
-          %b July 02, 2015
-          %span.fa.fa-edit
-      %li
-        %p
-          To:
-          %b July 08, 2015
-          %span.fa.fa-edit
+
+    .row
+      = form_tag '#', method: :get do
+        .col-xs-4.text-right
+          %h4 Reporting from
+
+        .col-xs-4
+          .input-group.input-daterange{"data-provide" => "datepicker"}
+            = text_field_tag 'date_from', Date.today-1.year, {class: 'form-control date-filter'}
+            / %input.form-control{:type => "text", :value => Date.today-1.month}
+            %span.input-group-addon to
+            = text_field_tag 'date_to', Date.today, {class: 'form-control date-filter'}
+        .col-xs-4
+          = submit_tag "Refresh", class: 'btn btn-main'
+
+    %hr
     %ul.carousel-indicators
       %li.active{"data-slide-to" => "0", "data-target" => "#analytics-carousel"}
         .headline Departments

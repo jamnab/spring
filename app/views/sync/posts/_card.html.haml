@@ -104,7 +104,7 @@
             .col-xs-6.col-xs-offset-6
               = form_for post, remote: true do |f|
                 .input-group.date.action-date{"data-provide" => "datepicker"}
-                  = f.text_field :action_date, class: 'form-control'
+                  = f.text_field :action_date, class: 'form-control date-filter'
                   .input-group-addon
                     %span.glyphicon.glyphicon-th
 
