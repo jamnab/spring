@@ -42,14 +42,14 @@
               .col-sm-6
                 = f.label "Edit Proposals"
                 .dropzone
-                  - @post.pictures.each do |pic|
-                    .row{class: "pic_#{pic.id}"}
-                      - @filename = pic.image(:url)
+                  - @post.assets.each do |asset|
+                    .row{class: "asset_#{asset.id}"}
+                      - @filename = asset.image(:url)
                       - @filename = @filename.split("?").first
                       - @filename = @filename.split("/").last
                       = @filename
                       = "  "
-                      = link_to "x", "/pictures/#{pic.id}", method: :delete,remote: true, class: "delete_pic"
+                      = link_to "x", "/assets/#{pic.id}", method: :delete,remote: true, class: "delete_pic"
             /.field.col-xs-12.nested_pics_form
             /  = f.label "Add Images"
             /  = file_field_tag "images[]",type: :file, multiple: true
