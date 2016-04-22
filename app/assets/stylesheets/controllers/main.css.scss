@@ -955,10 +955,41 @@ a:hover {
       .area {
         width:100%;
         &.post {
-          padding-top:10px;
-          /* background: $l-grey; */
-          .col-sm {
-            padding:5px 10px;
+          p {
+            padding:0 25px;
+            font-size: 16px;
+          }
+        }
+        .poster {
+          width: 100%;
+
+          .user {
+            padding: 10px 15px 25px;
+            text-align: left;
+
+            img {
+              margin-top: -15px;
+              width: 35px;
+              height: 35px;
+
+              @include border_radius(50%);
+            }
+            .name {
+              display: inline-block;
+              padding: 0px 5px;
+              line-height: 18px;
+              color: $grey;
+
+              span {
+                /* font-weight:600; */
+                font-size: 14px;
+                /* text-shadow:$t-shadow; */
+              }
+              .job {
+                color:$li-grey;
+                font-size: 12px;
+              }
+            }
           }
         }
         &.comments {

@@ -17,9 +17,9 @@
 
     thead {
       th {
-        font-weight: 600;
+        font-weight: 500;
         font-size: 15px;
-        text-shadow:$t-shadow;
+        text-align: center;
       }
       .text-center th {
         text-align: center;
@@ -223,13 +223,16 @@
         margin:auto 0px;
       }
     }
+    .col-sm-4 {
+      padding:5px;
+    }
     .summary-box {
       /* @include border_radius_exl(10px); */
       /* box-shadow: $shadow-2; */
       /* border: 1px solid $default_text_main !important; */
       /* height: 100%; */
       /* background-color: $white; */
-      margin-bottom: 2rem;
+      /* margin-bottom: 2rem; */
 
       .header {
         /* height: 50px; */
@@ -251,9 +254,11 @@
 
           .legend {
             font-size: 12px;
+            color: $grey;
           }
           rect {
             stroke-width: 2;
+            @include border_radius_exl(4px);
           }
         }
 
@@ -270,11 +275,10 @@
 
         /** card **/
         .summary-card {
-          /* border:1px solid $mid-grey; */
-          /* border-top: 5px solid $green; */
           text-align: center;
           padding:20px 10px;
-          margin-bottom:20px;
+          /* margin-bottom:20px; */
+          min-height: 190px;
           background: $white;
           @include border_radius(4px);
 
@@ -286,9 +290,9 @@
 
           .main-content {
             width: 100%;
-            font-size: 7.5rem;
-            font-weight: 700;
-            word-spacing: -12px;
+            font-size: 6.5rem;
+            font-weight: 300;
+            word-spacing: -18px;
             color: $green;
             &.sm {
               font-size:5rem $imp;
@@ -316,13 +320,17 @@
             }
           }
           .title {
-            font-size: 18px;
-            font-weight: 600;
-            text-shadow: $t-shadow;
-            color:$grey;
+            img {
+              @include border_radius(50%);
+              width:45px;
+              margin:0 auto 5px;
+            }
+            p {
+              margin-bottom: 0;
+            }
           }
           .footer {
-            font-weight: 600;
+            /* font-weight: 600; */
             /* text-shadow: $t-shadow; */
             font-size: 13px;
             margin-top:10px;
@@ -331,7 +339,7 @@
               @include border_radius(50%);
               /* vertical-align: top; */
               // margin-top: -20px;
-              height: 30px;
+              height: 20px;
               margin-right: 3px;
             }
           }
