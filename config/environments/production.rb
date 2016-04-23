@@ -92,9 +92,22 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.delivery_method = :sendmail
+  # config.action_mailer.delivery_method = :sendmail
 
+  # config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.sendgrid.net",
+    :port => "587",
+    :domain => "smtp.sendgrid.net",
+    :authentication => :plain,
+    :user_name => "azure_3081186fc2795d0d8d08328cb2e09a0f@azure.com",
+    :password => "Madmax5!",
+    :enable_starttls_auto => true
+  }
 
   # set default url host so that the url helper doesn't output localhost as the base url
   Rails.application.default_url_options[:host] = 'golaunchboard.com'
