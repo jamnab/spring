@@ -12,6 +12,9 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+
+    redirect_to controller: 'pages', action: 'dashboard', post_id: @post.id and return
+
     if params[:comment_order] == 'newest'
       @comments = @post.comments.order(created_at: :desc)
     elsif params[:comment_order] == 'upvote'
@@ -87,6 +90,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+
     if !params[:images].nil?
       params[:images].each { |image|
         @post.pictures.create(image: image)
@@ -96,8 +100,13 @@ class PostsController < ApplicationController
 
     pre_update_action_date = @post.action_date
 
+    if params[:post] && params[:post][:action_date]
+      params[:post][:action_date] = DateTime.strptime(post_params[:action_date], '%m/%d/%Y').to_date
+    end
+
     respond_to do |format|
       if @post.update(post_params)
+
         @activity = PublicActivity::Activity.create(owner: current_user,
           key: 'Post.edited_a', trackable:@post)
         if @activity.id != nil
@@ -220,6 +229,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :post_type, :endorsed, :anonymous, :threshold, :user_id, :comment_anonymity, :pictures, :graveyard, :organization_id)
+      params.require(:post).permit(:title, :content, :post_type, :endorsed, :anonymous, :threshold, :user_id, :comment_anonymity, :pictures, :graveyard, :organization_id, :action_date)
     end
 end

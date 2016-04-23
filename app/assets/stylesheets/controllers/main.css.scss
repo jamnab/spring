@@ -27,7 +27,7 @@ label {
   /* font-size: 16px; */
   font-weight: 500;
 
-  @include transition(0.5s);
+  @include transition(500ms);
 
   &:focus {
     border:1px solid $green;
@@ -87,6 +87,12 @@ label {
     .item {
       opacity: 0;
       transition-property: opacity;
+      a {
+        img {
+          width: 100%;
+          object-fit: cover;
+        }
+      }
     }
 
     .active {
@@ -110,14 +116,61 @@ label {
     z-index: 2;
   }
 }
+.carousel-inner {
+  >.item {
+      >img {
+        width: 100%;
+        object-fit: cover;
+      }
+  }
+}
 .modal-dialog {
   padding-top: 5%;
   .modal-content {
     .modal-body {
-      padding-top:0;
+      padding:0 0 10px;
+
+      .departments {
+        .badge {
+          padding:4px 12px 7px;
+        }
+      }
     }
     .modal-footer {
       border-top:1px dashed $l-grey;
+    }
+  }
+}
+.modal {
+  overflow:auto;
+}
+.modal h4.modal-title {
+  font-weight: 600;
+}
+.dropzone {
+  padding:20px 10px;
+  margin:5px;
+  border: 1px dashed $li-grey;
+  @include border_radius(5px);
+  input {
+    margin:0 auto;
+  }
+}
+.input-group.date {
+  .input-group-addon {
+    border: none;
+    background:$blue;
+    color:$white;
+  }
+}
+.nested_pics_form {
+  width:100%;
+}
+.member-list {
+  .member {
+    padding:3px 5px;
+    img {
+      height:20px;
     }
   }
 }
@@ -128,7 +181,7 @@ textarea {
   box-shadow: $shadow;
   border:1px solid $li-grey;
 
-  @include transition(0.5s);
+  @include transition(500ms);
 
   &:focus {
     border:1px solid $ghost;
@@ -151,7 +204,7 @@ textarea {
   padding:6px 12px;
   border:1px solid $ghoul;
 
-  @include transition(0.5s);
+  @include transition(500ms);
 
   @include border_radius(5px);
   &:hover {
@@ -167,25 +220,83 @@ textarea {
   border:none;
   color: #fff;
 }
+.select-style {
+  border: 1px solid $l-grey;
+  /* width: 120px; */
+  border-radius: 5px;
+  overflow: hidden;
+  background: #fff image-url("downvote-icon.png") no-repeat 98% 50%;
+  background-size:18px;
 
-html, body {
-  height: 100%;
-  /* width: 100%; */
-  /* min-width: 480px; */
-  /* background-color: $white; */
+  select {
+    padding: 5px 8px;
+    /* width: 100%; */
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+.dataTables_length {
+
+  select {
+    overflow: hidden;
+    background: #fff image-url("downvote-icon.png") no-repeat 90% center;
+    background-size:13px;
+    /* padding: 5px 8px; */
+    /* width: 100%; */
+    color: $grey;
+    border: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+html,body {
+
   color: $grey;
-  /* overflow-x: hidden; */
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 html {
   background:$green-grad-flip;
+  height: 100%;
 }
 body {
   background-image:image-url("noisy_grid.png");
+  min-height:Calc(40rem*2);
+  @media screen and (min-width: 1224px) {
+    min-height:Calc(40rem*2.75);
+  }
 }
 .body-wrapper {
   background:$green-trans;
-  background-size: cover;
-  min-height: 100%;
+  min-height:Calc(40rem*2);
+  @media screen and (min-width: 1224px) {
+    min-height:Calc(40rem*2.75);
+  }
+  /* background-size:100%;
+  min-height:768px;
+  @media screen and (min-width:1200px) {
+    min-height:1024px;
+  }
+  @media screen and (min-width:1448px) {
+    min-height:1324px;
+  } */
 }
 .admin-dashboard {
   padding: 10px 20px;
@@ -286,6 +397,7 @@ body {
         top: 4px;
         right: 2px;
         font-size: 10px;
+        font-weight:600;
         padding:0 7px;
         color: $white;
         @include border_radius(35%);
@@ -306,7 +418,7 @@ body {
     }
   }
   .popover {
-    box-shadow: $btn-shadow;
+    box-shadow: $menu-shadow;
     border: none;
     .arrow {
       border: none;
@@ -339,7 +451,10 @@ body {
       }
     }
     .dropdown {
-      margin-left: 10px $imp;
+      margin-left: 0px $imp;
+      .dropdown-toggle {
+        padding-left: 5px;
+      }
     }
     .post-wrapper {
       height: 40rem;
@@ -393,7 +508,7 @@ body {
       font-size: 14px;
       font-weight: 500;
 
-      @include transition(0.5s);
+      @include transition(500ms);
 
       &:focus {
         border:1px solid $ghost;
@@ -498,14 +613,14 @@ body {
     .dropdown-menu {
       padding: 0px;
       border: none;
-      margin-left: -85px;
+      margin-left: -75px;
       margin-top:5px;
-      box-shadow: $shadow;
+      box-shadow: $menu-shadow;
 
       @include border_radius(5px);
 
       @media screen and (max-width:768px) {
-        margin-left: -130px;
+        margin-left: -115px;
       }
 
       &.filter-menu {
@@ -528,14 +643,14 @@ body {
         }
         a {
           text-align: left;
-          padding:10px 15px 10px 20px;
+          padding:10px 20px;
           font-size: 14px;
           /* font-weight: 600; */
           background-color: $trans;
           color: $grey;
           text-shadow: $t-shadow;
 
-          @include transition(0.5s);
+          @include transition(500ms);
 
           &:active {
             /* background: $trans !important; */
@@ -554,7 +669,7 @@ body {
     .navbar-nav .open .dropdown-menu {
       position: absolute;
       background-color: $white;
-      box-shadow: $shadow;
+      box-shadow: $menu-shadow;
     }
   }
 
@@ -614,7 +729,7 @@ a:hover {
 .badge {
   background:$green;
   padding:5px 12px;
-  @include border_radius(15px);
+  @include border_radius(12px);
 }
 
 /** Departments **/
@@ -623,7 +738,7 @@ a:hover {
   padding:10px;
 
   .badge {
-    margin:1px;
+    margin:3px 1px;
 
     font-weight: 600;
     text-shadow: $btn-shadow;
@@ -689,9 +804,9 @@ a:hover {
 // }
 
 .content-wrapper {
-  /* margin-top: 90px;
-  height: calc(100% - 70px);
-  overflow-y: scroll; */
+  /* margin-top: 90px; */
+  /* height: calc(100% - 70px); */
+  /* overflow-y: scroll; */
 }
 
 
@@ -743,7 +858,17 @@ a:hover {
   color: $white;
   font-weight: 600;
 
-  img { height:32px; }
+  img {
+    height:32px;
+    &.edit-btn {
+      height:24px;
+    }
+  }
+  &.vote-icon {
+    img{
+      height:20px;
+    }
+  }
 
   .count { margin-left:-25px;}
   &:hover {
@@ -781,20 +906,43 @@ a:hover {
   .modal-content {
     border:none;
     @include border_radius(5px);
-    box-shadow: $shadow-2;
+    box-shadow: $menu-shadow;
     .modal-header {
       /* background-color: $green; */
       color: $grey;
-      border-bottom: none;
-      /* text-shadow: $btn-shadow; */
+      border-bottom: 1px dashed $l-grey;
+
       @include border_radius_top(5px);
+
+      .modal-title {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      .close {
+        opacity: 1;
+        color: $grey;
+      }
     }
     p {
       font-size: 12px;
+      margin:5px auto;
     }
     .btn.btn-main {
       /* background-color: $nav_background; */
     }
+  }
+}
+
+.dept_save {
+  @media screen and (max-width:767px) {
+    padding:10px 0;
+  }
+  span {
+    margin-left: 10px;
+  }
+  i {
+    margin-left:3px;
   }
 }
 
@@ -803,14 +951,45 @@ a:hover {
   .modal-content {
 
     .modal-body {
-      padding:0;
+      /* padding:0; */
       .area {
         width:100%;
         &.post {
-          padding-top:10px;
-          /* background: $l-grey; */
-          .col-sm {
-            padding:5px 10px;
+          p {
+            padding:0 25px;
+            font-size: 16px;
+          }
+        }
+        .poster {
+          width: 100%;
+
+          .user {
+            padding: 10px 15px 25px;
+            text-align: left;
+
+            img {
+              margin-top: -15px;
+              width: 35px;
+              height: 35px;
+
+              @include border_radius(50%);
+            }
+            .name {
+              display: inline-block;
+              padding: 0px 5px;
+              line-height: 18px;
+              color: $grey;
+
+              span {
+                /* font-weight:600; */
+                font-size: 14px;
+                /* text-shadow:$t-shadow; */
+              }
+              .job {
+                color:$li-grey;
+                font-size: 12px;
+              }
+            }
           }
         }
         &.comments {
@@ -890,9 +1069,4 @@ form .field {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.modal-header .close {
-  opacity: 1;
-  color: $grey;
 }

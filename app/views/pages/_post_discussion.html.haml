@@ -10,7 +10,7 @@
             = post.title
         .modal-body
           .area.post
-            #carousel-discussion.col-sm.carousel.slide.carousel-fade
+            #carousel-discussion.carousel.slide.carousel-fade
               .carousel-inner
                 - if post.pictures.empty?
                   .item.active
@@ -29,12 +29,28 @@
                       %li.active{"data-target"=> "#carousel-discussion", "data-slide-to"=> index}
                     - else
                       %li{"data-target"=> "#carousel-discussion", "data-slide-to"=> index}
-            .col-sm
+            %p
               = post.content
+            .poster
+              .user
+                - if !post.anonymous || post.doit?
+                  = image_tag(user.profile_image_url)
+                  .name
+                    %span= user.full_name
+                    %br
+                    .job
+                      #{user.job_title}
+                - else
+                  = image_tag("profile-icon.png")
+                  .name
+                    %span Anonymous User
+                    %br
+                    .job
+                      Contributor
           .area.comments
             .filter-sort-comments
               - @post = post
-              = render 'comments_filter_sort', :collection => @post
+              /= render 'comments_filter_sort', :collection => @post
               - if @sort != "upvoted"
                 = sync_new partial: "card", resource: Comment.new, scope:post
               - if @post.alt_doit?
