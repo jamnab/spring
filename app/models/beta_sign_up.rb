@@ -14,6 +14,8 @@ class BetaSignUp < ActiveRecord::Base
     state :denied
   end
 
+  validates_presence_of :email
+
   def approve
     BetaSignUpMailer.approved(self).deliver_now
   end
