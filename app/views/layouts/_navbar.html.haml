@@ -96,7 +96,7 @@
             - if can? :update, current_user
               %li
                 = link_to '#', data: {target: "#edit-user", toggle: "modal"} do
-                  %i.fa.fa-user
+                  %i.fa.fa-toggle-on
                   &nbsp;
                   Account
             - if can? :update, current_organization
@@ -107,12 +107,12 @@
                   Organization
               %li
                 = link_to '#', data: {target: "#dept_management", toggle: "modal"} do
-                  %i.fa.fa-cubes
+                  %i.fa.fa-users
                   &nbsp;
                   Teams
               %li
                 = link_to manage_users_organization_path(current_organization), remote: true do
-                  %i.fa.fa-users
+                  %i.fa.fa-user
                   &nbsp;
                   Members
             - if can? :update, current_user

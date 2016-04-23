@@ -2,40 +2,46 @@
 
 .summary
   #analytics-carousel.carousel.slide{"data-ride" => "carousel", "data-interval" => "false"}
-    %ul.alt-indicators
-      %li
-        %p
-          From:
-          %b July 02, 2015
-          %span.fa.fa-edit
-      %li
-        %p
-          To:
-          %b July 08, 2015
-          %span.fa.fa-edit
     %ul.carousel-indicators
       %li.active{"data-slide-to" => "0", "data-target" => "#analytics-carousel"}
-        .headline Departments
+        .headline
+          %i.fa.fa-users.fa-lg
         /.subline by Department
       %li{"data-slide-to" => "1", "data-target" => "#analytics-carousel"}
-        .headline Employees
+        .headline
+          %i.fa.fa-user.fa-lg
         /.subline by Employee
       %li{"data-slide-to" => "2", "data-target" => "#analytics-carousel"}
-        .headline Trending
+        .headline
+          %i.fa.fa-line-chart.fa-lg
         /.subline in the Pipline
       %li{"data-slide-to" => "3", "data-target" => "#analytics-carousel"}
-        .headline Approved
+        .headline
+          %i.fa.fa-check.fa-lg
         /.subline launched Actionables
       %li{"data-slide-to" => "4", "data-target" => "#analytics-carousel"}
-        .headline Insights
+        .headline
+          %i.fa.fa-lightbulb-o.fa-lg
         /.subline on Idea Generation
+    %ul.date-indicator
+      = form_tag '#', method: :get do
+        %li
+          %span From
+        %li.date-select
+          .input-group.input-daterange{"data-provide" => "datepicker"}
+            = text_field_tag 'date_from', (Date.today-1.year).strftime('%m/%d/%Y'), {class: 'form-control date-filter'}
+            / %input.form-control{:type => "text", :value => Date.today-1.month}
+            %span.input-group-addon to
+            = text_field_tag 'date_to', Date.today.strftime('%m/%d/%Y'), {class: 'form-control date-filter'}
+        %li
+          = submit_tag "↺", class: 'btn btn-main'
     / Wrapper for slides
     .carousel-inner{:role => "listbox"}
       .item.active
         .row.first-q
           .col-sm-6
             .summary-box
-              .header Top Departments
+              .header Top Teams
               .body
                 - @contributions_by_department[0..5].each do |entry|
                   .col-sm-4
@@ -49,17 +55,19 @@
                         /#{entry['# Ideas Total']}
                       .notes
                         Viable Ideas
+                      /.footer
+                      /  = entry['Department']
 
           .col-sm-6
             .summary-box
-              .header Department Contributions
+              .header Team Contributions
               .body
                 #contributions_by_department_graph.d3_graph
         .row
           .analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
               %thead.text-center
-                %th Department
+                %th Team
                 %th Viable Ideas
                 %th Total Ideas
                 %th Approved Ideas
@@ -80,25 +88,26 @@
         .row.first-q
           .col-sm-6
             .summary-box
-              .header Top Idea Contributors (Viable/Total)
+              .header Top Contributors
               .body
                 - @contributions_by_employee[0..5].each do |entry|
                   .col-sm-4
                     .summary-card
+                      .title
+                        - user = User.find(entry['user_id'])
+                        - if !user || user.picture.nil?
+                          = image_tag("profile-icon.png")
+                        - else
+                          = image_tag user.picture.image.url(:user_image)
+                        %p
+                          = entry['Name']
                       .main-content.sm
                         = entry['# Ideas Actionable']
                         :escaped
                           /
                         #{entry['# Ideas Total']}
-                      /.notes
-                      /  Viable Ideas - Total
-                      .footer
-                        - user = User.find(entry['user_id'])
-                        - if !user || user.picture.nil?
-                          = image_tag("profile_default.png")
-                        - else
-                          = image_tag user.picture.image.url(:user_image)
-                        = entry['Name']
+                      .notes
+                        Viable/Total
           .col-sm-6
             .summary-box
               .header Employee Contributions
@@ -134,16 +143,19 @@
         .row.first-q
           .col-xs-12.col-sm-6
             .summary-box
-              .header Trending Ideas (By Support)
+              .header Trending Ideas
               .body
                 - @trending_ideas[0..5].each do |entry|
                   .col-sm-4
                     .summary-card
+                      .title
+                        = entry['Title']
                       .main-content.sm
                         #{entry['Support']}%
-                      -#.notes.post
-                      .footer
-                        = entry['Title']
+                      .notes
+                        Support
+                      /.footer
+                      /  = entry['Title']
           .col-xs-12.col-sm-6
             .summary-box
               .header Chart
@@ -170,18 +182,21 @@
         .row.first-q
           .col-sm-6
             .summary-box
-              .header Approved Ideas (By Support)
+              .header Approved Ideas
               .body
                 - @approved_ideas[0..5].each do |entry|
                   .col-sm-4
                     .summary-card
-                      .main-content.sm
-                        #{entry['Support']}%
+                      .title
+                        = entry['Title']
                       .notes.post
                         -#%br
-                        %span= entry['Title']
-                      .footer
-                        = entry['Poster']
+                        %span= entry['Poster']
+                      .main-content.sm
+                        #{entry['Support']}%
+                      .notes
+                        Support
+
           .col-sm-6
             .summary-box
               .header Chart
@@ -208,7 +223,7 @@
         .row.first-q
           .col-sm-6
             .summary-box
-              .header Overview
+              .header Insights
               .body
                 .col-sm-4
                   .summary-card

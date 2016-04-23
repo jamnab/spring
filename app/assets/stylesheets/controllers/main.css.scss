@@ -87,6 +87,12 @@ label {
     .item {
       opacity: 0;
       transition-property: opacity;
+      a {
+        img {
+          width: 100%;
+          object-fit: cover;
+        }
+      }
     }
 
     .active {
@@ -110,11 +116,25 @@ label {
     z-index: 2;
   }
 }
+.carousel-inner {
+  >.item {
+      >img {
+        width: 100%;
+        object-fit: cover;
+      }
+  }
+}
 .modal-dialog {
   padding-top: 5%;
   .modal-content {
     .modal-body {
       padding:0 0 10px;
+
+      .departments {
+        .badge {
+          padding:4px 12px 7px;
+        }
+      }
     }
     .modal-footer {
       border-top:1px dashed $l-grey;
@@ -254,14 +274,21 @@ html,body {
 }
 html {
   background:$green-grad-flip;
-  /* height: 100%; */
+  height: 100%;
 }
 body {
   background-image:image-url("noisy_grid.png");
-  /* height:100%; */
+  min-height:Calc(40rem*2);
+  @media screen and (min-width: 1224px) {
+    min-height:Calc(40rem*2.75);
+  }
 }
 .body-wrapper {
   background:$green-trans;
+  min-height:Calc(40rem*2);
+  @media screen and (min-width: 1224px) {
+    min-height:Calc(40rem*2.75);
+  }
   /* background-size:100%;
   min-height:768px;
   @media screen and (min-width:1200px) {
@@ -424,7 +451,10 @@ body {
       }
     }
     .dropdown {
-      margin-left: 10px $imp;
+      margin-left: 0px $imp;
+      .dropdown-toggle {
+        padding-left: 5px;
+      }
     }
     .post-wrapper {
       height: 40rem;
@@ -699,7 +729,7 @@ a:hover {
 .badge {
   background:$green;
   padding:5px 12px;
-  @include border_radius(15px);
+  @include border_radius(12px);
 }
 
 /** Departments **/
@@ -708,7 +738,7 @@ a:hover {
   padding:10px;
 
   .badge {
-    margin:2px 1px;
+    margin:3px 1px;
 
     font-weight: 600;
     text-shadow: $btn-shadow;
@@ -828,7 +858,12 @@ a:hover {
   color: $white;
   font-weight: 600;
 
-  img { height:32px; }
+  img {
+    height:32px;
+    &.edit-btn {
+      height:24px;
+    }
+  }
   &.vote-icon {
     img{
       height:20px;
@@ -920,10 +955,41 @@ a:hover {
       .area {
         width:100%;
         &.post {
-          padding-top:10px;
-          /* background: $l-grey; */
-          .col-sm {
-            padding:5px 10px;
+          p {
+            padding:0 25px;
+            font-size: 16px;
+          }
+        }
+        .poster {
+          width: 100%;
+
+          .user {
+            padding: 10px 15px 25px;
+            text-align: left;
+
+            img {
+              margin-top: -15px;
+              width: 35px;
+              height: 35px;
+
+              @include border_radius(50%);
+            }
+            .name {
+              display: inline-block;
+              padding: 0px 5px;
+              line-height: 18px;
+              color: $grey;
+
+              span {
+                /* font-weight:600; */
+                font-size: 14px;
+                /* text-shadow:$t-shadow; */
+              }
+              .job {
+                color:$li-grey;
+                font-size: 12px;
+              }
+            }
           }
         }
         &.comments {

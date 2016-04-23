@@ -123,17 +123,29 @@ class PagesController < ApplicationController
       redirect_to :back, notice: "No permission" and return
     end
 
+    # default ranges
+    if params[:date_from].nil?
+      params[:date_from] = Date.today - 1.year
+    else
+      params[:date_from] = DateTime.strptime(params[:date_from], '%m/%d/%Y').to_date
+    end
+    if params[:date_to].nil?
+      params[:date_to] = Date.today
+    else
+      params[:date_to] = DateTime.strptime(params[:date_to], '%m/%d/%Y').to_date
+    end
+
     # contributions_by_department_csv = File.read('public/dummy_data/contributions_by_department.csv')
     # @contributions_by_department = CSV.parse(contributions_by_department_csv, :headers => true)
     @contributions_by_department = []
     current_organization.department_entries.each do |de|
       entry = {
         'Department' => de.department_name,
-        '# Ideas Actionable' => de.posts.where(launch_approved: true).count,
-        '# Ideas Total' => de.posts.count,
+        '# Ideas Actionable' => de.posts.where(created_at: params[:date_from]..params[:date_to]).where(launch_approved: true).count,
+        '# Ideas Total' => de.posts.where(created_at: params[:date_from]..params[:date_to]).count,
         '# Ideas Approved' => de.posts.where(approved: true).count,
-        '# of Comments' => de.comments.count,
-        '# of Votes' => de.opinions.count,
+        '# of Comments' => de.comments.where(created_at: params[:date_from]..params[:date_to]).count,
+        '# of Votes' => de.opinions.where(created_at: params[:date_from]..params[:date_to]).count,
         '# of Users' => de.users.count
       }
       @contributions_by_department.push(entry)
@@ -146,13 +158,13 @@ class PagesController < ApplicationController
     current_organization.users.uniq.each do |user|
       entry = {
         'Name' => user.full_name,
-        '# Ideas Actionable' => user.posts.where(launch_approved: true).count,
-        '# Ideas Total' => user.posts.count,
-        '# Ideas Approved' => user.posts.where(approved: true).count,
-        '# of Comments Received' => user.posts.sum(:comments_count),
-        '# of Comments Given' => user.comments.count,
-        '# of Votes Received' => user.posts.map{|x| x.opinions.count}.inject(0, :+),
-        '# of Votes Given' => user.opinions.count,
+        '# Ideas Actionable' => user.posts.where(created_at: params[:date_from]..params[:date_to]).where(launch_approved: true).count,
+        '# Ideas Total' => user.posts.where(created_at: params[:date_from]..params[:date_to]).count,
+        '# Ideas Approved' => user.posts.where(created_at: params[:date_from]..params[:date_to]).where(approved: true).count,
+        '# of Comments Received' => user.posts.where(created_at: params[:date_from]..params[:date_to]).sum(:comments_count),
+        '# of Comments Given' => user.comments.where(created_at: params[:date_from]..params[:date_to]).count,
+        '# of Votes Received' => user.posts.where(created_at: params[:date_from]..params[:date_to]).map{|x| x.opinions.count}.inject(0, :+),
+        '# of Votes Given' => user.opinions.where(created_at: params[:date_from]..params[:date_to]).count,
         'user_id' => user.id
       }
       @contributions_by_employee.push(entry)
@@ -168,9 +180,9 @@ class PagesController < ApplicationController
       entry = {
         'Label' => post.user.full_name,
         'Title' => post.title,
-        'Support' => post.opinions.where(positive: true).count * 100 / audience_size,
-        '# of Comments' => post.comments.count,
-        '# of Votes' => post.opinions.count,
+        'Support' => post.opinions.where(created_at: params[:date_from]..params[:date_to]).where(positive: true).count * 100 / audience_size,
+        '# of Comments' => post.comments.where(created_at: params[:date_from]..params[:date_to]).count,
+        '# of Votes' => post.opinions.where(created_at: params[:date_from]..params[:date_to]).count,
         'Poster' => post.user.full_name
       }
       @trending_ideas.push(entry)
@@ -186,9 +198,9 @@ class PagesController < ApplicationController
       entry = {
         'Label' => post.user.full_name,
         'Title' => post.title,
-        'Support' => post.opinions.where(positive: true).count * 100 / audience_size,
-        '# of Comments' => post.comments.count,
-        '# of Votes' => post.opinions.count,
+        'Support' => post.opinions.where(created_at: params[:date_from]..params[:date_to]).where(positive: true).count * 100 / audience_size,
+        '# of Comments' => post.comments.where(created_at: params[:date_from]..params[:date_to]).count,
+        '# of Votes' => post.opinions.where(created_at: params[:date_from]..params[:date_to]).count,
         'Poster' => post.user.full_name
       }
       @approved_ideas.push(entry)
@@ -198,11 +210,11 @@ class PagesController < ApplicationController
     detailed_trends_csv = File.read("#{Rails.root}/public/dummy_data/detailed_trends.csv")
     @detailed_trends = CSV.parse(detailed_trends_csv, :headers => true)
     @stat_overview = {
-      num_actionables: current_organization.posts.where(launch_approved: true).count,
-      num_total_ideas: current_organization.posts.count,
-      num_approved: current_organization.posts.where(launch_approved: false, approved: true).count,
-      num_comments: current_organization.posts.sum(:comments_count),
-      num_votes: current_organization.posts.map{|x| x.opinions.count}.inject(0, :+),
+      num_actionables: current_organization.posts.where(created_at: params[:date_from]..params[:date_to]).where(launch_approved: true).count,
+      num_total_ideas: current_organization.posts.where(created_at: params[:date_from]..params[:date_to]).count,
+      num_approved: current_organization.posts.where(created_at: params[:date_from]..params[:date_to]).where(launch_approved: false, approved: true).count,
+      num_comments: current_organization.posts.where(created_at: params[:date_from]..params[:date_to]).sum(:comments_count),
+      num_votes: current_organization.posts.where(created_at: params[:date_from]..params[:date_to]).map{|x| x.opinions.count}.inject(0, :+),
       num_users: current_organization.users.uniq.count
     }
     # @detailed_trends = [['Date', '# Ideas Actionable', '# Ideas Total', '# Ideas Approved']]

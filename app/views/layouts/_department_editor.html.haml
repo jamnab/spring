@@ -14,7 +14,7 @@
               Require Approval
               = f.check_box :approval_required
             %span
-              = f.submit 'save', class: 'btn btn-main'
+              = f.submit '✓', class: 'btn btn-main'
               = link_to department_entry, method: :delete, data: { confirm: 'Are you sure? This is remove all posts under this department and is not reversible.' } do
                 .btn.btn-main
                   -#.fa.fa-trash

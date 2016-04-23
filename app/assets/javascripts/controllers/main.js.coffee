@@ -101,21 +101,24 @@ $ ->
   $('.action-date').on "changeDate", () ->
     # submit form, AJAX-y
     $(this).parent().submit()
-    console.log $(this)
 
-  winHeight = undefined
-  winWidth = undefined
-  winWidth = $(window).width()
-  winHeight = $(window).height()
-  $('.body-wrapper').css
-    #width: winWidth
-    height: winHeight
-  $(window).resize ->
-    $('.body-wrapper').css
-      #width: $(window).width()
-      height: $(window).height()
-    # if $('.content-wrapper').height() < winHeight
-    #   height: $('.content-wrapper').height()
-    # else
-    #   height: $(window).height()
-  return
+  $('.date-filter').datepicker
+    'endDate': new Date()
+    'autoclose': true
+
+  # winHeight = undefined
+  # winWidth = undefined
+  # winWidth = $(window).width()
+  # winHeight = $(window).height()
+  # $('.body-wrapper').css
+  #   #width: winWidth
+  #   height: winHeight
+  # $(window).resize ->
+  #   $('.body-wrapper').css
+  #     #width: $(window).width()
+  #     height: $(window).height()
+  #   # if $('.content-wrapper').height() < winHeight
+  #   #   height: $('.content-wrapper').height()
+  #   # else
+  #   #   height: $(window).height()
+  # return

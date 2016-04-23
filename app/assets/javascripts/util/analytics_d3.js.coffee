@@ -148,7 +148,7 @@ $('.summary').ready ->
       height
       0
     ])
-    color = d3.scale.category10()
+    color = d3.scale.ordinal().range(["#F012BE","#FFC837","#11FFBD","#FF8008","#FC354C","#19B5FE","#9013FE","#00FFFF","#6c7a89","#A46F3F"])
     xAxis = d3.svg.axis().scale(x).orient('bottom')
       .tickFormat(d3.time.format('%b %d'))
     yAxis = d3.svg.axis().scale(y).orient('left')

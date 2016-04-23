@@ -27,13 +27,11 @@
               - if can? :update, comment
                 = link_to edit_comment_path(comment), remote: true do
                   .btn.btn-sm{class: "btn-#{class_type}"}
-                    -#%span.flaticon-edit45
-                    = image_tag "edit-icon.png", class: "com-btn"
+                    %i.fa.fa-pencil
               - if can? :destroy, comment
                 = link_to comment, method: :delete, data: { confirm: "Are you sure about this?"}, remote: true do
                   .btn.btn-sm{class: "btn-#{class_type}"}
-                    -#%span.flaticon-delete48
-                    = image_tag "del-icon.png", class: "com-btn"
+                    %i.fa.fa-trash
 
       .col-xs-12
         - if comment.is_suggestion?

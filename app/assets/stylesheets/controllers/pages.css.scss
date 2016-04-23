@@ -17,9 +17,9 @@
 
     thead {
       th {
-        font-weight: 600;
+        font-weight: 500;
         font-size: 15px;
-        text-shadow:$t-shadow;
+        text-align: center;
       }
       .text-center th {
         text-align: center;
@@ -150,44 +150,82 @@
       font-weight: 500;
       margin-top:0;
     }
-    .alt-indicators {
-      width: 100%;
+    .date-indicator {
+      width:50rem;
       text-align: center;
       color: $white;
-      padding-bottom:30px;
-      margin-bottom:0;
+      padding:0 0 30px 0;
+      margin:0 auto;
+      display: table;
+
+      @media screen and (max-width: 767px) {
+        width:100%;
+      }
+      span {
+        padding-right:10px;
+      }
+      .date-select {
+
+        .form-control {
+          color:$grey;
+          font-weight:600;
+        }
+        span {
+          background:$l-grey;
+          border:none;
+          padding:5px 10px;
+        }
+      }
       li {
-        display: inline-block;
+
+        display: table-cell;
+
         list-style: none;
+        /* @media screen and (max-width: 416px) {
+          display: flex;
+        } */
       }
     }
   }
-  #analytics-carousel .carousel-indicators > li,
-  #analytics-carousel .carousel-indicators > li.active{
-    width: auto;
-    height: 35px;
-    padding: 5px 20px;
-    border: none;
+  #analytics-carousel .carousel-indicators {
+    >li {
+      width: auto;
+      height: 35px;
+      padding: 5px 25px;
+      border: none;
+      border-bottom: 3px solid $trans;
 
-    /* @include border_radius_top(10px); */
-    text-align: right;
-    text-indent: 0;
+      /* @include border_radius_top(10px); */
+      text-align: right;
+      text-indent: 0;
 
-    .headline {
-      font-size: 16px;
-      font-weight: 600;
+      @include border_radius_exl(0px);
+
+      .headline {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .subline {
+        font-size: 12px;
+        margin-left: -10px;
+      }
+      &.active {
+        border-bottom: 3px solid $white;
+        /* color: $green; */
+        background: $trans;
+
+      }
     }
-    .subline {
-      font-size: 12px;
-      margin-left: -10px;
-    }
+  }
+  /* #analytics-carousel .carousel-indicators > li.active{
+
   }
   #analytics-carousel .carousel-indicators > li.active {
     border-bottom: 3px solid $white;
-    /* color: $green; */
+    color: $green;
     background: $trans;
     @include border_radius_exl(0px);
-  }
+  } */
 
   #analytics-carousel .carousel-inner {
     .item {
@@ -198,13 +236,16 @@
         margin:auto 0px;
       }
     }
+    .col-sm-4 {
+      padding:5px;
+    }
     .summary-box {
       /* @include border_radius_exl(10px); */
       /* box-shadow: $shadow-2; */
       /* border: 1px solid $default_text_main !important; */
       /* height: 100%; */
       /* background-color: $white; */
-      margin-bottom: 2rem;
+      /* margin-bottom: 2rem; */
 
       .header {
         /* height: 50px; */
@@ -226,9 +267,11 @@
 
           .legend {
             font-size: 12px;
+            color: $grey;
           }
           rect {
             stroke-width: 2;
+            @include border_radius_exl(4px);
           }
         }
 
@@ -245,11 +288,10 @@
 
         /** card **/
         .summary-card {
-          /* border:1px solid $mid-grey; */
-          /* border-top: 5px solid $green; */
           text-align: center;
           padding:20px 10px;
-          margin-bottom:20px;
+          /* margin-bottom:20px; */
+          min-height: 190px;
           background: $white;
           @include border_radius(4px);
 
@@ -261,9 +303,9 @@
 
           .main-content {
             width: 100%;
-            font-size: 7.5rem;
-            font-weight: 700;
-            word-spacing: -12px;
+            font-size: 6.5rem;
+            font-weight: 300;
+            word-spacing: -18px;
             color: $green;
             &.sm {
               font-size:5rem $imp;
@@ -291,13 +333,17 @@
             }
           }
           .title {
-            font-size: 18px;
-            font-weight: 600;
-            text-shadow: $t-shadow;
-            color:$grey;
+            img {
+              @include border_radius(50%);
+              width:45px;
+              margin:0 auto 5px;
+            }
+            p {
+              margin-bottom: 0;
+            }
           }
           .footer {
-            font-weight: 600;
+            /* font-weight: 600; */
             /* text-shadow: $t-shadow; */
             font-size: 13px;
             margin-top:10px;
@@ -306,7 +352,7 @@
               @include border_radius(50%);
               /* vertical-align: top; */
               // margin-top: -20px;
-              height: 30px;
+              height: 20px;
               margin-right: 3px;
             }
           }

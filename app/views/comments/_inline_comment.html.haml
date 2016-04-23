@@ -6,13 +6,13 @@
   .signature
     .user
       - if @comment.doit?
-        = image_tag("profile_default.png")
+        = image_tag("profile-icon.png")
         .name
           %b= user.full_name
           %br
           (#{user.job_title})
       - else
-        = image_tag("profile_default.png")
+        = image_tag("profile-icon.png")
         .name
           Anonymous User
           %br
@@ -20,5 +20,3 @@
     .options
       - if can? :update, @comment
         = f.submit "save",  class: "btn btn-sm btn-#{class_type}"
-
-
