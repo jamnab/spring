@@ -141,8 +141,6 @@ namespace :azure do
     on roles(:app) do
       if fetch(:slack_stage) == "production"
         execute :curl, "-o #{shared_path}/config/database.yml -L #{fetch :database_yml_url}"
-      elsif fetch(:slack_stage) == "staging"
-        execute :cp, "#{current_path}/config/database.yml #{shared_path}/config/database.yml"
       end
     end
   end
