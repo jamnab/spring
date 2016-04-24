@@ -31,6 +31,16 @@
                 .field
                   = label_tag 'Decision Makers'
                   = text_area_tag 'admin_list', nil, class: 'form-control', rows: 2, placeholder: 'Add by email. Separate with commas or semi-colons. e.g. jsmith@example.com, jdoe@example.com'
+                .field
+                  = label_tag 'Current Decision Makers'
+                  .member-list
+                    .member
+                      = image_tag 'profile-icon.png'
+                      %span
+                        Member Name
+                      %span
+                        /= link_to department_entry, method: :delete, data: { confirm: 'Are you sure you want to remove this member?' } do
+                        ×
                 .field.modal-footer
                   .actions
                     = submit_tag 'Update', class: "btn btn-main pull-right"
