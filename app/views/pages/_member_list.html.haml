@@ -1,0 +1,17 @@
+- if admin
+  - @memberships = @user_memberships
+- else
+  - @memberships = @admin_memberships
+
+- @memberships.each do |membership|
+  .member{id: "membership-#{membership.id}"}
+    - if !membership.user || membership.user.picture.nil?
+      = image_tag ("profile-icon.png"), class: "profile-img"
+    - else
+      = image_tag membership.user.picture.image.url(:user_image)
+
+    %span
+      = membership.user.full_name
+    %span
+      = link_to 'x', membership, method: :delete, data: { confirm: 'Are you sure you want to remove this member?' }, remote: true
+

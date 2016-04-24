@@ -1,5 +1,5 @@
 class DepartmentEntriesController < ApplicationController
-  before_action :set_department_entry, only: [:update, :destroy]
+  before_action :set_department_entry, only: [:fetch_users, :destroy]
 
   # POST /department_entries
   # POST /department_entries.json
@@ -17,25 +17,22 @@ class DepartmentEntriesController < ApplicationController
     end
   end
 
-  def update
-    respond_to do |format|
-      if @department_entry.update(department_entry_params)
-        format.html { redirect_to :back, notice: 'Department was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /department_entries/1
   # DELETE /department_entries/1.json
   def destroy
     @department_entry.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Department entry was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def fetch_users
+    @user_memberships = @department_entry.department_entry_memberships.where(admin: false)
+    @admin_memberships = @department_entry.department_entry_memberships.where(admin: true)
+
+    respond_to do |format|
+      format.html {redirect_to :back}
+      format.js {render 'pages/de_fetch_users'}
     end
   end
 
