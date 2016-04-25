@@ -343,7 +343,7 @@
           }
 
       } @media only screen and (max-width: 480px){
-          .mcnShareContent,.mcnCaptionTopContent,.mcnCaptionBottomContent,.mcnTextContentContainer,.mcnBoxedTextContentContainer,.mcnImageGroupContentContainer,.mcnCaptionLeftTextContentContainer,.mcnCaptionRightTextContentContainer,.mcnCaptionLeftImageContentContainer,.mcnCaptionRightImageContentContainer,.mcnImageCardLeftTextContentContainer,.mcnImageCardRightTextContentContainer{
+          .mcnCaptionTopContent,.mcnCaptionBottomContent,.mcnTextContentContainer,.mcnBoxedTextContentContainer,.mcnImageGroupContentContainer,.mcnCaptionLeftTextContentContainer,.mcnCaptionRightTextContentContainer,.mcnCaptionLeftImageContentContainer,.mcnCaptionRightImageContentContainer,.mcnImageCardLeftTextContentContainer,.mcnImageCardRightTextContentContainer{
             max-width:100% !important;
             width:100% !important;
           }
@@ -514,7 +514,7 @@
           }
 
       }
-  %body
+  %body{:style => "height: 100%;margin: 0;padding: 0;width: 100%;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #ffffff;"}
     %center
       %table#bodyTable{:border => "0", :cellpadding => "0", :cellspacing => "0", :height => "100%", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;height: 100%;margin: 0;padding: 0;width: 100%;background-color: #ffffff;", :width => "100%"}
         %tr
@@ -550,7 +550,7 @@
                                         %tbody
                                           %tr
                                             %td.mcnImageContent{:style => "padding-right: 9px;padding-left: 9px;padding-top: 0;padding-bottom: 0;text-align: center;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "top"}
-                                              %img.mcnImage{:align => "center", :alt => "", :src => "https://gallery.mailchimp.com/798e4d8241195bbc430ad3543/images/fab9ad2f-29af-42b0-9927-09d5fdad4ad3.png", :style => "max-width: 1024px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "564"}/
+                                              %img.mcnImage{:align => "center", :alt => "", :src => "https://gallery.mailchimp.com/798e4d8241195bbc430ad3543/images/75664dd4-2264-45c9-8264-3f78e61c1635.png", :style => "max-width: 200px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "200"}/
                   / // END PREHEADER
               %tr
                 %td{:align => "center", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "top"}
@@ -575,30 +575,56 @@
                                     %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :id => "", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
                                       %tr
                                         %td.headerContainer{:style => "padding-top: 20px;padding-bottom: 20px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "top"}
-                                          %table.mcnTextBlock{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
+                                          %table.mcnTextBlock{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
                                             %tbody.mcnTextBlockOuter
                                               %tr
-                                                %td.mcnTextBlockInner{:style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "top"}
-                                                  %table.mcnTextContentContainer{:align => "left", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "600"}
+                                                %td.mcnTextBlockInner{:style => "padding-top: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "top"}
+                                                  /[if mso]
+                                                    <table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+                                                    <tr>
+                                                  /[if mso]
+                                                    <td valign="top" width="600" style="width:600px;">
+                                                  %table.mcnTextContentContainer{:align => "left", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "max-width: 100%;min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
                                                     %tbody
                                                       %tr
-                                                        %td.mcnTextContent{:style => "padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #FFFFFF;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;", :valign => "top"}
+                                                        %td.mcnTextContent{:style => "padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #FFFFFF;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;", :valign => "top"}
                                                           %h1{:style => "display: block;margin: 0;padding: 0;font-family: Helvetica;font-size: 26px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;text-align: left;color: #FFFFFF !important;"}
                                                             %span{:style => "font-family:arial,helvetica neue,helvetica,sans-serif"}
                                                               = yield :title
-                                          %table.mcnTextBlock{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
+                                                  /[if mso]
+                                                    </td>
+                                                  /[if mso]
+                                                    </tr>
+                                                    </table>
+                                          %table.mcnTextBlock{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
                                             %tbody.mcnTextBlockOuter
                                               %tr
-                                                %td.mcnTextBlockInner{:style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "top"}
-                                                  %table.mcnTextContentContainer{:align => "left", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "600"}
+                                                %td.mcnTextBlockInner{:style => "padding-top: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "top"}
+                                                  /[if mso]
+                                                    <table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+                                                    <tr>
+                                                  /[if mso]
+                                                    <td valign="top" width="600" style="width:600px;">
+                                                  %table.mcnTextContentContainer{:align => "left", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "max-width: 100%;min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
                                                     %tbody
                                                       %tr
-                                                        %td.mcnTextContent{:style => "padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #FFFFFF;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;", :valign => "top"}
-                                                          %span{:style => "font-family:arial,helvetica neue,helvetica,sans-serif"}
-                                                            = yield
-                                                          %br/
-                                          = yield :cta_button
+                                                        %td.mcnTextContent{:style => "padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #FFFFFF;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;", :valign => "top"}
+                                                          = yield
 
+                                                  /[if mso]
+                                                    </td>
+                                                  /[if mso]
+                                                    </tr>
+                                                    </table>
+                                          %table.mcnButtonBlock{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
+                                            %tbody.mcnButtonBlockOuter
+                                              %tr
+                                                %td.mcnButtonBlockInner{:align => "center", :style => "padding-top: 0;padding-right: 18px;padding-bottom: 18px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "top"}
+                                                  %table.mcnButtonContentContainer{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: separate !important;border: 2px solid #F2F2F2;border-radius: 4px;background-color: #FFFFFF;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"}
+                                                    %tbody
+                                                      %tr
+                                                        %td.mcnButtonContent{:align => "center", :style => "font-family: Arial;font-size: 16px;padding: 20px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle"}
+                                                          = yield :cta_button
                                     / // END HEADER
                   / // END HEADER
               %tr
@@ -610,22 +636,27 @@
                         %table.templateContainer{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "600"}
                           %tr
                             %td.bodyContainer{:style => "padding-top: 10px;padding-bottom: 10px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "top"}
-                              %table.mcnShareBlock{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
+                              %table.mcnShareBlock{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
                                 %tbody.mcnShareBlockOuter
                                   %tr
                                     %td.mcnShareBlockInner{:style => "padding: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "top"}
-                                      %table.mcnShareContentContainer{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
+                                      %table.mcnShareContentContainer{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
                                         %tbody
                                           %tr
                                             %td{:align => "center", :style => "padding-top: 0;padding-left: 9px;padding-bottom: 0;padding-right: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"}
-                                              %table.mcnShareContent{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
+                                              %table.mcnShareContent{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
                                                 %tbody
                                                   %tr
                                                     %td.mcnShareContentItemContainer{:align => "center", :style => "padding-top: 9px;padding-right: 9px;padding-left: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "top"}
-                                                      %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"}
+                                                      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"}
                                                         %tbody
                                                           %tr
                                                             %td{:align => "left", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "top"}
+                                                              /[if mso]
+                                                                <table align="center" border="0" cellspacing="0" cellpadding="0">
+                                                                <tr>
+                                                              /[if mso]
+                                                                <td align="center" valign="top">
                                                               %table{:align => "left", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"}
                                                                 %tbody
                                                                   %tr
@@ -639,9 +670,13 @@
                                                                                   %tr
                                                                                     %td.mcnShareIconContent{:align => "center", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle", :width => "24"}
                                                                                       %a{:href => "*|FORWARD|*", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => "_blank"}
-                                                                                        %img{:height => "24", :src => "http://cdn-images.mailchimp.com/icons/social-block-v2/outline-color-forwardtofriend-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
+                                                                                        %img{:height => "24", :src => "https://cdn-images.mailchimp.com/icons/social-block-v2/outline-color-forwardtofriend-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
                                                                                     %td.mcnShareTextContent{:align => "left", :style => "padding-left: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle"}
                                                                                       %a{:href => "*|FORWARD|*", :style => "color: #202020;font-family: Arial;font-size: 12px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => ""} Forward
+                                                              /[if mso]
+                                                                </td>
+                                                              /[if mso]
+                                                                <td align="center" valign="top">
                                                               %table{:align => "left", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"}
                                                                 %tbody
                                                                   %tr
@@ -654,10 +689,14 @@
                                                                                 %tbody
                                                                                   %tr
                                                                                     %td.mcnShareIconContent{:align => "center", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle", :width => "24"}
-                                                                                      %a{:href => "http://twitter.com/intent/tweet?text=*|URL:MC_SUBJECT|*: *|URL:ARCHIVE_LINK_SHORT|*", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => "_blank"}
-                                                                                        %img{:height => "24", :src => "http://cdn-images.mailchimp.com/icons/social-block-v2/outline-color-twitter-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
+                                                                                      %a{:href => "http://twitter.com/intent/tweet?text=: https%3A%2F%2Fgolaunchboard.com", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => "_blank"}
+                                                                                        %img{:height => "24", :src => "https://cdn-images.mailchimp.com/icons/social-block-v2/outline-color-twitter-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
                                                                                     %td.mcnShareTextContent{:align => "left", :style => "padding-left: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle"}
-                                                                                      %a{:href => "http://twitter.com/intent/tweet?text=*|URL:MC_SUBJECT|*: *|URL:ARCHIVE_LINK_SHORT|*", :style => "color: #202020;font-family: Arial;font-size: 12px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => ""} Tweet
+                                                                                      %a{:href => "http://twitter.com/intent/tweet?text=: https%3A%2F%2Fgolaunchboard.com", :style => "color: #202020;font-family: Arial;font-size: 12px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => ""} Tweet
+                                                              /[if mso]
+                                                                </td>
+                                                              /[if mso]
+                                                                <td align="center" valign="top">
                                                               %table{:align => "left", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"}
                                                                 %tbody
                                                                   %tr
@@ -670,10 +709,14 @@
                                                                                 %tbody
                                                                                   %tr
                                                                                     %td.mcnShareIconContent{:align => "center", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle", :width => "24"}
-                                                                                      %a{:href => "http://www.linkedin.com/shareArticle?url=*|URL:ARCHIVE_LINK_SHORT|*&mini=true&title=*|URL:MC_SUBJECT|*", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => "_blank"}
-                                                                                        %img{:height => "24", :src => "http://cdn-images.mailchimp.com/icons/social-block-v2/outline-color-linkedin-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
+                                                                                      %a{:href => "http://www.linkedin.com/shareArticle?url=https%3A%2F%2Fgolaunchboard.com&mini=true&title=", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => "_blank"}
+                                                                                        %img{:height => "24", :src => "https://cdn-images.mailchimp.com/icons/social-block-v2/outline-color-linkedin-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
                                                                                     %td.mcnShareTextContent{:align => "left", :style => "padding-left: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle"}
-                                                                                      %a{:href => "http://www.linkedin.com/shareArticle?url=*|URL:ARCHIVE_LINK_SHORT|*&mini=true&title=*|URL:MC_SUBJECT|*", :style => "color: #202020;font-family: Arial;font-size: 12px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => ""} Share
+                                                                                      %a{:href => "http://www.linkedin.com/shareArticle?url=https%3A%2F%2Fgolaunchboard.com&mini=true&title=", :style => "color: #202020;font-family: Arial;font-size: 12px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => ""} Share
+                                                              /[if mso]
+                                                                </td>
+                                                              /[if mso]
+                                                                <td align="center" valign="top">
                                                               %table{:align => "left", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"}
                                                                 %tbody
                                                                   %tr
@@ -686,10 +729,14 @@
                                                                                 %tbody
                                                                                   %tr
                                                                                     %td.mcnShareIconContent{:align => "center", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle", :width => "24"}
-                                                                                      %a{:href => "https://plus.google.com/share?url=*|URL:ARCHIVE_LINK_SHORT|*", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => "_blank"}
-                                                                                        %img{:height => "24", :src => "http://cdn-images.mailchimp.com/icons/social-block-v2/outline-color-googleplus-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
+                                                                                      %a{:href => "https://plus.google.com/share?url=https%3A%2F%2Fgolaunchboard.com", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => "_blank"}
+                                                                                        %img{:height => "24", :src => "https://cdn-images.mailchimp.com/icons/social-block-v2/outline-color-googleplus-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
                                                                                     %td.mcnShareTextContent{:align => "left", :style => "padding-left: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle"}
-                                                                                      %a{:href => "https://plus.google.com/share?url=*|URL:ARCHIVE_LINK_SHORT|*", :style => "color: #202020;font-family: Arial;font-size: 12px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => ""} +1
+                                                                                      %a{:href => "https://plus.google.com/share?url=https%3A%2F%2Fgolaunchboard.com", :style => "color: #202020;font-family: Arial;font-size: 12px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => ""} +1
+                                                              /[if mso]
+                                                                </td>
+                                                              /[if mso]
+                                                                <td align="center" valign="top">
                                                               %table{:align => "left", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"}
                                                                 %tbody
                                                                   %tr
@@ -702,10 +749,14 @@
                                                                                 %tbody
                                                                                   %tr
                                                                                     %td.mcnShareIconContent{:align => "center", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle", :width => "24"}
-                                                                                      %a{:href => "http://www.facebook.com/sharer/sharer.php?u=*|URL:ARCHIVE_LINK_SHORT|*", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => "_blank"}
-                                                                                        %img{:height => "24", :src => "http://cdn-images.mailchimp.com/icons/social-block-v2/outline-color-facebook-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
+                                                                                      %a{:href => "http://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgolaunchboard.com", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => "_blank"}
+                                                                                        %img{:height => "24", :src => "https://cdn-images.mailchimp.com/icons/social-block-v2/outline-color-facebook-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
                                                                                     %td.mcnShareTextContent{:align => "left", :style => "padding-left: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle"}
-                                                                                      %a{:href => "http://www.facebook.com/sharer/sharer.php?u=*|URL:ARCHIVE_LINK_SHORT|*", :style => "color: #202020;font-family: Arial;font-size: 12px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => ""} Share
+                                                                                      %a{:href => "http://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgolaunchboard.com", :style => "color: #202020;font-family: Arial;font-size: 12px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => ""} Share
+                                                              /[if mso]
+                                                                </td>
+                                                              /[if mso]
+                                                                <td align="center" valign="top">
                                                               %table{:align => "left", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"}
                                                                 %tbody
                                                                   %tr
@@ -718,10 +769,15 @@
                                                                                 %tbody
                                                                                   %tr
                                                                                     %td.mcnShareIconContent{:align => "center", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle", :width => "24"}
-                                                                                      %a{:href => "https://www.pinterest.com/pin/find/?url=*|URL:ARCHIVE_LINK_SHORT|*", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => "_blank"}
-                                                                                        %img{:height => "24", :src => "http://cdn-images.mailchimp.com/icons/social-block-v2/outline-color-pinterest-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
+                                                                                      %a{:href => "https://www.pinterest.com/pin/find/?url=https%3A%2F%2Fgolaunchboard.com", :style => "mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => "_blank"}
+                                                                                        %img{:height => "24", :src => "https://cdn-images.mailchimp.com/icons/social-block-v2/outline-color-pinterest-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
                                                                                     %td.mcnShareTextContent{:align => "left", :style => "padding-left: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :valign => "middle"}
-                                                                                      %a{:href => "https://www.pinterest.com/pin/find/?url=*|URL:ARCHIVE_LINK_SHORT|*", :style => "color: #202020;font-family: Arial;font-size: 12px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => ""} Pin
+                                                                                      %a{:href => "https://www.pinterest.com/pin/find/?url=https%3A%2F%2Fgolaunchboard.com", :style => "color: #202020;font-family: Arial;font-size: 12px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :target => ""} Pin
+                                                              /[if mso]
+                                                                </td>
+                                                              /[if mso]
+                                                                </tr>
+                                                                </table>
                               %table.mcnTextBlock{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;", :width => "100%"}
                                 %tbody.mcnTextBlockOuter
                                   %tr
@@ -830,4 +886,3 @@
                                                                                         %img{:height => "24", :src => "http://cdn-images.mailchimp.com/icons/social-block-v2/dark-link-48.png", :style => "display: block;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;", :width => "24"}/
                   / // END FOOTER
             / // END TEMPLATE
-
