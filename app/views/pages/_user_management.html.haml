@@ -19,21 +19,23 @@
               = form_tag manage_users_organization_path(current_organization) do
                 .field
                   = label_tag 'Add Members'
-                  = text_area_tag 'invitee_list', nil, class: 'form-control', rows: 2, placeholder: 'Add by email. Separate with commas or semi-colons. e.g. jsmith@example.com, jdoe@example.com'
+                  = text_area_tag 'invitee_list', nil, class: 'form-control', rows: 2, placeholder: 'Add by email. e.g. jsmith@example.com, jdoe@example.com'
+                .field
+                  = label_tag 'Current Members'
+                  .member-list
                 .field
                   = label_tag 'Add Decision Makers'
-                  = text_area_tag 'admin_list', nil, class: 'form-control', rows: 2, placeholder: 'Add by email. Separate with commas or semi-colons. e.g. jsmith@example.com, jdoe@example.com'
+                  = text_area_tag 'admin_list', nil, class: 'form-control', rows: 2, placeholder: 'Add by email. e.g. jsmith@example.com, jdoe@example.com'
+                .field
+                  = label_tag 'Current Decision Makers'
+                  .admin-list
                 .field.modal-footer
                   .actions
                     = submit_tag 'Update', class: "btn btn-main pull-right"
 
-              .field
-                = label_tag 'Current Decision Makers'
-                .admin-list
 
-              .field
-                = label_tag 'Current Members'
-                .member-list
+
+
           /.col-sm-6.col-xs-12
           /  .row
           /    .col-xs-12

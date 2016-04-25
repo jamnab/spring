@@ -170,11 +170,25 @@ label {
 .nested_pics_form {
   width:100%;
 }
-.member-list {
+.member-list, .admin-list {
+  padding:10px;
+  border:1px dashed $l-grey;
+
+  @include border_radius(7px);
   .member {
-    padding:3px 5px;
+    display: inline-block;
+    padding:5px 10px;
+    margin:3px 0;
+    border:1px solid $ghoul;
+    background:$ghoul;
+    font-size: 13px;
+    @include border_radius(20px);
     img {
       height:20px;
+      @include border_radius(50%);
+    }
+    span {
+      color: $grey;
     }
   }
 }
@@ -732,7 +746,7 @@ a:hover {
 }
 .badge {
   background:$green;
-  padding:5px 12px;
+  padding:6px 10px;
   @include border_radius(12px);
 }
 

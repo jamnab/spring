@@ -22,26 +22,10 @@
               .col-sm-6
                 = f.label :images
                 .dropzone
-                  - @post.pictures.each do |pic|
-                    .col-sm-12{class: "pic_#{pic.id}"}
-                      - @filename = pic.image(:url)
-                      - @filename = @filename.split("?").first
-                      - @filename = @filename.split("/").last
-                      = @filename
-                      = "  "
-                      = link_to "x", "/pictures/#{pic.id}", method: :delete,remote: true, class: "delete_pic"
                   = file_field_tag "images[]",type: :file, multiple: true
               .col-sm-6
                 = f.label 'Proposals'
                 .dropzone
-                  - @post.pictures.each do |pic|
-                    .col-sm-12{class: "pic_#{pic.id}"}
-                      - @filename = pic.image(:url)
-                      - @filename = @filename.split("?").first
-                      - @filename = @filename.split("/").last
-                      = @filename
-                      = "  "
-                      = link_to "x", "/pictures/#{pic.id}", method: :delete,remote: true, class: "delete_pic"
                   = file_field_tag "files[]",type: :file, multiple: true
             .field.col-xs-12
               = f.label 'Teams', class: ""

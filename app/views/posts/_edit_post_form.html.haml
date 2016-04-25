@@ -38,7 +38,7 @@
                       - @filename = @filename.split("/").last
                       = @filename
                       = "  "
-                      = link_to "x", "/pictures/#{pic.id}", method: :delete,remote: true, class: "delete_pic"
+                      = link_to "×", "/pictures/#{pic.id}", method: :delete,remote: true, class: "delete_pic"
                   = file_field_tag "images[]",type: :file, multiple: true
               .col-sm-6
                 = f.label "Edit Proposals"
@@ -53,7 +53,7 @@
                       - @filename = @filename.split("/").last
                       = @filename
                       = "  "
-                      = link_to "x", "/assets/#{pic.id}", method: :delete,remote: true, class: "delete_pic"
+                      = link_to "×", "/assets/#{pic.id}", method: :delete,remote: true, class: "delete_pic"
                   = file_field_tag "files[]",type: :file, multiple: true
             /.field.col-xs-12.nested_pics_form
             /  = f.label "Add Images"
