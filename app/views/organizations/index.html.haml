@@ -22,3 +22,11 @@
               Toggle Activation
           %td= link_to 'Show', organization
           %td= link_to 'Destroy', organization, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        - organization.managers.each do |manager|
+          %tr
+            %td= "&nbsp;&nbsp;&nbsp;&nbsp;#{manager.first_name} #{manager.last_name}".html_safe
+            %td= "&nbsp;&nbsp;&nbsp;&nbsp;#{manager.email}".html_safe
+            %td
+            %td
+            %td
+            %td
