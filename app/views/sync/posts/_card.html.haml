@@ -89,7 +89,8 @@
                   %li{"data-target"=> "#carousel-post-#{post.id}", "data-slide-to"=> index}
         %div{ class: (@viewmode == 'list' ? 'col-xs-10' : 'col-xs-12') }
           %h4.bolded= post.title
-          = post.content
+          %span
+            = post.content
 
         .options
           - if (can? :update, post) && !post.launch_approved

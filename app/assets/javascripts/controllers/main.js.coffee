@@ -102,6 +102,9 @@ $ ->
     # submit form, AJAX-y
     $(this).parent().submit()
 
+  $('body').on "change", 'select#department_entry_id', () ->
+    $('#fetch_de_users').trigger('submit.rails');
+
   $('.date-filter').datepicker
     'endDate': new Date()
     'autoclose': true

@@ -10,30 +10,32 @@
           .row
             .col-xs-12
               /%h4.bolded Add Members
-              = form_tag manage_users_organization_path(current_organization) do
+              = form_tag fetch_users_department_entries_path(format: :js), id: 'fetch_de_users' , remote: true do
                 .field
                   = label_tag 'Team'
                   .select-style
-                    = select_tag "department_entry_id", options_from_collection_for_select(current_organization.department_entries, "id", "department_name"), class: 'form-control'
+                    = select_tag "id", options_from_collection_for_select(current_organization.department_entries, "id", "department_name"), include_blank: 'Select department...', class: 'form-control', id: 'department_entry_id'
+
+              = form_tag manage_users_organization_path(current_organization) do
                 .field
                   = label_tag 'Add Members'
-                  = text_area_tag 'invitee_list', nil, class: 'form-control', rows: 2, placeholder: 'Add by email. Separate with commas or semi-colons. e.g. jsmith@example.com, jdoe@example.com'
+                  = text_area_tag 'invitee_list', nil, class: 'form-control', rows: 2, placeholder: 'Add by email. e.g. jsmith@example.com, jdoe@example.com'
                 .field
                   = label_tag 'Current Members'
                   .member-list
-                    .member
-                      = image_tag 'profile-icon.png'
-                      %span
-                        Member Name
-                      %span
-                        /= link_to department_entry, method: :delete, data: { confirm: 'Are you sure you want to remove this member?' } do
-                        ×
                 .field
-                  = label_tag 'Decision Makers'
-                  = text_area_tag 'admin_list', nil, class: 'form-control', rows: 2, placeholder: 'Add by email. Separate with commas or semi-colons. e.g. jsmith@example.com, jdoe@example.com'
+                  = label_tag 'Add Decision Makers'
+                  = text_area_tag 'admin_list', nil, class: 'form-control', rows: 2, placeholder: 'Add by email. e.g. jsmith@example.com, jdoe@example.com'
+                .field
+                  = label_tag 'Current Decision Makers'
+                  .admin-list
                 .field.modal-footer
                   .actions
                     = submit_tag 'Update', class: "btn btn-main pull-right"
+
+
+
+
           /.col-sm-6.col-xs-12
           /  .row
           /    .col-xs-12

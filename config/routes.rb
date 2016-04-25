@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :department_entries
+  resources :department_entry_memberships
+  resources :department_entries do
+    collection do
+      post :fetch_users
+    end
+  end
 
   resources :favourites
 
