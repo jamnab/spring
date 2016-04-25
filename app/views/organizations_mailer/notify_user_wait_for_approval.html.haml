@@ -1,4 +1,7 @@
 = content_for :cta_button do
   %a.mcnButton{:href => "https://golaunchboard.com/", :style => "font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #D55258;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;", :target => "_blank", :title => "Login now"} Login now
 
-= "Thank-you for applying to Launchboard. We will contact you within 24 hours to approve the account for your organization"
+= content_for :title do
+  = "Thank-you for applying to Launchboard"
+
+= "We will contact you within 24 hours to approve the account for your organization"

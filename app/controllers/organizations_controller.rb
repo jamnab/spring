@@ -45,9 +45,18 @@ class OrganizationsController < ApplicationController
   end
 
   def toggle
-    activation_status = @organization.activated
-    @organization.update(activated: !activation_status)
-    redirect_to :back, notice: 'Organization activation status toggled.'
+    respond_to do |format|
+      if @organization.toggle_activation_status!
+        format.html {
+          redirect_to :back, notice: 'Organization activation status toggled.'
+        }
+      else
+        format.html {
+          flash[:error] = "Could not toggle organization's activation status. Please try again later"
+          redirect_to :back
+        }
+      end
+    end
   end
 
   # def generate_code

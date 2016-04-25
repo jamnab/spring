@@ -51,4 +51,15 @@ class Organization < ActiveRecord::Base
     self.doit_post_count + self.doit_comment_count
   end
 
+  def toggle_activation_status!
+    activation_status = self.activated
+    if activation_status == false && self.update(activated: !activation_status)
+      self.managers.each do |m|
+        OrganizationsMailer.notfify_manager_of_approval(m).deliver_now
+      end
+    else
+      false
+    end
+  end
+
 end
