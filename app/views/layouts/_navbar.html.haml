@@ -93,6 +93,12 @@
               = image_tag "dropdown-icon.png", class: "drop-icon"
 
           %ul.dropdown-menu{:role => "menu"}
+            - if can? :manage, :all
+              %li
+                = link_to organizations_path do
+                  %i.fa.fa-wrench
+                  &nbsp;
+                  Manage Subscriptions
             - if can? :update, current_user
               %li
                 = link_to '#', data: {target: "#edit-user", toggle: "modal"} do
