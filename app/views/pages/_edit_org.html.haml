@@ -15,9 +15,18 @@
                   = p.label :image
                   .dropzone
                     = p.file_field :image
-              .field.col-xs-12
-                = f.label :name
-                = f.text_field :name, class: "form-control"
+              .row.no-margin
+                .field.col-xs-7
+                  = f.label :name
+                  = f.text_field :name, class: "form-control"
+                .field.col-xs-5
+                  = f.label 'Current Subscription'
+                  %h5
+                    - if current_organization.active_subscription.nil?
+                      No subscriptions active
+                    - else
+                      Active until:
+                      = current_organization.active_subscription.end_at.strftime('%b %d, %Y')
               .field.col-xs-12
                 = f.label :twitter_handle
                 = f.text_field :twitter_handle, class: "form-control"
