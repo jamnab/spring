@@ -24,6 +24,9 @@
             - else
               Active until:
               = organization.active_subscription.end_at.strftime('%b %d, %Y')
+              = form_for organization.active_subscription do |f|
+                = f.hidden_field :active, value: false
+                = f.submit 'Revoke'
           %td
             = link_to toggle_organization_path(organization) do
               Toggle Activation
