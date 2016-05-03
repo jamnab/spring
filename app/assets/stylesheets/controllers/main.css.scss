@@ -363,6 +363,9 @@ body {
   color:$white;
   /* box-shadow: $shadow-2; */
 
+  @media print {
+    margin-bottom:0;
+  }
   .navbar-brand {
     display: inline-block;
     font-size: 22px;
@@ -454,7 +457,7 @@ body {
       line-height: 30px;
 
     }
-    .profile-img {
+    img:first-child {
       width: 30px;
       height: 30px;
 
@@ -877,7 +880,7 @@ a:hover {
   font-weight: 600;
 
   img {
-    height:32px;
+    height:28px;
     &.edit-btn {
       height:24px;
     }

@@ -11,6 +11,16 @@
     /* @include border_radius(10px); */
     color:$grey;
 
+    @media print {
+      padding-top:0;
+    }
+
+    .row {
+      @media print {
+        display:none;
+      }
+    }
+
     label {
       text-shadow: none;
     }
@@ -20,6 +30,10 @@
         font-weight: 500;
         font-size: 15px;
         text-align: center;
+
+        @media print {
+          font-size:10px;
+        }
       }
       .text-center th {
         text-align: center;
@@ -28,18 +42,27 @@
     table {
       /* border: 1px solid #fff; */
       background:$white;
-      box-shadow: $shadow-2;
+      /* box-shadow: $shadow-2; */
       @include border_radius_exl(4px);
+
+      @media print {
+        margin:0;
+      }
     }
   }
   .table {
     &>thead>tr>th {
-    border-bottom:1px dashed rgba(0,0,0,0.04);
+    border-bottom:none;
     }
     &>tbody>tr {
-      border-top:1px solid $l-grey;
+      /* border-top:1px solid $l-grey; */
       td {
         border: none;
+
+        @media print {
+          font-size: 12px;
+          padding:2px 8px;
+        }
       }
       &:last-child {
         td {
@@ -62,7 +85,7 @@
     }
   }
   .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
-    background:$ghoul;
+    background:rgba(108,122,137,0.05);
   }
   .dataTables_info {
     color:$white;
@@ -71,6 +94,9 @@
   .dataTables_filter, .dataTables_length {
     label {
       color:$white;
+      @media print {
+        display:none;
+      }
     }
     input {
       @include border_radius_exl(4px);
@@ -154,15 +180,24 @@
       width:50rem;
       text-align: center;
       color: $white;
-      padding:0 0 30px 0;
+      padding:0 0 10px 0;
       margin:0 auto;
       display: table;
 
       @media screen and (max-width: 767px) {
         width:100%;
       }
+
+      @media print {
+        padding-bottom:0;
+      }
       span {
         padding-right:10px;
+        &:first-child {
+          @media print {
+            padding:0;
+          }
+        }
       }
       .date-select {
 
@@ -184,10 +219,20 @@
         /* @media screen and (max-width: 416px) {
           display: flex;
         } */
+        .btn-main {
+          @media print {
+            display:none;
+          }
+        }
       }
     }
   }
   #analytics-carousel .carousel-indicators {
+    bottom:10px;
+
+    @media print {
+      display:none;
+    }
     >li {
       width: auto;
       height: 35px;
@@ -234,9 +279,25 @@
         @include border_radius_exl(10px);
         /* box-shadow: $shadow-2; */
         margin:auto 0px;
+
+        .col-sm-12:nth-child(1) {
+          .header {
+            @media print {
+              padding-bottom:0;
+            }
+          }
+        }
+
+        .col-sm-12:nth-child(2) {
+          margin-top:1.5em;
+
+          @media print {
+            margin-top:0;
+          }
+        }
       }
     }
-    .col-sm-4 {
+    .col-sm-2, .col-sm-4 {
       padding:5px;
     }
     .summary-box {
@@ -245,7 +306,7 @@
       /* border: 1px solid $default_text_main !important; */
       /* height: 100%; */
       /* background-color: $white; */
-      /* margin-bottom: 2rem; */
+      /* margin-top: 2em; */
 
       .header {
         /* height: 50px; */
@@ -253,11 +314,16 @@
         color: $white;
         padding: 0 15px 15px;
         font-size: 20px;
-        font-weight: 600;
+        font-weight: 400;
+
+        @media print {
+          padding:0 0 20px;
+          font-size:16px;
+        }
       }
       .body {
-        // chart
-        .d3_graph {
+
+        .d3_graph, canvas {
           position: relative;
           z-index: 10;
           text-align: center;
@@ -265,6 +331,14 @@
           background:$white;
           @include border_radius_exl(4px);
 
+          /* @media screen and (max-width: 767px) {
+            height:100% $imp;
+          } */
+
+          @media print {
+            padding:0 0 10px;
+            height:20%;
+          }
           .legend {
             font-size: 12px;
             color: $grey;
@@ -297,6 +371,11 @@
 
           @include transition(275ms);
 
+          @media print {
+            /* padding:20px 0 0; */
+            /* min-height:auto; */
+          }
+
           &:hover {
             box-shadow: $focus;
           }
@@ -307,14 +386,17 @@
             font-weight: 300;
             word-spacing: -18px;
             color: $green;
+
+            @media print {
+              color:$green;
+            }
             &.sm {
               font-size:5rem $imp;
               word-spacing: -14px;
             }
             &.xs {
-              font-size:1.5rem $imp;
-              font-weight: 500;
-              word-spacing: normal;
+              font-size:4rem $imp;
+              word-spacing: -12px;
             }
 
             @media screen and (max-width: 767px) {
@@ -333,6 +415,9 @@
             }
           }
           .title {
+            @media print {
+              font-size:11px;
+            }
             img {
               @include border_radius(50%);
               width:45px;
@@ -412,9 +497,9 @@
         margin: 0px -10px;
 
         h1 {
-          color: $main_project;
+          color: $li-grey;
           text-align: center;
-          margin-top: 240px;
+          margin:50% auto 0 auto;
         }
       }
     }
