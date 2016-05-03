@@ -76,6 +76,11 @@ class PagesController < ApplicationController
       @post = @posts.first
     end
 
+    if params[:post_id].present?
+      @direct_post = true
+      @post = Post.find(params[:post_id])
+    end
+
     # if params[:page_num] != nil
     #   @total_pages =  ((@posts.count.to_f)/@@dashboard_page_limit.to_f).ceil
     #   offset = (params[:page_num].to_i - 1) * @@dashboard_page_limit

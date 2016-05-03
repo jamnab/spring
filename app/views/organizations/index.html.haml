@@ -1,12 +1,12 @@
 - if can? :manage, :all
   .admin-dashboard
-    %h1 Listing organizations
+    %h2 Manage Organizations
 
-    %table.table.table-striped
+    %table.table
       %tr
         %th Name
-        %th Access Token
         %th Activated?
+        %th Active Subscription
         %th
         %th
         %th
@@ -14,11 +14,32 @@
       - @organizations.each do |organization|
         %tr
           %td= organization.name
-          %td= organization.access_token
           %td
             = organization.activated ? 'Yes' : 'No'
           %td
+            - if organization.active_subscription.nil?
+              = form_for organization do |f|
+                = f.date_field :new_subscription
+                = f.submit 'Update'
+            - else
+              Active until:
+              = organization.active_subscription.end_at.strftime('%b %d, %Y')
+              = form_for organization.active_subscription do |f|
+                = f.hidden_field :active, value: false
+                = f.submit 'Revoke'
+          %td
             = link_to toggle_organization_path(organization) do
               Toggle Activation
-          %td= link_to 'Show', organization
+          %td
           %td= link_to 'Destroy', organization, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        - organization.managers.each do |manager|
+          %tr.bg-white
+            %td= "#{'&nbsp;'*10}#{manager.first_name} #{manager.last_name}".html_safe
+            %td= "#{manager.email}".html_safe
+            %td
+            %td
+            %td
+            %td
+            %td
+- else
+  %h3 You are not authorized to view this page.

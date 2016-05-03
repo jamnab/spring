@@ -105,6 +105,10 @@ $ ->
   $('body').on "change", 'select#department_entry_id', () ->
     $('#fetch_de_users').trigger('submit.rails');
 
+  if $('#direct_post_id').length
+    # autoshowing requested post
+    $('#post-discussion').modal("show")
+
   $('.date-filter').datepicker
     'endDate': new Date()
     'autoclose': true

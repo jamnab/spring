@@ -45,9 +45,18 @@ class OrganizationsController < ApplicationController
   end
 
   def toggle
-    activation_status = @organization.activated
-    @organization.update(activated: !activation_status)
-    redirect_to :back, notice: 'Organization activation status toggled.'
+    respond_to do |format|
+      if @organization.toggle_activation_status!
+        format.html {
+          redirect_to :back, notice: 'Organization activation status toggled.'
+        }
+      else
+        format.html {
+          flash[:error] = "Could not toggle organization's activation status. Please try again later"
+          redirect_to :back
+        }
+      end
+    end
   end
 
   # def generate_code
@@ -155,6 +164,11 @@ class OrganizationsController < ApplicationController
       end
     end
     if @organization.update(organization_params)
+      if organization_params[:new_subscription]
+        Subscription.create(organization_id: @organization.id,
+          end_at: organization_params[:new_subscription].to_date,
+          subscription_type: 'standard', active: true)
+      end
       redirect_to :back
     else
       @pic.delete
@@ -180,6 +194,6 @@ class OrganizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
-      params.require(:organization).permit(:name, :access_token, :twitter_handle, :twitter_widget_id, :facebook_page_handle)
+      params.require(:organization).permit(:name, :access_token, :twitter_handle, :twitter_widget_id, :facebook_page_handle, :new_subscription)
     end
 end

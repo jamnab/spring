@@ -1,4 +1,6 @@
 = content_for :cta_button do
-  %br/
+  = link_to 'Manage', organizations_url, class: 'mcnButton', style: 'font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #D55258;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;', target: '_blank', title: 'Manage'
+= content_for :title do
+  = "A new manager has signed up"
 
-= "User #{@user.username} has registered as manager. Please approve."
+= "User #{@user.username} has registered as manager for a new organization #{@user.organization.name}. Please manage the new organization's application: "

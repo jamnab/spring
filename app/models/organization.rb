@@ -1,5 +1,7 @@
 class Organization < ActiveRecord::Base
   attr_accessor :username
+  attr_accessor :new_subscription
+
   has_many :posts
   has_one :picture
   accepts_nested_attributes_for :picture
@@ -49,6 +51,17 @@ class Organization < ActiveRecord::Base
 
   def doit_count
     self.doit_post_count + self.doit_comment_count
+  end
+
+  def toggle_activation_status!
+    activation_status = self.activated
+    if activation_status == false && self.update(activated: !activation_status)
+      self.managers.each do |m|
+        OrganizationsMailer.notfify_manager_of_approval(m).deliver_now
+      end
+    else
+      false
+    end
   end
 
 end

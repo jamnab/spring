@@ -42,7 +42,7 @@ class SubscriptionsController < ApplicationController
   def update
     respond_to do |format|
       if @subscription.update(subscription_params)
-        format.html { redirect_to @subscription, notice: 'Subscription was successfully updated.' }
+        format.html { redirect_to :back}
         format.json { render :show, status: :ok, location: @subscription }
       else
         format.html { render :edit }
@@ -69,6 +69,6 @@ class SubscriptionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def subscription_params
-      params.require(:subscription).permit(:email, :note)
+      params.require(:subscription).permit(:email, :note, :active)
     end
 end

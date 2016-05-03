@@ -285,7 +285,7 @@ ActiveRecord::Schema.define(version: 20160421030025) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "subscribe_to_newsletter",             default: false
-    t.string   "notification_settings",   limit: 255, default: "211211211"
+    t.string   "notification_settings",   limit: 255, default: "210011211"
   end
 
 end

@@ -3,7 +3,9 @@
 
 = content_for :popups do
   .test-modal
-    / = render 'post_discussion'
+    - if @direct_post && @post
+      %input{id: 'direct_post_id', name: 'direct_post_id', type: 'hidden', value: "#{@post.id}"}
+      = render 'post_discussion'
   #new_post_form_wrapper
     = render 'new_post_form'
   .edit-modal

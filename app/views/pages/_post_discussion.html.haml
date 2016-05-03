@@ -34,12 +34,12 @@
             .poster
               .user
                 - if !post.anonymous || post.doit?
-                  = image_tag(user.profile_image_url)
+                  = image_tag(post.user.profile_image_url)
                   .name
-                    %span= user.full_name
+                    %span= post.user.full_name
                     %br
                     .job
-                      #{user.job_title}
+                      #{post.user.job_title}
                 - else
                   = image_tag("profile-icon.png")
                   .name
