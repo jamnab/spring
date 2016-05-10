@@ -1,6 +1,6 @@
 - if can? :manage, :all
-  .admin-dashboard
-    %h2 Manage Organizations
+  .admin-dashboard.col-sm-8.col-sm-offset-2
+    %h3 Subscriptions
 
     %table.table
       %tr
@@ -30,8 +30,9 @@
           %td
             = link_to toggle_organization_path(organization) do
               Toggle Activation
+              %i.fa.fa-retweet
           %td
-          %td= link_to 'Destroy', organization, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          %td= link_to 'Destroy ×', organization, :method => :delete, :data => { :confirm => 'Are you sure?' }
         - organization.managers.each do |manager|
           %tr.bg-white
             %td= "#{'&nbsp;'*10}#{manager.first_name} #{manager.last_name}".html_safe

@@ -96,9 +96,9 @@
             - if can? :manage, :all
               %li
                 = link_to organizations_path do
-                  %i.fa.fa-wrench
+                  %i.fa.fa-retweet
                   &nbsp;
-                  Manage Subscriptions
+                  Subscriptions
             - if can? :update, current_user
               %li
                 = link_to '#', data: {target: "#edit-user", toggle: "modal"} do

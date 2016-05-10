@@ -319,7 +319,8 @@ body {
 .admin-dashboard {
   padding: 10px 20px;
   height: 100%;
-  overflow-y: scroll;
+  background:#fff;
+  @include border_radius(4px);
 }
 
 .flash-msg{
@@ -634,14 +635,14 @@ body {
     .dropdown-menu {
       padding: 0px;
       border: none;
-      margin-left: -75px;
+      margin-left: -35px;
       margin-top:5px;
       box-shadow: $menu-shadow;
 
       @include border_radius(5px);
 
       @media screen and (max-width:768px) {
-        margin-left: -115px;
+        margin-left: -75px;
       }
 
       &.filter-menu {

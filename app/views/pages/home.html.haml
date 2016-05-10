@@ -12,8 +12,14 @@
         %h1
           = "Reward Ideas"
           /%br
-        %p A private platform for questions, thoughts, and concerns that help focus on what matters. Tap into great ideas, identify key contributors who create real value, and foster a culture of innovation.
-        /%p A private platform for questions, thoughts, and concerns that help focus on what matters.
+        %p
+          %span
+            A private platform for questions, thoughts, and concerns that's tailored to your businesses approach to culture.
+          %br
+          %br
+          %span
+            /Run internal campaigns that tap into great ideas, identify key contributors who create real value, and foster a culture of innovation.
+            Employees share solutions to internal campaigns that tackle key issues such as improving customer experience, increasing revenue generation, reducing costs, and bettering morale.
         %br
         .btns
           %a.btn.btn-primary{href: '#feature-panel'}
@@ -27,11 +33,9 @@
           .features-bodies
             .features-body.active
               %h6 Step 1
-              %h3 It starts with a spark
+              %h3 Empower your workforce
               %p
-                Members create a post around whatever is on their mind, and pending approval it is viewable to an audience for voting.
-                %br/
-                The poster remains anonymous until the votes are in, which helps eliminate any decision bias.
+                Integrate Launchboard into your existing processes within minutes, and watch as employees contribute ideas to key initiatives. Ideas are ready after gaining manager approval, and other team members can collaborate seamlessly.
               /%a.btn.btn-clear{:href => "features"} Learn More
       .col-sm-5
         = image_tag 'graphic-card.png', :class => 'image'
@@ -43,9 +47,10 @@
           .features-bodies
             .features-body.active
               %h6 Step 2
-              %h3 Initiatives take flight
+              %h3 Act on initiatives
               %p
-                Majority audience support advances important posts, with contributor ideas sent to a decision maker for approval & timeline setting.
+                Start seeing real change and watch ideas as they move smoothly from approval to implementation. Remove barriers to success, increase communication and prevent great ideas from running out of steam.
+              %br
       .col-sm-5
         = image_tag 'graphic-comments.png', :class => 'image'
 %section.content-24
@@ -56,52 +61,80 @@
           .features-bodies
             .features-body.active
               %h6 Step 3
-              %h3 Ideas spring into Action
+              %h3 Smarter management
               %p
-                Efficiently monitor ideas from inception to reality. You can easily see what initiatives are in launch stage, keep track of everyone via a leaderboard & analytics, and feel comfort knowing that your information is kept secure.
+                Powerful analytics get translated into an insightful dashboard that surfaces key data for results based management: important ideas, impactful employees, and high performing teams.
       .col-sm-5
         = image_tag 'graphic-analytics.png', :class => 'image'
+-# %section.price-1#price
+-#   .container
+-#     %h3.row-title Convenient & Flexible Pricing
+-#     .row.plans
+-#       .col-sm-4.col-sm-offset-2
+-#         .plan
+-#           .header
+-#             .title SMEs
+-#             .price
+-#               Starting at
+-#               %span $2/month
+-#           .description
+-#             %b Unlimited
+-#             accounts
+-#             %br/
+-#             %b Unlimited
+-#             teams
+-#             %br/
+-#             %b 1 year flat rate
+-#             special offer
+-#             %br/
+-#
+-#           %a.btn.btn-primary{:href => "#", data: {toggle: 'modal', target: '#register'}} Sign Up
+-#       .col-sm-4
+-#         .plan
+-#           .header
+-#             .title Large Enterprise
+-#             .price Custom Quote
+-#           .description
+-#             %b Unlimited
+-#             accounts
+-#             %br/
+-#             %b Unlimited
+-#             teams
+-#             %br/
+-#             %b 1 year
+-#             special offer
+-#             %br/
+-#             %b Premium
+-#             customer support
+-#           %a.btn.btn-primary{:href => "mailto:clinton@golaunchboard.com"} Contact Us
 %section.price-1#price
   .container
-    %h3.row-title Convenient & Flexible Pricing
+    %h3.row-title See Launchboard in action
     .row.plans
-      .col-sm-4.col-sm-offset-2
+      .col-sm-6.col-sm-offset-3
         .plan
           .header
-            .title SMEs
-            .price
-              Starting at
-              %span $5/month
+            .title Included Features
+            /.price Custom Quote
           .description
-            %b 500
-            accounts
+            %b Manageable
+            Accounts
             %br/
-            %b 5
-            Core Teams
+            %b Flexible
+            Teams & roles
             %br/
-            %b 1 year
-            special offer
+            %b Private
+            Communication
+            %br
+            %b Secure
+            File storage
             %br/
-
-          %a.btn.btn-primary{:href => "#", data: {toggle: 'modal', target: '#register'}} Sign Up
-      .col-sm-4
-        .plan
-          .header
-            .title Large Enterprise
-            .price Custom Quote
-          .description
-            %b Unlimited
-            accounts
-            %br/
-            %b Unlimited
-            Core Teams
-            %b 1 year
-            special offer
-            %br/
+            %b Detailed
+            Analytics reports
             %br/
             %b Premium
-            customer support
-          %a.btn.btn-primary{:href => "mailto:clinton@golaunchboard.com"} Contact Us
+            Customer support
+          %a.btn.btn-primary{:href => "mailto:clinton@golaunchboard.com?subject=Book%Demo&body=Hello%Im%interested%in%booking%a%personal%demo%of%launchboard"} Request Demo
 %footer.footer-1
   .background
   .container
@@ -131,7 +164,8 @@
             %li
               %a{:href => "#price"} Price
       .col-sm-2.buy-btn
-        %a.btn.btn-success.btn-block{:href => "#", data: {toggle: 'modal', target: '#register'}} Sign Up
+        /%a.btn.btn-success.btn-block{:href => "#", data: {toggle: 'modal', target: '#register'}} Sign Up
+        %a.btn.btn-success.btn-block{:href => "mailto:clinton@golaunchboard.com?subject=Book%Demo&body=Hello%Im%interested%in%booking%a%personal%demo%of%launchboard"} Request Demo
         or
         %a{:href => "#", data: {toggle: 'modal', target: '#login'}}
           %span Log In
@@ -143,6 +177,7 @@
 :javascript
   window.sr = ScrollReveal({reset: true});
   sr.reveal('.header-10');
+  sr.reveal('.header-14-sub');
   sr.reveal('.header-19-sub .container');
   sr.reveal('.content-24');
   sr.reveal('.price-1');
