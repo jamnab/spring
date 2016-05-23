@@ -296,17 +296,22 @@ html {
 }
 body {
   background-image:image-url("noisy_grid.png");
-  min-height:Calc(40rem*2);
-  @media screen and (min-width: 1224px) {
+  /* min-height:Calc(40rem*2); */
+  /* @media screen and (min-width: 1224px) {
     min-height:Calc(40rem*2.75);
-  }
+  } */
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
 }
 .body-wrapper {
   background:$green-trans;
-  min-height:Calc(40rem*2);
-  @media screen and (min-width: 1224px) {
+  /* min-height:Calc(40rem*2); */
+  /* @media screen and (min-width: 1224px) {
     min-height:Calc(40rem*2.75);
-  }
+  } */
   /* background-size:100%;
   min-height:768px;
   @media screen and (min-width:1200px) {
@@ -315,6 +320,11 @@ body {
   @media screen and (min-width:1448px) {
     min-height:1324px;
   } */
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
 }
 .admin-dashboard {
   padding: 10px 20px;
