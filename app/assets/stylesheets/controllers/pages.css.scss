@@ -170,11 +170,17 @@
     .carousel-indicators {
       width: 100%;
       text-align: center;
-      color: $white;
       left: 0px;
       padding:0;
       font-weight: 500;
       margin-top:0;
+      color:rgba(255,255,255,0.75);
+
+      @include transition(1s);
+
+      &:hover {
+        color:#fff;
+      }
     }
     .date-indicator {
       width:50rem;
@@ -255,8 +261,8 @@
         margin-left: -10px;
       }
       &.active {
+        color:#fff $imp;
         border-bottom: 3px solid $white;
-        /* color: $green; */
         background: $trans;
 
       }
@@ -573,8 +579,8 @@
   }
 }
 .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
-  background:$green;
-  border-color:$green;
+  background:$a-grey;
+  border-color:$a-grey;
   color:$white $imp;
 }
 
@@ -603,7 +609,7 @@
     border-right:none;
   }
   .current {
-    background:$green;
+    background:$grey;
     color:$white $imp;
     font-style:normal;
   }
@@ -613,7 +619,7 @@
 }
   .digg_pagination a:hover, .digg_pagination a:focus {
     color: $white !important;
-    background: $green $imp;
+    background: $a-grey $imp;
     /* border:1px solid $white; */
     @include transition(0.5s);
   }

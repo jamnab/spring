@@ -105,10 +105,12 @@
  * */
 
 @green:#50E3C2;
-@l-green:#11FFBD;
+@d-green:#11FFBD;
+@d-green:#2AD18B;
 @green-grad:linear-gradient(#50E3C2,#11FFBD);
 @green-grad-flip:linear-gradient(#11FFBD,#50E3C2);
 @green-trans:linear-gradient(rgba(80,227,194,0.8),rgba(17,255,189,0.8));
+@blue-grad:linear-gradient(#3498DB, #258CD1);
 
 @white-grad:linear-gradient(#f8fafb,#e9eef1);
 @white-grad-flip:linear-gradient(#e9eef1,#f8fafb);
@@ -121,11 +123,11 @@
 @green:#50E3C2;
 @grey:#7f8c8d;
 @l-grey:#DADFE1;
-@blue-1:#3498db;
-@blue:#19B5FE;
+@blue:#3498db;
 @l-blue:#19B5FE;
 @d-blue:#258cd1;
 @blue-grad:linear-gradient(#3498db,#258cd1);
+@blue-grad:linear-gradient(#3A7BD5,#00d2ff);
 @blue-grad-flip:linear-gradient(#258cd1,#3498db);
 @grey:#6c7a89;
 @t-shadow:0 1px 0 #fff;
@@ -156,9 +158,12 @@
   -webkit-transition:all @speed ease-in-out !important;
 }
 
-.green-grad { background: @green-grad;}
+.green-grad { background: @blue-grad;}
 .green-trans {
   background:linear-gradient(rgba(80,227,194,0.83),rgba(17,255,189,0.83));
+  background:linear-gradient(rgba(52,152,219,0.83),rgba(37,140,209,0.83));
+  background:linear-gradient(rgba(58,123,213,0.83),rgba(0,210,255,0.83));
+  // background:linear-gradient(#3498DB, #3A7BD5);
   position: absolute;
   top:0;
   bottom:0;
@@ -166,8 +171,15 @@
   left:0;
 }
 .background {
-  background: @green-grad;
+  background: @blue-grad;
   opacity: 0.8;
+}
+
+.btn {
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+
+  font-weight: 700;
 }
 
 /**
@@ -196,9 +208,10 @@
     background:@orange @imp;
   }
   &.alert-success {
-    background:@l-green @imp;
+    background:@d-green @imp;
   }
 }
+
 
 body {
   background:#fff;
@@ -273,10 +286,12 @@ body {
           width: 100%;
           background:@green;
           color: #fff;
+          font-weight:700;
           .roundBtn(25px);
+          .transit(1s);
           &:hover, &:focus {
-            background:@l-green;
-            .transition(0.5s all);
+            background:@d-green;
+
           }
         }
       }
@@ -338,13 +353,12 @@ body {
         padding: 28px 0 5px;
         font-size: 15px;
         font-weight: normal;
-        color:@grey;
-        font-weight: 400;
+        font-weight: 700;
         letter-spacing: 1px;
-        color: #ffffff;
-        .transition(0.25s all);
+        color:rgba(255,255,255,0.8);
+        .transit(1s);
         &:hover, &:focus, &.active {
-          border-bottom:2px solid #fff;
+          color:#fff;
         }
         &.button {
           margin-top:18px;
@@ -353,18 +367,17 @@ body {
           font-weight:700;
           border: 2px solid #fff;
           .border-radius(25px);
-          .transition(0.75s all);
+          .transit(1s);
           &:hover, &:focus, &.active {
-            border-color:@trans;
-            background:@blue;
-            border-bottom:none;
+            border-color:@green;
+            background:@green;
           }
         }
       }
       &.active > a {
-        border-bottom:2px solid #fff;
+        color:#fff;
         &:hover, &:focus, &.active {
-          border-bottom:2px solid #fff;
+          color:#fff;
         }
       }
     }
@@ -402,7 +415,7 @@ body {
   }
   .background {
     /* background-image: image-url('splash_page/bg-hero-2.jpg'); */
-    background:@green-grad;
+    background:@blue-grad;
     opacity: 40;
     opacity: 0.4;
   }
@@ -414,7 +427,7 @@ body {
 
 .header-14-sub {
   color: #fff;
-  background: @green-grad;
+  background: @blue-grad;
   position: relative;
   padding-top: 30px;
   padding-bottom: 95px;
@@ -566,17 +579,17 @@ body {
         }
     }
     a {
-      .transit(0.5s);
+      .transit(1s);
     }
     .btn {
       width: 160px;
       padding-left: 18px;
       padding-right: 18px;
-      background:@blue;
-      .transit(0.5s);
+      background:@green;
+      .transit(1s);
       .border-radius(20px);
       &:hover, &:active, &:focus {
-        background:@d-blue;
+        background:@d-green;
       }
     }
     .additional-links {
@@ -1351,7 +1364,7 @@ body {
     color:#5b5e61;
     color:#fff;
     font-weight: normal;
-    .transition(0.5s ease-in-out all);
+    .transition(1s ease-in-out all);
     &:hover, &:focus, &.active {
       /* color: #979c9f; */
       /* border-bottom: 2px solid #fff; */
@@ -1372,18 +1385,15 @@ body {
       margin: 0;
       padding: 0;
       font-size: 16px;
-      font-weight: normal;
-      color: #bdc3c7;
-      color:#5b5e61;
       color:#fff;
       li {
         margin-bottom: 14px;
         a {
           padding-bottom: 1px;
-          .transit(0.5s);
+          color:rgba(255,255,255,0.75);
+          .transit(1s);
           &:hover, &:focus, &.active {
-            /* color: #979c9f; */
-            border-bottom: 2px solid #fff;
+            color:#fff;
           }
         }
       }
@@ -1393,14 +1403,13 @@ body {
     text-align: center;
     a.btn {
       font-size: 15px;
-      font-weight: normal;
+      font-weight: 700;
       color: #ffffff;
-      background: @l-green;
-      background:@blue;
-      .transit(0.5s);
+      background:@green;
+      .transit(1s);
       .border-radius(20px);
       &:hover {
-        background:@d-blue;
+        background:@d-green;
       }
     }
     .btn {
@@ -1408,9 +1417,10 @@ body {
     }
     a span {
       font-weight: 600;
-      .transit(0.5s);
+      color:rgba(255,255,255,0.9);
+      .transit(1s);
       &:hover {
-        border-bottom: 2px solid #fff;
+        color:#fff;
       }
     }
   }
@@ -1428,7 +1438,7 @@ body {
       color:#5b5e61;
       color:#fff;
       padding-bottom: 5px;
-      .transition(0.5s ease-in-out all);
+      .transition(1s ease-in-out all);
       &:hover, &:focus, &.active {
         color: #778485;
         color:#fff;
@@ -1602,7 +1612,7 @@ body {
     font-size: 18px;
     font-weight: normal;
     .header {
-      background: @green;
+      background: @l-blue;
       padding:25px 0;
       .border-top(5px);
     }
@@ -1656,11 +1666,11 @@ body {
     }
     .btn {
       width: 65%;
-      background: @green;
-      .transit(0.5s);
+      background: @l-blue;
+      .transit(1s);
       .border-radius(20px);
       &:hover {
-        background: @l-green;
+        background: @blue;
       }
     }
   }
@@ -1917,7 +1927,7 @@ body {
           border:1px solid #f0f0f0;
           color: #7f8c8d;
           &:focus {
-              border-color: @green;
+              border-color: @l-blue;
           }
       }
       textarea {
@@ -1943,7 +1953,7 @@ body {
       }
       .btn.btn-primary {
           &:hover, &:focus {
-              background-color: @l-green;
+              background-color: @d-green;
           }
           &:active, &.active {
               background-color: mix(@brand-danger, black, 85%);
