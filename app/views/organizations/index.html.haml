@@ -20,13 +20,13 @@
             - if organization.active_subscription.nil?
               = form_for organization do |f|
                 = f.date_field :new_subscription
-                = f.submit 'Update'
+                = f.submit 'Update', class: 'btn btn-option'
             - else
               Active until:
               = organization.active_subscription.end_at.strftime('%b %d, %Y')
               = form_for organization.active_subscription do |f|
                 = f.hidden_field :active, value: false
-                = f.submit 'Revoke'
+                = f.submit 'Revoke', class: 'btn btn-option'
           %td
             = link_to toggle_organization_path(organization) do
               Toggle Activation

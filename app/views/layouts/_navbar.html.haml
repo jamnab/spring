@@ -24,7 +24,7 @@
         = form_tag search_path, class: "form-inline", remote: (request.path == '/search'), :method => :get do
           .form-group
             .input-group
-              = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "Search by title"
+              = text_field_tag :query, params[:query], class: "form-control", id: "search", placeholder: "Search"
               / %input#search.form-control{:placeholder => "search ...", :type => "text"}
             / .col-xs-2.no-padding
             /   %button.btn.btn-main{:type => "submit"}
@@ -78,7 +78,7 @@
         %li.navicon
           = link_to dashboard_path(:dashboard_page => "following"),  class: "body-loading popover-trigger", data: {content: "Votes", placement: "bottom", trigger: "hover"} do
             = image_tag "vote-icon.png", class: "vote"
-            #pending_counter.notification_counter.blue
+            #pending_counter.notification_counter.green
               = current_organization_posts('following_posts').count
 
         %li.dropdown
