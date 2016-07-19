@@ -5,11 +5,11 @@
     %ul.carousel-indicators
       %li.active{"data-slide-to" => "0", "data-target" => "#analytics-carousel"}
         .headline
-          %i.fa.fa-users.fa-lg
+          %i.fa.fa-trophy.fa-lg
         /.subline by Department
       %li{"data-slide-to" => "1", "data-target" => "#analytics-carousel"}
         .headline
-          %i.fa.fa-user.fa-lg
+          %i.fa.fa-user-plus.fa-lg
         /.subline by Employee
       %li{"data-slide-to" => "2", "data-target" => "#analytics-carousel"}
         .headline
@@ -17,7 +17,7 @@
         /.subline in the Pipline
       %li{"data-slide-to" => "3", "data-target" => "#analytics-carousel"}
         .headline
-          %i.fa.fa-check.fa-lg
+          %i.fa.fa-chevron-up.fa-lg
         /.subline launched Actionables
       %li{"data-slide-to" => "4", "data-target" => "#analytics-carousel"}
         .headline
@@ -34,17 +34,17 @@
             %span.input-group-addon to
             = text_field_tag 'date_to', Date.today.strftime('%m/%d/%Y'), {class: 'form-control date-filter'}
         %li
-          = submit_tag "↺", class: 'btn btn-main'
+          = submit_tag "↺", class: 'btn btn-accent'
     / Wrapper for slides
     .carousel-inner{:role => "listbox"}
       .item.active
         .row.first-q
-          .col-sm-6
+          .col-sm-12
             .summary-box
               .header Top Teams
-              .body
+              .body.row
                 - @contributions_by_department[0..5].each do |entry|
-                  .col-sm-4
+                  .col-sm-2
                     .summary-card
                       .title
                         = entry['Department']
@@ -58,11 +58,53 @@
                       /.footer
                       /  = entry['Department']
 
-          .col-sm-6
+          .col-sm-12
             .summary-box
               .header Team Contributions
               .body
                 #contributions_by_department_graph.d3_graph
+                /%canvas#myChart1{:height => "50%", :width => "100%"}
+                /:javascript
+                /  var ctx = document.getElementById("myChart1");
+                /  var data = {
+                /      datasets: [{
+                /          data: [
+                /              11,
+                /              16,
+                /              7,
+                /              3,
+                /              14
+                /          ],
+                /          backgroundColor: [
+                /              "#FF6384",
+                /              "#4BC0C0",
+                /              "#FFCE56",
+                /              "#E7E9ED",
+                /              "#36A2EB"
+                /          ],
+                /          label: 'My dataset' // for legend
+                /      }],
+                /      labels: [
+                /          "Red",
+                /          "Green",
+                /          "Yellow",
+                /          "Grey",
+                /          "Blue"
+                /      ]
+                /  };
+                /  var myChart1 = new Chart(ctx, {
+                /      data: data,
+                /      type: 'polarArea',
+                /      options: {
+                /        scales: {
+                /            yAxes: [{
+                /                ticks: {
+                /                    beginAtZero:true
+                /                }
+                /            }]
+                /        }
+                /      }
+                /  });
         .row
           .analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
@@ -86,12 +128,12 @@
                     %td= entry['# of Users']
       .item
         .row.first-q
-          .col-sm-6
+          .col-sm-12
             .summary-box
               .header Top Contributors
-              .body
+              .body.row
                 - @contributions_by_employee[0..5].each do |entry|
-                  .col-sm-4
+                  .col-sm-2
                     .summary-card
                       .title
                         - user = User.find(entry['user_id'])
@@ -101,18 +143,47 @@
                           = image_tag user.picture.image.url(:user_image)
                         %p
                           = entry['Name']
-                      .main-content.sm
+                      .main-content.xs
                         = entry['# Ideas Actionable']
                         :escaped
                           /
                         #{entry['# Ideas Total']}
                       .notes
                         Viable/Total
-          .col-sm-6
+          .col-sm-12
             .summary-box
               .header Employee Contributions
               .body
                 #contributions_by_employee_graph.d3_graph
+                /%canvas#myChart2{:height => "50%", :width => "100%"}
+                /:javascript
+                /  var ctx = document.getElementById("myChart2");
+                /  var myChart2 = new Chart(ctx, {
+                /      type: 'bar',
+                /      data: {
+                /          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                /          datasets: [{
+                /              label: '# of Votes',
+                /              data: [12, 19, 3, 5, 2, 3],
+                /              backgroundColor: [
+                /                  "#FF6384",
+                /                  "#4BC0C0",
+                /                  "#FFCE56",
+                /                  "#E7E9ED",
+                /                  "#36A2EB"
+                /              ]
+                /          }]
+                /      },
+                /      options: {
+                /          scales: {
+                /              yAxes: [{
+                /                  ticks: {
+                /                      beginAtZero:true
+                /                  }
+                /              }]
+                /          }
+                /      }
+                /  });
         .row
           .col-xs-12.analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
@@ -141,12 +212,12 @@
                     %td= entry['# of Votes Given']
       .item
         .row.first-q
-          .col-xs-12.col-sm-6
+          .col-sm-12
             .summary-box
               .header Trending Ideas
-              .body
+              .body.row
                 - @trending_ideas[0..5].each do |entry|
-                  .col-sm-4
+                  .col-sm-2
                     .summary-card
                       .title
                         = entry['Title']
@@ -156,11 +227,40 @@
                         Support
                       /.footer
                       /  = entry['Title']
-          .col-xs-12.col-sm-6
+          .col-sm-12
             .summary-box
               .header Chart
               .body
                 #trending_ideas_graph.d3_graph
+                /%canvas#myChart3{:height => "50%", :width => "100%"}
+                /:javascript
+                /  var ctx = document.getElementById("myChart3");
+                /  var myChart3 = new Chart(ctx, {
+                /      type: 'bar',
+                /      data: {
+                /          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                /          datasets: [{
+                /              label: '# of Votes',
+                /              data: [12, 19, 3, 5, 2, 3],
+                /              backgroundColor: [
+                /                  "#FF6384",
+                /                  "#4BC0C0",
+                /                  "#FFCE56",
+                /                  "#E7E9ED",
+                /                  "#36A2EB"
+                /              ]
+                /          }]
+                /      },
+                /      options: {
+                /          scales: {
+                /              yAxes: [{
+                /                  ticks: {
+                /                      beginAtZero:true
+                /                  }
+                /              }]
+                /          }
+                /      }
+                /  });
         .row
           .col-xs-12.analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
@@ -180,12 +280,12 @@
                     %td= entry['# of Votes']
       .item
         .row.first-q
-          .col-sm-6
+          .col-sm-12
             .summary-box
               .header Approved Ideas
-              .body
+              .body.row
                 - @approved_ideas[0..5].each do |entry|
-                  .col-sm-4
+                  .col-sm-2
                     .summary-card
                       .title
                         = entry['Title']
@@ -197,11 +297,40 @@
                       .notes
                         Support
 
-          .col-sm-6
+          .col-sm-12
             .summary-box
               .header Chart
               .body
                 #approved_ideas_graph.d3_graph
+                /%canvas#myChart4{:height => "50%", :width => "100%"}
+                /:javascript
+                /  var ctx = document.getElementById("myChart4");
+                /  var myChart4 = new Chart(ctx, {
+                /      type: 'bar',
+                /      data: {
+                /          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                /          datasets: [{
+                /              label: '# of Votes',
+                /              data: [12, 19, 3, 5, 2, 3],
+                /              backgroundColor: [
+                /                  "#FF6384",
+                /                  "#4BC0C0",
+                /                  "#FFCE56",
+                /                  "#E7E9ED",
+                /                  "#36A2EB"
+                /              ]
+                /          }]
+                /      },
+                /      options: {
+                /          scales: {
+                /              yAxes: [{
+                /                  ticks: {
+                /                      beginAtZero:true
+                /                  }
+                /              }]
+                /          }
+                /      }
+                /  });
         .row
           .col-xs-12.analytics_data_table_wrapper
             %table.analytics_data_table.table.table-striped.display{cellspacing: "0", width: "100%"}
@@ -221,11 +350,11 @@
                     %td= entry['# of Votes']
       .item
         .row.first-q
-          .col-sm-6
+          .col-sm-12
             .summary-box
               .header Insights
-              .body
-                .col-sm-4
+              .body.row
+                .col-sm-2
                   .summary-card
                     .main-content
                       = @stat_overview[:num_actionables]
@@ -233,7 +362,7 @@
                     /  Total Number of
                     .footer
                       Viable Ideas
-                .col-sm-4
+                .col-sm-2
                   .summary-card
                     .main-content
                       = @stat_overview[:num_total_ideas]
@@ -241,7 +370,7 @@
                     /  Total Number of
                     .footer
                       Total Ideas
-                .col-sm-4
+                .col-sm-2
                   .summary-card
                     .main-content
                       = @stat_overview[:num_approved]
@@ -249,7 +378,7 @@
                     /  Total Number of
                     .footer
                       Approved Ideas
-                .col-sm-4
+                .col-sm-2
                   .summary-card
                     .main-content
                       = @stat_overview[:num_comments]
@@ -257,7 +386,7 @@
                     /  Total Number of
                     .footer
                       Total Comments
-                .col-sm-4
+                .col-sm-2
                   .summary-card
                     .main-content
                       = @stat_overview[:num_votes]
@@ -265,7 +394,7 @@
                     /  Total Number of
                     .footer
                       Total Votes
-                .col-sm-4
+                .col-sm-2
                   .summary-card
                     .main-content
                       = @stat_overview[:num_users]
@@ -273,13 +402,42 @@
                     /  Total Number of
                     .footer
                       Total Users
-          .col-sm-6
+          .col-sm-12
             .summary-box
               .header Chart
-              .body
+              .body.row
                 .graph_cover
                   Not Enough Data
                 #detailed_trends_graph.d3_graph
+                /%canvas#myChart5{:height => "50%", :width => "100%"}
+                /:javascript
+                /  var ctx = document.getElementById("myChart5");
+                /  var myChart5 = new Chart(ctx, {
+                /      type: 'line',
+                /      data: {
+                /          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                /          datasets: [{
+                /              label: '# of Votes',
+                /              data: [12, 19, 3, 5, 2, 3],
+                /              backgroundColor: [
+                /                  "#FF6384",
+                /                  "#4BC0C0",
+                /                  "#FFCE56",
+                /                  "#E7E9ED",
+                /                  "#36A2EB"
+                /              ]
+                /          }]
+                /      },
+                /      options: {
+                /          scales: {
+                /              yAxes: [{
+                /                  ticks: {
+                /                      beginAtZero:true
+                /                  }
+                /              }]
+                /          }
+                /      }
+                /  });
 
 
 

@@ -1,7 +1,7 @@
 @import 'presets';
 
 *, html, body, h1, h2, h3, h4, h5, h6, p, input, li, a {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   letter-spacing: 0.03rem;
   word-spacing: 0.02rem;
 }
@@ -12,6 +12,7 @@
 .orange { background-color:$orange; }
 .red { background-color: $red; }
 .blue { background-color: $blue; }
+.green { background-color: $green; }
 
 label {
   font-weight: 600;
@@ -30,7 +31,7 @@ label {
   @include transition(500ms);
 
   &:focus {
-    border:1px solid $green;
+    border:1px solid $blue;
     outline: 0;
     box-shadow:inset $shadow;
     /* @include placeholder-active; */
@@ -291,22 +292,21 @@ html,body {
   -moz-osx-font-smoothing: grayscale;
 }
 html {
-  background:$green-grad-flip;
-  height: 100%;
+  background:$blue-grad;
+  min-height: 100%;
 }
 body {
-  background-image:image-url("noisy_grid.png");
-  min-height:Calc(40rem*2);
-  @media screen and (min-width: 1224px) {
-    min-height:Calc(40rem*2.75);
-  }
+  background:image-url("noisy_grid.png");
+  height:100%;
+  width:100%;
+
 }
 .body-wrapper {
-  background:$green-trans;
-  min-height:Calc(40rem*2);
-  @media screen and (min-width: 1224px) {
+  background:$blue-trans;
+  /* min-height:Calc(40rem*2); */
+  /* @media screen and (min-width: 1224px) {
     min-height:Calc(40rem*2.75);
-  }
+  } */
   /* background-size:100%;
   min-height:768px;
   @media screen and (min-width:1200px) {
@@ -315,11 +315,19 @@ body {
   @media screen and (min-width:1448px) {
     min-height:1324px;
   } */
+  // position: absolute;
+  // top:0;
+  // bottom:0;
+  // left:0;
+  // right:0;
+  width:100%;
+  min-height:100vh;
 }
 .admin-dashboard {
   padding: 10px 20px;
   height: 100%;
-  overflow-y: scroll;
+  background:#fff;
+  @include border_radius(4px);
 }
 
 .flash-msg{
@@ -363,6 +371,9 @@ body {
   color:$white;
   /* box-shadow: $shadow-2; */
 
+  @media print {
+    margin-bottom:0;
+  }
   .navbar-brand {
     display: inline-block;
     font-size: 22px;
@@ -454,7 +465,7 @@ body {
       line-height: 30px;
 
     }
-    .profile-img {
+    img:first-child {
       width: 30px;
       height: 30px;
 
@@ -579,7 +590,7 @@ body {
     }
 
     #filter-post-all{
-      color: $green !important;
+      color: $blue !important;
     }
     #filter-post-all::before{
       /* content:"•"; */
@@ -631,14 +642,14 @@ body {
     .dropdown-menu {
       padding: 0px;
       border: none;
-      margin-left: -75px;
+      margin-left: -65px;
       margin-top:5px;
       box-shadow: $menu-shadow;
 
       @include border_radius(5px);
 
       @media screen and (max-width:768px) {
-        margin-left: -115px;
+        margin-left: -105px;
       }
 
       &.filter-menu {
@@ -676,7 +687,7 @@ body {
           }
           &:hover {
             background: $trans !important;
-            color:$green !important;
+            color:$blue !important;
           }
         }
       }
@@ -745,7 +756,7 @@ a:hover {
   margin: auto;
 }
 .badge {
-  background:$green;
+  background:$blue;
   padding:6px 10px;
   @include border_radius(12px);
 }
@@ -877,7 +888,7 @@ a:hover {
   font-weight: 600;
 
   img {
-    height:32px;
+    height:28px;
     &.edit-btn {
       height:24px;
     }
@@ -1087,4 +1098,12 @@ form .field {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.bg-white {
+  background-color: white;
 }

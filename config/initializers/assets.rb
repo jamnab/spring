@@ -4,6 +4,7 @@ Rails.application.config.assets.precompile += %w( homepage.css )
 Rails.application.config.assets.precompile += %w( homepage.js )
 
 Rails.application.config.assets.precompile += %w( scrollreveal.min.js )
+Rails.application.config.assets.precompile += %w( chart.js )
 
 Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/

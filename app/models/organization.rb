@@ -1,5 +1,7 @@
 class Organization < ActiveRecord::Base
   attr_accessor :username
+  attr_accessor :new_subscription
+
   has_many :posts
   has_one :picture
   accepts_nested_attributes_for :picture

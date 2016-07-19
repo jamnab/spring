@@ -131,18 +131,43 @@
 }
 
 .btn-main {
-  background: $green-grad;
-  background: $green;
   background:$blue;
   font-weight: 600;
   text-shadow: $btn-shadow;
 
-  @include transition(500ms);
+  @include transition(1s);
   &.on  { opacity: 0.9; }
   &.off { opacity: 0.6; }
 
   &:hover, &:active, &:focus {
-    background-color: $l-blue;
+    background-color: $d-blue;
+    color:$white;
+    box-shadow: none;
+
+
+  }
+}
+.btn-accent {
+  background:$green;
+
+  @include transition(1s);
+
+  &:hover, &:focus, &:active {
+    background:$d-green;
+    color: #fff;
+  }
+}
+.btn-option {
+  background:$a-grey;
+  font-weight: 600;
+  text-shadow: $btn-shadow;
+
+  @include transition(1s);
+  &.on  { opacity: 0.9; }
+  &.off { opacity: 0.6; }
+
+  &:hover, &:active, &:focus {
+    background-color: $grey;
     color:$white;
     box-shadow: none;
 
@@ -268,7 +293,7 @@ h3.page_title {
         /* font-size:16px; */
       }
       span {
-      
+
       }
       .carousel {
         /* margin-top: 8px; */
@@ -302,7 +327,7 @@ h3.page_title {
         form {
           padding-left: 10px;
           .btn-launch-approve { padding: 0px }
-          img { width: 32px; }
+          img { width: 30px; }
         }
       }
     }
