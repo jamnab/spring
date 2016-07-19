@@ -9,7 +9,9 @@ state_path "/home/deploy/launchboard/tmp/pids/faye.state"
 stdout_redirect '/home/deploy/launchboard/log/faye.error.log', '/home/syncidlabs/inthought/log/faye.access.log', true
 
 
-threads 1,5
+threads 1,2
+
+bind 'tcp://localhost:9292/'
 
 workers 2
 
