@@ -1,12 +1,12 @@
 #!/usr/bin/env puma
 
-directory '/home/deploy/launchboard'
-rackup "/home/deploy/launchboard/sync.ru"
+directory '/home/deploy/launchboard/current'
+rackup "/home/deploy/launchboard/current/sync.ru"
 environment 'production'
 
-pidfile "/home/deploy/launchboard/tmp/pids/faye.pid"
-state_path "/home/deploy/launchboard/tmp/pids/faye.state"
-stdout_redirect '/home/deploy/launchboard/log/faye.error.log', '/home/syncidlabs/inthought/log/faye.access.log', true
+pidfile "/home/deploy/launchboard/shared/tmp/pids/faye.pid"
+state_path "/home/deploy/launchboard/shared/tmp/pids/faye.state"
+stdout_redirect '/home/deploy/launchboard/shared/log/faye.error.log', '/home/deploy/launchboard/shared/log/faye.access.log', true
 
 
 threads 1,2
