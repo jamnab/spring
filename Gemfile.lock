@@ -310,7 +310,7 @@ GEM
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    sync (0.3.5)
+    sync (0.4.0)
       em-http-request
     systemu (2.6.5)
     therubyracer (0.12.2)
@@ -387,7 +387,7 @@ DEPENDENCIES
   searchkick
   skrollr-rails
   spring
-  sync (~> 0.3.5)
+  sync (~> 0.4.0)
   therubyracer
   thin
   to_words

@@ -31,7 +31,7 @@ gem 'scrypt'
 gem 'cancancan'
 gem 'faye', '~> 1.2.0'
 gem 'thin', require: false
-gem 'sync', '~> 0.3.5'
+gem 'sync', '~> 0.4.0'
 gem 'forgery', '0.6.0'
 gem 'jquery-fileupload-rails'
 gem 'rmagick'
