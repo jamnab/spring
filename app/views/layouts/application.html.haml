@@ -5,7 +5,7 @@
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     / = javascript_include_tag :defaults
-    = javascript_include_tag Sync.adapter_javascript_url
+    = include_sync_config
     = csrf_meta_tags
     = favicon_link_tag 'favicon.png'
     %script{:src => "//load.sumome.com/", "data-sumo-site-id" => "06a6409e43d3b483a09642486524b9763b6bd6cae1afd944bc4629bf263a1d97", :async => "async"}

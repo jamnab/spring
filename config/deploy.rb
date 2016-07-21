@@ -76,6 +76,17 @@ namespace :deploy do
     end
   end
 
+  desc "Clear tmp because sync gem doesn't like it otherwise"
+  task :tmp_clear do
+    on roles(:app) do
+      within current_path do
+        with rails_env: fetch(:stage) do
+          execute :rake, 'tmp:clear'
+        end
+      end
+    end
+  end
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -105,7 +116,8 @@ end
 # faye setup. uncomment this if u need
 set :faye_pid, "#{shared_path}/tmp/pids/faye.pid"
 set :faye_state, "#{shared_path}/tmp/pids/faye.state"
-# set :faye_config, "#{current_path}/sync.ru"
+set :faye_config, "#{current_path}/config/puma_faye.rb"
+
 
 namespace :faye do
   desc 'Start Faye'
@@ -114,8 +126,8 @@ namespace :faye do
       within current_path do
         with rails_env: fetch(:stage) do
           # faye must be run on production
-          execute :bundle, :exec, "thin -C #{current_path}/config/sync_thin.yml --pid #{fetch :faye_pid} -d start"
-          # execute :bundle, :exec, "rackup sync.ru -D -E production --pid #{fetch :faye_pid} -O Threads=1:5 --host 0.0.0.0"
+          execute :bundle, :exec, "puma --config #{fetch :faye_config} -d"
+          # execute :bundle, :exec, :rackup, "#{current_path}/sync.ru -D -s puma -E production --pid #{fetch :faye_pid} -O Threads=1:5"
         end
       end
     end
@@ -125,14 +137,31 @@ namespace :faye do
   task :stop do
     on roles(:faye) do
       execute :kill, "`cat #{fetch :faye_pid}` || true"
-      if test("[ -f #{fetch :faye_pid} ]")
-        execute :rm, fetch(:faye_pid)
+    end
+  end
+
+  desc 'Restart Faye'
+  task :restart do
+    on roles(:faye) do
+      within current_path do
+        with rails_env: fetch(:stage) do
+          invoke "faye:stop"
+          invoke "faye:start"
+          # execute :bundle, :exec, :pumactl, "-S #{fetch(:faye_state)} -F #{fetch :faye_config} restart"
+        end
       end
     end
   end
 
-  before 'deploy:updating', 'faye:stop'
-  after 'deploy:published', 'faye:start'
+  desc 'Move sync config file from gist'
+  task :config do
+    on roles(:faye) do
+      execute :curl, "-o #{current_path}/config/sync.yml -L #{fetch :sync_yml_url}"
+    end
+  end
+
+  after 'deploy:published', 'faye:config'
+  after 'faye:config', 'faye:restart'
 end
 
 namespace :azure do
