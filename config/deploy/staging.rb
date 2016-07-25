@@ -12,6 +12,8 @@ server 'lb-test.syncidlabs.com', user: 'deploy', roles: %w{app db web faye}
 set :slack_stage, 'staging'
 set :branch, "development"
 
+set :sync_yml_url, 'https://gist.github.com/abcnever/d954fe807917231b6a0a722647d1e05d/raw'
+
 # role-based syntax
 # ==================
 
