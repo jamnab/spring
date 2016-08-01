@@ -280,7 +280,7 @@ class PagesController < ApplicationController
     end
 
     def check_org_subscription
-      if @organization.active_subscription.blank?
+      if @organization.nil? || @organization.active_subscription.blank?
         redirect_to :pending_approval and return
       end
     end
