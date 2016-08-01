@@ -16,4 +16,9 @@ class OrganizationsMailer < ApplicationMailer
     mail(subject: "Your organization #{org.name} has been approved.", to: manager.email)
   end
 
+  def notify_manager_of_trial_expiration(manager)
+    org = manager.organization
+
+    mail(subject: "Please confirm subscription", to: manager.email)
+  end
 end

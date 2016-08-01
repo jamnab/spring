@@ -1,25 +1,25 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-# class Sync.CommentNotification extends Sync.View
+# class RenderSync.CommentNotification extends RenderSync.View
 #   afterInsert: ->
 #     $('.new-comment-number').fadeIn("slow")
 #     count = $('.new-comment-number > .new-comment-notification').length
 #     $('.new-comment-number > .number').text(count)
-class Sync.PostNotification extends Sync.View
+class RenderSync.PostNotification extends RenderSync.View
   afterInsert: ->
     $('.new-post-number').fadeIn("slow")
     count = $('.new-post-number > .new-post-notification').length
     $('.new-post-number > .number').text(count)
 
-class Sync.CommentNotification extends Sync.View
+class RenderSync.CommentNotification extends RenderSync.View
   afterInsert: ->
     $('.new-comment-number').fadeIn("slow")
     count = $('.new-comment-number > .new-comment-notification').length
     $('.new-comment-number > .number').text(count)
 
 
-class Sync.PostCard extends Sync.View
+class RenderSync.PostCard extends RenderSync.View
   beforeInsert: ($el) ->
     $el.hide()
     post = $el.children()
