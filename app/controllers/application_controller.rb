@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   private
 
   def check_account_status
-    if current_user && !current_user.is_admin?
+    if current_user && current_organization && !current_user.is_admin?
       sub = current_user.organization.active_subscription
 
       if sub && sub.end_at < DateTime.current
