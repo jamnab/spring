@@ -1,5 +1,5 @@
 class DepartmentEntriesController < ApplicationController
-  before_action :set_department_entry, only: [:fetch_users, :destroy]
+  before_action :set_department_entry, only: [:update, :fetch_users, :destroy]
 
   # POST /department_entries
   # POST /department_entries.json
@@ -8,6 +8,18 @@ class DepartmentEntriesController < ApplicationController
 
     respond_to do |format|
       if @department_entry.save
+        format.html { redirect_to :back, notice: 'Department entry was successfully created.' }
+        format.json { render :show, status: :created, location: @department_entry }
+      else
+        format.html { render :new }
+        format.json { render json: @department_entry.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @department_entry.update(department_entry_params)
         format.html { redirect_to :back, notice: 'Department entry was successfully created.' }
         format.json { render :show, status: :created, location: @department_entry }
       else
