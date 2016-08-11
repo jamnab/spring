@@ -95,7 +95,8 @@ $ ->
     exitObj.innerHTML = text.replace('{CHAR}', length)
 
   $('body').on 'keyup', 'textarea', ->
-    textarea_count($(this), $(this).siblings()[0], 'Content ({CHAR} characters remaining)', $(this).attr('maxlength'))
+    if $(this).attr('maxlength') != undefined
+      textarea_count($(this), $(this).siblings()[0], 'Content ({CHAR} characters remaining)', $(this).attr('maxlength'))
 
 $ ->
   $('.action-date').on "changeDate", () ->
