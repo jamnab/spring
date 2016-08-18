@@ -126,8 +126,13 @@ namespace :faye do
       within current_path do
         with rails_env: fetch(:stage) do
           # faye must be run on production
-          execute :bundle, :exec, "puma --config #{fetch :faye_config} -d"
+          # execute :bundle, :exec, "puma --config #{fetch :faye_config} -d"
           # execute :bundle, :exec, :rackup, "#{current_path}/sync.ru -D -s puma -E production --pid #{fetch :faye_pid} -O Threads=1:5"
+          if fetch(:slack_stage) == 'staging'
+            execute :bundle, :exec, :rackup, "-E production -s thin --pid #{fetch :faye_pid} #{current_path}/sync.ru"
+          else
+            execute :bundle, :exec, :thin, "-C #{current_path}/config/sync_thin.yml start"
+          end
         end
       end
     end
@@ -176,3 +181,28 @@ namespace :azure do
 
   after 'deploy:started', 'azure:sql_config'
 end
+
+namespace :console do
+  desc 'Dump the database data to download later'
+  task :dump_db do
+    on roles(:db) do
+      within current_path do
+        with rails_env: fetch(:stage) do
+          execute :bundle, :exec, :rake, 'db:data:dump'
+        end
+      end
+    end
+  end
+end
+
+namespace :ftp do
+  desc 'Download the dumped data.yml. NOTE: Execute this in the project root directory!!!'
+  task :download_db do
+    on roles(:db) do
+      within current_path do
+        download! "#{current_path}/db/data.yml", "db/data.yml"
+      end
+    end
+  end
+end
+p

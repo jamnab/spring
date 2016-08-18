@@ -4,7 +4,7 @@ require "yaml"
 require "faye"
 require "render_sync"
 
-Faye::WebSocket.load_adapter 'puma'
+Faye::WebSocket.load_adapter 'thin'
 
 RenderSync.load_config(
   File.expand_path("../config/sync.yml", __FILE__),

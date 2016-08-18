@@ -1,6 +1,18 @@
+---
 port: 4443
 ssl: true
 ssl_key_file: /etc/ssl/server.key
 ssl_cert_file: /etc/ssl/ssl-bundle.crt
 environment: production
 rackup: sync.ru
+pid: ~/launchboard/shared/tmp/pids/thin.pid
+timeout: 30
+wait: 30
+log: ~/launchboard/shared/log/thin.log
+max_conns: 1024
+max_persistent_conns: 512
+socket: ~/launchboard/shared/tmp/sockets/thin.sock
+servers: 1
+threaded: true
+no-epoll: true
+daemonize: true
