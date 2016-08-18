@@ -143,6 +143,16 @@
           - post.departments.each do |department|
             .badge
               = department
+
+
+        / link to proposal file
+        - if !post.assets.empty?
+          .documents
+            - post.assets.each do |asset|
+              = link_to asset.document.url do
+                = asset.document_file_name
+
+
       .signature
         .user
           - if !post.anonymous || post.doit?
