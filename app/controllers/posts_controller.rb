@@ -71,6 +71,11 @@ class PostsController < ApplicationController
             @post.pictures.create(image: image)
           }
         end
+        if params[:documents]
+          params[:documents].each { |document|
+            @post.assets.create(document: document)
+          }
+        end
         if !params[:departments].nil?
           params[:departments].each do |de_id|
             de = DepartmentEntry.find(de_id)
@@ -96,6 +101,12 @@ class PostsController < ApplicationController
         @post.pictures.create(image: image)
       }
     end
+    if !params[:documents].nil?
+      params[:documents].each { |document|
+        @post.assets.create(document: document)
+      }
+    end
+
     @viewmode = params[:viewmode]
 
     pre_update_action_date = @post.action_date
@@ -139,7 +150,7 @@ class PostsController < ApplicationController
         format.html { redirect_to :dashboard, notice: 'Post was successfully updated.' }
         format.js
       else
-        format.html { render :edit }
+        format.html { redirect_to :back, notice: @post.errors.full_messages * ' ' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -229,6 +240,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :post_type, :endorsed, :anonymous, :threshold, :user_id, :comment_anonymity, :pictures, :graveyard, :organization_id, :action_date)
+      params.require(:post).permit(:title, :content, :post_type, :endorsed, :anonymous, :threshold, :user_id, :comment_anonymity, :pictures, :documents, :graveyard, :organization_id, :action_date)
     end
 end
