@@ -129,7 +129,7 @@ namespace :faye do
           # execute :bundle, :exec, "puma --config #{fetch :faye_config} -d"
           # execute :bundle, :exec, :rackup, "#{current_path}/sync.ru -D -s puma -E production --pid #{fetch :faye_pid} -O Threads=1:5"
           if fetch(:slack_stage) == 'staging'
-            execute :bundle, :exec, :rackup, "-E production -s thin --pid #{fetch :faye_pid} #{current_path}/sync.ru"
+            execute :bundle, :exec, :rackup, "#{current_path}/sync.ru -E production -s thin --pid #{fetch :faye_pid} -D"
           else
             execute :bundle, :exec, :thin, "-C #{current_path}/config/sync_thin.yml start"
           end
