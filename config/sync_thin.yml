@@ -12,6 +12,7 @@ log: ~/launchboard/shared/log/thin.log
 max_conns: 1024
 max_persistent_conns: 512
 socket: ~/launchboard/shared/tmp/sockets/thin.sock
+chdir: ~/launchboard/current
 servers: 1
 threaded: true
 no-epoll: true
