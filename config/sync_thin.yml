@@ -5,13 +5,13 @@ ssl_key_file: /etc/ssl/server.key
 ssl_cert_file: /etc/ssl/ssl-bundle.crt
 environment: production
 rackup: current/sync.ru
-pid: shared/tmp/pids/thin.pid
+pid: shared/tmp/pids/faye.pid
 timeout: 30
 wait: 30
-log: shared/log/thin.log
+log: shared/log/faye.log
 max_conns: 1024
 max_persistent_conns: 512
-socket: shared/tmp/sockets/thin.sock
+socket: shared/tmp/sockets/faye.sock
 chdir: /home/deploy/launchboard/
 servers: 1
 threaded: true
