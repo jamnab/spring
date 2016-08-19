@@ -21,6 +21,8 @@ class Ability
         user == u
       end
 
+      can :autocomplete_user_email, User
+
       # Organizations
       can @cru, Organization do |org|
         user.manager && user.organization == org

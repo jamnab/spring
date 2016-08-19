@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   acts_as_authentic
 
+  searchkick match: :word_start, searchable: [:email]
+
   has_many :posts
   has_many :comments
   # has_many :received_comments, through: :posts, class_name: 'Comment'

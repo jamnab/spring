@@ -119,6 +119,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def autocomplete_user_email
+    render json: User.search(params[:term], {
+      fields: ["email"],
+      limit: 10,
+      load: false,
+      misspellings: {below: 5}
+    }).collect { |u|
+      {
+        id: u.id,
+        label: "#{u.email} <#{u.username}>",
+        value: u.email
+      }
+    }
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy

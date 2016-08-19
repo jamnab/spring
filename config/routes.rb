@@ -85,6 +85,10 @@ Rails.application.routes.draw do
     member do
       get :my_organization
     end
+
+    collection do
+      get :autocomplete_user_email
+    end
   end
 
   get 'login' => 'user_sessions#new', :as => :login
