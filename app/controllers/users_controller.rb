@@ -73,9 +73,9 @@ class UsersController < ApplicationController
         end
 
         # invalidate the signup code by attaching the code to the user
-        @beta_sign_up.user = @user
+        # @beta_sign_up.user = @user
 
-        @beta_sign_up.save!
+        # @beta_sign_up.save!
 
         format.html { redirect_to :dashboard, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
