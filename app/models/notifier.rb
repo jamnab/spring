@@ -18,7 +18,6 @@ class Notifier < ActionMailer::Base
     @department_name = department_name
     mail(
       subject: "New Department Assignment",
-      from: "no_reply@golaunchboard.com",
       to: user.email ,
       date: Time.now)
   end
@@ -30,7 +29,6 @@ class Notifier < ActionMailer::Base
     @url = url
     mail(
       subject: "Launchboard Invitation",
-      from: "no_reply@golaunchboard.com",
       to: email,
       date: Time.now)
   end
@@ -40,7 +38,6 @@ class Notifier < ActionMailer::Base
     @url = url
     mail(
       subject: "Post Update",
-      from: "no_reply@golaunchboard.com",
       to: post.user.email,
       date: Time.now)
   end
