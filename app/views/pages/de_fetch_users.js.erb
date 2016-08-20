@@ -1,2 +1,4 @@
 $('.member-list').html("<%= j render('pages/member_list', admin: false) %>");
 $('.admin-list').html("<%= j render('pages/member_list', admin: true) %>");
+
+$('input[name=department_entry_id]').val("<%= @department_entry.id %>");
