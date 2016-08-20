@@ -92,7 +92,7 @@ class OrganizationsController < ApplicationController
     if !params[:department_entry_id].nil?
       @url = Rails.env.production? ? request.host : request.host_with_port
       @department_entry = DepartmentEntry.find(params[:department_entry_id])
-      @organization = @department_entry.context
+      @organization = current_organization
 
       params[:invitee_list].split(/[,;]/).each do |target_email|
         @user = User.where(email: target_email).first
