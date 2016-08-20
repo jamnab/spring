@@ -92,7 +92,6 @@ class OrganizationsController < ApplicationController
     if !params[:department_entry_id].nil?
       @url = Rails.env.production? ? request.host : request.host_with_port
       @department_entry = DepartmentEntry.find(params[:department_entry_id])
-      @department = @department_entry.department
       @organization = @department_entry.context
 
       params[:invitee_list].split(/[,;]/).each do |target_email|
@@ -109,7 +108,7 @@ class OrganizationsController < ApplicationController
           existing_membership = DepartmentEntryMembership.where(department_entry: @department_entry, user: @user).first
           if !existing_membership
             DepartmentEntryMembership.create(department_entry: @department_entry, user: @user)
-            Notifier.new_department_assignment(@user, @organization, @url, @department).deliver_now
+            Notifier.new_department_assignment(@user, @organization, @url, @department_entry.department_name).deliver_now
           end
         end
       end

@@ -11,11 +11,11 @@ class Notifier < ActionMailer::Base
   #     date: Time.now)
   # end
 
-  def new_department_assignment(user,organization,url,department)
+  def new_department_assignment(user,organization,url,department_name)
     @user = user
     @organization = organization
     @url = url
-    @department = department
+    @department_name = department_name
     mail(
       subject: "New Department Assignment",
       from: "no_reply@golaunchboard.com",
