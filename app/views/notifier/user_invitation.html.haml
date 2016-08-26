@@ -1,13 +1,14 @@
-%html
-  - if Rails.env.production?
-    - host = 'golaunchboard.com'
-  - else
-    - host = @url
+- if Rails.env.production?
+  - host = 'golaunchboard.com'
+- else
+  - host = @url
 
-  - @full = "http://" + host + new_user_path(name: @organization.name, email: @email)
+- @full = "http://" + host + new_user_path(name: @organization.name, email: @email)
 
-  %h5 Launchboard Invite
-  %p You have been invited by #{@sender.full_name} to #{@organization.name}.
+= content_for :cta_button do
+  %a.mcnButton{:href => @full, :style => "font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #D55258;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;", :target => "_blank", :title => "Login now"} Complete Registration
 
-  %h5
-    %a{href: @full} Complete Registration
+= content_for :title do
+  = "Launchboard Invite"
+
+= "You have been invited by #{@sender.full_name} to #{@organization.name}."

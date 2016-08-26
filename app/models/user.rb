@@ -29,6 +29,9 @@ class User < ActiveRecord::Base
   has_many :department_entry_memberships, dependent: :destroy
   has_many :department_entries, through: :department_entry_memberships
 
+  # user can send multiple external invites
+  has_many :user_invites
+
   after_create :sign_up_email
   # has_many :departments, through: :department_entries
 
