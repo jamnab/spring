@@ -29,7 +29,7 @@ class Notifier < ActionMailer::Base
     @url = url
     mail(
       subject: "Launchboard Invitation",
-      to: email,
+      to: @email,
       date: Time.now)
   end
 
