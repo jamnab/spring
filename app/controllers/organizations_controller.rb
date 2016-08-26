@@ -95,6 +95,7 @@ class OrganizationsController < ApplicationController
       @organization = current_organization
 
       params[:invitee_list].split(/[,;]/).each do |target_email|
+        next if target_email.blank?
         @user = User.where(email: target_email).first
         if @user.nil?
           # generate invite, send email
