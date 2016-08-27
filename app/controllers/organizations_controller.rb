@@ -99,7 +99,7 @@ class OrganizationsController < ApplicationController
         @user = User.where(email: target_email).first
         if @user.nil?
           # generate invite, send email
-          existing_invite = UserInvite.where(user: current_user, email: target_email, department_entry: @department_entry, organization: current_organization).first
+          existing_invite = UserInvite.where(user_id: current_user.id, email: target_email, department_entry: @department_entry, organization: current_organization).first
           if !existing_invite
             UserInvite.create(email: target_email, department_entry: @department_entry, organization: current_organization, user: current_user)
           end
