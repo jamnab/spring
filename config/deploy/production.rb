@@ -12,7 +12,7 @@ set :slack_stage, "production"
 
 set :sync_yml_url, 'https://gist.github.com/abcnever/07cced8cfc13f18d5c2326aa911116f0/raw'
 set :database_yml_url, 'https://gist.github.com/abcnever/f942326d8462a9e52c20c4d1764baeb9/raw'
-
+set :stage, :production
 
 # role-based syntax
 # ==================

@@ -14,6 +14,7 @@ set :branch, "development"
 
 set :sync_yml_url, 'https://gist.github.com/abcnever/d954fe807917231b6a0a722647d1e05d/raw'
 
+set :stage, :staging
 # role-based syntax
 # ==================
 

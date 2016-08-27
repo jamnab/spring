@@ -13,7 +13,6 @@ set :deploy_to, "/home/deploy/#{fetch :application}"
 # DO NOT modify the codes below this line unless you know what you are doing.
 set :pty, true
 set :use_sudo, false
-set :stage, :production
 set :deploy_via, :remote_cache
 
 set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/images', 'public/uploads', 'vendor/bundle')
@@ -31,9 +30,9 @@ set :puma_init_active_record, true  # Change to true if using ActiveRecord
 
 set :tmp_dir, "#{shared_path}/tmp/"
 
-set :slack_msg_starting,     -> { "#{ENV['USER'] || ENV['USERNAME']} has started deploying branch #{fetch :branch} of #{fetch :application} to #{fetch :slack_stage, 'an unknown stage'}" }
-set :slack_msg_finished,     -> { "#{ENV['USER'] || ENV['USERNAME']} has finished deploying branch #{fetch :branch} of #{fetch :application} to #{fetch :slack_stage, 'an unknown stage'}" }
-set :slack_msg_failed,       -> { "#{ENV['USER'] || ENV['USERNAME']} failed to deploy branch #{fetch :branch} of #{fetch :application} to #{fetch :slack_stage, 'an unknown stage'}" }
+set :slack_msg_starting,     -> { "#{ENV['USER'] || ENV['USERNAME']} has started deploying branch #{fetch :branch} of #{fetch :application} to #{fetch :stage, 'an unknown stage'}" }
+set :slack_msg_finished,     -> { "#{ENV['USER'] || ENV['USERNAME']} has finished deploying branch #{fetch :branch} of #{fetch :application} to #{fetch :stage, 'an unknown stage'}" }
+set :slack_msg_failed,       -> { "#{ENV['USER'] || ENV['USERNAME']} failed to deploy branch #{fetch :branch} of #{fetch :application} to #{fetch :stage, 'an unknown stage'}" }
 
 # slack integration
 set :slack_webhook, "https://hooks.slack.com/services/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"
@@ -167,19 +166,6 @@ namespace :faye do
 
   after 'deploy:published', 'faye:config'
   after 'faye:config', 'faye:restart'
-end
-
-namespace :azure do
-  desc 'Azure sql server config'
-  task :sql_config do
-    on roles(:app) do
-      if fetch(:slack_stage) == "production"
-        execute :curl, "-o #{shared_path}/config/database.yml -L #{fetch :database_yml_url}"
-      end
-    end
-  end
-
-  after 'deploy:started', 'azure:sql_config'
 end
 
 namespace :console do
