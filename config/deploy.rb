@@ -16,7 +16,7 @@ set :use_sudo, false
 set :deploy_via, :remote_cache
 
 set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/images', 'public/uploads', 'vendor/bundle')
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secret.yml')
+set :linked_files, fetch(:linked_files, []).push( 'config/secret.yml')
 
 set :puma_bind, "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
@@ -156,16 +156,6 @@ namespace :faye do
       end
     end
   end
-
-  desc 'Move sync config file from gist'
-  task :config do
-    on roles(:faye) do
-      execute :curl, "-o #{current_path}/config/sync.yml -L #{fetch :sync_yml_url}"
-    end
-  end
-
-  after 'deploy:published', 'faye:config'
-  after 'faye:config', 'faye:restart'
 end
 
 namespace :console do
