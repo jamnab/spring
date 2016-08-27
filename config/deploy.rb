@@ -156,6 +156,17 @@ namespace :faye do
       end
     end
   end
+
+  # desc 'Move sync config file from gist'
+  # task :config do
+  #   on roles(:faye) do
+  #     execute :curl, "-o #{current_path}/config/sync.yml -L #{fetch :sync_yml_url}"
+  #   end
+  # end
+
+  # after 'deploy:published', 'faye:config'
+  # after 'faye:config', 'faye:restart'
+  # after 'deploy:published', 'faye:restart'
 end
 
 namespace :console do
