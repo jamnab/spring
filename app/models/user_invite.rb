@@ -6,8 +6,6 @@ class UserInvite < ActiveRecord::Base
   after_create :invite_email
 
   def invite_email
-    url = Rails.env.production? ? request.host : request.host_with_port
-
-    Notifier.user_invitation(email, organization, url, current_user).deliver_now
+    Notifier.user_invitation(email, organization, current_user).deliver_now
   end
 end

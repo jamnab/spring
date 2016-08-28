@@ -21,20 +21,18 @@ class Notifier < ApplicationMailer
       date: Time.now)
   end
 
-  def user_invitation(email,organization,url,sender)
+  def user_invitation(email,organization,sender)
     @email = email
     @sender = sender
     @organization = organization
-    @url = url
     mail(
       subject: "Launchboard Invitation",
       to: @email,
       date: Time.now)
   end
 
-  def post_update(post,url)
+  def post_update(post)
     @post = post
-    @url = url
     mail(
       subject: "Post Update",
       to: post.user.email,
