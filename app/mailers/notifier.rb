@@ -30,12 +30,12 @@ class Notifier < ApplicationMailer
       date: Time.now)
   end
 
-  def post_update(post)
-    @post = post
-    mail(
-      subject: "Post Update",
-      to: post.user.email,
-      date: Time.now)
-  end
+  # def post_update(post)
+  #   @post = post
+  #   mail(
+  #     subject: "Post Update",
+  #     to: post.user.email,
+  #     date: Time.now)
+  # end
 
 end
