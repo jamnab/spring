@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @organization = Organization.where(name: @user.organization_name).first
     @invites = UserInvite.where(email: @user.email)
     new_org = false
-    @beta_sign_up = BetaSignUp.find_by_signup_code params[:signup_code]
+    # @beta_sign_up = BetaSignUp.find_by_signup_code params[:signup_code]
 
     # allow if new organization or has embedded token
     if @user.is_manager? && @organization.nil?
