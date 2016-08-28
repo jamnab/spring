@@ -55,7 +55,7 @@ class UserMailer < ApplicationMailer
       end
       @body_text = "A new comment by #{context.user.full_name} was posted on #{context.commentable.title}."
       @link = post_url(context.commentable)
-      # TODO: @emails = ?
+      # TODO: @emails = ? refer to the example above
     elsif type == 'post_verdict'
       if context.approved
         verdict = 'approved'
