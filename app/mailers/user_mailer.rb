@@ -29,8 +29,6 @@ class UserMailer < ApplicationMailer
     # => 'new_launched_post', Post
     # => 'action_date', Post
     # build: @message_title, @body_text, @link
-    @emails = [email]
-
     if type == 'new_post_view'
       @post = context
       @message_title = "New Idea"
@@ -88,6 +86,7 @@ class UserMailer < ApplicationMailer
       # unknown, do nothing
     end
 
+    @emails = [email] if @emails.blank?
 
     mail(
       subject: @message_title,
