@@ -10,10 +10,9 @@ class Notifier < ApplicationMailer
   #     date: Time.now)
   # end
 
-  def new_department_assignment(user,organization,url,department_name)
+  def new_department_assignment(user,organization,department_name)
     @user = user
     @organization = organization
-    @url = url
     @department_name = department_name
     mail(
       subject: "New Department Assignment",
