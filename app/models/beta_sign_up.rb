@@ -1,4 +1,4 @@
-# deprecated
+# DEPRECATED
 
 class BetaSignUp < ActiveRecord::Base
   belongs_to :user
