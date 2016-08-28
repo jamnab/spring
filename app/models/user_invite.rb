@@ -6,6 +6,6 @@ class UserInvite < ActiveRecord::Base
   after_create :invite_email
 
   def invite_email
-    Notifier.user_invitation(email, organization, current_user).deliver_now
+    Notifier.user_invitation(email, organization, user).deliver_now
   end
 end
