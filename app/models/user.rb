@@ -1,3 +1,6 @@
+# :admin is the flag to determine if user is an admin for launchboard
+# :manager is the flag to determine if user is a manager for the organization he
+# belongs to
 class User < ActiveRecord::Base
   # attr_accessor :is_manager
   attr_accessor :organization_name
