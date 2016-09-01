@@ -29,6 +29,7 @@ class UserMailer < ApplicationMailer
     # => 'new_launched_post', Post
     # => 'action_date', Post
     # build: @message_title, @body_text, @link
+    user = User.where(email: email).first
 
     if type == 'new_post_view'
       @message_title = "New Idea"
@@ -39,7 +40,7 @@ class UserMailer < ApplicationMailer
       @body_text = "A new idea #{context.title} was posted in your departments and pending your approval."
       @link = post_url(context)
     elsif type == 'new_comment'
-      if user == context.commentable.user
+      if user && user == context.commentable.user
         @message_title = "New Comment on Your Idea"
       else
         @message_title = "New Comment on a Post You Upvoted"
@@ -56,7 +57,7 @@ class UserMailer < ApplicationMailer
       @body_text = "Your idea #{context.title} was #{verdict} for listing."
       @link = post_url(context)
     elsif type == 'new_launched_post'
-      if user == context.user
+      if user && user == context.user
         @message_title = "Your Idea was Launched!"
         @body_text = "Your idea #{context.title} was launched!"
       else
