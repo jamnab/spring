@@ -45,8 +45,17 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
+
+staging:
   adapter: mysql2
   database: pindoit_production
   username: pindoit
+  password: 8twpBsPCKHq6nL6CxBaqnP4a
+
+production:
+  adapter: mysql2
+  host: 10.2.0.7
+  pool: 30
+  database: pindoit_production
+  username: root
   password: 8twpBsPCKHq6nL6CxBaqnP4a

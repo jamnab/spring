@@ -8,6 +8,7 @@
     = javascript_include_tag 'homepage'
     %script{:async => "async", "data-sumo-site-id" => "06a6409e43d3b483a09642486524b9763b6bd6cae1afd944bc4629bf263a1d97", :src => "//load.sumome.com/"}
     = csrf_meta_tags
+    %script{:async => "async", "data-sumo-site-id" => "06a6409e43d3b483a09642486524b9763b6bd6cae1afd944bc4629bf263a1d97", :src => "//load.sumome.com/"}
     = favicon_link_tag 'favicon.png'
   %body
     = render partial: 'shared/feedback'
@@ -34,7 +35,7 @@
                   /%li
                   /  %a{href: "#", data: {target: '#register', toggle: 'modal'}, class: "button"} Sign Up
                   %li
-                    %a{href: "mailto:clinton@golaunchboard.com?subject=Book%Demo&body=Hello%Im%interested%in%booking%a%personal%demo%of%launchboard", class: "button"} Request Demo
+                    %a{href: "mailto:clinton@golaunchboard.com?subject=Book%20Demo&body=Hello%20I'm%20interested%20in%20booking%20a%20personal%20demo%20of%20LaunchBoard.", class: "button"} Request Demo
 
 
                 / %ul.subnav

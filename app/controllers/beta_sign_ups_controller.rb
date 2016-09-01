@@ -1,3 +1,4 @@
+# DEPRECATED
 class BetaSignUpsController < ApplicationController
   load_and_authorize_resource except: [:register]
   before_action :set_bsu_with_code, only: [:register]

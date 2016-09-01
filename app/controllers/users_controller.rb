@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @organization = Organization.where(name: @user.organization_name).first
     @invites = UserInvite.where(email: @user.email)
     new_org = false
-    @beta_sign_up = BetaSignUp.find_by_signup_code params[:signup_code]
+    # @beta_sign_up = BetaSignUp.find_by_signup_code params[:signup_code]
 
     # allow if new organization or has embedded token
     if @user.is_manager? && @organization.nil?
@@ -73,9 +73,9 @@ class UsersController < ApplicationController
         end
 
         # invalidate the signup code by attaching the code to the user
-        @beta_sign_up.user = @user
+        # @beta_sign_up.user = @user
 
-        @beta_sign_up.save!
+        # @beta_sign_up.save!
 
         format.html { redirect_to :dashboard, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
@@ -117,6 +117,21 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def autocomplete_user_email
+    render json: User.search(params[:term], {
+      fields: ["email"],
+      limit: 10,
+      load: false,
+      misspellings: {below: 5}
+    }).collect { |u|
+      {
+        id: u.id,
+        label: "#{u.email} <#{u.username}>",
+        value: u.email
+      }
+    }
   end
 
   # DELETE /users/1

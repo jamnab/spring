@@ -30,15 +30,23 @@ class UserMailer < ApplicationMailer
     # => 'action_date', Post
     # build: @message_title, @body_text, @link
     user = User.where(email: email).first
-
     if type == 'new_post_view'
+      @post = context
       @message_title = "New Idea"
       @body_text = "A new idea #{context.title} was posted in your departments."
-      @link = post_url(context)
+      @link = post_url(@post)
+      @emails = @post.department_entries.collect do |de|
+        de.users.map(&:email)
+      end.flatten
+
     elsif type == 'new_post_pending'
+      @post = context
       @message_title = "New Idea Pend Approval"
       @body_text = "A new idea #{context.title} was posted in your departments and pending your approval."
-      @link = post_url(context)
+      @link = post_url(@post)
+      @emails = @post.department_entries.collect do |de|
+        de.managers.map(&:email)
+      end.flatten
     elsif type == 'new_comment'
       if user && user == context.commentable.user
         @message_title = "New Comment on Your Idea"
@@ -47,6 +55,7 @@ class UserMailer < ApplicationMailer
       end
       @body_text = "A new comment by #{context.user.full_name} was posted on #{context.commentable.title}."
       @link = post_url(context.commentable)
+      # TODO: @emails = ? refer to the example above
     elsif type == 'post_verdict'
       if context.approved
         verdict = 'approved'
@@ -56,6 +65,7 @@ class UserMailer < ApplicationMailer
       @message_title = "Your Idea was #{verdict.capitalize}"
       @body_text = "Your idea #{context.title} was #{verdict} for listing."
       @link = post_url(context)
+      @emails = [context.user.email]
     elsif type == 'new_launched_post'
       if user && user == context.user
         @message_title = "Your Idea was Launched!"
@@ -65,17 +75,21 @@ class UserMailer < ApplicationMailer
         @body_text = "A new idea #{context.title} was launched in your departments!"
       end
       @link = post_url(context)
+      # TODO: @emails = ?
     elsif type == 'action_date'
       @message_title = "New Action Date"
       @body_text = "A manager has set an action date (#{context.action_date.strftime('%b %d, %Y')}) for your idea #{context.title}."
       @link = post_url(context)
+      # TODO: @emails = ?
     else
       # unknown, do nothing
     end
 
+    @emails = [email] if @emails.blank?
+
     mail(
       subject: @message_title,
-      to: email
+      to: @emails
     )
   end
 end

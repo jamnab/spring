@@ -21,6 +21,11 @@
 //= require bootstrap-switch.min
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker/core
+
+// autocomplete stuffs
+//= require jquery-ui/autocomplete
+//= require autocomplete-rails
+
 //= require prefixfree.min
 //= require skrollr
 //= require skrollr.ie

@@ -1,9 +1,14 @@
+# :admin is the flag to determine if user is an admin for launchboard
+# :manager is the flag to determine if user is a manager for the organization he
+# belongs to
 class User < ActiveRecord::Base
   # attr_accessor :is_manager
   attr_accessor :organization_name
   attr_accessor :organization_token
 
   acts_as_authentic
+
+  searchkick match: :word_start, searchable: [:email]
 
   has_many :posts
   has_many :comments
@@ -26,6 +31,9 @@ class User < ActiveRecord::Base
 
   has_many :department_entry_memberships, dependent: :destroy
   has_many :department_entries, through: :department_entry_memberships
+
+  # user can send multiple external invites
+  has_many :user_invites
 
   after_create :sign_up_email
   # has_many :departments, through: :department_entries
@@ -69,20 +77,20 @@ class User < ActiveRecord::Base
       # send now
       case notification_type
         when 0
-          UserMailer.new_notification('new_post_view', n.activity.trackable)
+          UserMailer.new_notification('new_post_view', n.activity.trackable).deliver_now
         when 1
-          UserMailer.new_notification('new_post_pending', n.activity.trackable)
+          UserMailer.new_notification('new_post_pending', n.activity.trackable).deliver_now
         when 2    # same as 3
         when 3
           # TODO, default never
         when 4    # same as 5
         when 5
-          UserMailer.new_notification('post_verdict', n.activity.trackable)
+          UserMailer.new_notification('post_verdict', n.activity.trackable).deliver_now
         when 6
-          UserMailer.new_notification('action_date', n.activity.trackable)
+          UserMailer.new_notification('action_date', n.activity.trackable).deliver_now
         when 7    # same as 8
         when 8
-          UserMailer.new_notification('new_launched_post', n.activity.trackable)
+          UserMailer.new_notification('new_launched_post', n.activity.trackable).deliver_now
       end
     elsif ns == '2'
       # add to_compile

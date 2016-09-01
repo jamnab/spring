@@ -241,6 +241,7 @@ class PagesController < ApplicationController
   end
 
   def pending_approval
+    @organization = current_organization
   end
 
   def newsfeed

@@ -1,12 +1,13 @@
-%html
-  - if Rails.env.production?
-    - host = 'golaunchboard.com'
-  - else
-    - host = @url
-  - @full = "http://" + host + new_user_path(:name=> @organization.name, :token=> @organization.access_token)
+- if Rails.env.production?
+  - host = 'golaunchboard.com'
+- else
+  - host = @url
+- @full = "http://" + host + new_user_path(:name=> @organization.name, :token=> @organization.access_token)
 
-  %h5 Invite users to #{@organization.name}
-  %p Please forward this invitation to all desired recipients, the invitation token expires in 24 hours.
+= content_for :cta_button do
+  %a.mcnButton{:href => @full, :style => "font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #D55258;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;", :target => "_blank", :title => "Login now"} Register Here
 
-  %h5
-    %a{href: @full} Register Here
+= content_for :title do
+  = "Invite users to #{@organization.name}"
+
+= "Please forward this invitation to all desired recipients, the invitation expires in 24 hours."

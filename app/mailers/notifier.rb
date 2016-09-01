@@ -10,10 +10,9 @@ class Notifier < ApplicationMailer
   #     date: Time.now)
   # end
 
-  def new_department_assignment(user,organization,url,department_name)
+  def new_department_assignment(user,organization,department_name)
     @user = user
     @organization = organization
-    @url = url
     @department_name = department_name
     mail(
       subject: "New Department Assignment",
@@ -21,24 +20,22 @@ class Notifier < ApplicationMailer
       date: Time.now)
   end
 
-  def user_invitation(email,organization,url,sender)
+  def user_invitation(email,organization,sender)
     @email = email
     @sender = sender
     @organization = organization
-    @url = url
     mail(
       subject: "Launchboard Invitation",
       to: @email,
       date: Time.now)
   end
 
-  def post_update(post,url)
-    @post = post
-    @url = url
-    mail(
-      subject: "Post Update",
-      to: post.user.email,
-      date: Time.now)
-  end
+  # def post_update(post)
+  #   @post = post
+  #   mail(
+  #     subject: "Post Update",
+  #     to: post.user.email,
+  #     date: Time.now)
+  # end
 
 end

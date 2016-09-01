@@ -1,23 +1,20 @@
-%html
-  - if Rails.env.production?
-    - host = 'golaunchboard.com'
+= content_for :title do
+  = "Post Update"
+
+= content_for :cta_button do
+  %a.mcnButton{:href => dashboard_url, :style => "font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #D55258;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;", :target => "_blank", :title => "Login now"} See Dashboard
+
+- if @post.launch_approved
+  - if @post.action_date.nil?
+    - msg = "launch approved, date TBD"
   - else
-    - host = @url
+    - msg = "launch approved for #{@post.action_date.strftime('%b %d, %Y')}"
+- elsif @post.approved
+  - msg = "approved for listing"
+- elsif @post.graveyard
+  - msg = "rejected from listing"
 
-  - @full = "http://" + host + "/dashboard"
+= "Your post #{@post.title} has been #{msg}."
 
-  - if @post.launch_approved
-    - if @post.action_date.nil?
-      - msg = "launch approved, date TBD"
-    - else
-      - msg = "launch approved for #{@post.action_date.strftime('%b %d, %Y')}"
-  - elsif @post.approved
-    - msg = "approved for listing"
-  - elsif @post.graveyard
-    - msg = "rejected from listing"
-
-  %h5 Post Update
-  %p Your post #{@post.title} has been #{msg}.
-
-  %h5
-    %a{href: @full} See Dashboard
+%h5
+  %a{href: @full} See Dashboard

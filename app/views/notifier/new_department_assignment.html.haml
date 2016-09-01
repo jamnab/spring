@@ -1,13 +1,7 @@
-%html
-  - if Rails.env.production?
-    - host = 'golaunchboard.com'
-  - else
-    - host = @url
+= content_for :cta_button do
+  %a.mcnButton{:href => dashboard_url, :style => "font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #D55258;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;", :target => "_blank", :title => "Login now"} See Dashboard
 
-  - @full = "http://" + host + "/dashboard"
+= content_for :title do
+  = "New Department Assignemnt"
 
-  %h5 New Department Assignemnt
-  %p You have been assigned to a new department #{@department.name} under #{@organization.name}.
-
-  %h5
-    %a{href: @full} See Dashboard
+= "You have been assigned to a new department #{@department_name} under #{@organization.name}."

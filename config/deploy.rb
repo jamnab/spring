@@ -13,13 +13,12 @@ set :deploy_to, "/home/deploy/#{fetch :application}"
 # DO NOT modify the codes below this line unless you know what you are doing.
 set :pty, true
 set :use_sudo, false
-set :stage, :production
 set :deploy_via, :remote_cache
 
 set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/images', 'public/uploads', 'vendor/bundle')
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secret.yml')
+set :linked_files, fetch(:linked_files, []).push( 'config/secret.yml')
 
-set :puma_bind, "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
+set :puma_bind, "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-#{fetch(:stage)}-puma.sock"
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid, "#{shared_path}/tmp/pids/puma.pid"
 set :puma_access_log, "#{shared_path}/log/puma.error.log"
@@ -31,9 +30,9 @@ set :puma_init_active_record, true  # Change to true if using ActiveRecord
 
 set :tmp_dir, "#{shared_path}/tmp/"
 
-set :slack_msg_starting,     -> { "#{ENV['USER'] || ENV['USERNAME']} has started deploying branch #{fetch :branch} of #{fetch :application} to #{fetch :slack_stage, 'an unknown stage'}" }
-set :slack_msg_finished,     -> { "#{ENV['USER'] || ENV['USERNAME']} has finished deploying branch #{fetch :branch} of #{fetch :application} to #{fetch :slack_stage, 'an unknown stage'}" }
-set :slack_msg_failed,       -> { "#{ENV['USER'] || ENV['USERNAME']} failed to deploy branch #{fetch :branch} of #{fetch :application} to #{fetch :slack_stage, 'an unknown stage'}" }
+set :slack_msg_starting,     -> { "#{ENV['USER'] || ENV['USERNAME']} has started deploying branch #{fetch :branch} of #{fetch :application} to #{fetch :stage, 'an unknown stage'}" }
+set :slack_msg_finished,     -> { "#{ENV['USER'] || ENV['USERNAME']} has finished deploying branch #{fetch :branch} of #{fetch :application} to #{fetch :stage, 'an unknown stage'}" }
+set :slack_msg_failed,       -> { "#{ENV['USER'] || ENV['USERNAME']} failed to deploy branch #{fetch :branch} of #{fetch :application} to #{fetch :stage, 'an unknown stage'}" }
 
 # slack integration
 set :slack_webhook, "https://hooks.slack.com/services/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"
@@ -126,8 +125,13 @@ namespace :faye do
       within current_path do
         with rails_env: fetch(:stage) do
           # faye must be run on production
-          execute :bundle, :exec, "puma --config #{fetch :faye_config} -d"
+          # execute :bundle, :exec, "puma --config #{fetch :faye_config} -d"
           # execute :bundle, :exec, :rackup, "#{current_path}/sync.ru -D -s puma -E production --pid #{fetch :faye_pid} -O Threads=1:5"
+          # if fetch(:slack_stage) == 'staging'
+          execute :bundle, :exec, :rackup, "#{current_path}/sync.ru -E production -s thin --pid #{fetch :faye_pid} -D"
+          # else
+          #   execute :bundle, :exec, :thin, "-C #{current_path}/config/sync_thin.yml start"
+          # end
         end
       end
     end
@@ -153,26 +157,38 @@ namespace :faye do
     end
   end
 
-  desc 'Move sync config file from gist'
-  task :config do
-    on roles(:faye) do
-      execute :curl, "-o #{current_path}/config/sync.yml -L #{fetch :sync_yml_url}"
-    end
-  end
+  # desc 'Move sync config file from gist'
+  # task :config do
+  #   on roles(:faye) do
+  #     execute :curl, "-o #{current_path}/config/sync.yml -L #{fetch :sync_yml_url}"
+  #   end
+  # end
 
-  after 'deploy:published', 'faye:config'
-  after 'faye:config', 'faye:restart'
+  # after 'deploy:published', 'faye:config'
+  # after 'faye:config', 'faye:restart'
+  # after 'deploy:published', 'faye:restart'
 end
 
-namespace :azure do
-  desc 'Azure sql server config'
-  task :sql_config do
-    on roles(:app) do
-      if fetch(:slack_stage) == "production"
-        execute :curl, "-o #{shared_path}/config/database.yml -L #{fetch :database_yml_url}"
+namespace :console do
+  desc 'Dump the database data to download later'
+  task :dump_db do
+    on roles(:db) do
+      within current_path do
+        with rails_env: fetch(:stage) do
+          execute :bundle, :exec, :rake, 'db:data:dump'
+        end
       end
     end
   end
+end
 
-  after 'deploy:started', 'azure:sql_config'
+namespace :ftp do
+  desc 'Download the dumped data.yml. NOTE: Execute this in the project root directory!!!'
+  task :download_db do
+    on roles(:db) do
+      within current_path do
+        download! "#{current_path}/db/data.yml", "db/data.yml"
+      end
+    end
+  end
 end

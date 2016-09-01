@@ -22,6 +22,8 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
+gem 'jquery-ui-rails'
+
 gem 'public_activity'
 gem 'haml-rails'
 gem 'authlogic'
@@ -55,6 +57,9 @@ gem 'will_paginate'
 gem 'workflow'
 
 gem 'yaml_db'
+
+# autocomplete
+gem 'rails-jquery-autocomplete', git: "https://github.com/abcnever/rails-jquery-autocomplete/"
 
 group :development do
   gem 'better_errors'
