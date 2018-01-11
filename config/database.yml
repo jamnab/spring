@@ -13,7 +13,7 @@ default: &default
   adapter: mysql2
   encoding: utf8
   username: root
-  password: ''
+  password: 'Jordan23'
 
 development:
   <<: *default

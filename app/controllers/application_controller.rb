@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
       sub = current_user.organization.active_subscription
 
       if sub && sub.end_at < DateTime.current
-        sub.active = false
+        sub.active = true
         sub.save!
       end
     end
