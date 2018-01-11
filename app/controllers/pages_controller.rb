@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   before_action :check_login, only: [:pending_approval, :dashboard, :summary, :search, :archive, :newsfeed]
-  before_action :set_organization, only: [:pending_approval, :dashboard, :summary, :search, :archive, :newsfeed]
-  before_action :check_org_subscription, only: [:dashboard, :summary, :search, :archive, :newsfeed]
+  # before_action :set_organization, only: [:pending_approval, :dashboard, :summary, :search, :archive, :newsfeed]
+  # before_action :check_org_subscription, only: [:dashboard, :summary, :search, :archive, :newsfeed]
 
   @@global_limit = 200
   @page_limit = 200
